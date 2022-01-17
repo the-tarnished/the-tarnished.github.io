@@ -1,0 +1,1109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="urllib的使用">
+    <meta name="description" content="前言这是python自带的爬虫相关模块,但市面上有更好的BeautifulSoup模块和requests模块.如果是速成爬虫直接学习那两个模块用法即可,但requests模块是使用urllib搭建而成,如果时间不急,可以从底层看起.
+url">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>urllib的使用 | 零落闲拾</title>
+    <link rel="icon" type="image/png" href="/the-tarnished/the-tarnished.github.io.git/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/css/my.css">
+
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/the-tarnished/the-tarnished.github.io.git/" class="waves-effect waves-light">
+                    
+                    <img src="/the-tarnished/the-tarnished.github.io.git/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">零落闲拾</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/the-tarnished/the-tarnished.github.io.git/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/the-tarnished/the-tarnished.github.io.git/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/the-tarnished/the-tarnished.github.io.git/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/the-tarnished/the-tarnished.github.io.git/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/the-tarnished/the-tarnished.github.io.git/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-atom" style="zoom: 0.6;"></i>
+      
+      <span>Category</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/the-tarnished/the-tarnished.github.io.git/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">零落闲拾</div>
+        <div class="logo-desc">
+            
+            零落闲拾
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/the-tarnished/the-tarnished.github.io.git/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/the-tarnished/the-tarnished.github.io.git/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/the-tarnished/the-tarnished.github.io.git/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/the-tarnished/the-tarnished.github.io.git/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/the-tarnished/the-tarnished.github.io.git/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-atom"></i>
+			
+			Category
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpsv.tgbus.com%2FUploadFiles_5352%2F201306%2F20130614104148898.jpg&refer=http%3A%2F%2Fpsv.tgbus.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002876&t=88f32ad5e48f5a275529653df17d2dbc')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">urllib的使用</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/the-tarnished/the-tarnished.github.io.git/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/the-tarnished/the-tarnished.github.io.git/tags/spider-crawler/">
+                                <span class="chip bg-color">spider/crawler</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2022-01-16
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是python自带的爬虫相关模块,但市面上有更好的BeautifulSoup模块和requests模块.如果是速成爬虫直接学习那两个模块用法即可,但requests模块是使用urllib搭建而成,如果时间不急,可以从底层看起.</br></p>
+<h1 id="urllib的使用"><a href="#urllib的使用" class="headerlink" title="urllib的使用"></a>urllib的使用</h1><p>基本模块:</p>
+<ul>
+<li><strong>request</strong>:HTTP请求模块</li>
+<li><strong>error</strong>:异常处理模块</li>
+<li><strong>parse</strong>:工具模块,提供url处理方法</li>
+<li><strong>robotparser</strong>:识别网站的robot.txt文件<h2 id="requset模块"><a href="#requset模块" class="headerlink" title="requset模块"></a>requset模块</h2><h3 id="urlopen"><a href="#urlopen" class="headerlink" title="urlopen"></a>urlopen</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.requset</span><br><span class="line"></span><br><span class="line">response = urlib.request.urlopen(url,data=<span class="literal">None</span>,[timeout,]*,cafile=<span class="literal">None</span>,capath=<span class="literal">None</span>,cadefault=<span class="literal">False</span>,context=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<strong ><font face = "仿宋"  size = 4 >参数解释</font></strong ></li>
+<li>url: 网页地址</li>
+<li>data: <code>bytes</code>类型的字节流编码<blockquote>
+<p><code>data = bytes(urllib.parse.urlencode(&#123;&#39;username&#39;:&#39;admin&#39;&#125;),encoding = &quot;utf-8&quot;)</code></p>
+</blockquote>
+</li>
+<li>timeout:超时时间设置,单位秒.</li>
+<li>其他参数:<blockquote>
+<p>context:接受ssl.SSLContext类,用来设置SSL</br><br>cafile/capath:设置CA证书和其路径,请求https链接有用</br><br>cadefault:已经弃用</br></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Request"><a href="#Request" class="headerlink" title="Request"></a>Request</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">request = urllib.request.Request(url)</span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line"><span class="built_in">print</span>(response.read().decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<p><code>Request</code>使用<code>Request</code>对象传给<code>urlopen</code>,可读性更高,封装更好.</p>
+<h4 id="Request构造"><a href="#Request构造" class="headerlink" title="Request构造"></a>Request构造</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request = urllib.request.Request(url,data=None,headers=&#123;&#125;,origin_req_host=None,unverifiable=False,method=Noe)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>url:同urlopen</li>
+<li>data:同urlopen</li>
+<li>headers:传一个字典参数,作为请求头</li>
+<li>origin_req_host:请求方的host名称或者IP地址</li>
+<li>unverifiable:表示请求是否是无法验证的,默认为<code>False</code>,表示用户没有足够的权限来接受这个请求的结果</li>
+<li>method:字符串参数,表示请求方法,如GET,POST,PUT,DELETE<h3 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h3>request的高级用法依托<code>Handler</code>实现.<br>首先是所有<code>Handler</code>的父类<code>BaseHandler</code>,其提供了基本方法,如default_open,protocol_request等<br>其几个子类如下<blockquote>
+<ul>
+<li><strong>HTTPDefaultErrorHandler</strong>:用于处理<code>HTTP</code>响应错误,所有错误都会抛出<code>HTTPError</code>类型的异常</li>
+<li><strong>HTTPRedirectHandler</strong>:用于处理重定向</li>
+<li><strong>HTTPCookieProcessor</strong>:用于处理Cookie</li>
+<li><strong>ProxyHandler</strong>:用于设置代理,代理默认为空</li>
+<li><strong>HTTPPasswordMgr</strong>:用于密码管理,维护者用户名密码对照表</li>
+<li><strong>HTTPBasicAuthHandler</strong>:用于管理认证,如果一个链接在打开的时候需要认证,那么可以用这个解决认证问题.</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</br>
+
+<p>另外一个比较重要的类是<code>OpenerDirector</code>,简称Opener.之前的<code>urlopen</code>方法就是一个<code>Opener</code>.<code>Request</code>类和<code>urlopen</code>类都是已经封装好的常用请求方法,如果需要高级用法则需要使用更加底层的实例来完成操作.</br><br><code>Opener</code>类提供<code>Open</code>方法,该方法的返回的响应类型和<code>urlopen</code>方法一致.<code>Opener</code>类需要使用<code>Handler</code>类来构建.<br></br></p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>在访问一些服务器的时候,有些网页需要用户输入账号密码进行身份验证.这就是<code>HTTP Basic Access Authentication</code>.</br><br>爬虫借助<code>HTTPBasicAuthHandler</code>模块就能完成身份验证.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener</span><br><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line"></span><br><span class="line">username = <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">password = <span class="string">&#x27;password&#x27;</span></span><br><span class="line">url = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">p = HTTPPasswordMgrWithDefaultRealm() </span><br><span class="line">p.addpassword(<span class="literal">None</span>,url,username,password) <span class="comment">##这个类是构建　用户名和密码　对一个地址的映射，这个映射可以是　url 也可以是 proxy </span></span><br><span class="line">auth_handler = HTTPBasicAuthHandler(p) <span class="comment">## HTTPBasicAuthHandler的构造方法需要提供一个HTTPPasswordMgr(密码管理 Password Management Object) 对象 如果不知道域/对域不需要关心,就使用 HTTPPasswordMgrwithDefaultRealm 对象,使用None作为构造参数,知道的话就使用realm代替None </span></span><br><span class="line">opener = build_opener(auth_handler) <span class="comment">## 构建了一个opener,可以使用这个opener去open url.如果这个opener是 网页验证,那么就是open url,如果是 代理验证,那么访问的时候,就是使用代理ip帮你访问(相当于Request封装再更底层)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = opener.<span class="built_in">open</span>(url)</span><br><span class="line">    html = result.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(html)</span><br><span class="line"><span class="keyword">except</span> URLError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br></pre></td></tr></table></figure>
+
+<h4 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h4><p>代理的逻辑同验证一样,先使用ProxyHandler建立代理,再使用build_opener方法建立opener,再使用这个opener打开你需要的web</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.requset <span class="keyword">import</span> ProxyHandler, build_opener, </span><br><span class="line"><span class="keyword">from</span> urllib.error <span class="keyword">import</span> URLError</span><br><span class="line">proxy_Handler = ProxyHandler(&#123;<span class="string">&#x27;http&#x27;</span>:<span class="string">&#x27;http://&#x27;</span>,</span><br><span class="line">                             <span class="string">&#x27;https&#x27;</span>:<span class="string">&#x27;https://&#x27;</span>&#125;) <span class="comment">## ProxyHandler类的构造需要一个字典</span></span><br><span class="line">opener = build_opener(proxy_Handler)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = opener.<span class="built_in">open</span>(url)</span><br><span class="line">    <span class="built_in">print</span>(response.read().decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="keyword">except</span> URLError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br></pre></td></tr></table></figure>
+<p>但是如果碰到了代理验证的话,那么还是需要使用HTTPBasicAuthHandler</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener</span><br><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line"></span><br><span class="line">username = <span class="string">&#x27;admin&#x27;</span></span><br><span class="line">password = <span class="string">&#x27;password&#x27;</span></span><br><span class="line">proxyserver = <span class="string">&quot;61.158.163.130:16816&quot;</span> // 此时代理地址直接使用IP地址的字符串</span><br><span class="line">url = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">p = HTTPPasswordMgrWithDefaultRealm() </span><br><span class="line">p.addpassword(<span class="literal">None</span>,proxyserver,username,password) <span class="comment">##这个类是构建　用户名和密码　对代理地址的映射</span></span><br><span class="line">auth_handler = HTTPBasicAuthHandler(p) </span><br><span class="line">opener = build_opener(auth_handler)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = opener.<span class="built_in">open</span>(url)</span><br><span class="line">    html = result.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(html)</span><br><span class="line"><span class="keyword">except</span> URLError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>获取网站的Cookie,就是根据网站的响应头里面的 Set_Cookie的值来设置Cookie.</br><br>思路是构建CookieJar对象,再用这个对象创建opener,用这个opener打开网站,其响应的cookie会自动给CookieJar对象,通过直接访问CookieJar对象来获得Cookie.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urlib.request <span class="keyword">import</span> HTTPCookieProcessor,build_opener</span><br><span class="line"><span class="keyword">from</span> http.cookiejar <span class="keyword">import</span> CookieJar</span><br><span class="line"></span><br><span class="line">cookie = CookieJar()</span><br><span class="line">handler = HTTPCookieProcessor(cookie)</span><br><span class="line">opener = build_opener(handler)</span><br><span class="line">response = opener.<span class="built_in">open</span>(url)</span><br><span class="line"><span class="keyword">for</span> items <span class="keyword">in</span> cookie:</span><br><span class="line">    <span class="built_in">print</span>(item.name + <span class="string">&#x27;:&#x27;</span> + item.value)</span><br></pre></td></tr></table></figure>
+<p>如果需要保存cookie的话,那么需要使用MozillaCookieJar.它是CookieJar的子类,专门用于处理Cookie,比如Cookie的读取和保存,其将Cookie保存为Mozilla浏览器类型的Cookie,也就是在请求头中看到的格式.</br></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urlib.request <span class="keyword">import</span> HTTPCookieProcessor,build_opener</span><br><span class="line"><span class="keyword">from</span> http.cookiejar <span class="keyword">import</span> MozillaCookieJar</span><br><span class="line"></span><br><span class="line">filename = <span class="string">&#x27;cookie.txt&#x27;</span></span><br><span class="line">cookie = MozillaCookieJar(filename)</span><br><span class="line">handler = HTTPCookieProcessor(cookie)</span><br><span class="line">opener = build_opener(handler)</span><br><span class="line">response = opener.<span class="built_in">open</span>(url)</span><br><span class="line">cookie.save(ignore_discard = <span class="literal">True</span>,ignore_expires = <span class="literal">True</span>) <span class="comment">## ignore_discard 及时被弃用也将其保存下来,ignore_expires 及时已经过期也将其保存</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>同样的,如果是LWP(<code>libwww-perl</code>)格式,则使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie = LWPCookieJar(filename)</span><br></pre></td></tr></table></figure>
+
+<p>那么,如何读取利用cookie?.下面是代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.request <span class="keyword">import</span> HTTPCookieProcessor,build_opener</span><br><span class="line"><span class="keyword">from</span> http.cookiejar <span class="keyword">import</span> MozillaCookieJar</span><br><span class="line"></span><br><span class="line">cookie = CookieJar()</span><br><span class="line">cookie.load(<span class="string">&quot;cookie.txt&quot;</span>,ignore_discard = <span class="literal">True</span>,ignore_expires = <span class="literal">True</span>)</span><br><span class="line">handler = HTTPCookieProcessor(cookie)</span><br><span class="line">opener = build_opener(handler)</span><br><span class="line">response = opener.<span class="built_in">open</span>(url)</span><br><span class="line"><span class="built_in">print</span>(response.read().decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p><code>urllib.error</code>定义了<code>urllib.request</code>库产生的异常</p>
+<h3 id="URLError"><a href="#URLError" class="headerlink" title="URLError"></a>URLError</h3><p><code>URLError</code>来自<code>urllib.error</code>库,继承于<code>OSError</code>,是<code>urllib.error</code>异常模块的基类.它具有一个reason属性,返回错误原因.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = opener.<span class="built_in">open</span>(url)</span><br><span class="line">    html = result.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(html)</span><br><span class="line"><span class="keyword">except</span> URLError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br></pre></td></tr></table></figure>
+<h3 id="HTTPError"><a href="#HTTPError" class="headerlink" title="HTTPError"></a>HTTPError</h3><p><code>HTTPError</code>是<code>URLError</code>的子类,专门用来处理<code>HTTP</code>请求错误,例如认证请求失败.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = opener.<span class="built_in">open</span>(url)</span><br><span class="line">    html = result.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(html)</span><br><span class="line"><span class="keyword">except</span> HTTPError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason,e.code,e.headers)</span><br><span class="line"><span class="keyword">except</span> URLError <span class="keyword">as</span> e: <span class="comment">##如果不是HTTPError,则进入URLError捕获</span></span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br></pre></td></tr></table></figure>
+
+<h2 id="解析链接"><a href="#解析链接" class="headerlink" title="解析链接"></a>解析链接</h2><p><code>urllib.parse</code>块定义了处理URL的标准接口,例如实现URL各部分的抽取,合并已经连接转换.</p>
+<h3 id="urlparse"><a href="#urlparse" class="headerlink" title="urlparse"></a>urlparse</h3><p>该方法实现<code>URL</code>的识别和分段</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse</span><br><span class="line"></span><br><span class="line">result = urlparse(<span class="string">&#x27;https://www.baidu.com/index.html;user?id=5#commemt&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(result)) <span class="comment">##&lt;class &#x27;urllib.parse.ParseResult&#x27;&gt;,是一个元组,可以使用索引或者序列号访问其中的元素</span></span><br><span class="line"><span class="built_in">print</span>(result) <span class="comment">## scheme,netloc,path,params,query fragment</span></span><br></pre></td></tr></table></figure>
+<p>可得标准链接格式:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme://netloc/path;params?query#fragment</span><br></pre></td></tr></table></figure>
+<p><code>urlparse</code>含有三个参数,下面是解释</p>
+<ul>
+<li><strong>urlstring</strong>:待解析的url</li>
+<li><strong>scheme</strong>:默认的协议,如果url没有提供协议则会用这个代替</li>
+<li><strong>allow_fragment</strong>:是否忽略<code>fragment</code></li>
+</ul>
+<h3 id="urlunparse"><a href="#urlunparse" class="headerlink" title="urlunparse"></a>urlunparse</h3><p>此方法用于构造url.参数必须是一个可迭代对象,长度必须为6,否则会抛出异常.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlunparse</span><br><span class="line"></span><br><span class="line">string = [<span class="string">&quot;https&quot;</span>,<span class="string">&quot;www.baidu.com&quot;</span>,<span class="string">&quot;index.html&quot;</span>,<span class="string">&quot;user&quot;</span>,<span class="string">&quot;id=5&quot;</span>,<span class="string">&quot;commemt&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="urlsplit"><a href="#urlsplit" class="headerlink" title="urlsplit"></a>urlsplit</h3><p>和<code>urlparse</code>类似,只不过<code>params</code>不会单独出现,划分为path的一部分,返回结果是<code>SplitResult</code>,和<code>ParseResult</code>类似,既能索引,也可以序列访问.</p>
+<h3 id="urlunsplit"><a href="#urlunsplit" class="headerlink" title="urlunsplit"></a>urlunsplit</h3><p>和<code>urlunparse</code>类似,使用长度为5的可迭代对象.</p>
+<h3 id="urljoin"><a href="#urljoin" class="headerlink" title="urljoin"></a>urljoin</h3><p>该方法需要两个参数,一个是<code>base_url</code>,一个是待修改的链接.该方法会分析<code>base_url</code>中的<code>scheme</code>,<code>netloc</code>和<code>path</code>.如果待修改的链接不含这三个部分中的一个,则补充上去.</p>
+<h3 id="urlencode"><a href="#urlencode" class="headerlink" title="urlencode"></a>urlencode</h3><p>这个方法在<code>GET</code>方法中特别实用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlencode</span><br><span class="line"></span><br><span class="line">query = &#123;</span><br><span class="line">    <span class="string">&#x27;tn&#x27;</span>:<span class="string">&#x27;monline_3_dg&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;ie&#x27;</span>:<span class="string">&#x27;utf-8&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;wd&#x27;</span>:<span class="string">&#x27;python&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">base_url = <span class="string">&#x27;https://www.baidu.com?&#x27;</span></span><br><span class="line">url = base_url + urlencode(query)</span><br><span class="line"><span class="built_in">print</span>(url) <span class="comment">## https://www.baidu.com?tn=monline_3_dg&amp;ie=utf-8&amp;wd=python</span></span><br></pre></td></tr></table></figure>
+<p>其作用就是把字典参数链接在url后面</p>
+<h3 id="parse-qs"><a href="#parse-qs" class="headerlink" title="parse_qs"></a>parse_qs</h3><p>反序列化方法,将<code>query</code>参数返回为字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> parse_qs</span><br><span class="line"></span><br><span class="line">query = <span class="string">&quot;tn=monline_3_dg&amp;ie=utf-8&amp;wd=python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(parse_qs(query)) <span class="comment">## query = &#123;</span></span><br><span class="line">                       <span class="comment">##    &#x27;tn&#x27;:&#x27;monline_3_dg&#x27;,</span></span><br><span class="line">                       <span class="comment">##    &#x27;ie&#x27;:&#x27;utf-8&#x27;,</span></span><br><span class="line">                       <span class="comment">##    &#x27;wd&#x27;:&#x27;python&#x27;</span></span><br><span class="line">                       <span class="comment">## &#125; </span></span><br></pre></td></tr></table></figure>
+
+<h3 id="parse-qsl"><a href="#parse-qsl" class="headerlink" title="parse_qsl"></a>parse_qsl</h3><p>将参数转化为元组组成的列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> parse_qsl</span><br><span class="line"></span><br><span class="line">query = <span class="string">&quot;tn=monline_3_dg&amp;ie=utf-8&amp;wd=python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(parse_qsl(query)) <span class="comment">## [(&#x27;tn&#x27;,&#x27;monline_3_dg&#x27;),(&#x27;ie&#x27;,&#x27;utf-8&#x27;),(&#x27;wd&#x27;,&#x27;python&#x27;)]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="quote"><a href="#quote" class="headerlink" title="quote"></a>quote</h3><p>将内容转化为<code>URL</code>编码格式.如果<code>URL</code>有中文参数,有可能乱码,所以需要<code>quote</code>将其转化为<code> URL</code>编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> url.parse <span class="keyword">import</span> quote</span><br><span class="line"></span><br><span class="line">keyword = <span class="string">&quot;爬虫&quot;</span></span><br><span class="line">url = <span class="string">&#x27;https://www.baidu.com/s?wd=&#x27;</span> + quote(keyword)</span><br><span class="line"><span class="built_in">print</span>(url)</span><br></pre></td></tr></table></figure>
+
+<h3 id="unquote"><a href="#unquote" class="headerlink" title="unquote"></a>unquote</h3><p>将<code>URL</code>编码转成中文</p>
+<h2 id="分析Robot协议"><a href="#分析Robot协议" class="headerlink" title="分析Robot协议"></a>分析Robot协议</h2><p><code>Robot</code>协议也叫机器人协议,全名网络爬虫排除标准(Robot Exclusion Protocal),用来告诉爬虫那些网页可以抓取,那些不行.通常命名为<code>robot.txt</code>,放在网站根目录.</br><br>爬虫在实际爬取时,会先检查是否存在’robot.txt’,如果有则遵从,没有的话就随意爬取.<br>下面是一个<code>robot.txt</code>的实例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: * /对所有爬虫生效</span><br><span class="line">Disallow: / #不允许爬取任何页面</span><br><span class="line">Allow: /public/ #只能爬取public</span><br></pre></td></tr></table></figure>
+<h3 id="robotparser"><a href="#robotparser" class="headerlink" title="robotparser"></a>robotparser</h3><p>这个模块用于解析<code>robot.txt</code>文件,来判断是由有权利爬取这个网页.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">urllib.robotparser.RobotFileParser(url = &#x27;&#x27;) ## 可以不设置url,之后用set_url添加</span><br></pre></td></tr></table></figure>
+<p>以下是<code>RobotFileParset</code>常用方法</p>
+<ul>
+<li><strong>set_url</strong>:设置<code>robot.txt</code>文件链接.</li>
+<li><strong>read</strong>:读取文件并进行分析.这个方法包含读取和分析,所以一定要使用.</li>
+<li><strong>parse</strong>:解析文件,传入其中的参数是文件中某些行的内容.</li>
+<li><strong>can_fetch</strong>:需要两个参数,一个是<code>User-Agent</code>,一个是<code>URL</code>.判断是否能爬取.</li>
+<li><strong>mtime</strong>:返回上次抓取分析文件的时间,如果长时间爬取的话就需要获取最新的<code>robot.txt</code>文件来判断自己爬取的合法性.</li>
+<li><strong>modified</strong>:将当前时间设置为上次抓取分析文件的时间,在长时间爬取中很有用.</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这一节主要是<code>urllib</code>的使用,使用略显复杂,后面的<code>requesets</code>模块更加方便,但是对于自定义爬虫这很有用.<br>爬取逻辑分析:<br>判断是否需要验证和代理 -&gt; 根据情况建立HTTPBasicAuthHandler(PasswordMgrWithDefaultRealm)或者ProxyHandler(字典) -&gt; 根据Handler建立opener -&gt; 爬取网页,同时记得捕获异常,根据异常修改爬虫. -&gt;如果需要修改cookie,使用HTTPCookieProcessor(CookieJar类).</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/the-tarnished/the-tarnished.github.io.git/about" rel="external nofollow noreferrer">Dovahkiin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://github.com/the-tarnished/the-tarnished.github.io.git/the-tarnished/the-tarnished.github.io.git/2022/01/16/the_use_of_urllib/">https://github.com/the-tarnished/the-tarnished.github.io.git/the-tarnished/the-tarnished.github.io.git/2022/01/16/the_use_of_urllib/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/the-tarnished/the-tarnished.github.io.git/about" target="_blank">Dovahkiin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/the-tarnished/the-tarnished.github.io.git/tags/spider-crawler/">
+                                    <span class="chip bg-color">spider/crawler</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/the-tarnished/the-tarnished.github.io.git/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/the-tarnished/the-tarnished.github.io.git/2022/01/16/the_use_of_requests/">
+                    <div class="card-image">
+                        
+                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
+                        
+                        <span class="card-title">Requests的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/the-tarnished/the-tarnished.github.io.git/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/the-tarnished/the-tarnished.github.io.git/tags/spider-crawler/">
+                        <span class="chip bg-color">spider/crawler</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Current&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/the-tarnished/the-tarnished.github.io.git/2022/01/16/the_use_of_urllib/">
+                    <div class="card-image">
+                        
+                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpsv.tgbus.com%2FUploadFiles_5352%2F201306%2F20130614104148898.jpg&refer=http%3A%2F%2Fpsv.tgbus.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002876&t=88f32ad5e48f5a275529653df17d2dbc" class="responsive-img" alt="urllib的使用">
+                        
+                        <span class="card-title">urllib的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Dovahkiin
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/the-tarnished/the-tarnished.github.io.git/tags/spider-crawler/">
+                        <span class="chip bg-color">spider/crawler</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/the-tarnished/the-tarnished.github.io.git/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/the-tarnished/the-tarnished.github.io.git/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/the-tarnished/the-tarnished.github.io.git/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/the-tarnished/the-tarnished.github.io.git/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/the-tarnished/the-tarnished.github.io.git/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/the-tarnished/the-tarnished.github.io.git/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/the-tarnished/the-tarnished.github.io.git/libs/aplayer/APlayer.min.js"></script>
+<script src="/the-tarnished/the-tarnished.github.io.git/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/the-tarnished/the-tarnished.github.io.git/about" target="_blank">Dovahkiin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/the-tarnished" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1106931777@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1106931777" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1106931777" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/the-tarnished/the-tarnished.github.io.git/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/materialize/materialize.min.js"></script>
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/aos/aos.js"></script>
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/the-tarnished/the-tarnished.github.io.git/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/the-tarnished/the-tarnished.github.io.git/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/the-tarnished/the-tarnished.github.io.git/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/the-tarnished/the-tarnished.github.io.git/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
