@@ -5,8 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="正则表达式学习">
-    <meta name="description" content="关于正则表达式的学习笔记和总结浅谈正则表达式1我有一个问题可以用正则表达式解决，好了现在我有两个问题了
-为什么是正则表达式在我个人的学习经历中接触过各种字符串查找函数，但为什么正则表达式这么神奇？我觉得是它的模糊性，它的模糊性决定了查找时无">
+    <meta name="description" content="关于正则表达式的学习笔记和总结浅谈正则表达式我有一个问题可以用正则表达式解决，好了现在我有两个问题了
+为什么是正则表达式在我个人的学习经历中接触过各种字符串查找函数，但为什么正则表达式这么神奇？我觉得是它的模糊性，它的模糊性决定了查找时无关">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -365,14 +365,18 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="关于正则表达式的学习笔记和总结"><a href="#关于正则表达式的学习笔记和总结" class="headerlink" title="关于正则表达式的学习笔记和总结"></a>关于正则表达式的学习笔记和总结</h2><h3 id="浅谈正则表达式"><a href="#浅谈正则表达式" class="headerlink" title="浅谈正则表达式"></a>浅谈正则表达式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我有一个问题可以用正则表达式解决，好了现在我有两个问题了</span><br></pre></td></tr></table></figure>
+                <h2 id="关于正则表达式的学习笔记和总结"><a href="#关于正则表达式的学习笔记和总结" class="headerlink" title="关于正则表达式的学习笔记和总结"></a>关于正则表达式的学习笔记和总结</h2><h3 id="浅谈正则表达式"><a href="#浅谈正则表达式" class="headerlink" title="浅谈正则表达式"></a>浅谈正则表达式</h3><pre class="line-numbers language-none"><code class="language-none">我有一个问题可以用正则表达式解决，好了现在我有两个问题了<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h5 id="为什么是正则表达式"><a href="#为什么是正则表达式" class="headerlink" title="为什么是正则表达式"></a>为什么是正则表达式</h5><p>在我个人的学习经历中接触过各种字符串查找函数，但为什么正则表达式这么神奇？我觉得是它的模糊性，它的模糊性决定了查找时无关元素的影响更小，更能找到需要的内容</br><br>用一段python代码举例</br></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;abcdef&quot;</span></span><br><span class="line">res = <span class="built_in">str</span>.find(<span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token builtin">str</span> <span class="token operator">=</span> <span class="token string">"abcdef"</span>
+res <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>这个代码能帮助你找到字符串中a这个字符，但如果换个问题，在一堆电话号码中找某一个开头的电话，或者末尾是某一片段的电话号码，那么，find函数就没这么好用了。</br>这时候，正则表达式的模糊性就能很好的得到需要的结果。</p>
 <h5 id="正则表达式的应用范围"><a href="#正则表达式的应用范围" class="headerlink" title="正则表达式的应用范围"></a>正则表达式的应用范围</h5><p>正则表达式在java和python等语言中都有相应的包调用.在爬虫的使用中,正则表达式能很好的从一堆标签中找到你需要的某一段消息(虽然有时候在结构规整,目标不复杂的情况下,bs4有更好的效果).</p>
 <h3 id="正则表达式规则"><a href="#正则表达式规则" class="headerlink" title="正则表达式规则"></a>正则表达式规则</h3><h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><ol>
@@ -393,8 +397,18 @@
 <li><code>[abc]</code>或者<code>[a-c]</code> 表明匹配abc中任意一个的字符  <h4 id="转义符"><a href="#转义符" class="headerlink" title="转义符"></a>转义符</h4></li>
 <li><code>\</code> 表明将下一个字符标记为一个特殊字符、或一个原义字符、或一个向后引用、或一个八进制转义符。如:<code>&quot;(\n)&quot;</code>表示匹配\n <code>&quot;(\(ab\))+&quot;</code>表示匹配一个或者多个<code>&quot;(ab)&quot;</code>的字符<h4 id="条件符"><a href="#条件符" class="headerlink" title="条件符"></a>条件符</h4></li>
 <li><code>|</code> 条件或,满足前者或者后者的字符,例如<code>&quot;(12)(3|4)&quot;</code>匹配<code>&quot;123&quot;</code>或者<code>&quot;124&quot;</code>的字符<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4></li>
-<li>正向先行断言<code>表达式1(?=pattern)</code>匹配pattern前面的表达式,不包含本身,例如下面的代码</br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">line = <span class="string">&quot;&lt;div class = \&quot;left_box\&quot; height = 100px&gt;&quot;</span></span><br><span class="line">pattern = <span class="string">&quot;.*(?=height)&quot;</span></span><br><span class="line">m = re.search(pattern,line)</span><br><span class="line"><span class="built_in">print</span>(m.group(<span class="number">0</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;div <span class="class"><span class="keyword">class</span> = &quot;<span class="title">left_box</span>&quot; </span></span><br></pre></td></tr></table></figure></li>
-<li>负向先行断言<code>表达式1(?!pattern)</code>匹配后面不含pattern的表达式,不包含本身,例如下面的代码</br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">line = <span class="string">&quot;regular regex rlief&quot;</span></span><br><span class="line">pattern = <span class="string">r&quot;r(\w&#123;1&#125;)(?!g)&quot;</span></span><br><span class="line">m = re.search(pattern,line)</span><br><span class="line"><span class="built_in">print</span>(m.group(<span class="number">0</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>rl</span><br></pre></td></tr></table></figure></li>
+<li>正向先行断言<code>表达式1(?=pattern)</code>匹配pattern前面的表达式,不包含本身,例如下面的代码</br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+line <span class="token operator">=</span> <span class="token string">"&lt;div class = \"left_box\" height = 100px>"</span>
+pattern <span class="token operator">=</span> <span class="token string">".*(?=height)"</span>
+m <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span>line<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span> <span class="token operator">&lt;</span>div <span class="token keyword">class</span> <span class="token operator">=</span> <span class="token string">"left_box"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>负向先行断言<code>表达式1(?!pattern)</code>匹配后面不含pattern的表达式,不包含本身,例如下面的代码</br><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+line <span class="token operator">=</span> <span class="token string">"regular regex rlief"</span>
+pattern <span class="token operator">=</span> <span class="token string">r"r(\w&#123;1&#125;)(?!g)"</span>
+m <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span>line<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span> rl<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>正向后行断言<code>(?&lt;=pattern)表达式1</code>,同正向先行断言,只是匹配的是pattern后面的表达式</li>
 <li>负向向后行断言<code>(?&lt;!pattern)表达式1</code>,同负向向先行断言,只是匹配的是pattern后面的表达式</li>
 </ol>
@@ -404,8 +418,37 @@
 <li><code>+?</code>重复一到正无穷次,从1开始</li>
 <li><code>??</code>重复0到1次,从0开始</li>
 <li><code>&#123;n,m&#125;?</code> 重复n到m次,从n开始<h4 id="编号分组"><a href="#编号分组" class="headerlink" title="编号分组"></a>编号分组</h4></li>
-<li>数字编号分组<code>&#123;表达式&#125;</code>,例如:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">line = <span class="string">&quot;020-85653333&quot;</span></span><br><span class="line">pattern = <span class="string">r&quot;(0\d&#123;2,3&#125;)-(\d&#123;8&#125;)&quot;</span></span><br><span class="line">m = re.search(pattern,line)</span><br><span class="line">m.group(<span class="number">0</span>)</span><br><span class="line">&gt;&gt;&gt;020-<span class="number">85653333</span></span><br><span class="line">m.group(<span class="number">1</span>)</span><br><span class="line">&gt;&gt;&gt;020</span><br><span class="line">m.group(<span class="number">2</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="number">85653333</span></span><br></pre></td></tr></table></figure></li>
-<li>命名编号捕获组<code>(?&lt;name&gt;表达式)</code>,非捕获组<code>()?:表达式</code>,不捕获(在不同语言中实现方式不同,如在python中需要添加P在?与<name>之间)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">line = <span class="string">&quot;020-85653333&quot;</span></span><br><span class="line">pattern = <span class="string">r&quot;(?P&lt;区号&gt;0\d&#123;2,3&#125;)-(?P&lt;号码&gt;\d&#123;8&#125;)&quot;</span></span><br><span class="line">m = re.search(pattern,line)</span><br><span class="line">m.group(<span class="number">0</span>)</span><br><span class="line">&gt;&gt;&gt;020-<span class="number">85653333</span></span><br><span class="line">m.group(<span class="string">&quot;号码&quot;</span>)</span><br><span class="line">&gt;&gt;&gt;020</span><br><span class="line">m.group(<span class="string">&quot;区号&quot;</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="number">85653333</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">line = <span class="string">&quot;020-85653333&quot;</span></span><br><span class="line">pattern = <span class="string">r&quot;(?P&lt;区号&gt;0\d&#123;2,3&#125;)-(?:\d&#123;8&#125;)&quot;</span></span><br><span class="line">m = re.search(pattern,line)</span><br><span class="line">m.group(<span class="number">0</span>)</span><br><span class="line">&gt;&gt;&gt;020-<span class="number">85653333</span></span><br><span class="line">m.group(<span class="string">&quot;号码&quot;</span>)</span><br><span class="line">&gt;&gt;&gt;Error</span><br><span class="line">m.group(<span class="string">&quot;区号&quot;</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="number">85653333</span></span><br></pre></td></tr></table></figure>
+<li>数字编号分组<code>&#123;表达式&#125;</code>,例如:<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+line <span class="token operator">=</span> <span class="token string">"020-85653333"</span>
+pattern <span class="token operator">=</span> <span class="token string">r"(0\d&#123;2,3&#125;)-(\d&#123;8&#125;)"</span>
+m <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span>line<span class="token punctuation">)</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">020</span><span class="token operator">-</span><span class="token number">85653333</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">020</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">85653333</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>命名编号捕获组<code>(?&lt;name&gt;表达式)</code>,非捕获组<code>()?:表达式</code>,不捕获(在不同语言中实现方式不同,如在python中需要添加P在?与<name>之间)<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> re
+line <span class="token operator">=</span> <span class="token string">"020-85653333"</span>
+pattern <span class="token operator">=</span> <span class="token string">r"(?P&lt;区号>0\d&#123;2,3&#125;)-(?P&lt;号码>\d&#123;8&#125;)"</span>
+m <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span>line<span class="token punctuation">)</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">020</span><span class="token operator">-</span><span class="token number">85653333</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"号码"</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">020</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"区号"</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">85653333</span>
+
+<span class="token keyword">import</span> re
+line <span class="token operator">=</span> <span class="token string">"020-85653333"</span>
+pattern <span class="token operator">=</span> <span class="token string">r"(?P&lt;区号>0\d&#123;2,3&#125;)-(?:\d&#123;8&#125;)"</span>
+m <span class="token operator">=</span> re<span class="token punctuation">.</span>search<span class="token punctuation">(</span>pattern<span class="token punctuation">,</span>line<span class="token punctuation">)</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">020</span><span class="token operator">-</span><span class="token number">85653333</span>
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"号码"</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>Error
+m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"区号"</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span><span class="token number">85653333</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h3>正则表达式在线匹配网站:<code>https://c.runoob.com/front-end/854/</code></li>
 </ol>
 
@@ -525,18 +568,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/16/response_status_code/">
+                <a href="/2022/01/16/hello-world/">
                     <div class="card-image">
                         
-                        <img src="https://img38.51tietu.net/pic/2017-010812/201701081257235ztrn5h4lgx21949.jpg" class="responsive-img" alt="响应状态码">
+                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fdd663e5d4e58d1060f5e525af2433f4c57620314.jpg&refer=http%3A%2F%2Fi0.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644927780&t=0a851fef3d4c59b5323580bafb41e1f5" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">响应状态码</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            hello world
                         
                     </div>
                     <div class="publish-info">
@@ -545,23 +588,11 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Dovahkiin
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/http/">
-                        <span class="chip bg-color">http</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -573,12 +604,12 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/16/the_principle_of_crawler/">
+                <a href="/2022/01/16/response_status_code/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
+                        <img src="https://img38.51tietu.net/pic/2017-010812/201701081257235ztrn5h4lgx21949.jpg" class="responsive-img" alt="响应状态码">
                         
-                        <span class="card-title">爬虫基础</span>
+                        <span class="card-title">响应状态码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -606,8 +637,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spider-crawler/">
-                        <span class="chip bg-color">spider/crawler</span>
+                    <a href="/tags/http/">
+                        <span class="chip bg-color">http</span>
                     </a>
                     
                 </div>
