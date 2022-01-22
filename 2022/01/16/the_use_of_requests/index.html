@@ -473,10 +473,89 @@ MySpider &#x3D; Spider()          ## 创捷Spider对象
 MySpider.Update(r.cookies)   ## 更新cookies
 MySpider.Crawler_get(url)    ## 获取开始爬<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="Session维持"><a href="#Session维持" class="headerlink" title="Session维持"></a>Session维持</h4><pre class="line-numbers language-none"><code class="language-none"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="Session维持"><a href="#Session维持" class="headerlink" title="Session维持"></a>Session维持</h4><p><code>Session</code>维持能保证两次请求的时候都是同一个账户,并且不需要手动保持<code>Cookie</code>,显得更为方便.其主要模拟同一个浏览器访问同一个站点的不同页面.</p>
+<p>下面举例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'https://www.httpbin.org/cookies/set/number/123456789'</span><span class="token punctuation">)</span> <span class="token comment">##这个网址能设置cookies</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'http://www.httpbin.org/cookies'</span><span class="token punctuation">)</span> <span class="token comment">##访问这个网址能获取自己的请求头,这里是返回自己的cookies</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span> <span class="token comment">##这里面不会有之前这是的cookies</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+s <span class="token operator">=</span> requests<span class="token punctuation">.</span>Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+s<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'https://www.httpbin.org/cookies/set/number/123456789'</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> s<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'http://www.httpbin.org/cookies'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span> <span class="token comment">###这里返回了cookies</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h4 id="SSL证书验证"><a href="#SSL证书验证" class="headerlink" title="SSL证书验证"></a>SSL证书验证</h4><p>有些网站可能没有设置好HTTPS证书,或者其证书没有被CA认证,那么访问的时候就会出现SSL证书错误异常,那么就需要让爬虫自动处理.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
 
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>verify <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span><span class="token comment">##这里能输出200,但是会有一个warning,让我们指定证书,我们可以设置忽略</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> requests<span class="token punctuation">.</span>packages<span class="token punctuation">.</span>md <span class="token keyword">import</span> urllib3
+
+urllib3<span class="token punctuation">.</span>disable_warnings<span class="token punctuation">(</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>verify <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>或者我们可以把警告捕获到日志,从而忽略</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> logging
+<span class="token keyword">import</span> requests
+
+logging<span class="token punctuation">.</span>CaptureWarnings<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>verify <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当然也可以设置本地证书用作客户端证书,可以是单个文件,也可以是包含两个文件路径的元组</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>cert <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'/path/server.crt'</span><span class="token punctuation">,</span><span class="token string">'/path/server.key'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>timeout <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h4><p><code>urllib</code>中有<code>HTTPBasicAuthHandler</code>来处理身份验证问题,那么同样的<code>requests</code>中也有相应的库来处理.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> requests<span class="token punctuation">.</span>auth <span class="token keyword">import</span> HTTPBasicAuth
+
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>auth <span class="token operator">=</span> HTTPBasicAuth<span class="token punctuation">(</span><span class="token string">"admin"</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">##或者</span>
+r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>auth <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"admin"</span><span class="token punctuation">,</span><span class="token string">"password"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>status_code<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另外,<code>requests</code>还提供了其他认证方式,比如<code>oa</code>验证,提供了<code>OAuth</code>,需要安装<code>oauth</code>包.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests<span class="token punctuation">.</span>oauthlib <span class="token keyword">import</span> OAuth1
+<span class="token keyword">import</span> request
+
+auth <span class="token operator">=</span> OAuth1<span class="token punctuation">(</span><span class="token string">'Your_App_Key'</span><span class="token punctuation">,</span><span class="token string">'You_App_Secret'</span><span class="token punctuation">,</span><span class="token string">'User_Oauth_Token'</span><span class="token punctuation">,</span><span class="token string">'User_Oauth_Token_Secret'</span><span class="token punctuation">)</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">.</span>auth <span class="token operator">=</span> auth<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h4><p><code>urllib</code>中有<code>ProxyHandler</code>来处理身份验证问题,那么同样的<code>requests</code>中也有相应的库来处理.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+
+proxies <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">'http'</span><span class="token punctuation">:</span><span class="token string">'http://'</span>
+        <span class="token string">'https'</span><span class="token punctuation">:</span><span class="token string">'https://'</span>
+<span class="token punctuation">&#125;</span>
+requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>proxies <span class="token operator">=</span> proxies<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果需要身份验证,那么,可以使用类似<code>http://user:password@host:port</code>的形式设置代理.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+
+proxies <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">'http'</span><span class="token punctuation">:</span><span class="token string">'http://user:password@'</span>
+        <span class="token string">'https'</span><span class="token punctuation">:</span><span class="token string">'https://user:password@'</span>
+<span class="token punctuation">&#125;</span>
+requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>proxies <span class="token operator">=</span> proxies<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Requests库的实现浅尝"><a href="#Requests库的实现浅尝" class="headerlink" title="Requests库的实现浅尝"></a>Requests库的实现浅尝</h3><p>实际上,在使用requests库的时候,他是在内部构造了一个Request对象,并给这个对象各种参数,再把这个Request对象发送出去,请求成功之后再返回Response对象.</p>
+<p>这个Request对象是Prepare Request类型</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> requests <span class="token keyword">import</span> Request<span class="token punctuation">,</span>Session
+
+url <span class="token operator">=</span> <span class="token string">''</span>
+data <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">''</span><span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">&#125;</span>
+headers <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">''</span><span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">,</span><span class="token string">''</span><span class="token punctuation">:</span><span class="token string">''</span><span class="token punctuation">&#125;</span>
+s <span class="token operator">=</span> Session<span class="token punctuation">(</span><span class="token punctuation">)</span>
+req <span class="token operator">=</span> Request<span class="token punctuation">(</span><span class="token string">'POST'</span><span class="token punctuation">,</span>url<span class="token punctuation">,</span>data<span class="token operator">=</span> data<span class="token punctuation">,</span>headers <span class="token operator">=</span> headers<span class="token punctuation">)</span> <span class="token comment">##创建了一个request对象</span>
+prepped <span class="token operator">=</span> s<span class="token punctuation">.</span>prepare_request<span class="token punctuation">(</span>req<span class="token punctuation">)</span> <span class="token comment">##把request对象转换为一个prepare_request对象</span>
+r <span class="token operator">=</span> s<span class="token punctuation">.</span>send<span class="token punctuation">(</span>prepped<span class="token punctuation">)</span><span class="token comment">##把prepare_request对象发送出去,获得其response对象</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>r<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -641,12 +720,12 @@ MySpider.Crawler_get(url)    ## 获取开始爬<span aria-hidden="true" class="l
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/16/the_use_of_urllib/">
+                <a href="/2022/01/16/the_principle_of_crawler/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpsv.tgbus.com%2FUploadFiles_5352%2F201306%2F20130614104148898.jpg&refer=http%3A%2F%2Fpsv.tgbus.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002876&t=88f32ad5e48f5a275529653df17d2dbc" class="responsive-img" alt="urllib的使用">
+                        <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
                         
-                        <span class="card-title">urllib的使用</span>
+                        <span class="card-title">爬虫基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -661,8 +740,12 @@ MySpider.Crawler_get(url)    ## 获取开始爬<span aria-hidden="true" class="l
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Dovahkiin
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
+                                </a>
+                            
                             
                         </span>
                     </div>

@@ -390,7 +390,7 @@ request <span class="token operator">=</span> urllib<span class="token punctuati
 response <span class="token operator">=</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span>urlopen<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>decode<span class="token punctuation">(</span><span class="token string">'utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>Request</code>使用<code>Request</code>对象传给<code>urlopen</code>,可读性更高,封装更好.</p>
-<h4 id="Request构造"><a href="#Request构造" class="headerlink" title="Request构造"></a>Request构造</h4><pre class="line-numbers language-none"><code class="language-none">request &#x3D; urllib.request.Request(url,data&#x3D;None,headers&#x3D;&#123;&#125;,origin_req_host&#x3D;None,unverifiable&#x3D;False,method&#x3D;Noe)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="Request构造"><a href="#Request构造" class="headerlink" title="Request构造"></a>Request构造</h4><pre class="line-numbers language-none"><code class="language-none">request &#x3D; urllib.request.Request(url,data&#x3D;None,headers&#x3D;&#123;&#125;,origin_req_host&#x3D;None,unverifiable&#x3D;False,method&#x3D;None)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>url:同urlopen</li>
 <li>data:同urlopen</li>
@@ -714,12 +714,12 @@ Allow: &#x2F;public&#x2F; #只能爬取public<span aria-hidden="true" class="lin
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/16/the_use_of_requests/">
+                <a href="/2022/01/16/the_principle_of_crawler/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
+                        <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
                         
-                        <span class="card-title">Requests的使用</span>
+                        <span class="card-title">爬虫基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">

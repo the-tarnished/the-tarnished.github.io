@@ -382,9 +382,15 @@ res <span class="token operator">=</span> <span class="token builtin">str</span>
 <h3 id="正则表达式规则"><a href="#正则表达式规则" class="headerlink" title="正则表达式规则"></a>正则表达式规则</h3><h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><ol>
 <li><code>.</code> :匹配除换行符之外的任意字符</li>
 <li><code>\w</code> :匹配字母或数字或下划线或汉字</li>
+<li><code>\W</code> :匹配不是字母或数字或下划线或汉字的字符</li>
 <li><code>\s</code> :匹配任意空白符</li>
+<li><code>\S</code> :匹配任意非空白符</li>
 <li><code>\d</code> :匹配数字</li>
+<li><code>\D</code> :匹配非数字</li>
 <li><code>\b</code> :匹配单词的开始或结束 如<code>&quot;er\b&quot;</code> 可以匹配never 不能匹配 very</li>
+<li><code>\A</code> :匹配字符串开头</li>
+<li><code>\z</code>:匹配字符串结尾,如果有换行符,则同时匹配换行符.</li>
+<li><code>\Z</code>:匹配字符串结尾,不匹配换行符.</li>
 <li><code>^</code> :匹配输入字符串的开始</li>
 <li><code>$</code> :匹配输入字符串的结束<h4 id="重复限定符"><a href="#重复限定符" class="headerlink" title="重复限定符"></a>重复限定符</h4></li>
 <li><code>*</code> 重复零次或者多次</li>
@@ -449,8 +455,24 @@ m<span class="token punctuation">.</span>group<span class="token punctuation">(<
 <span class="token operator">>></span><span class="token operator">></span>Error
 m<span class="token punctuation">.</span>group<span class="token punctuation">(</span><span class="token string">"区号"</span><span class="token punctuation">)</span>
 <span class="token operator">>></span><span class="token operator">></span><span class="token number">85653333</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h3>正则表达式在线匹配网站:<code>https://c.runoob.com/front-end/854/</code></li>
+<h3 id="python中re库介绍"><a href="#python中re库介绍" class="headerlink" title="python中re库介绍"></a>python中re库介绍</h3><h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4></li>
 </ol>
+<ul>
+<li>re.I 大小写不敏感</li>
+<li>re.L 实现本地化识别(local-aware)匹配</li>
+<li>re.M 多行匹配</li>
+<li>re.S 匹配包括换行符在内的任何字符</li>
+<li>re.U 使用Unicode字符集解析字符</li>
+<li>re.X 该标志给予灵活格式.</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ul>
+<li>search:从开头开始匹配,如果开头不匹配则失败</li>
+<li>findall:获取匹配的所有字符串</li>
+<li>sub:把匹配字符出从其中删去</li>
+<li>compile:将正则表达式编译成正则表达式对象,方便之后复用</li>
+<li>match:找到第一个匹配的字符串</li>
+</ul>
+<h3 id="参考网站"><a href="#参考网站" class="headerlink" title="参考网站"></a>参考网站</h3><p>正则表达式在线匹配网站:<code>https://c.runoob.com/front-end/854/</code></p>
 
                 
             </div>
@@ -607,7 +629,7 @@ m<span class="token punctuation">.</span>group<span class="token punctuation">(<
                 <a href="/2022/01/16/response_status_code/">
                     <div class="card-image">
                         
-                        <img src="https://img38.51tietu.net/pic/2017-010812/201701081257235ztrn5h4lgx21949.jpg" class="responsive-img" alt="响应状态码">
+                        <img src="/../cover/4.jpg" class="responsive-img" alt="响应状态码">
                         
                         <span class="card-title">响应状态码</span>
                     </div>
