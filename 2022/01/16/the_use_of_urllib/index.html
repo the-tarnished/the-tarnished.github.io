@@ -714,12 +714,12 @@ Allow: &#x2F;public&#x2F; #只能爬取public<span aria-hidden="true" class="lin
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/16/the_principle_of_crawler/">
+                <a href="/2022/01/16/the_use_of_requests/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
+                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
                         
-                        <span class="card-title">爬虫基础</span>
+                        <span class="card-title">Requests的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1177,6 +1177,14 @@ $(function () {
     
 
     <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 鼠标星星特效 -->
@@ -1206,8 +1214,6 @@ $(function () {
     })();
 </script>
 
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>

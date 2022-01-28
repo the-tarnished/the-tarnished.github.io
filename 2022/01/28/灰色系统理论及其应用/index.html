@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="httpx的使用, 零落闲拾">
-    <meta name="description" content="">
+    <meta name="keywords" content="灰色系统理论及其应用">
+    <meta name="description" content="灰色系统介绍灰色系统本质就是系统内部信息部分已知而部分信息未知的系统.如果所有信息都已知,如力和加速度的关系,那么这就是白色系统,反之则成为黑色系统.
+灰色系统提出了一个和回归分析不同的分析方法-关联度分析方法,即根据因素之间发展态势的相似">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>httpx的使用 | 零落闲拾</title>
+    <title>灰色系统理论及其应用 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -202,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/../cover/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">httpx的使用</h1>
+                    <h1 class="description center-align post-title">灰色系统理论及其应用</h1>
                 </div>
             </div>
         </div>
@@ -323,8 +324,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spider-crawler/">
-                                <span class="chip bg-color">spider/crawler</span>
+                            <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">数理知识</span>
                             </a>
                         
                     </div>
@@ -335,8 +336,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                数学建模
                             </a>
                         
                     </div>
@@ -348,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-01-18
+                    2022-01-28
                 </div>
                 
 
@@ -372,7 +373,39 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="灰色系统介绍"><a href="#灰色系统介绍" class="headerlink" title="灰色系统介绍"></a>灰色系统介绍</h2><p>灰色系统本质就是系统内部信息部分已知而部分信息未知的系统.如果所有信息都已知,如力和加速度的关系,那么这就是白色系统,反之则成为黑色系统.</p>
+<p>灰色系统提出了一个和回归分析不同的分析方法-关联度分析方法,即根据因素之间发展态势的相似或相异程度来衡量因素间的关联程度.</p>
+<h2 id="关联分析"><a href="#关联分析" class="headerlink" title="关联分析"></a>关联分析</h2><h3 id="关联系数的定义"><a href="#关联系数的定义" class="headerlink" title="关联系数的定义"></a>关联系数的定义</h3><p>$选取参考数列x_0 = {x_0(k)|k = 1,2,…,n}其中k表示时刻.假设有m个比较数列x_i={x_i(k)|k = 1,2,…,n}(i=1,2,…,m)$</p>
+<p>$则称\xi_{i}(k) = \frac{\min_{s}min_{t}\left|x_{0}(t), - x_{s}(t)\right|,+\rho , \max_{s}max_{t} \left | x_{0}(t), - x_{s}(t) \right | }{\left | x_{0}(k), - x_{i}(k) \right | , + \rho , \max_{s}max_{t} \left | x_{0}(t), - x_{s}(t) \right | } \cdots \left ( 1 \right )$</p>
+<p>$为比较数列x_{i} 对参考数列x_{0} 在k时刻的关联系数，  其中 \rho \in \left [ 0, 1 \right ] 为分辨系数；$</p>
+<p>称（1）式中$\min_{s}min_{t}\left|x_{0}(t), - x_{s}(t)\right|,\max_{s}max_{t}\left|x_{0}(t), - x_{s}(t) \right|$分别为两级最小差，两级最大差。</p>
+<h3 id="关联度的定义"><a href="#关联度的定义" class="headerlink" title="关联度的定义"></a>关联度的定义</h3><p>称<br>$$r_i =\frac{1}{n}\Sigma\xi_i(k)$$<br>为数列$x_i$对参考数列$x_0$的关联度.</p>
+<p>易得关联度是各个时刻的关联系数集中的一个平均值</p>
+<h2 id="优势分析"><a href="#优势分析" class="headerlink" title="优势分析"></a>优势分析</h2><p>假设有m个参考数列,记为$y_1,y_2,…,y_m$.有l个比较数列,记为$x_1,…,x_l$.显然每一个参考数列对l个比较数列都有l个关联度.令$r_{ij}$表示比较数列$x_j$对$y_i$的关联度,可构造关联度矩阵$R=(r_{ij})_{m*l}$若某一列元素大于其他列元素的时候称此列对应的比较数列(子因素)为优势子因素;若某一行元素大于其他行元素,则称此行对应的参考数列(母元素)为优势母元素.</p>
+<h2 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h2><h3 id="累加生成"><a href="#累加生成" class="headerlink" title="累加生成"></a>累加生成</h3><p>把数列 x 各时刻数据依次累加的过程叫做<strong>累加过程</strong>，记作 <strong>AGO</strong>，累加所得的新数列，叫做<strong>累加生成数列</strong>。具体地，设原始数列为<br>$$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n)),累加生成数列记为x^{(1)} = (x^{(1)}(1),…,x^{(1)}(n)),且x^{(0)}与x^{(1)}满足 $$<br>$$x^{(1)}(k) = \Sigma^k_{i=\alpha}x^{(0)}(i),k = \alpha,…,n$$<br>$$其中\alpha\leq n为正整数.上述累加过程当1&lt;\alpha \leq k时称为去首累加成,当\alpha = 1时称为一般累加成.$$<br>$$当\alpha = 1时, 式子x^{(1)}中的上标(1)表示一次累加生成,记作1-AGO.再做一次累加生成可得二次累加生成,所以易得$$<br>$$x^{(r)}(k) = \Sigma^k_{i=1}x^{(r-1)}(i),k = 1,…,n$$</p>
+<p>一般的,对于实际情况为非负的数列,累加生成可以使得生成数列为递增数列,对于有负数的数列可以使用移轴的方式再累加生成.</p>
+<h3 id="累减生成"><a href="#累减生成" class="headerlink" title="累减生成"></a>累减生成</h3><p>对累加生成的还原就是累减生成<br>$$x^{(r-1)}(k) = x^{(r)}(k)-x^{(r)}(k-1),k = 1,…,n$$</p>
+<h3 id="均值生成"><a href="#均值生成" class="headerlink" title="均值生成"></a>均值生成</h3><h4 id="邻值生成数"><a href="#邻值生成数" class="headerlink" title="邻值生成数"></a>邻值生成数</h4><p>设原始数列为$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n))$,则称$x^{(0)}(k-1)$与$x^{(0)}(k1)$为数列$x^{(0)}$的一对邻值,$x^{(0)}(k-1)$称为前值,$x^{(0)}(k1)$称为后值.</p>
+<p>对数常数$\alpha \in [0,1]$,则称<br>$$z^(0)(k) = \alpha x^{(0)}(k)+(1-\alpha) x^{(0)}(k-1)$$<br>为由数列$x^{(0)}$的邻值在生成系数$\alpha$下的邻值生成数.</p>
+<h4 id="等权邻值生成数"><a href="#等权邻值生成数" class="headerlink" title="等权邻值生成数"></a>等权邻值生成数</h4><p>当$\alpha=0.5$时,$z^(0)(k)$称为等权邻值生成数</p>
+<h4 id="非邻值生成数"><a href="#非邻值生成数" class="headerlink" title="非邻值生成数"></a>非邻值生成数</h4><p>类似的,可定义非邻值生成数:<br>$$z^(0)(k) = \alpha x^{(0)}(k+1)+(1-\alpha) x^{(0)}(k-1)$$</p>
+<h2 id="灰色模型"><a href="#灰色模型" class="headerlink" title="灰色模型"></a>灰色模型</h2><h3 id="GM-1-1-模型的定义"><a href="#GM-1-1-模型的定义" class="headerlink" title="GM(1,1)模型的定义"></a>GM(1,1)模型的定义</h3><p><strong>灰导数</strong><br>$$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n)),x^{(0)}的AGO生成数列为x^{(1)} = (x^{(1)}(1),…,x^{(1)}(n)),其中x^{(1)}(k) = \Sigma^k_{i=1}x^{(0)}(i)$$<br>$则定义x^{(1)}的灰导数为$<br>$$d(k) = x^{(0)}(k) =x^{(1)}(k) -x^{(1)}(k-1)$$<br><strong>GM(1,1)的灰微分方程模型</strong><br>$$令x^{(1)}为数列x^{(1)}的紧邻均值数列,即z^(1)(k) = 0.5 x^{(1)}(k)+0.5 x^{(1)}(k-1),于是定义GM(1,1)的灰微分方程模型为$$</p>
+<p>$$d(k)+az^{(1)}(k) = b$$</p>
+<p>其中$x^{(0)}(k)$称为灰导数,a称为发展系数,$z^{(1)}(k)$称为白化背景值,b称为灰作用量.</p>
+<h3 id="参数向量估计"><a href="#参数向量估计" class="headerlink" title="参数向量估计"></a>参数向量估计</h3><p>将k=2,3,…,n带入灰微分方程<br>$$\begin{cases}<br>d(2)+az^{(1)}(2) = x^{(0)}(2)+az^{(1)}(2) = b\\<br>d(3)+az^{(1)}(3) = x^{(0)}(3)+az^{(1)}(3) = b\\<br>…….\\<br>d(n)+az^{(1)}(n) = x^{(0)}(n)+az^{(1)}(n) = b\\<br>\end{cases}<br>$$</p>
+<p>$$令Y=(x^{(0)}(2),x^{(0)}(3),…,x^{(0)}(n))^T,u=(a,b)^T,<br>B =\begin{bmatrix}<br>-z^{(1)}(2)&amp;1\\<br>-z^{(1)}(3)&amp;1\\<br>{\vdots}&amp;{\vdots}\\<br>-z^{(1)}(n)&amp;1\\<br>\end{bmatrix}<br>$$<br>称Y为数据向量,B为数据矩阵,u为参数向量,GM(1,1)模型可以表示为Y = Bu</p>
+<p>由最小二乘法可以求得<br>$$\hat{u} = (\hat{a},\hat{b})^T = (B^TB)^{-1}B^TY$$</p>
+<h3 id="GM-1-1-白化型"><a href="#GM-1-1-白化型" class="headerlink" title="GM(1,1)白化型"></a>GM(1,1)白化型</h3><p>对于GM(1,1)的灰微分方程,如果将k视为连续变量t,则数列$x^{(0)}$可视作t的函数,记为 $x^{(0)} = $x^{(0)}$(t)$ ,则 $x^{(1)}$ 是 $x^{(0)}$ 的积分,于是可得白微分方程为<br>$$\frac{dx^{(1)}}{dt}+ax^{(1)} = b$$</p>
+<h3 id="GM-1-N-模型定义"><a href="#GM-1-N-模型定义" class="headerlink" title="GM(1,N)模型定义"></a>GM(1,N)模型定义</h3><p><code>GM(1,1)</code>即表示模型是 1 阶的，且只含 1 个变量的灰色模型。而<code>GM(1, N)</code> 即表示模型是 1 阶的，包含有 N 个变量的灰色模型。<br>设系统由N个行为因子,其原始数列为$x_i^{(0)} = (x_i^{(0)}(1),…,x_i^{(0)}(n)),i=1,…,N$</p>
+<p>其一阶累加生成数列为$x_i^{(1)} = (x_i^{(1)}(1),…,x_i^{(1)}(n)),i=1,…,N,x_i^{(1)}(k)=\Sigma ^k_{j=1}x_i^{(0)}(j)$</p>
+<p>取$x_i^{(1)}$的均值数列为$z_i^{(1)}(k) = 0.5x_i^{(1)}(k)+0.5x_i^{(1)}(k-1)$</p>
+<p>则均值数列$z_i^{(1)} = (z_i^{(1)}(1),…,z_i^{(1)}(n))$</p>
+<p>于是可得GM(1,N)的灰微分方程为<br>$$x_i^{(0)}(k) + az_i^{(1)} = \Sigma^N_{(j\neq{i})}b_jx_j^{(1)}(k)$$<br>其中$x_i^{(0)}(k)$为灰导数,$z_i^{(1)}$为背景值,a,$b_j$为参数.</p>
+<p>引入向量矩阵符号,令i=1得<br>$$Y = [x_1^{(0)}(1),..,x_1^{(0)}(n)]^T,u=[a,b_2,…,b_N]^T$$<br>$$B = \begin{bmatrix}<br>-z_1^{(1)}(2) &amp;x_2^{(1)}(2) &amp;{\cdots} &amp;x_N^{(1)}(2)\\<br>{\vdots}&amp;{\vdots}&amp;{\vdots}&amp;{\vdots}\\<br>-z_1^{(1)}(n) &amp;x_2^{(1)}(n) &amp;{\cdots} &amp;x_N^{(1)}(n)\\<br>\end{bmatrix}$$<br>则GM(1,N)的灰微分方程为<br>$$Y=Bu$$</p>
+<h3 id="GM-1-N-模型的参数估计"><a href="#GM-1-N-模型的参数估计" class="headerlink" title="GM(1,N)模型的参数估计"></a>GM(1,N)模型的参数估计</h3><p>如果$(B^TB)^{-1}$存在,则$\hat{u} = (B^TB)^{-1}B^TY$</p>
+<p>如果$(B^TB)^{-1}$不存在,比如n-1 &lt; N,那么$\hat{u}$不能通过上式确定,但注意到$\hat{u}$是对各子因素对主因素影响大小的反映,所以通过引入加权矩阵 $W = diag(w_1,…,w_N)$,对各因素进行调节,对于未来发展减弱趋势的因素赋予较大权值,对于未来发展增强趋势的因素赋予较小权值,则<br>$$\hat{u} = W^{-1}B^T(B^{-1}B^T)^{-1}Y$$</p>
+<h3 id="GM-1-N-白化型"><a href="#GM-1-N-白化型" class="headerlink" title="GM(1,N)白化型"></a>GM(1,N)白化型</h3><p>$$\frac{dx_1^{(1)}}{dt} + ax_1^{(1)}(t) = \Sigma^N_{(j\neq{1})}b_jx_j^{(1)}(k)$$</p>
+
                 
             </div>
             <hr/>
@@ -398,7 +431,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/01/28/%E7%81%B0%E8%89%B2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">https://the-tarnished.github.io/2022/01/28/%E7%81%B0%E8%89%B2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -436,8 +469,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spider-crawler/">
-                                    <span class="chip bg-color">spider/crawler</span>
+                                <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">数理知识</span>
                                 </a>
                             
                         </div>
@@ -485,17 +518,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/01/19/Numpy%E5%AD%A6%E4%B9%A0/">
+                <a href="/2022/01/28/%E7%81%B0%E8%89%B2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Numpy学习">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="灰色系统理论及其应用">
                         
-                        <span class="card-title">Numpy学习</span>
+                        <span class="card-title">灰色系统理论及其应用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -505,9 +539,59 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-19
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                    数学建模
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">数理知识</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/22/Geatpy%E5%AD%A6%E4%B9%A0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.gif" class="responsive-img" alt="Geatpy学习">
+                        
+                        <span class="card-title">Geatpy学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -523,56 +607,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Numpy-Python/">
-                        <span class="chip bg-color">数学建模,Numpy,Python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/01/17/logism%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
-                    <div class="card-image">
-                        
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a3885cbb0919a8012141682a2366.png%402o.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645001651&t=b75d142a50723f95ae78e710a898aefb" class="responsive-img" alt="logism自动化填充">
-                        
-                        <span class="card-title">logism自动化填充</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/logism/" class="post-category">
-                                    logism
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/logisim-P0/">
-                        <span class="chip bg-color">logisim,P0</span>
+                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Geatpy-Python/">
+                        <span class="chip bg-color">数学建模,Geatpy,Python</span>
                     </a>
                     
                 </div>
@@ -703,6 +739,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

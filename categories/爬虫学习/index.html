@@ -266,11 +266,11 @@
                 
                 
                 
-                <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" title="数学建模: 4">
+                <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" title="数学建模: 5">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             style="background-color: #F9EBEA;">数学建模
-                        <span class="tag-length">4</span>
+                        <span class="tag-length">5</span>
                     </span>
                 </a>
                 
@@ -360,21 +360,25 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2022/01/16/the_principle_of_crawler/">
+                    <a href="/2022/01/16/the_use_of_requests/">
                         <div class="card-image tag-image">
                             
-                            <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
+                            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
                             
-                            <span class="card-title">爬虫基础</span>
+                            <span class="card-title">Requests的使用</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、爬虫的基本原理概述爬虫就是假装浏览器爬取网页并获取信息.
-爬取数据类型
-最常见的就是爬虫能爬取JSON形式的HTML代码.
-对于js,css等文件,需分析源代码后台Ajax接口,或者使用Selenium,Splash,Pyppeteer
+                                Requests的应用Get请求import requests
+
+### 添加params
+data = &#123;
+    'name':'admin',
+    'password':'passward'
+&#125;
+### 添加h
                             
                         </div>
                         <div class="publish-info">
@@ -408,25 +412,21 @@
             
             <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2022/01/16/the_use_of_requests/">
+                    <a href="/2022/01/16/the_principle_of_crawler/">
                         <div class="card-image tag-image">
                             
-                            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
+                            <img src="https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500" class="responsive-img" alt="爬虫基础">
                             
-                            <span class="card-title">Requests的使用</span>
+                            <span class="card-title">爬虫基础</span>
                         </div>
                     </a>
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Requests的应用Get请求import requests
-
-### 添加params
-data = &#123;
-    'name':'admin',
-    'password':'passward'
-&#125;
-### 添加h
+                                一、爬虫的基本原理概述爬虫就是假装浏览器爬取网页并获取信息.
+爬取数据类型
+最常见的就是爬虫能爬取JSON形式的HTML代码.
+对于js,css等文件,需分析源代码后台Ajax接口,或者使用Selenium,Splash,Pyppeteer
                             
                         </div>
                         <div class="publish-info">
@@ -821,6 +821,14 @@ $(function () {
     
 
     <!-- 雪花特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 鼠标星星特效 -->
@@ -850,8 +858,6 @@ $(function () {
     })();
 </script>
 
-    
-    <script src="/libs/others/clicklove.js" async="async"></script>
     
     
     <script async src="/libs/others/busuanzi.pure.mini.js"></script>
