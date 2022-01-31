@@ -214,7 +214,7 @@ constan">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -499,7 +499,8 @@ constan">
 <li>4.对于每个簇心,计算属于它的点集的平均点,该点为新的簇心</li>
 <li>5.在获得新的n个簇心之后,重复 3,4步骤,如果划分新的点集的时候,点集没有变则循环结束.</li>
 </ul>
-<h3 id="hierarchy模块"><a href="#hierarchy模块" class="headerlink" title="hierarchy模块"></a>hierarchy模块</h3><p><del>这一块的数理逻辑暂且看不懂,之后再更新.应该吧</del></p>
+<p>这个算法最后返回的是质心坐标矩阵,通过<code>vq</code>方法再把每个点分给对应的质心,<code>vq</code>方法的返回值是每个观察的簇是失真.</p>
+<h3 id="hierarchy模块"><a href="#hierarchy模块" class="headerlink" title="hierarchy模块"></a>hierarchy模块</h3><p>见<a href="%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90.md">博客多元分析一节</a></p>
 <h2 id="Scipy-fftpack模块"><a href="#Scipy-fftpack模块" class="headerlink" title="Scipy fftpack模块"></a>Scipy fftpack模块</h2><p>fftpack模块提供了快速傅里叶变化的方法.</p>
 <h3 id="一维离散傅里叶变换"><a href="#一维离散傅里叶变换" class="headerlink" title="一维离散傅里叶变换"></a>一维离散傅里叶变换</h3><p>长度为n的x序列,通过fft方法算出其在复数域上的映射a+bi.ifft方法是逆傅里叶变换.</p>
 <h3 id="离散余弦变换"><a href="#离散余弦变换" class="headerlink" title="离散余弦变换"></a>离散余弦变换</h3><p>离散余弦变换是实偶函数的傅里叶变换,不含虚数单位项.可以认为是0i.也即没有初项,只有振幅和频率两个参数.<br>Scipy提供了dct和idct方法求得</p>
@@ -705,8 +706,62 @@ x <span class="token operator">=</span> linalg<span class="token punctuation">.<
 <li>Feature extraction</li>
 <li>Registration<h3 id="过滤器filter"><a href="#过滤器filter" class="headerlink" title="过滤器filter"></a>过滤器filter</h3>下面的函数都是对数组中的值进行过滤,输出元素是输入元素邻域元素的函数值.对于这个元素邻域我们成为过滤器内核,可以是矩形,也可以是任意图形,通过自己给的权重控制.对于过滤器内核,其内核中心一般是核形状的尺寸除以2,(长度为2的内核,中心就是1,既第一位元素.),但是也能通过设置参数移动内核中心.</li>
 </ul>
-<p>对于边界元素,需要边界外的值来辅助计算,所以需要选择边界条件.<br>| mode     | description           | example              |<br>| :——- | :——————– | :——————- |<br>| nearest  | 使用边界值            | [1,2]-&gt;[1,1,2,2]     |<br>| wrap     | 复制阵列              | [1,2,3]-&gt;[3,1,2,3,1] |<br>| reflect  | 反射在边界的数组      | [1,2,3]-&gt;[1,1,2,3,3] |<br>| mirror   | 镜像边界处的数组      | [1,2,3]-&gt;[2,1,2,3,2] |<br>| constant | 使用常数填充(默认是0) | [1,2,3]-&gt;[0,1,2,3,0] |</p>
-<p>同时还支持以下关键字<br>| mode          | description    |<br>| :———— | :————- |<br>| grid-constant | 等价于constant |<br>| grid-mirror   | 等价于mirror   |<br>| grid-wrap     | 等价于wrap     |</p>
+<p>对于边界元素,需要边界外的值来辅助计算,所以需要选择边界条件.</p>
+<table>
+<thead>
+<tr>
+<th align="left">mode</th>
+<th align="left">description</th>
+<th align="left">example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">nearest</td>
+<td align="left">使用边界值</td>
+<td align="left">[1,2]-&gt;[1,1,2,2]</td>
+</tr>
+<tr>
+<td align="left">wrap</td>
+<td align="left">复制阵列</td>
+<td align="left">[1,2,3]-&gt;[3,1,2,3,1]</td>
+</tr>
+<tr>
+<td align="left">reflect</td>
+<td align="left">反射在边界的数组</td>
+<td align="left">[1,2,3]-&gt;[1,1,2,3,3]</td>
+</tr>
+<tr>
+<td align="left">mirror</td>
+<td align="left">镜像边界处的数组</td>
+<td align="left">[1,2,3]-&gt;[2,1,2,3,2]</td>
+</tr>
+<tr>
+<td align="left">constant</td>
+<td align="left">使用常数填充(默认是0)</td>
+<td align="left">[1,2,3]-&gt;[0,1,2,3,0]</td>
+</tr>
+</tbody></table>
+<p>同时还支持以下关键字</p>
+<table>
+<thead>
+<tr>
+<th align="left">mode</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">grid-constant</td>
+<td align="left">等价于constant</td>
+</tr>
+<tr>
+<td align="left">grid-mirror</td>
+<td align="left">等价于mirror</td>
+</tr>
+<tr>
+<td align="left">grid-wrap</td>
+<td align="left">等价于wrap</td>
+</tr>
+</tbody></table>
 <ul>
 <li>correlate是计算多维相关的函数,数组和给定内核相关<blockquote>
 <p><code>scipy.ndimage.correlate(input, weights, output=None, mode=&#39;reflect&#39;, cval=0.0, origin=0)</code></p>
@@ -906,7 +961,7 @@ sol <span class="token operator">=</span> root<span class="token punctuation">(<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Matplotlib学习">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Matplotlib学习">
                         
                         <span class="card-title">Matplotlib学习</span>
                     </div>
@@ -955,7 +1010,7 @@ sol <span class="token operator">=</span> root<span class="token punctuation">(<
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Numpy学习">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Numpy学习">
                         
                         <span class="card-title">Numpy学习</span>
                     </div>

@@ -4,8 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="http基础">
-    <meta name="description" content="HTTP基本原理1. URI  和  URL URI = URL(统一资源定位符,需要有路径) + URN(统一资源名称,只需要独一无二,例如ID card)URL 统一格式:scheme://[username:password@]hos">
+    <meta name="keywords" content="多元分析">
+    <meta name="description" content="多元分析聚类分析聚类分析是对多个样本或者变量进行定量分类的一种方法.对样本进行分类叫做Q型聚类分析,对变量进行分类叫做R型聚类分析.
+Q型聚类分析主要针对样本,是综合利用多个变量信息进行分类.R型聚类分析是分析的变量之间的亲疏关系.
+Q型聚">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>http基础 | 零落闲拾</title>
+    <title>多元分析 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -202,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi1.hdslb.com%2Fbfs%2Farchive%2Favsas_i181109wsf9otma4jq5ue1ag9bxk4yki_0022.jpg&refer=http%3A%2F%2Fi1.hdslb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002437&t=152bb6c33da2650c4a2378c397684501')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">http基础</h1>
+                    <h1 class="description center-align post-title">多元分析</h1>
                 </div>
             </div>
         </div>
@@ -323,8 +325,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spider-crawler/">
-                                <span class="chip bg-color">spider/crawler</span>
+                            <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">数理知识</span>
                             </a>
                         
                     </div>
@@ -335,8 +337,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                数学建模
                             </a>
                         
                     </div>
@@ -348,7 +350,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-01-16
+                    2022-01-29
                 </div>
                 
 
@@ -372,122 +374,52 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTP基本原理"><a href="#HTTP基本原理" class="headerlink" title="HTTP基本原理"></a>HTTP基本原理</h1><h2 id="1-URI-和-URL"><a href="#1-URI-和-URL" class="headerlink" title="1. URI  和  URL "></a>1.<strong> URI </strong> 和 <strong> URL </strong></h2><p>URI = URL(统一资源定位符,需要有路径) + URN(统一资源名称,只需要独一无二,例如ID card)</br><br>URL 统一格式:</br><br><code>scheme://[username:password@]hostname[:port][/path][;parameters][?query][#fragment] </code></p>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释:"></a>解释:</h3><blockquote>
-<p>scheme: 协议 也称protocol </br><br><strong>[username:password@]</strong>:用户名和密码<br><strong>hostname</strong>:主机地址</br><br><strong>port</strong>:端口</br><br><strong>path</strong>:路径,网络资源在服务器中的指定地址,类比操作系统中目录</br><br><strong>parameters</strong>:参数,访问资源的附加信息</br><br><strong>query</strong>:查询,查询某类资源,比如地址</br><code>https://www.baidu.com/baidu?tn=monline_3_dg&amp;ie=utf-8&amp;wd=%E4%BD%A0%E5%A5%BD%E6%9D%8E%E7%84%95%E8%8B%B1</code></br>问号后面限制了搜索引擎关键词<br>fragment:片段,对资源描述的部分补充.应用之一作为现代前端框架做路由管理,其二是HTML锚点(href = “#top”)</p>
-</blockquote>
-<h2 id="2-HTTP-和-HTTPS"><a href="#2-HTTP-和-HTTPS" class="headerlink" title="2. HTTP  和  HTTPS "></a>2.<strong> HTTP </strong> 和 <strong> HTTPS </strong></h2><p>HTTP只是单纯把超文本数据从网络传输到本地浏览器,HTTPS增加了SSL层,传输内容经过SSL加密.</br><br>这两个协议都是应用层协议,只负责信息传输的规范,其传输层还是TCP/IP(三次握手,四次挥手)协议,负责服务器和本地主机建立联系.</br></p>
-<h2 id="3-HTTP-HTTPS请求过程"><a href="#3-HTTP-HTTPS请求过程" class="headerlink" title="3.HTTP/HTTPS请求过程:"></a>3.HTTP/HTTPS请求过程:</h2><p>客户端发送Request(请求),服务器收到请求进行解析,然后服务器返回Response(响应).浏览器得到响应之后进行响应解析渲染呈现.</p>
-<h2 id="4-请求"><a href="#4-请求" class="headerlink" title="4.请求"></a>4.请求</h2><p>请求  ＝ 请求方法 + 请求网址 + 请求头 + 请求体</p>
-<h3 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h3><p>常用<code>get</code>和<code>post</code></p>
-<h4 id="GET方法"><a href="#GET方法" class="headerlink" title="GET方法:"></a>GET方法:</h4><blockquote>
-<p>当输入网址按下回车的时候就已经输入了GET方法到服务器,请求参数(query)会和URL一起发给服务器.一个Get请求一次最多发送1024Byte大小数据</p>
-</blockquote>
-<h4 id="POST方法"><a href="#POST方法" class="headerlink" title="POST方法:"></a>POST方法:</h4><blockquote>
-<p>当输入账号密码等需要提交表单的时候就是发送了<code>post</code>方法,参数不会包含在URL中,而是包含在请求体里面发给服务器.发送的数据没有大小要求.</p>
-</blockquote>
-<p>不常用方法有<code>HEAD</code>,<code>PUT</code>,<code>DELETE</code>,<code>CONNECT</code>,<code>OPTIONS</code>,<code>TRACE</code>.</p>
+                <h1 id="多元分析"><a href="#多元分析" class="headerlink" title="多元分析"></a>多元分析</h1><h2 id="聚类分析"><a href="#聚类分析" class="headerlink" title="聚类分析"></a>聚类分析</h2><p>聚类分析是对多个样本或者变量进行定量<strong>分类</strong>的一种方法.对样本进行分类叫做<strong>Q型聚类分析</strong>,对变量进行分类叫做<strong>R型聚类分析</strong>.</p>
+<p>Q型聚类分析主要针对样本,是综合利用多个变量信息进行分类.R型聚类分析是分析的变量之间的亲疏关系.</p>
+<h3 id="Q型聚类分析"><a href="#Q型聚类分析" class="headerlink" title="Q型聚类分析"></a>Q型聚类分析</h3><p>对一群待分类的样本有n个变量描述,所以每一个样本可以堪称$R^n$空间中的一个点,每个样本之间的亲疏关系可以通过样本点间距离进行度量.</p>
+<p>在聚类分析中,对于定量变量,最常用的就是<strong>闵氏距离</strong>，即<br>$$d_q(x,y)=[∑_{k=1}^n∣x_k−y_k∣^q]^{\frac1q},q&gt;0$$<br>以下是当q取特定值时的距离:</p>
 <ul>
-<li>HEAD:类似于GET请求,但是Response中没有具体内容,用于获取响应头.</li>
-<li>PUT: 用客户端发送给服务器的数据取代指定文档中的内容(修改操作,共享文档 <del>或许是</del> )</li>
-<li>DELET: 请求服务器删除指定页面(类似于不使用<code>blank</code>)</li>
-<li>CONNECT: 通过服务器代替客户端访问其他网页(<code>VPN</code>)</li>
-<li>OPTIONS: 允许客户端查看服务器性能</li>
-<li>TRACE: 回显服务器收到的请求,主要用于测试和诊断<h3 id="请求网址"><a href="#请求网址" class="headerlink" title="请求网址"></a>请求网址</h3>URL,不再赘述.<h3 id="请求头-headers"><a href="#请求头-headers" class="headerlink" title="请求头(headers)"></a>请求头(headers)</h3>服务器要使用的附加信息,常用来判断是否请求合法.<h4 id="常用请求头信息"><a href="#常用请求头信息" class="headerlink" title="常用请求头信息"></a>常用请求头信息</h4></li>
-<li><strong>Accept</strong>: 请求报头域,用于指定客户端可接受哪些类型的信息 <del>(神画了一条线,说你只能在此地,不能逾越)</del> </li>
-<li><strong>Accept-Language</strong>: 用于指定客户端的语言类型</li>
-<li><strong>Accept-Encoding</strong>:用于指定客户端可接受的编码(常用UTF-8,也有GBK)</li>
-<li><strong>Host</strong>:用于指定请求资源的主机IP和端口号</li>
-<li><strong>Cookie/Cookies</strong>: 网站用于辨别用户,进行会话跟踪而存储在 <strong>用户本地</strong> 的数据.功能是 <strong>维持当前访问会话</strong>.</br><br>例如:</br>登录网站之后,客户端本地会保存服务器发来的Cookies,这样之后在网站内跳转,凭借Cookies就能保持登录状态,如果Cookies被删掉就要重新获得Cookies.(为了保证个人信息安全,请及时删除Cookies,以免病毒获得了你的Cookies,登入网站)</li>
-<li><strong>Referer</strong>:用于标识请求是从那个页面发过来,判断访问是否合法(你不能在不进入浏览器的情况直接进入某宝的付款页面,但是正常登录就行,因为Referer不合法),以及来源统计(网站统计访问人数和来源).</li>
-<li><strong>User-Agent/UA</strong>:帮助服务器识别客户端使用的操作系统以及版本、浏览器和版本信息.爬虫加上此头用于模仿浏览器的正常访问,如果不加,该UA就是Python.</li>
-<li><strong>Content-Type</strong>: 也叫互联网媒体类型或者MIME类型,在HTTP中用来表示具体请求中的媒体类型信息,例如<code>text/html</code>表示<code>HTML</code>格式,<code>image/gif</code>表示<code>GIF</code>图片,<code>application/json</code>代表<code>json</code>类型<h3 id="请求体-body"><a href="#请求体-body" class="headerlink" title="请求体(body)"></a>请求体(body)</h3><a id="Content_Type_Table"></li>
+<li>绝对值距离:$d_1(x,y) = [∑_{k=1}^n∣x_k−y_k∣]$</li>
+<li>欧几里得距离: $d_2(x,y)=[∑_{k=1}^n∣x_k−y_k∣^2]^{\frac12}$</li>
+<li>切比雪夫距离: $d_{\infty}(x,y) = max|x_k-y_k|$<br>为了克服闵氏距离对于量纲的一致性要求的缺点,可以使用马氏距离:<br>$$d(x,y)=\sqrt{(x-y)^T\Sigma^T(x-y)}$$<br>其中$\Sigma$时Z的协方差矩阵.</li>
 </ul>
-<p>在GET中为空,POSI为提交的表单信息</br></p>
-<table>
-<thead>
-<tr>
-<th align="center">Content-Type</th>
-<th align="center">Post提交数据方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">application/x-www-form-urlencoded</td>
-<td align="center">表单数据</td>
-</tr>
-<tr>
-<td align="center">multipart/form-data</td>
-<td align="center">表单文件上传</td>
-</tr>
-<tr>
-<td align="center">application/json</td>
-<td align="center">序列化json数据(<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/JSON/2462549?fr=aladdin">一种数据交换格式,本质是js对象的字符串表示方法</a>)</td>
-</tr>
-<tr>
-<td align="center">text/xml</td>
-<td align="center">xml数据(<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/xml/xml_intro.asp">一种可拓展标签语言,用来传递数据</a>)</td>
-</tr>
-</tbody></table>
-<h2 id="5-响应"><a href="#5-响应" class="headerlink" title="5.响应"></a>5.响应</h2><h3 id="响应状态码"><a href="#响应状态码" class="headerlink" title="响应状态码"></a>响应状态码</h3><ul>
-<li>状态码分类:</br></li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">分类</th>
-<th align="center">分类描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1xx</td>
-<td align="center">信息，服务器收到请求，需要请求者继续执行操作</td>
-</tr>
-<tr>
-<td align="center">2xx</td>
-<td align="center">成功，操作被成功接收并处理</td>
-</tr>
-<tr>
-<td align="center">3xx</td>
-<td align="center">重定向，需要进一步的操作以完成请求</td>
-</tr>
-<tr>
-<td align="center">4xx</td>
-<td align="center">客户端错误，请求包含语法错误或无法完成请求</td>
-</tr>
-<tr>
-<td align="center">5xx</td>
-<td align="center">服务器错误，服务器在处理请求的过程中发生了错误</td>
-</tr>
-</tbody></table>
+<p>类的相似度度量有如下方法:</p>
 <ul>
-<li>详解:</br></li>
-<li>状态码    </li>
+<li>最短距离:顾名思义</li>
+<li>最长距离:顾名思义</li>
+<li>重心:重心之间的距离</li>
+<li>类平均:$D(G_1,G_2)=\frac1{n_1n_2}∑_{x_i∈G_1}∑_{x_j∈G_2}d(x_i,x_j)$,n1,n2为点的个数</li>
+<li>离差平方和</li>
 </ul>
-<p><a href="response_status_code.md">详见响应状态码</a></p>
-<h3 id="响应头"><a href="#响应头" class="headerlink" title="响应头"></a>响应头</h3><p>响应头包含服务器对请求的应答</p>
+<p>对于这一类聚类分析,代码思路</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> scipy<span class="token punctuation">.</span>cluster<span class="token punctuation">.</span>hierarchy <span class="token keyword">import</span> linkage
+<span class="token keyword">from</span> scipy<span class="token punctuation">.</span>spatial<span class="token punctuation">.</span>distance <span class="token keyword">import</span> pdist<span class="token punctuation">,</span>squareform
+y <span class="token operator">=</span> pdist<span class="token punctuation">(</span>a<span class="token punctuation">,</span>method <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token comment">##a是各个点坐标,method选择距离计算方法</span>
+yc <span class="token operator">=</span> squareform<span class="token punctuation">(</span>y<span class="token punctuation">)</span>       <span class="token comment">##将距离转换为距离对称方阵</span>
+z <span class="token operator">=</span> linkage<span class="token punctuation">(</span>y<span class="token punctuation">,</span>method <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span> <span class="token comment">##y是各点距离,method参数选择,返回聚类</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="R型聚类分析"><a href="#R型聚类分析" class="headerlink" title="R型聚类分析"></a>R型聚类分析</h3><p>对于R型聚类分析的变量相似性度量,有两种相似性度量:</p>
 <ul>
-<li><strong>Date</strong>:日期</li>
-<li><strong>Last_Modified</strong>:指定资源的最后修改时间</li>
-<li><strong>Content_Encoding</strong>:指定响应内容的编码</li>
-<li><strong>Server</strong>:服务器信息</li>
-<li><strong>Content_Type</strong>:文档类型,见<a href="#Content_Type_Table">请求头Content_Type对应数据类型</a></li>
-<li><strong>Set_Cookie</strong>:服务器传给客户端的Cookies,需要在下次访问网站时携带此Cookie</li>
-<li><strong>Expires</strong>:用于指定响应的过期时间,在此时间内浏览器可把内容写入缓存,下次直接从缓存中获得.</li>
+<li>相关系数:用两变量$x_j$与$x_k$的样本相关系数作为他们的相似性度量</li>
+<li>夹角余弦:用两变量$x_j$与$x_k$的样本夹角余弦作为他们的相似性度量</li>
 </ul>
-<h3 id="响应体"><a href="#响应体" class="headerlink" title="响应体"></a>响应体</h3><p>客户端对于请求返回的响应数据皆在此部分.是爬虫的爬取目标.</p>
-<h2 id="6-HTTP2-0"><a href="#6-HTTP2-0" class="headerlink" title="6.HTTP2.0"></a>6.HTTP2.0</h2><h3 id="二进制分帧层"><a href="#二进制分帧层" class="headerlink" title="二进制分帧层"></a>二进制分帧层</h3><ul>
-<li>帧是HTTP2.0中的概念.代表数据通信最小单位.比如请求头帧,请求体帧.</li>
-<li>数据流:一个虚拟的双向通道,有唯一整数ID标识.</li>
-<li>信息:与逻辑请求或响应信息对应的完整的一系列帧.</li>
-</ul>
-<p>HTTP2.0 将HTTP协议通信分解为二进制编码帧的交换,帧对应特定数据流中的信息,在一个TCP中复用,从而提高效率.</p>
-<h3 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h3><p>HTTP2.0通过讲HTTP消息分解为互不依赖的帧,交错发送,从而达到多路并行的效果(类似Pipeline),客户端再把这些帧拼接起来.</p>
-<h3 id="流控制"><a href="#流控制" class="headerlink" title="流控制"></a>流控制</h3><p>流控制是为了防止服务器向客户端发送过量数据,客户端来不及处理.因为HTTP2.0只在一个TCP内复用,无法使用TCP自带流控制API.</br><br>为了解决这一问题,HTTP2.0提供了简单构建块.</p>
-<ul>
-<li>流控制具有方向性.每个接受方都能按自身需求为每个数据流甚至整个连接设置窗口大小.</li>
-<li>流控制窗口大小是动态控制的.每个接受方都可以公布其窗口,当发送方发送DATA时窗口变小,接收方发出WINDOW_UPDATA时窗口变大.</li>
-<li>流控制无法停止.<h3 id="服务器推送"><a href="#服务器推送" class="headerlink" title="服务器推送"></a>服务器推送</h3>服务器可以对一个客户端请求发送多个数据.这个常用于发送了HTML文件之后再把CSS和JS发送过去.</li>
-</ul>
+<p>对于R型聚类分析的类与类的相似性度量,与Q型类似,对于实际分析的时候,先用R型聚类法从所有变量中选取几个有代表性的变量(剔除相关性较强的变量),再对选取变量进行Q型聚类分析.</p>
+<h3 id="动态聚类法"><a href="#动态聚类法" class="headerlink" title="动态聚类法"></a>动态聚类法</h3><p>K-mean算法,见<a href="../Scipy%E5%AD%A6%E4%B9%A0">Scipy学习</a></p>
+<h2 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>主成分分析将许多相关性很高的变量转化成彼此相互独立或不相关的变量，并用以解释资料的综合性指标。<br>设$X_1,…,X_p$表示p个随机变量,$x_1,…,x_p$表示样本观测值,若能找到$c_1,…,c_p,并且\Sigma_{i=1}^pc_i^2 = 1$使得$D(\Sigma_{i=1}^p(c_iX_i))$最大,由于方差反应的是数据差异程度,也就表明我们找到了这p个变量的最不相关的因素,这个解是p维空间的一个单位向量,代表一个主成分方向.</p>
+<p>为了代表原来的p个向量,需要求多个主成分方向,并且这几个主成分方向向量正交/协方差为0.可以理解为主成分方向是原来p个变量的线性组合,通过找矩阵秩的方式降低了变量个数.之后,再通过选择特征值大的特征向量来笼统代表p个向量(特征值大说明这个因素对整体的贡献高,特征值小的变量对整体贡献值小)</p>
+<h3 id="特征值因子筛选"><a href="#特征值因子筛选" class="headerlink" title="特征值因子筛选"></a>特征值因子筛选</h3><p>设有p个指标变量$x_1,…,x_p$,在第i此的取值为$a_{i1},…,a_{ip}$,其矩阵形式为<br>$$<br>A = \begin{bmatrix}<br>a_{11}&amp;\ldots&amp;a_{1p}\\<br>\vdots&amp;\ddots&amp;\vdots\\<br>a_{n1}&amp;\ldots&amp;a_{np}\\<br>\end{bmatrix}<br>$$<br>称A为设计阵,$A^TA$为方阵,取前面的特征值使所取特征值所占比重超过85%，每个特征值所对应的特征向量即为一个主成分方向。</p>
+<h3 id="主成分回归分析"><a href="#主成分回归分析" class="headerlink" title="主成分回归分析"></a>主成分回归分析</h3><p>首先需要对样本值中心标准化,设i次观测的样本j的值为$a_{ij}$,中心标准化之后的值为$a_{ij}^{‘}$</p>
+<p>$$a_{ij}^{‘} = \frac{a_{ij} - u_j}{S_j}$$<br>$u_j$为样本j的均值,$S_j$为样本j的方差,令$A = {a_ij}$,则$(A^TA)X = X^T\Sigma$</p>
+<p>在等到样本矩阵之后,如果样本数据数量级差距很大,则计算相关系数矩阵,反之,则计算协方差矩阵.</p>
+<p>之后,根据计算出来的关系矩阵计算特征值(特征值是白化数据的方差,因为中心标准化之后,方差为1,特征值是拉伸倍数)和特征向量(是白化数据的旋转变换矩阵).选取较大特征值对应的特征向量(相当于降维,降低离散点的影响)组成,求出转移矩阵P,和原始数据X相乘得到新的数据Y. Y=PX. </p>
+<h2 id="因子分析"><a href="#因子分析" class="headerlink" title="因子分析"></a>因子分析</h2><p>因子分析通过研究众多变量之间的内部依赖关系，探求观测数据中的基本结构，用少数几个假想变量来表示其基本数据结构。这几个假想变量能够反映原来众多变量的主要信息，原始的变量时可观测的显在变量，而假想变量是不可观测的潜在变量，称为因子。</p>
+<p>因子分析和主成分分析类似,都是降维方式.</p>
+<p>在开始分析之前需要进行KMO检验(大于0.7)和bartlett球形度检验(小于0.05),</p>
+<h3 id="因子分析模型"><a href="#因子分析模型" class="headerlink" title="因子分析模型"></a>因子分析模型</h3><p>设P个变量$X_i$可以表示为<br>$$X_i = u_i + a_{i1}F_1 + … + a_{im}F_m + \epsilon_i, m \leq p(降维所以一定m不能比p大)$$<br>或矩阵表示<br>$$X_i - u_i = \Lambda F + \epsilon$$<br>F为公共因子,$\Lambda$为载荷因子,$\epsilon$为特殊因子,且<br>$$E(F) = 0, E(\epsilon) = 0,Cov(F) = I_m,D(\epsilon) = Cov(\epsilon) = diag(\sigma_1^2,…,\sigma_p^2)$$<br>$$Cov(X-u) = \Lambda{Cov(F)}\Lambda^T+Cov(\epsilon)= \Lambda\Lambda^T + diag(\sigma_1^2,…,\sigma_p^2)$$</p>
+<h3 id="因子载荷矩阵估计方法"><a href="#因子载荷矩阵估计方法" class="headerlink" title="因子载荷矩阵估计方法"></a>因子载荷矩阵估计方法</h3><p>设$\lambda_1 \geq \lambda_2…\geq \lambda_p$为样本系数矩阵R特征值,$\eta_1,…,\eta_p$为对应的特征向量,取较大的m个特征值以及其特征向量组成因子载荷矩阵$\Lambda$,<br>$$\Lambda = [\sqrt{\lambda_1}\eta_1,…,\sqrt{\lambda_m}\eta_m]$$<br>(有点类似主成分分析)<br>特殊因子的方差用$R-\Lambda\Lambda^T$的对角元来估计,为<br>$$\sigma^2_i = 1 - \Sigma_{(j = 1)}^m{a_{ij}^2}$$</p>
+<h3 id="因子旋转"><a href="#因子旋转" class="headerlink" title="因子旋转"></a>因子旋转</h3><p>建立因子分析模型的重要目的是为了知道每个公共因子的含义.因为载荷因子矩阵不唯一,为使后期分析工作方便,需要对载荷因子矩阵进行旋转,使得载荷因子矩阵的各个因子之间方差最大,类似主成分分析法找主成分方向.</p>
+<p>从简化因子载荷矩阵的每一列出发，使和每个因子有关的载荷的平方的方差最大。当只有少数几个变量在某个因子上有较高的载荷时，对因子的解释最简单。方差最大的直观意义是希望通过因子旋转后，使每个因子上的载荷尽量拉开距离，一部分载荷趋于 ±1，另一部分趋于0。(这一部分可以直接交给第三方库去做)</p>
+<h3 id="因子得分"><a href="#因子得分" class="headerlink" title="因子得分"></a>因子得分</h3><p>因子得分也就是公共因子的估计也很必要.因子得分则需要把公共因子表示为原变量的线性组合，因子得分函数：<br>$F_j=c_j+b_{j1}X_1+⋯+b_{jp}X_p ,j=1,2,⋯,m$<br>若将原始数据中心标准化,则<br>$\hat{F} = X_0R^{-1}\Lambda$</p>
 
                 
             </div>
@@ -514,7 +446,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/01/16/the_principle_of_HTTP/">https://the-tarnished.github.io/2022/01/16/the_principle_of_HTTP/</a>
+                    <a href="https://the-tarnished.github.io/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">https://the-tarnished.github.io/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -552,8 +484,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spider-crawler/">
-                                    <span class="chip bg-color">spider/crawler</span>
+                                <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">数理知识</span>
                                 </a>
                             
                         </div>
@@ -601,16 +533,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/01/16/response_status_code/">
+                <a href="/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">
                     <div class="card-image">
                         
-                        <img src="/../cover/4.jpg" class="responsive-img" alt="响应状态码">
                         
-                        <span class="card-title">响应状态码</span>
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="多元分析">
+                        
+                        <span class="card-title">多元分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -620,26 +554,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                    数学建模
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/http/">
-                        <span class="chip bg-color">http</span>
+                    <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">数理知识</span>
                     </a>
                     
                 </div>
@@ -653,12 +588,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/16/the_use_of_requests/">
+                <a href="/2022/01/28/%E7%81%B0%E8%89%B2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
                         
-                        <span class="card-title">Requests的使用</span>
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="灰色系统理论及其应用">
+                        
+                        <span class="card-title">灰色系统理论及其应用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -669,14 +605,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                    数学建模
                                 </a>
                             
                             
@@ -686,8 +622,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spider-crawler/">
-                        <span class="chip bg-color">spider/crawler</span>
+                    <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">数理知识</span>
                     </a>
                     
                 </div>
@@ -818,6 +754,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

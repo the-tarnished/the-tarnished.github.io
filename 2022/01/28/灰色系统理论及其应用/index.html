@@ -203,7 +203,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -382,7 +382,7 @@
 <h3 id="关联度的定义"><a href="#关联度的定义" class="headerlink" title="关联度的定义"></a>关联度的定义</h3><p>称<br>$$r_i =\frac{1}{n}\Sigma\xi_i(k)$$<br>为数列$x_i$对参考数列$x_0$的关联度.</p>
 <p>易得关联度是各个时刻的关联系数集中的一个平均值</p>
 <h2 id="优势分析"><a href="#优势分析" class="headerlink" title="优势分析"></a>优势分析</h2><p>假设有m个参考数列,记为$y_1,y_2,…,y_m$.有l个比较数列,记为$x_1,…,x_l$.显然每一个参考数列对l个比较数列都有l个关联度.令$r_{ij}$表示比较数列$x_j$对$y_i$的关联度,可构造关联度矩阵$R=(r_{ij})_{m*l}$若某一列元素大于其他列元素的时候称此列对应的比较数列(子因素)为优势子因素;若某一行元素大于其他行元素,则称此行对应的参考数列(母元素)为优势母元素.</p>
-<h2 id="生成树"><a href="#生成树" class="headerlink" title="生成树"></a>生成树</h2><h3 id="累加生成"><a href="#累加生成" class="headerlink" title="累加生成"></a>累加生成</h3><p>把数列 x 各时刻数据依次累加的过程叫做<strong>累加过程</strong>，记作 <strong>AGO</strong>，累加所得的新数列，叫做<strong>累加生成数列</strong>。具体地，设原始数列为<br>$$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n)),累加生成数列记为x^{(1)} = (x^{(1)}(1),…,x^{(1)}(n)),且x^{(0)}与x^{(1)}满足 $$<br>$$x^{(1)}(k) = \Sigma^k_{i=\alpha}x^{(0)}(i),k = \alpha,…,n$$<br>$$其中\alpha\leq n为正整数.上述累加过程当1&lt;\alpha \leq k时称为去首累加成,当\alpha = 1时称为一般累加成.$$<br>$$当\alpha = 1时, 式子x^{(1)}中的上标(1)表示一次累加生成,记作1-AGO.再做一次累加生成可得二次累加生成,所以易得$$<br>$$x^{(r)}(k) = \Sigma^k_{i=1}x^{(r-1)}(i),k = 1,…,n$$</p>
+<h2 id="生成数"><a href="#生成数" class="headerlink" title="生成数"></a>生成数</h2><h3 id="累加生成"><a href="#累加生成" class="headerlink" title="累加生成"></a>累加生成</h3><p>把数列 x 各时刻数据依次累加的过程叫做<strong>累加过程</strong>，记作 <strong>AGO</strong>，累加所得的新数列，叫做<strong>累加生成数列</strong>。具体地，设原始数列为<br>$$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n)),累加生成数列记为x^{(1)} = (x^{(1)}(1),…,x^{(1)}(n)),且x^{(0)}与x^{(1)}满足 $$<br>$$x^{(1)}(k) = \Sigma^k_{i=\alpha}x^{(0)}(i),k = \alpha,…,n$$<br>$$其中\alpha\leq n为正整数.上述累加过程当1&lt;\alpha \leq k时称为去首累加成,当\alpha = 1时称为一般累加成.$$<br>$$当\alpha = 1时, 式子x^{(1)}中的上标(1)表示一次累加生成,记作1-AGO.再做一次累加生成可得二次累加生成,所以易得$$<br>$$x^{(r)}(k) = \Sigma^k_{i=1}x^{(r-1)}(i),k = 1,…,n$$</p>
 <p>一般的,对于实际情况为非负的数列,累加生成可以使得生成数列为递增数列,对于有负数的数列可以使用移轴的方式再累加生成.</p>
 <h3 id="累减生成"><a href="#累减生成" class="headerlink" title="累减生成"></a>累减生成</h3><p>对累加生成的还原就是累减生成<br>$$x^{(r-1)}(k) = x^{(r)}(k)-x^{(r)}(k-1),k = 1,…,n$$</p>
 <h3 id="均值生成"><a href="#均值生成" class="headerlink" title="均值生成"></a>均值生成</h3><h4 id="邻值生成数"><a href="#邻值生成数" class="headerlink" title="邻值生成数"></a>邻值生成数</h4><p>设原始数列为$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n))$,则称$x^{(0)}(k-1)$与$x^{(0)}(k1)$为数列$x^{(0)}$的一对邻值,$x^{(0)}(k-1)$称为前值,$x^{(0)}(k1)$称为后值.</p>
@@ -403,8 +403,18 @@
 <p>于是可得GM(1,N)的灰微分方程为<br>$$x_i^{(0)}(k) + az_i^{(1)} = \Sigma^N_{(j\neq{i})}b_jx_j^{(1)}(k)$$<br>其中$x_i^{(0)}(k)$为灰导数,$z_i^{(1)}$为背景值,a,$b_j$为参数.</p>
 <p>引入向量矩阵符号,令i=1得<br>$$Y = [x_1^{(0)}(1),..,x_1^{(0)}(n)]^T,u=[a,b_2,…,b_N]^T$$<br>$$B = \begin{bmatrix}<br>-z_1^{(1)}(2) &amp;x_2^{(1)}(2) &amp;{\cdots} &amp;x_N^{(1)}(2)\\<br>{\vdots}&amp;{\vdots}&amp;{\vdots}&amp;{\vdots}\\<br>-z_1^{(1)}(n) &amp;x_2^{(1)}(n) &amp;{\cdots} &amp;x_N^{(1)}(n)\\<br>\end{bmatrix}$$<br>则GM(1,N)的灰微分方程为<br>$$Y=Bu$$</p>
 <h3 id="GM-1-N-模型的参数估计"><a href="#GM-1-N-模型的参数估计" class="headerlink" title="GM(1,N)模型的参数估计"></a>GM(1,N)模型的参数估计</h3><p>如果$(B^TB)^{-1}$存在,则$\hat{u} = (B^TB)^{-1}B^TY$</p>
-<p>如果$(B^TB)^{-1}$不存在,比如n-1 &lt; N,那么$\hat{u}$不能通过上式确定,但注意到$\hat{u}$是对各子因素对主因素影响大小的反映,所以通过引入加权矩阵 $W = diag(w_1,…,w_N)$,对各因素进行调节,对于未来发展减弱趋势的因素赋予较大权值,对于未来发展增强趋势的因素赋予较小权值,则<br>$$\hat{u} = W^{-1}B^T(B^{-1}B^T)^{-1}Y$$</p>
+<p>如果$(B^TB)^{-1}$不存在,比如n-1 &lt;br N,那么$\hat{u}$不能通过上式确定,但注意到$\hat{u}$是对各子因素对主因素影响大小的反映,所以通过引入加权矩阵 $W = diag(w_1,…,w_N)$,对各因素进行调节,对于未来发展减弱趋势的因素赋予较大权值,对于未来发展增强趋势的因素赋予较小权值,则<br>$$\hat{u} = W^{-1}B^T(B^{-1}B^T)^{-1}Y$$</p>
 <h3 id="GM-1-N-白化型"><a href="#GM-1-N-白化型" class="headerlink" title="GM(1,N)白化型"></a>GM(1,N)白化型</h3><p>$$\frac{dx_1^{(1)}}{dt} + ax_1^{(1)}(t) = \Sigma^N_{(j\neq{1})}b_jx_j^{(1)}(k)$$</p>
+<h2 id="Verhulst模型"><a href="#Verhulst模型" class="headerlink" title="Verhulst模型"></a>Verhulst模型</h2><p>GM(1,1)模型适用于具有较强指数规律的序列，只能描述单调的变化过程。故对于非单调的摆动发展序列或具有饱和状态的 S 形序列， Verhulst 模型，GM(2,1),DGM(2,1)模型等更适用。</p>
+<p>Verhulst 模型主要用来描述具有饱和状态的过程， 即 S 形过程，常用于人口预测、生物生长、繁殖预测及产品经济寿命预测等。</p>
+<h3 id="Verhulst模型简介"><a href="#Verhulst模型简介" class="headerlink" title="Verhulst模型简介"></a>Verhulst模型简介</h3><p>设$x^{(0)}$为原始数据序列<br>$$x^{(0)} = (x^{(0)}(1),…,x^{(0)}(n))$$<br>其一阶累加生成序列为<br>$$x^{(1)} = (x^{(1)}(1),…,x^{(1)}(n))$$<br>$z^{(1)}$为$x^{(1)}$的紧邻均值生成序列<br>$$z^{(1)} = (z^{(1)}(1),…,z^{(1)}(n))$$<br>则称<br>$$x^{(0)} + az^{(1)} = b(z^{(1)})^2$$<br>为Verhulst灰色模型,a和b为参数.<br>其解为<br>$$\hat{x}^{(1)}(k+1) = \frac{ax^{(1)}(1)}{bx^{(1)}(1)+(a-bx^{(1)}(1))e^{ak}}$$<br>可通过累减还原为$\hat{x}^{(0)}$ </p>
+<p>称<br>$$\frac{dx^{(1)}}{dt}+ax^{(1)} = b(x^{(1)})^2$$<br>为Verhulst白化方程,a和b为参数.<br>其解为<br>$$x^{(1)}(t) = \frac{ax^{(1)}(1)}{bx^{(1)}(1)+(a-bx^{(1)}(1))e^{ak}}$$<br>$$B = \begin{bmatrix}<br>-z^{(1)}(2)&amp;(z^{(1)}(2))^2\\<br>(\vdots)&amp;(\vdots)\\<br>-z^{(1)}(n)&amp;(z^{(1)}(n))^2\\<br>\end{bmatrix},<br>Y = \begin{bmatrix}<br>x^{(0)}(2)\\<br>\vdots\\<br>x^{(0)}(n)\\<br>\end{bmatrix}$$<br>参数估计值为<br>$$\hat\alpha = (B^TB)^{(-1)}B^TY$$</p>
+<h3 id="模型检验"><a href="#模型检验" class="headerlink" title="模型检验"></a>模型检验</h3><ul>
+<li>残差合格检验</li>
+<li>关联度合格检验</li>
+<li>均方差比合格检验</li>
+<li>小误差概率合格检验</li>
+</ul>
 
                 
             </div>
@@ -518,18 +528,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/28/%E7%81%B0%E8%89%B2%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8/">
+                <a href="/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="灰色系统理论及其应用">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="多元分析">
                         
-                        <span class="card-title">灰色系统理论及其应用</span>
+                        <span class="card-title">多元分析</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -539,9 +548,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -554,7 +563,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -577,7 +585,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.gif" class="responsive-img" alt="Geatpy学习">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Geatpy学习">
                         
                         <span class="card-title">Geatpy学习</span>
                     </div>
