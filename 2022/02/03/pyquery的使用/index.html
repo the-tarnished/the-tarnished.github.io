@@ -4,9 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="httpx的使用, 零落闲拾">
-    <meta name="description" content="HTTPX的使用有些网站使用的是http/2.0的协议,这种情况下,urllilb和requests模块是不能爬取数据的,这个时候就要使用httpx.官方文档
-基本使用httpx和requests很像,但是httpx有一个Client类,可">
+    <meta name="keywords" content="pyquery的使用, 零落闲拾">
+    <meta name="description" content="PyqueryPyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.
+初始化字符串初始化直接将HTML的内容当作初始化参数.
+from pyquery import PyQuery as ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>httpx的使用 | 零落闲拾</title>
+    <title>pyquery的使用 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -203,12 +204,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/../cover/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">httpx的使用</h1>
+                    <h1 class="description center-align post-title">pyquery的使用</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +325,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spider-crawler/">
-                                <span class="chip bg-color">spider/crawler</span>
+                            <a href="/tags/pyquery/">
+                                <span class="chip bg-color">pyquery</span>
                             </a>
                         
                     </div>
@@ -349,7 +350,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-01-18
+                    2022-02-03
                 </div>
                 
 
@@ -373,29 +374,124 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTPX的使用"><a href="#HTTPX的使用" class="headerlink" title="HTTPX的使用"></a>HTTPX的使用</h1><p>有些网站使用的是http/2.0的协议,这种情况下,urllilb和requests模块是不能爬取数据的,这个时候就要使用httpx.<br><a target="_blank" rel="noopener" href="https://www.python-httpx.org/quickstart/">官方文档</a></p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>httpx和requests很像,但是httpx有一个<code>Client</code>类,可以自定义协议,所以建议先实例化一个<code>Client</code>对象用于后续爬取.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> httpx
+                <h1 id="Pyquery"><a href="#Pyquery" class="headerlink" title="Pyquery"></a>Pyquery</h1><p>Pyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="字符串初始化"><a href="#字符串初始化" class="headerlink" title="字符串初始化"></a>字符串初始化</h3><p>直接将HTML的内容当作初始化参数.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;div>
+    &lt;li>first&lt;/li>
+    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
+&lt;/div>
+'''</span>
 
-client <span class="token operator">=</span> httpx<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token comment">## 手动打开http2的使能,不然是默认http/1.1</span>
-response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers <span class="token operator">=</span> headers<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="URL初始化"><a href="#URL初始化" class="headerlink" title="URL初始化"></a>URL初始化</h3><p>还可以把一个网址的URL直接给PyQuery实例化,PyQuery对象就会请求这个URL,得到HTML内容进行初始化,效果与字符串初始化类似.</p>
+<h3 id="文件初始化"><a href="#文件初始化" class="headerlink" title="文件初始化"></a>文件初始化</h3><p>还可以选择本地的文件进行初始化,参数指定为filename即可</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
 
-<h2 id="Client对象"><a href="#Client对象" class="headerlink" title="Client对象"></a>Client对象</h2><p><code>Client</code>和<code>Session</code>对象类似,可以理解为维护爬虫的进程,可以随时结束进程,类似打开文件</p>
-<p>示例代码:</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">with</span> https<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token keyword">as</span> client<span class="token punctuation">:</span>
-    response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers <span class="token operator">=</span> headers<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="异步请求"><a href="#异步请求" class="headerlink" title="异步请求"></a>异步请求</h2><p><code>httpx</code>还支持异步请求(即AsyncClient),支持Python的async请求模式,写法:</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> httpx
-<span class="token keyword">import</span> asyncio
+doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>filename<span class="token operator">=</span>path<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">async</span> <span class="token keyword">with</span> httpx<span class="token punctuation">.</span>AsyncClient<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token keyword">as</span> client<span class="token punctuation">:</span>
-        response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+<h2 id="基本CSS选择器"><a href="#基本CSS选择器" class="headerlink" title="基本CSS选择器"></a>基本CSS选择器</h2><p>首先,在CSS选择器中,<code>.</code>表示class属性,<code>#</code>表示id属性.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;div id='container'>
+    &lt;li>first&lt;/li>
+    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
+&lt;/div>
+'''</span>
 
-url <span class="token operator">=</span> <span class="token string">''</span>
-asyncio<span class="token punctuation">.</span>get_event_loop<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run_until_complete<span class="token punctuation">(</span>fetch<span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'#container .item3 span'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##先选取id为container的节点,再选取内部节点里面class为item1的节点内部为span的节点 既 &lt;span>third&lt;/span>,其类型也是PyQuery类</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><h3 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h3><p>find方法返回所有符合要求的子孙节点(子和孙),children方法返回所有满足要求的子节点.</p>
+<h3 id="父节点"><a href="#父节点" class="headerlink" title="父节点"></a>父节点</h3><p>使用parent方法获取某个节点的父节点</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;div id='container'>
+    &lt;li class='list'>first&lt;/li>
+    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
+&lt;/div>
+'''</span>
+
+doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'.list'</span><span class="token punctuation">)</span>
+pa <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>parent<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pa<span class="token punctuation">)</span>
+<span class="token triple-quoted-string string">"""
+&lt;div id='container'>
+    &lt;li class='list'>first&lt;/li>
+&lt;/div>
+"""</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用parents方法获取某个节点的所有祖先节点,可以传CSS选择器来筛选祖先节点.</p>
+<h3 id="兄弟节点"><a href="#兄弟节点" class="headerlink" title="兄弟节点"></a>兄弟节点</h3><p>使用siblings方法获取某个节点的兄弟节点,可以传CSS选择器来筛选兄弟节点.</p>
+<h2 id="节点遍历"><a href="#节点遍历" class="headerlink" title="节点遍历"></a>节点遍历</h2><h3 id="内容获取"><a href="#内容获取" class="headerlink" title="内容获取"></a>内容获取</h3><p>对于单个节点的PyQuery对象,可以直接输出,如果是多个节点的PyQuery对象,则需要使用items方法将其转换成生成器,再使用for来输出.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;div id='container'>
+    &lt;li class='list'>first&lt;/li>
+    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
+&lt;/div>
+'''</span>
+
+doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
+lis <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> each <span class="token keyword">in</span> lis<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>lis<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>使用attr方法获取属性,如果是多个节点的话默认返回第一个节点的属性,所以需要前面的items方法.</p>
+<h3 id="获取文本"><a href="#获取文本" class="headerlink" title="获取文本"></a>获取文本</h3><p>使用text方法获取节点内部的文本(相当于拆掉了外面的标签)</p>
+<h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">removeClass/addClass</td>
+<td align="left">修改class属性</td>
+</tr>
+<tr>
+<td align="left">attr</td>
+<td align="left">增添属性种类及其内容(需要两个参数,一个是属性名,一个是属性值)</td>
+</tr>
+<tr>
+<td align="left">text</td>
+<td align="left">修改文本(同attr)</td>
+</tr>
+<tr>
+<td align="left">html</td>
+<td align="left">直接修改html文件(同attr)</td>
+</tr>
+<tr>
+<td align="left">remove</td>
+<td align="left">移除节点</td>
+</tr>
+</tbody></table>
+<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h2><p>伪类选择器的语法格式:</p>
+<pre class="line-numbers language-none"><code class="language-none">css选择器:选择性质<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>例如</p>
+<pre class="line-numbers language-none"><code class="language-none">li:first-child   第一个li子节点
+li:last-child    最后一个li子节点
+li:nth-child(2)  第二个li子节点
+li:nth-child(2n) 偶数个子节点
+li:contains(second) 包含second文本的子节点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
                 
             </div>
             <hr/>
@@ -421,7 +517,7 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -459,8 +555,8 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spider-crawler/">
-                                    <span class="chip bg-color">spider/crawler</span>
+                                <a href="/tags/pyquery/">
+                                    <span class="chip bg-color">pyquery</span>
                                 </a>
                             
                         </div>
@@ -512,13 +608,13 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/19/Numpy%E5%AD%A6%E4%B9%A0/">
+                <a href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Numpy学习">
+                        <img src="/medias/featureimages/0.gif" class="responsive-img" alt="parsel的使用">
                         
-                        <span class="card-title">Numpy学习</span>
+                        <span class="card-title">parsel的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -529,14 +625,14 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
-                                    数学建模
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
                                 </a>
                             
                             
@@ -546,8 +642,8 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Numpy-Python/">
-                        <span class="chip bg-color">数学建模,Numpy,Python</span>
+                    <a href="/tags/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                        <span class="chip bg-color">parsel的使用</span>
                     </a>
                     
                 </div>
@@ -561,12 +657,13 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/17/logism%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+                <a href="/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a3885cbb0919a8012141682a2366.png%402o.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645001651&t=b75d142a50723f95ae78e710a898aefb" class="responsive-img" alt="logism自动化填充">
                         
-                        <span class="card-title">logism自动化填充</span>
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Xpath的使用">
+                        
+                        <span class="card-title">Xpath的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -577,14 +674,14 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/logism/" class="post-category">
-                                    logism
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
                                 </a>
                             
                             
@@ -594,8 +691,8 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/logisim-P0/">
-                        <span class="chip bg-color">logisim,P0</span>
+                    <a href="/tags/Xpath/">
+                        <span class="chip bg-color">Xpath</span>
                     </a>
                     
                 </div>

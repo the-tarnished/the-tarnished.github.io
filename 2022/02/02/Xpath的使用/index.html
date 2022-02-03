@@ -4,9 +4,40 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="httpx的使用, 零落闲拾">
-    <meta name="description" content="HTTPX的使用有些网站使用的是http/2.0的协议,这种情况下,urllilb和requests模块是不能爬取数据的,这个时候就要使用httpx.官方文档
-基本使用httpx和requests很像,但是httpx有一个Client类,可">
+    <meta name="keywords" content="Xpath的使用">
+    <meta name="description" content="Xpath常用规则
+
+
+符号
+描述
+
+
+
+nodename
+选取此节点的所有结点
+
+
+/
+选取当前结点的子节点
+
+
+//
+选取当前结点的子孙(子和孙)结点
+
+
+.
+选取当前节点
+
+
+..
+选取当前节点的父节点
+
+
+/*
+选取所有结点
+
+
+@">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +49,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>httpx的使用 | 零落闲拾</title>
+    <title>Xpath的使用 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -203,12 +234,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/../cover/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">httpx的使用</h1>
+                    <h1 class="description center-align post-title">Xpath的使用</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +355,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spider-crawler/">
-                                <span class="chip bg-color">spider/crawler</span>
+                            <a href="/tags/Xpath/">
+                                <span class="chip bg-color">Xpath</span>
                             </a>
                         
                     </div>
@@ -349,7 +380,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-01-18
+                    2022-02-02
                 </div>
                 
 
@@ -373,29 +404,63 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="HTTPX的使用"><a href="#HTTPX的使用" class="headerlink" title="HTTPX的使用"></a>HTTPX的使用</h1><p>有些网站使用的是http/2.0的协议,这种情况下,urllilb和requests模块是不能爬取数据的,这个时候就要使用httpx.<br><a target="_blank" rel="noopener" href="https://www.python-httpx.org/quickstart/">官方文档</a></p>
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><p>httpx和requests很像,但是httpx有一个<code>Client</code>类,可以自定义协议,所以建议先实例化一个<code>Client</code>对象用于后续爬取.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> httpx
+                <h1 id="Xpath"><a href="#Xpath" class="headerlink" title="Xpath"></a>Xpath</h1><h2 id="常用规则"><a href="#常用规则" class="headerlink" title="常用规则"></a>常用规则</h2><table>
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">nodename</td>
+<td align="left">选取此节点的所有结点</td>
+</tr>
+<tr>
+<td align="left">/</td>
+<td align="left">选取当前结点的子节点</td>
+</tr>
+<tr>
+<td align="left">//</td>
+<td align="left">选取当前结点的子孙(子和孙)结点</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">选取当前节点</td>
+</tr>
+<tr>
+<td align="left">..</td>
+<td align="left">选取当前节点的父节点</td>
+</tr>
+<tr>
+<td align="left">/*</td>
+<td align="left">选取所有结点</td>
+</tr>
+<tr>
+<td align="left">@</td>
+<td align="left">选取属性</td>
+</tr>
+</tbody></table>
+<p>在使用的时候,常以<code>//</code>开头的Xpath规则来选择所有结点,后续再添加符号就行筛选.</p>
+<p>在Xpath处理的时候先需要进行对文本进行处理,示例如下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> lxml <span class="token keyword">import</span> etree
 
-client <span class="token operator">=</span> httpx<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token comment">## 手动打开http2的使能,不然是默认http/1.1</span>
-response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers <span class="token operator">=</span> headers<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+html <span class="token operator">=</span> etree<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>text<span class="token punctuation">,</span>etree<span class="token punctuation">.</span>HTMLParser<span class="token punctuation">)</span> <span class="token comment">## text指的是html格式的文本</span>
+result <span class="token operator">=</span> html<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span>pattern<span class="token punctuation">)</span> <span class="token comment">##pattern值得是xpath pattern,选择的路径</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="属性匹配"><a href="#属性匹配" class="headerlink" title="属性匹配"></a>属性匹配</h3><p><code>[@+属性]</code>,例如需要查找<code>class = &#39;item1&#39;</code>的结点,直接使用</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;[@class&#x3D;&#39;item1&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>如果是要获取属性的话,直接<code>@/属性标签就行</code>,例如需要获得<code>a</code>标签的<code>href</code>属性,如下</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;a&#x2F;@href<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="Client对象"><a href="#Client对象" class="headerlink" title="Client对象"></a>Client对象</h2><p><code>Client</code>和<code>Session</code>对象类似,可以理解为维护爬虫的进程,可以随时结束进程,类似打开文件</p>
-<p>示例代码:</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">with</span> https<span class="token punctuation">.</span>Client<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token keyword">as</span> client<span class="token punctuation">:</span>
-    response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>headers <span class="token operator">=</span> headers<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="异步请求"><a href="#异步请求" class="headerlink" title="异步请求"></a>异步请求</h2><p><code>httpx</code>还支持异步请求(即AsyncClient),支持Python的async请求模式,写法:</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> httpx
-<span class="token keyword">import</span> asyncio
+<h3 id="属性多值匹配"><a href="#属性多值匹配" class="headerlink" title="属性多值匹配"></a>属性多值匹配</h3><p>面对有多个属性值的结点,如<code>&lt;a class = &#39;item1 item2&#39;&gt;</code>,如果使用<code>//a[@class=&#39;item1&#39;]</code>就匹配不到这个文本.</p>
+<p>可以使用<code>contains</code>方法,改成<code>//a[contains(class,&#39;item1&#39;)]</code>,那么就能匹配到该文本.</p>
+<h3 id="多属性匹配"><a href="#多属性匹配" class="headerlink" title="多属性匹配"></a>多属性匹配</h3><p>如果我们想要获取的结点要满足多个属性,如既要<code>class=&#39;item1&#39;</code>,而且<code>href=&#39;item2.html&#39;</code>,那么就要使用多属性匹配,示例如下:</p>
+<pre class="line-numbers language-none"><code class="language-none">&#96;&#x2F;&#x2F;a[@class&#x3D;&#39;item1&#39; and @href&#x3D;&#39;item2.htm&#39;]&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>下面是XPath运算符及其解释<br>| 运算符   |   描述          |  示例            |                返回值                                              |<br>| :———-|:————-|:————————-|:——–|<br>| or      |    或        |     class=’item1’ or class=’item2’ | 至少满足一个的结点                                   |<br>| and      |   且       |      class=’item1’ and class=’item2’ | 都满足的结点                                        |<br>| |       |    计算两个节点集  | class=’item1’ | class=’item2’ |   返回所有拥有class=’item1’ 和 class=’item2’的节点集 |</p>
+<h2 id="按序选择"><a href="#按序选择" class="headerlink" title="按序选择"></a>按序选择</h2><p>当同时匹配多个节点的时候,如果想要第某一个节点,使用中括号里面加入索引方法(数字代表第几个,last表示最后一个,可以加入布尔表达式,比如position()&lt;4,就是返回第一个,第二个,第三个节点&gt;)就能做到按序选择</p>
+<h2 id="节点轴选择"><a href="#节点轴选择" class="headerlink" title="节点轴选择"></a>节点轴选择</h2><p>节点轴关键字::修饰关键字</p>
+<p>这就是一个节点轴选择的格式<br>| 关键字           |       解释                           |<br>| :—————–|:———————————— |<br>| ancestor          |      获取所有祖先节点               |<br>| attribute        |       获取节点所有属性值             |<br>| child           |        获取所有直接子节点             |<br>| descendant      |        获取所有子孙节点               |<br>| following        |       获取当且节点之后的所有节点     |<br>| following-sibling  |     获取当前节点的所有同级节点 |</p>
 
-<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">fetch</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">async</span> <span class="token keyword">with</span> httpx<span class="token punctuation">.</span>AsyncClient<span class="token punctuation">(</span>http2 <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span> <span class="token keyword">as</span> client<span class="token punctuation">:</span>
-        response <span class="token operator">=</span> client<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-        <span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
-
-url <span class="token operator">=</span> <span class="token string">''</span>
-asyncio<span class="token punctuation">.</span>get_event_loop<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>run_until_complete<span class="token punctuation">(</span>fetch<span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -421,7 +486,7 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/01/18/httpx%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -459,8 +524,8 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spider-crawler/">
-                                    <span class="chip bg-color">spider/crawler</span>
+                                <a href="/tags/Xpath/">
+                                    <span class="chip bg-color">Xpath</span>
                                 </a>
                             
                         </div>
@@ -512,13 +577,13 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/01/19/Numpy%E5%AD%A6%E4%B9%A0/">
+                <a href="/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Numpy学习">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="pyquery的使用">
                         
-                        <span class="card-title">Numpy学习</span>
+                        <span class="card-title">pyquery的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -529,8 +594,57 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-19
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pyquery/">
+                        <span class="chip bg-color">pyquery</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="多元分析">
+                        
+                        <span class="card-title">多元分析</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -546,56 +660,8 @@ asyncio<span class="token punctuation">.</span>get_event_loop<span class="token 
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Numpy-Python/">
-                        <span class="chip bg-color">数学建模,Numpy,Python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/01/17/logism%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
-                    <div class="card-image">
-                        
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01a3885cbb0919a8012141682a2366.png%402o.png&refer=http%3A%2F%2Fimg.zcool.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645001651&t=b75d142a50723f95ae78e710a898aefb" class="responsive-img" alt="logism自动化填充">
-                        
-                        <span class="card-title">logism自动化填充</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-17
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/logism/" class="post-category">
-                                    logism
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/logisim-P0/">
-                        <span class="chip bg-color">logisim,P0</span>
+                    <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">数理知识</span>
                     </a>
                     
                 </div>
