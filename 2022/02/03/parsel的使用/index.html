@@ -324,8 +324,12 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                                <span class="chip bg-color">parsel的使用</span>
+                            <a href="/tags/python/">
+                                <span class="chip bg-color">python</span>
+                            </a>
+                        
+                            <a href="/tags/parsel/">
+                                <span class="chip bg-color">parsel</span>
                             </a>
                         
                     </div>
@@ -375,7 +379,38 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
             <div id="articleContent">
                 <h1 id="parsel"><a href="#parsel" class="headerlink" title="parsel"></a>parsel</h1><p><code>parsel</code>的<code>API</code>和<code>Scrapy</code>选择器的<code>API</code>高度相似,因为<code>Scrapy</code>选择器的是二次封装了<code>parsel</code>,类似于<code>request</code>和<code>urllib</code>.</p>
 <p><code>parsel</code>可以解析<code>XML</code>和<code>HTML</code>,支持<code>Xpath</code>和<code>CSS</code>选择器对内容的提取,同时融合了正则表达式,可以说是前面几个工具的综合.</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2>
+<h2 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
+&lt;div id='container'>
+    &lt;li class='list'>first&lt;/li>
+    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
+    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
+&lt;/div>
+'''</span>
+<span class="token keyword">from</span> parsel <span class="token keyword">import</span> Selector
+selector <span class="token operator">=</span> Selector<span class="token punctuation">(</span>text <span class="token operator">=</span> html<span class="token punctuation">)</span>  <span class="token comment">##调用Selector类构造一个Selector对象</span>
+css1 <span class="token operator">=</span> selector<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'#container'</span><span class="token punctuation">)</span>  <span class="token comment">##传入css选择器</span>
+css2 <span class="token operator">=</span> selector<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>  <span class="token comment">##传入css选择器,这个返回的是一个可迭代对象</span>
+xml1 <span class="token operator">=</span> selector<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//li[contains(@class,"list")]'</span><span class="token punctuation">)</span>
+xml2 <span class="token operator">=</span> selector<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//li/a[@href="item2"]'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> item <span class="token keyword">in</span> css1<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">".//text()"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">##遍历获取文本内容</span>
+
+result_href <span class="token operator">=</span> xml2<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'a::attr(href)'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">## css获取属性</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result_href<span class="token punctuation">)</span>
+result_href <span class="token operator">=</span> xml2<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//a/@href'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">##xpath获取属性</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result_href<span class="token punctuation">)</span>
+<span class="token comment">## 正则的使用</span>
+re <span class="token operator">=</span> selector<span class="token punctuation">.</span>re<span class="token punctuation">(</span><span class="token string">'&lt;li>&lt;a.*?>.*?&lt;/a>&lt;/li>'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>re<span class="token punctuation">)</span>
+re <span class="token operator">=</span> selector<span class="token punctuation">.</span>re_first<span class="token punctuation">(</span><span class="token string">'&lt;li>&lt;a.*?>.*?&lt;/a>&lt;/li>'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>re<span class="token punctuation">)</span> <span class="token comment">##返回第一个匹配字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
                 
             </div>
             <hr/>
@@ -439,8 +474,12 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                                    <span class="chip bg-color">parsel的使用</span>
+                                <a href="/tags/python/">
+                                    <span class="chip bg-color">python</span>
+                                </a>
+                            
+                                <a href="/tags/parsel/">
+                                    <span class="chip bg-color">parsel</span>
                                 </a>
                             
                         </div>
@@ -488,18 +527,17 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <a href="/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.gif" class="responsive-img" alt="parsel的使用">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="sklearn学习笔记">
                         
-                        <span class="card-title">parsel的使用</span>
+                        <span class="card-title">sklearn学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -509,27 +547,26 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-04
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                    数学建模
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">parsel的使用</span>
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>
@@ -579,6 +616,10 @@ parsel可以解析XML和HTML,支持Xpath和CSS选择器对内容的提取,同">
                     
                     <a href="/tags/pyquery/">
                         <span class="chip bg-color">pyquery</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>

@@ -4,10 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="pyquery的使用, 零落闲拾">
-    <meta name="description" content="PyqueryPyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.
-初始化字符串初始化直接将HTML的内容当作初始化参数.
-from pyquery import PyQuery as ">
+    <meta name="keywords" content="sklearn学习">
+    <meta name="description" content="sklearn官方文档
+有监督学习和无监督学习什么是有监督学习?什么是无监督学习?顾名思义,就是有无监督.那么,这个监督是什么?我个人理解,监督,也就是答案.我们对数据进行分析,归类,得出自己的结果,监督就是分析结果的标准答案.那么有无监督">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +18,7 @@ from pyquery import PyQuery as ">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>pyquery的使用 | 零落闲拾</title>
+    <title>sklearn学习笔记 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -204,12 +203,12 @@ from pyquery import PyQuery as ">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">pyquery的使用</h1>
+                    <h1 class="description center-align post-title">sklearn学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -325,12 +324,8 @@ from pyquery import PyQuery as ">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/pyquery/">
-                                <span class="chip bg-color">pyquery</span>
-                            </a>
-                        
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
                             </a>
                         
                     </div>
@@ -341,8 +336,8 @@ from pyquery import PyQuery as ">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                爬虫学习
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                数学建模
                             </a>
                         
                     </div>
@@ -354,7 +349,7 @@ from pyquery import PyQuery as ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-02-03
+                    2022-02-04
                 </div>
                 
 
@@ -378,124 +373,75 @@ from pyquery import PyQuery as ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Pyquery"><a href="#Pyquery" class="headerlink" title="Pyquery"></a>Pyquery</h1><p>Pyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="字符串初始化"><a href="#字符串初始化" class="headerlink" title="字符串初始化"></a>字符串初始化</h3><p>直接将HTML的内容当作初始化参数.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div>
-    &lt;li>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
+                <h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><p><a target="_blank" rel="noopener" href="https://www.sklearncn.cn/">官方文档</a></p>
+<h2 id="有监督学习和无监督学习"><a href="#有监督学习和无监督学习" class="headerlink" title="有监督学习和无监督学习"></a>有监督学习和无监督学习</h2><p>什么是有监督学习?什么是无监督学习?顾名思义,就是有无监督.那么,这个监督是什么?我个人理解,监督,也就是答案.我们对数据进行分析,归类,得出自己的结果,监督就是分析结果的标准答案.那么有无监督学习的区别就是是否有这样一个答案.</p>
+<p>有监督学习就是有这个”答案”,我们的目标是对这个答案进行解释,为什么这些数据一类,那些数据一类.得到结果之后,输入新的数据,看自己是否分类合理.</p>
+<p>无监督学习就是没有这个”答案’,我们的目标是构建自己的理论进行分类.</p>
+<p>所以,这两个方向的侧重点不同,有监督学习的侧重点是分类,既解释”答案”,无监督学习的重点是聚类,既通过数据,把样本之间分门别类.</p>
+<p>因为有监督学习的重点是解释,所以,解释结果是不透明的,我们无法解释为什么是这样分类,我们只是为了满足给的”答案”.相反,无监督学习不是透明的,我们可以说出我们聚类的方法,这几个样本是一类是因为他们某些数据相似度高.</p>
+<p>那么,这份”答案”来自于哪里?大多是不言而喻的,比如物种(著名的Iris数据集),这些是一个种,那些是一个种,我们的目的是解释为什么这些是一类.有些是可以人工进行分类,因为他们数据差得太远.</p>
+<p>但是有”答案”就一定选择有监督学习嘛?不一定,如果数据之间不是独立分布的,也即存在隐藏的因子(因子分析),那么,使用无监督更好.如果数据特别多,维数很高,人工难以分类,那么无监督也更好.</p>
+<p>综上,对于两者的选择,肯定是选择有监督学习更好,因为学习速率更快,但是有监督学习的条件苛刻,必须有”答案”,同时,数据之间不能有潜在联系(既不相互独立).</p>
+<h2 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a>广义线性模型</h2><h3 id="普通最小二乘法"><a href="#普通最小二乘法" class="headerlink" title="普通最小二乘法"></a>普通最小二乘法</h3><p>普通最小二乘法拟合有一个稀疏的线性模型,使得数据集实际观测数据和预测数据(估计值)之间的残差平方和最小<br>$$\underset{w}{min} {|| X w - y||_2}^2$$</p>
+<p>实现中,调用<code>linear_model</code>中的<code>LinearRegression</code>方法建立估计器,所有估计器都有两个方法<code>fit(x,y)</code>和<code>predict(x)</code>,一个用于模型建立,一个用于预测.<br>模型系数存在<code>coef_</code>成员中</p>
+<p>示例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_model
+reg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>LinearRegression<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">##建立估计器</span>
+reg<span class="token punctuation">.</span>fit <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 模型建立</span>
+LinearRegression<span class="token punctuation">(</span>copy_X<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> fit_intercept<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> n_jobs<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> normalize<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>coef_<span class="token punctuation">)</span><span class="token comment">##array([ 0.5,  0.5])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><p><code>Ridge</code>回归通过对系数的大小施加惩罚来解决<strong>普通最小二乘法</strong>的一些问题,比如每个维度的数据点少,使得噪声影响大。 岭系数最小化的是带罚项的残差平方和.</p>
+<p>$$\underset{w}{min} {|| X w - y||_2}^2 + \alpha {||w||_2}^2$$</p>
+<p>示例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_model
+reg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>Ridge <span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">.5</span><span class="token punctuation">)</span>
+reg<span class="token punctuation">.</span>fit <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+Ridge<span class="token punctuation">(</span>alpha<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> copy_X<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> fit_intercept<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> max_iter<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span>
+ normalize<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> random_state<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> solver<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">,</span> tol<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>coef_<span class="token punctuation">)</span><span class="token comment">##array([ 0.34545455,  0.34545455])</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>intercept_<span class="token punctuation">)</span><span class="token comment">#0.13636...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="URL初始化"><a href="#URL初始化" class="headerlink" title="URL初始化"></a>URL初始化</h3><p>还可以把一个网址的URL直接给PyQuery实例化,PyQuery对象就会请求这个URL,得到HTML内容进行初始化,效果与字符串初始化类似.</p>
-<h3 id="文件初始化"><a href="#文件初始化" class="headerlink" title="文件初始化"></a>文件初始化</h3><p>还可以选择本地的文件进行初始化,参数指定为filename即可</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+<p>另外还有带有交叉验证的岭回归,通过<code>RidgeCV</code>建立带有$\alpha$参数的岭回归,指定cv的属性,能触发(GridSearchCV)交叉验证,例如cv=10,触发十折交叉验证.</p>
+<h3 id="Lasso"><a href="#Lasso" class="headerlink" title="Lasso"></a>Lasso</h3><p><code>Lasso</code>是拟合稀疏系数的线性模型。 它在一些情况下是有用的，因为它倾向于使用具有较少参数值的情况，有效地减少给定解决方案所依赖变量的数量。</p>
+<p> 其最小化的目标函数是:<br>$$\underset{w}{min} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}$$<br>$Lasso$类的实现使用了<code>coordinate descent</code>（坐标下降算法）来拟合系数。</p>
+<p>示例</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_model
+reg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>Lasso<span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">)</span>
+reg<span class="token punctuation">.</span>fit<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#array([ 0.8])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>filename<span class="token operator">=</span>path<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="基本CSS选择器"><a href="#基本CSS选择器" class="headerlink" title="基本CSS选择器"></a>基本CSS选择器</h2><p>首先,在CSS选择器中,<code>.</code>表示class属性,<code>#</code>表示id属性.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
-
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'#container .item3 span'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##先选取id为container的节点,再选取内部节点里面class为item1的节点内部为span的节点 既 &lt;span>third&lt;/span>,其类型也是PyQuery类</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><h3 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h3><p>find方法返回所有符合要求的子孙节点(子和孙),children方法返回所有满足要求的子节点.</p>
-<h3 id="父节点"><a href="#父节点" class="headerlink" title="父节点"></a>父节点</h3><p>使用parent方法获取某个节点的父节点</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
-
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'.list'</span><span class="token punctuation">)</span>
-pa <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>parent<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>pa<span class="token punctuation">)</span>
-<span class="token triple-quoted-string string">"""
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-&lt;/div>
-"""</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用parents方法获取某个节点的所有祖先节点,可以传CSS选择器来筛选祖先节点.</p>
-<h3 id="兄弟节点"><a href="#兄弟节点" class="headerlink" title="兄弟节点"></a>兄弟节点</h3><p>使用siblings方法获取某个节点的兄弟节点,可以传CSS选择器来筛选兄弟节点.</p>
-<h2 id="节点遍历"><a href="#节点遍历" class="headerlink" title="节点遍历"></a>节点遍历</h2><h3 id="内容获取"><a href="#内容获取" class="headerlink" title="内容获取"></a>内容获取</h3><p>对于单个节点的PyQuery对象,可以直接输出,如果是多个节点的PyQuery对象,则需要使用items方法将其转换成生成器,再使用for来输出.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
-
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
-lis <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> each <span class="token keyword">in</span> lis<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>lis<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>使用attr方法获取属性,如果是多个节点的话默认返回第一个节点的属性,所以需要前面的items方法.</p>
-<h3 id="获取文本"><a href="#获取文本" class="headerlink" title="获取文本"></a>获取文本</h3><p>使用text方法获取节点内部的文本(相当于拆掉了外面的标签)</p>
-<h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><table>
-<thead>
-<tr>
-<th align="left">方法</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">removeClass/addClass</td>
-<td align="left">修改class属性</td>
-</tr>
-<tr>
-<td align="left">attr</td>
-<td align="left">增添属性种类及其内容(需要两个参数,一个是属性名,一个是属性值)</td>
-</tr>
-<tr>
-<td align="left">text</td>
-<td align="left">修改文本(同attr)</td>
-</tr>
-<tr>
-<td align="left">html</td>
-<td align="left">直接修改html文件(同attr)</td>
-</tr>
-<tr>
-<td align="left">remove</td>
-<td align="left">移除节点</td>
-</tr>
-</tbody></table>
-<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h2><p>伪类选择器的语法格式:</p>
-<pre class="line-numbers language-none"><code class="language-none">css选择器:选择性质<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>例如</p>
-<pre class="line-numbers language-none"><code class="language-none">li:first-child   第一个li子节点
-li:last-child    最后一个li子节点
-li:nth-child(2)  第二个li子节点
-li:nth-child(2n) 偶数个子节点
-li:contains(second) 包含second文本的子节点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+<p>同样,<code>lasso</code>也有交叉验证,分别为<code>LassoCV</code>和<code>LassoLarsCV</code>,<code>LassoLarsCV</code>使用最小角回归算法计算alpha值,更加有优势,在面对样本数量比特征数量少很多的时候,其速率一般更快.在面对具有许多线性回归的高位数据集的时候,<code>LassoCV</code>更有优势.</p>
+<h3 id="多任务Lasso"><a href="#多任务Lasso" class="headerlink" title="多任务Lasso"></a>多任务Lasso</h3><p>多任务Lasso的Y是一个二维数组,横轴为样本,竖轴为属性.其使用<code>MultiTaskLasso</code>建立估计器.类的实现使用了坐标下降作为拟合系数的算法。</p>
+<h2 id="支持向量机-SVMs"><a href="#支持向量机-SVMs" class="headerlink" title="支持向量机(SVMs)"></a>支持向量机(SVMs)</h2><p>支持向量机主要用于监督学习算法:分类,回归和异常检测</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><code>SVC</code>, <code>NuSVC</code> 和 <code>LinearSVC</code> 能在数据集中实现多元分类.</p>
+<h3 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h3><p>支持向量回归有三种不同的实现形式: <code>SVR</code>, <code>NuSVR</code> 和 <code>LinearSVR</code>.其在高维,大数据下的表现优于最小二乘法.如果是稀疏矩阵,建议使用<code>scipy</code>中的<code>CSR</code>矩阵格式.</p>
+<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><h3 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h3><p>SGDClassifier 类实现了一个简单的随机梯度下降学习例程,这个估计器使用的时候需要保证数据充分打乱(梯度下降算法容易陷入局部最小值).<code>coef_</code>成员储存了参数,<code>intercept_</code>存储了截距.可以自己选择损失函数,通过loss参数选择.</p>
+<ul>
+<li><code>loss=&quot;hinge&quot;</code>: (soft-margin) linear Support Vector Machine （（软-间隔）线性支持向量机），</li>
+<li><code>loss=&quot;modified_huber&quot;</code>: smoothed hinge loss （平滑的 hinge 损失），</li>
+<li><code>loss=&quot;log&quot;</code>: logistic regression （logistic 回归），</li>
+</ul>
+<h3 id="回归-1"><a href="#回归-1" class="headerlink" title="回归"></a>回归</h3><p><code>SGDRegressor</code>类实现了一个简单的随机梯度下降学习例程，它支持用不同的损失函数和惩罚来拟合线性回归模型。 SGDRegressor 非常适用于有大量训练样本的回归问题，对于其他问题，使用 <code>Ridge</code> ，<code>Lasso</code> 是更好的选择 。</p>
+<p>具体的损失函数可以通过 loss 参数设置。 SGDRegressor 支持以下的损失函数:</p>
+<ul>
+<li><code>loss=&quot;squared_loss&quot;</code>: Ordinary least squares（普通最小二乘法）</li>
+<li><code>loss=&quot;huber&quot;</code>: Huber loss for robust regression（Huber回归)</li>
+<li><code>loss=&quot;epsilon_insensitive&quot;</code>: linear Support Vector Regression（线性支持向量回归）</li>
+</ul>
+<h2 id="最近邻"><a href="#最近邻" class="headerlink" title="最近邻"></a>最近邻</h2><p>最近邻算法是将所有点中最相似的点合并为一个类,称为一个新的点,再继续合并,直到只剩下所需要的簇的数目.其中最相似这个概念不一定是距离最短,因为对于类中包含多个点,他们的距离计算需要事先规定,可能是<code>single link</code>最近两点为类间距,也可能是<code>complete link</code>最远两点为类间距.</p>
+<h3 id="无监督最近邻"><a href="#无监督最近邻" class="headerlink" title="无监督最近邻"></a>无监督最近邻</h3><p>算法接口为<code>NearestNeighbors</code></p>
+<ul>
+<li><code>algorithm</code>参数选择算法,建议选择<code>auto</code>,程序自动选择最优算法</li>
+<li><code>n_neighbors</code>参数用于控制<code>kneighbors</code>查询的邻居数.</li>
+</ul>
+<p>该类可以通过kneighbors查询邻居索引和距离.<br><code>distances, indices = nbrs.kneighbors(X)</code></p>
+<h3 id="最近邻分类"><a href="#最近邻分类" class="headerlink" title="最近邻分类"></a>最近邻分类</h3><p>最近邻分类是由每个点的最近邻的简单多数投票中计算得到,也就是说一个查询点的数据类型是由它最近邻点中最具代表性的数据类型来决定.</p>
+<p><code>scikit-learn</code>提供了两种最近邻分类器.</p>
+<ul>
+<li><code>RadiusNeighborsClassifier</code> 是一个通过访问给定半径类的邻居实现投票的类.可以通过修改<code>weights</code>参数来决定距离对投票权重的影响.</li>
+<li><code>KNeighborsClassifier</code> knn算法进行投票,修改<code>n-neighbots</code>参数控制访问的最近邻居数进行投票.</li>
+</ul>
+<h3 id="最近邻回归"><a href="#最近邻回归" class="headerlink" title="最近邻回归"></a>最近邻回归</h3>
                 
             </div>
             <hr/>
@@ -521,7 +467,7 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/">https://the-tarnished.github.io/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -559,12 +505,8 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/pyquery/">
-                                    <span class="chip bg-color">pyquery</span>
-                                </a>
-                            
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
                                 </a>
                             
                         </div>
@@ -616,6 +558,55 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
+                <a href="/2022/02/08/CSV%E6%96%87%E4%BB%B6/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="CSV文件">
+                        
+                        <span class="card-title">CSV文件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-08
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CSV/">
+                        <span class="chip bg-color">CSV</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
                     <div class="card-image">
                         
@@ -632,9 +623,9 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -656,55 +647,6 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     
                     <a href="/tags/parsel/">
                         <span class="chip bg-color">parsel</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Xpath的使用">
-                        
-                        <span class="card-title">Xpath的使用</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Xpath/">
-                        <span class="chip bg-color">Xpath</span>
                     </a>
                     
                 </div>
@@ -835,6 +777,13 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

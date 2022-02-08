@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>parsel的使用</title>
-      <link href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-      <url>/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <title>CSV文件</title>
+      <link href="/2022/02/08/CSV%E6%96%87%E4%BB%B6/"/>
+      <url>/2022/02/08/CSV%E6%96%87%E4%BB%B6/</url>
       
-        <content type="html"><![CDATA[<h1 id="parsel"><a href="#parsel" class="headerlink" title="parsel"></a>parsel</h1><p><code>parsel</code>的<code>API</code>和<code>Scrapy</code>选择器的<code>API</code>高度相似,因为<code>Scrapy</code>选择器的是二次封装了<code>parsel</code>,类似于<code>request</code>和<code>urllib</code>.</p><p><code>parsel</code>可以解析<code>XML</code>和<code>HTML</code>,支持<code>Xpath</code>和<code>CSS</code>选择器对内容的提取,同时融合了正则表达式,可以说是前面几个工具的综合.</p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2>]]></content>
+        <content type="html"><![CDATA[<h2 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h2><p>csv文件的写入需要通过writer类构造一个对象进行写入,该类构造方法需要一个file对象,另外可以通过delimiter参数自定义分隔符</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> csvfile<span class="token punctuation">:</span>    writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>csvfile<span class="token punctuation">,</span>delimiter<span class="token operator">=</span>`<span class="token operator">|</span>`<span class="token punctuation">)</span>    writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">## 写入列表的头</span>    writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">## 写入列表数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>另外也可以通过writerows方法一次写入多条数据.</p><p>如果要写入中文数据,记得修改open的<code>encoding</code>参数</p><p>如果要写入字典的话,需要通过DicWriter类构造一个对象进行写入,该类构造方法需要一个file对象,还需要一个fieldnames参数,这个参数是字典的key值.<br>实例代码:</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csvfieldnames <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">]</span><span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encodeing<span class="token operator">=</span><span class="token string">'utf8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> csvfile<span class="token punctuation">:</span>    writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>DicWriter<span class="token punctuation">(</span>csvfile<span class="token punctuation">,</span>fieldnames <span class="token operator">=</span> fieldnames<span class="token punctuation">)</span>    writer<span class="token punctuation">.</span>writecow<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'韩梅梅'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'114514'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>另外,也可以使用pandas库的DataFrame对象的to_csv方法将数据写入CSV文件中.</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandasdata <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'韩梅梅'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'114'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>        <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'李雷'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'514'</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span>df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>data<span class="token punctuation">)</span>df<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span>index <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h2 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h2><p>读取文件需要通过reader构造一个reader对象.</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span>    reader <span class="token operator">=</span> csv<span class="token punctuation">.</span>reader<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span>    <span class="token keyword">for</span> row <span class="token keyword">in</span> reader<span class="token punctuation">:</span>        <span class="token keyword">print</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>另外也可以通过pandas库的read_csv方法读取</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandasdf <span class="token operator">=</span> pandas<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token comment">##本质是一个DataFrame对象,类似矩阵</span><span class="token builtin">list</span> <span class="token operator">=</span> df<span class="token punctuation">.</span>values<span class="token punctuation">.</span>to_list<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment">##输出的是一个列表</span><span class="token keyword">for</span> index<span class="token punctuation">,</span>row <span class="token keyword">in</span> df<span class="token punctuation">.</span>iterrows<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment">##进行遍历</span>    <span class="token keyword">print</span><span class="token punctuation">(</span>row<span class="token punctuation">.</span>tolist<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
       
       
       <categories>
@@ -20,7 +20,59 @@
       
         <tags>
             
-            <tag> parsel的使用 </tag>
+            <tag> CSV </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>sklearn学习笔记</title>
+      <link href="/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="sklearn"><a href="#sklearn" class="headerlink" title="sklearn"></a>sklearn</h1><p><a href="https://www.sklearncn.cn/">官方文档</a></p><h2 id="有监督学习和无监督学习"><a href="#有监督学习和无监督学习" class="headerlink" title="有监督学习和无监督学习"></a>有监督学习和无监督学习</h2><p>什么是有监督学习?什么是无监督学习?顾名思义,就是有无监督.那么,这个监督是什么?我个人理解,监督,也就是答案.我们对数据进行分析,归类,得出自己的结果,监督就是分析结果的标准答案.那么有无监督学习的区别就是是否有这样一个答案.</p><p>有监督学习就是有这个”答案”,我们的目标是对这个答案进行解释,为什么这些数据一类,那些数据一类.得到结果之后,输入新的数据,看自己是否分类合理.</p><p>无监督学习就是没有这个”答案’,我们的目标是构建自己的理论进行分类.</p><p>所以,这两个方向的侧重点不同,有监督学习的侧重点是分类,既解释”答案”,无监督学习的重点是聚类,既通过数据,把样本之间分门别类.</p><p>因为有监督学习的重点是解释,所以,解释结果是不透明的,我们无法解释为什么是这样分类,我们只是为了满足给的”答案”.相反,无监督学习不是透明的,我们可以说出我们聚类的方法,这几个样本是一类是因为他们某些数据相似度高.</p><p>那么,这份”答案”来自于哪里?大多是不言而喻的,比如物种(著名的Iris数据集),这些是一个种,那些是一个种,我们的目的是解释为什么这些是一类.有些是可以人工进行分类,因为他们数据差得太远.</p><p>但是有”答案”就一定选择有监督学习嘛?不一定,如果数据之间不是独立分布的,也即存在隐藏的因子(因子分析),那么,使用无监督更好.如果数据特别多,维数很高,人工难以分类,那么无监督也更好.</p><p>综上,对于两者的选择,肯定是选择有监督学习更好,因为学习速率更快,但是有监督学习的条件苛刻,必须有”答案”,同时,数据之间不能有潜在联系(既不相互独立).</p><h2 id="广义线性模型"><a href="#广义线性模型" class="headerlink" title="广义线性模型"></a>广义线性模型</h2><h3 id="普通最小二乘法"><a href="#普通最小二乘法" class="headerlink" title="普通最小二乘法"></a>普通最小二乘法</h3><p>普通最小二乘法拟合有一个稀疏的线性模型,使得数据集实际观测数据和预测数据(估计值)之间的残差平方和最小<br>$$\underset{w}{min} {|| X w - y||_2}^2$$</p><p>实现中,调用<code>linear_model</code>中的<code>LinearRegression</code>方法建立估计器,所有估计器都有两个方法<code>fit(x,y)</code>和<code>predict(x)</code>,一个用于模型建立,一个用于预测.<br>模型系数存在<code>coef_</code>成员中</p><p>示例</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_modelreg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>LinearRegression<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">##建立估计器</span>reg<span class="token punctuation">.</span>fit <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 模型建立</span>LinearRegression<span class="token punctuation">(</span>copy_X<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> fit_intercept<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> n_jobs<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> normalize<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>coef_<span class="token punctuation">)</span><span class="token comment">##array([ 0.5,  0.5])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><h3 id="岭回归"><a href="#岭回归" class="headerlink" title="岭回归"></a>岭回归</h3><p><code>Ridge</code>回归通过对系数的大小施加惩罚来解决<strong>普通最小二乘法</strong>的一些问题,比如每个维度的数据点少,使得噪声影响大。 岭系数最小化的是带罚项的残差平方和.</p><p>$$\underset{w}{min} {|| X w - y||_2}^2 + \alpha {||w||_2}^2$$</p><p>示例</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_modelreg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>Ridge <span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">.5</span><span class="token punctuation">)</span>reg<span class="token punctuation">.</span>fit <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">.1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>Ridge<span class="token punctuation">(</span>alpha<span class="token operator">=</span><span class="token number">0.5</span><span class="token punctuation">,</span> copy_X<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> fit_intercept<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> max_iter<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> normalize<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> random_state<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> solver<span class="token operator">=</span><span class="token string">'auto'</span><span class="token punctuation">,</span> tol<span class="token operator">=</span><span class="token number">0.001</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>coef_<span class="token punctuation">)</span><span class="token comment">##array([ 0.34545455,  0.34545455])</span><span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>intercept_<span class="token punctuation">)</span><span class="token comment">#0.13636...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>另外还有带有交叉验证的岭回归,通过<code>RidgeCV</code>建立带有$\alpha$参数的岭回归,指定cv的属性,能触发(GridSearchCV)交叉验证,例如cv=10,触发十折交叉验证.</p><h3 id="Lasso"><a href="#Lasso" class="headerlink" title="Lasso"></a>Lasso</h3><p><code>Lasso</code>是拟合稀疏系数的线性模型。 它在一些情况下是有用的，因为它倾向于使用具有较少参数值的情况，有效地减少给定解决方案所依赖变量的数量。</p><p> 其最小化的目标函数是:<br>$$\underset{w}{min} { \frac{1}{2n_{samples}} ||X w - y||_2 ^ 2 + \alpha ||w||_1}$$<br>$Lasso$类的实现使用了<code>coordinate descent</code>（坐标下降算法）来拟合系数。</p><p>示例</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn <span class="token keyword">import</span> linear_modelreg <span class="token operator">=</span> linear_model<span class="token punctuation">.</span>Lasso<span class="token punctuation">(</span>alpha <span class="token operator">=</span> <span class="token number">0.1</span><span class="token punctuation">)</span>reg<span class="token punctuation">.</span>fit<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>reg<span class="token punctuation">.</span>predict<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#array([ 0.8])</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><p>同样,<code>lasso</code>也有交叉验证,分别为<code>LassoCV</code>和<code>LassoLarsCV</code>,<code>LassoLarsCV</code>使用最小角回归算法计算alpha值,更加有优势,在面对样本数量比特征数量少很多的时候,其速率一般更快.在面对具有许多线性回归的高位数据集的时候,<code>LassoCV</code>更有优势.</p><h3 id="多任务Lasso"><a href="#多任务Lasso" class="headerlink" title="多任务Lasso"></a>多任务Lasso</h3><p>多任务Lasso的Y是一个二维数组,横轴为样本,竖轴为属性.其使用<code>MultiTaskLasso</code>建立估计器.类的实现使用了坐标下降作为拟合系数的算法。</p><h2 id="支持向量机-SVMs"><a href="#支持向量机-SVMs" class="headerlink" title="支持向量机(SVMs)"></a>支持向量机(SVMs)</h2><p>支持向量机主要用于监督学习算法:分类,回归和异常检测</p><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><code>SVC</code>, <code>NuSVC</code> 和 <code>LinearSVC</code> 能在数据集中实现多元分类.</p><h3 id="回归"><a href="#回归" class="headerlink" title="回归"></a>回归</h3><p>支持向量回归有三种不同的实现形式: <code>SVR</code>, <code>NuSVR</code> 和 <code>LinearSVR</code>.其在高维,大数据下的表现优于最小二乘法.如果是稀疏矩阵,建议使用<code>scipy</code>中的<code>CSR</code>矩阵格式.</p><h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><h3 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h3><p>SGDClassifier 类实现了一个简单的随机梯度下降学习例程,这个估计器使用的时候需要保证数据充分打乱(梯度下降算法容易陷入局部最小值).<code>coef_</code>成员储存了参数,<code>intercept_</code>存储了截距.可以自己选择损失函数,通过loss参数选择.</p><ul><li><code>loss=&quot;hinge&quot;</code>: (soft-margin) linear Support Vector Machine （（软-间隔）线性支持向量机），</li><li><code>loss=&quot;modified_huber&quot;</code>: smoothed hinge loss （平滑的 hinge 损失），</li><li><code>loss=&quot;log&quot;</code>: logistic regression （logistic 回归），</li></ul><h3 id="回归-1"><a href="#回归-1" class="headerlink" title="回归"></a>回归</h3><p><code>SGDRegressor</code>类实现了一个简单的随机梯度下降学习例程，它支持用不同的损失函数和惩罚来拟合线性回归模型。 SGDRegressor 非常适用于有大量训练样本的回归问题，对于其他问题，使用 <code>Ridge</code> ，<code>Lasso</code> 是更好的选择 。</p><p>具体的损失函数可以通过 loss 参数设置。 SGDRegressor 支持以下的损失函数:</p><ul><li><code>loss=&quot;squared_loss&quot;</code>: Ordinary least squares（普通最小二乘法）</li><li><code>loss=&quot;huber&quot;</code>: Huber loss for robust regression（Huber回归)</li><li><code>loss=&quot;epsilon_insensitive&quot;</code>: linear Support Vector Regression（线性支持向量回归）</li></ul><h2 id="最近邻"><a href="#最近邻" class="headerlink" title="最近邻"></a>最近邻</h2><p>最近邻算法是将所有点中最相似的点合并为一个类,称为一个新的点,再继续合并,直到只剩下所需要的簇的数目.其中最相似这个概念不一定是距离最短,因为对于类中包含多个点,他们的距离计算需要事先规定,可能是<code>single link</code>最近两点为类间距,也可能是<code>complete link</code>最远两点为类间距.</p><h3 id="无监督最近邻"><a href="#无监督最近邻" class="headerlink" title="无监督最近邻"></a>无监督最近邻</h3><p>算法接口为<code>NearestNeighbors</code></p><ul><li><code>algorithm</code>参数选择算法,建议选择<code>auto</code>,程序自动选择最优算法</li><li><code>n_neighbors</code>参数用于控制<code>kneighbors</code>查询的邻居数.</li></ul><p>该类可以通过kneighbors查询邻居索引和距离.<br><code>distances, indices = nbrs.kneighbors(X)</code></p><h3 id="最近邻分类"><a href="#最近邻分类" class="headerlink" title="最近邻分类"></a>最近邻分类</h3><p>最近邻分类是由每个点的最近邻的简单多数投票中计算得到,也就是说一个查询点的数据类型是由它最近邻点中最具代表性的数据类型来决定.</p><p><code>scikit-learn</code>提供了两种最近邻分类器.</p><ul><li><code>RadiusNeighborsClassifier</code> 是一个通过访问给定半径类的邻居实现投票的类.可以通过修改<code>weights</code>参数来决定距离对投票权重的影响.</li><li><code>KNeighborsClassifier</code> knn算法进行投票,修改<code>n-neighbots</code>参数控制访问的最近邻居数进行投票.</li></ul><h3 id="最近邻回归"><a href="#最近邻回归" class="headerlink" title="最近邻回归"></a>最近邻回归</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>parsel的使用</title>
+      <link href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="parsel"><a href="#parsel" class="headerlink" title="parsel"></a>parsel</h1><p><code>parsel</code>的<code>API</code>和<code>Scrapy</code>选择器的<code>API</code>高度相似,因为<code>Scrapy</code>选择器的是二次封装了<code>parsel</code>,类似于<code>request</code>和<code>urllib</code>.</p><p><code>parsel</code>可以解析<code>XML</code>和<code>HTML</code>,支持<code>Xpath</code>和<code>CSS</code>选择器对内容的提取,同时融合了正则表达式,可以说是前面几个工具的综合.</p><h2 id="使用实例"><a href="#使用实例" class="headerlink" title="使用实例"></a>使用实例</h2><pre class="line-numbers language-python" data-language="python"><code class="language-python">html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''&lt;div id='container'>    &lt;li class='list'>first&lt;/li>    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>&lt;/div>'''</span><span class="token keyword">from</span> parsel <span class="token keyword">import</span> Selectorselector <span class="token operator">=</span> Selector<span class="token punctuation">(</span>text <span class="token operator">=</span> html<span class="token punctuation">)</span>  <span class="token comment">##调用Selector类构造一个Selector对象</span>css1 <span class="token operator">=</span> selector<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'#container'</span><span class="token punctuation">)</span>  <span class="token comment">##传入css选择器</span>css2 <span class="token operator">=</span> selector<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>  <span class="token comment">##传入css选择器,这个返回的是一个可迭代对象</span>xml1 <span class="token operator">=</span> selector<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//li[contains(@class,"list")]'</span><span class="token punctuation">)</span>xml2 <span class="token operator">=</span> selector<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//li/a[@href="item2"]'</span><span class="token punctuation">)</span><span class="token keyword">for</span> item <span class="token keyword">in</span> css1<span class="token punctuation">:</span>    <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>    <span class="token keyword">print</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">".//text()"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">##遍历获取文本内容</span>result_href <span class="token operator">=</span> xml2<span class="token punctuation">.</span>css<span class="token punctuation">(</span><span class="token string">'a::attr(href)'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">## css获取属性</span><span class="token keyword">print</span><span class="token punctuation">(</span>result_href<span class="token punctuation">)</span>result_href <span class="token operator">=</span> xml2<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span><span class="token string">'//a/@href'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment">##xpath获取属性</span><span class="token keyword">print</span><span class="token punctuation">(</span>result_href<span class="token punctuation">)</span><span class="token comment">## 正则的使用</span>re <span class="token operator">=</span> selector<span class="token punctuation">.</span>re<span class="token punctuation">(</span><span class="token string">'&lt;li>&lt;a.*?>.*?&lt;/a>&lt;/li>'</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>re<span class="token punctuation">)</span>re <span class="token operator">=</span> selector<span class="token punctuation">.</span>re_first<span class="token punctuation">(</span><span class="token string">'&lt;li>&lt;a.*?>.*?&lt;/a>&lt;/li>'</span><span class="token punctuation">)</span><span class="token keyword">print</span><span class="token punctuation">(</span>re<span class="token punctuation">)</span> <span class="token comment">##返回第一个匹配字符串</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 爬虫学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> parsel </tag>
             
         </tags>
       
@@ -47,6 +99,8 @@
             
             <tag> pyquery </tag>
             
+            <tag> python </tag>
+            
         </tags>
       
     </entry>
@@ -58,7 +112,7 @@
       <link href="/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
       <url>/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
       
-        <content type="html"><![CDATA[<h1 id="Xpath"><a href="#Xpath" class="headerlink" title="Xpath"></a>Xpath</h1><h2 id="常用规则"><a href="#常用规则" class="headerlink" title="常用规则"></a>常用规则</h2><table><thead><tr><th align="left">符号</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">nodename</td><td align="left">选取此节点的所有结点</td></tr><tr><td align="left">/</td><td align="left">选取当前结点的子节点</td></tr><tr><td align="left">//</td><td align="left">选取当前结点的子孙(子和孙)结点</td></tr><tr><td align="left">.</td><td align="left">选取当前节点</td></tr><tr><td align="left">..</td><td align="left">选取当前节点的父节点</td></tr><tr><td align="left">/*</td><td align="left">选取所有结点</td></tr><tr><td align="left">@</td><td align="left">选取属性</td></tr></tbody></table><p>在使用的时候,常以<code>//</code>开头的Xpath规则来选择所有结点,后续再添加符号就行筛选.</p><p>在Xpath处理的时候先需要进行对文本进行处理,示例如下</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> lxml <span class="token keyword">import</span> etreehtml <span class="token operator">=</span> etree<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>text<span class="token punctuation">,</span>etree<span class="token punctuation">.</span>HTMLParser<span class="token punctuation">)</span> <span class="token comment">## text指的是html格式的文本</span>result <span class="token operator">=</span> html<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span>pattern<span class="token punctuation">)</span> <span class="token comment">##pattern值得是xpath pattern,选择的路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="属性匹配"><a href="#属性匹配" class="headerlink" title="属性匹配"></a>属性匹配</h3><p><code>[@+属性]</code>,例如需要查找<code>class = &#39;item1&#39;</code>的结点,直接使用</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;[@class&#x3D;&#39;item1&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>如果是要获取属性的话,直接<code>@/属性标签就行</code>,例如需要获得<code>a</code>标签的<code>href</code>属性,如下</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;a&#x2F;@href<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="属性多值匹配"><a href="#属性多值匹配" class="headerlink" title="属性多值匹配"></a>属性多值匹配</h3><p>面对有多个属性值的结点,如<code>&lt;a class = &#39;item1 item2&#39;&gt;</code>,如果使用<code>//a[@class=&#39;item1&#39;]</code>就匹配不到这个文本.</p><p>可以使用<code>contains</code>方法,改成<code>//a[contains(class,&#39;item1&#39;)]</code>,那么就能匹配到该文本.</p><h3 id="多属性匹配"><a href="#多属性匹配" class="headerlink" title="多属性匹配"></a>多属性匹配</h3><p>如果我们想要获取的结点要满足多个属性,如既要<code>class=&#39;item1&#39;</code>,而且<code>href=&#39;item2.html&#39;</code>,那么就要使用多属性匹配,示例如下:</p><pre class="line-numbers language-none"><code class="language-none">&#96;&#x2F;&#x2F;a[@class&#x3D;&#39;item1&#39; and @href&#x3D;&#39;item2.htm&#39;]&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>下面是XPath运算符及其解释<br>| 运算符   |   描述          |  示例            |                返回值                                              |<br>| :———-|:————-|:————————-|:——–|<br>| or      |    或        |     class=’item1’ or class=’item2’ | 至少满足一个的结点                                   |<br>| and      |   且       |      class=’item1’ and class=’item2’ | 都满足的结点                                        |<br>| |       |    计算两个节点集  | class=’item1’ | class=’item2’ |   返回所有拥有class=’item1’ 和 class=’item2’的节点集 |</p><h2 id="按序选择"><a href="#按序选择" class="headerlink" title="按序选择"></a>按序选择</h2><p>当同时匹配多个节点的时候,如果想要第某一个节点,使用中括号里面加入索引方法(数字代表第几个,last表示最后一个,可以加入布尔表达式,比如position()&lt;4,就是返回第一个,第二个,第三个节点&gt;)就能做到按序选择</p><h2 id="节点轴选择"><a href="#节点轴选择" class="headerlink" title="节点轴选择"></a>节点轴选择</h2><p>节点轴关键字::修饰关键字</p><p>这就是一个节点轴选择的格式<br>| 关键字           |       解释                           |<br>| :—————–|:———————————— |<br>| ancestor          |      获取所有祖先节点               |<br>| attribute        |       获取节点所有属性值             |<br>| child           |        获取所有直接子节点             |<br>| descendant      |        获取所有子孙节点               |<br>| following        |       获取当且节点之后的所有节点     |<br>| following-sibling  |     获取当前节点的所有同级节点 |</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="Xpath"><a href="#Xpath" class="headerlink" title="Xpath"></a>Xpath</h1><h2 id="常用规则"><a href="#常用规则" class="headerlink" title="常用规则"></a>常用规则</h2><table><thead><tr><th align="left">符号</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">nodename</td><td align="left">选取此节点的所有结点</td></tr><tr><td align="left">/</td><td align="left">选取当前结点的子节点</td></tr><tr><td align="left">//</td><td align="left">选取当前结点的子孙(子和孙)结点</td></tr><tr><td align="left">.</td><td align="left">选取当前节点</td></tr><tr><td align="left">..</td><td align="left">选取当前节点的父节点</td></tr><tr><td align="left">/*</td><td align="left">选取所有结点</td></tr><tr><td align="left">@</td><td align="left">选取属性</td></tr></tbody></table><p>在使用的时候,常以<code>//</code>开头的Xpath规则来选择所有结点,后续再添加符号就行筛选.</p><p>在Xpath处理的时候先需要进行对文本进行处理,示例如下</p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> lxml <span class="token keyword">import</span> etreehtml <span class="token operator">=</span> etree<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>text<span class="token punctuation">,</span>etree<span class="token punctuation">.</span>HTMLParser<span class="token punctuation">)</span> <span class="token comment">## text指的是html格式的文本</span>result <span class="token operator">=</span> html<span class="token punctuation">.</span>xpath<span class="token punctuation">(</span>pattern<span class="token punctuation">)</span> <span class="token comment">##pattern值得是xpath pattern,选择的路径</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="属性匹配"><a href="#属性匹配" class="headerlink" title="属性匹配"></a>属性匹配</h3><p><code>[@+属性]</code>,例如需要查找<code>class = &#39;item1&#39;</code>的结点,直接使用</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;[@class&#x3D;&#39;item1&#39;]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>如果是要获取属性的话,直接<code>@/属性标签就行</code>,例如需要获得<code>a</code>标签的<code>href</code>属性,如下</p><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;a&#x2F;@href<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h3 id="属性多值匹配"><a href="#属性多值匹配" class="headerlink" title="属性多值匹配"></a>属性多值匹配</h3><p>面对有多个属性值的结点,如<code>&lt;a class = &#39;item1 item2&#39;&gt;</code>,如果使用<code>//a[@class=&#39;item1&#39;]</code>就匹配不到这个文本.</p><p>可以使用<code>contains</code>方法,改成<code>//a[contains(class,&#39;item1&#39;)]</code>,那么就能匹配到该文本.</p><h3 id="多属性匹配"><a href="#多属性匹配" class="headerlink" title="多属性匹配"></a>多属性匹配</h3><p>如果我们想要获取的结点要满足多个属性,如既要<code>class=&#39;item1&#39;</code>,而且<code>href=&#39;item2.html&#39;</code>,那么就要使用多属性匹配,示例如下:</p><pre class="line-numbers language-none"><code class="language-none">&#96;&#x2F;&#x2F;a[@class&#x3D;&#39;item1&#39; and @href&#x3D;&#39;item2.htm&#39;]&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>下面是XPath运算符及其解释</p><table><thead><tr><th align="left">运算符</th><th align="left">描述</th><th align="left">示例</th><th align="left">返回值</th></tr></thead><tbody><tr><td align="left">or</td><td align="left">或</td><td align="left">class=’item1’ or class=’item2’</td><td align="left">至少满足一个的结点</td></tr><tr><td align="left">and</td><td align="left">且</td><td align="left">class=’item1’ and class=’item2’</td><td align="left">都满足的结点</td></tr><tr><td align="left">|</td><td align="left">计算两个节点集</td><td align="left">class=’item1’ | class=’item2’</td><td align="left">返回所有拥有class=’item1’ 和 class=’item2’的节点集</td></tr></tbody></table><h2 id="按序选择"><a href="#按序选择" class="headerlink" title="按序选择"></a>按序选择</h2><p>当同时匹配多个节点的时候,如果想要第某一个节点,使用中括号里面加入索引方法(数字代表第几个,last表示最后一个,可以加入布尔表达式,比如position()&lt;4,就是返回第一个,第二个,第三个节点&gt;)就能做到按序选择</p><h2 id="节点轴选择"><a href="#节点轴选择" class="headerlink" title="节点轴选择"></a>节点轴选择</h2><p>节点轴关键字::修饰关键字</p><p>这就是一个节点轴选择的格式</p><table><thead><tr><th align="left">关键字</th><th align="left">解释</th></tr></thead><tbody><tr><td align="left">ancestor</td><td align="left">获取所有祖先节点</td></tr><tr><td align="left">attribute</td><td align="left">获取节点所有属性值</td></tr><tr><td align="left">child</td><td align="left">获取所有直接子节点</td></tr><tr><td align="left">descendant</td><td align="left">获取所有子孙节点</td></tr><tr><td align="left">following</td><td align="left">获取当且节点之后的所有节点</td></tr><tr><td align="left">following-sibling</td><td align="left">获取当前节点的所有同级节点</td></tr></tbody></table>]]></content>
       
       
       <categories>
@@ -145,7 +199,11 @@
       
         <tags>
             
-            <tag> 数学建模,Geatpy,Python </tag>
+            <tag> 数学建模 </tag>
+            
+            <tag> Geatpy </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -170,7 +228,11 @@
       
         <tags>
             
-            <tag> Python,Matplotlib,数学建模 </tag>
+            <tag> 数学建模 </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> Matplotlib </tag>
             
         </tags>
       
@@ -195,7 +257,11 @@
       
         <tags>
             
-            <tag> 数学建模,Scipy,Python </tag>
+            <tag> 数学建模 </tag>
+            
+            <tag> Scipy </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
@@ -220,7 +286,11 @@
       
         <tags>
             
-            <tag> 数学建模,Numpy,Python </tag>
+            <tag> 数学建模 </tag>
+            
+            <tag> Python </tag>
+            
+            <tag> Numpy </tag>
             
         </tags>
       
@@ -245,7 +315,9 @@
       
         <tags>
             
-            <tag> spider/crawler </tag>
+            <tag> python </tag>
+            
+            <tag> spider </tag>
             
         </tags>
       
@@ -270,7 +342,9 @@
       
         <tags>
             
-            <tag> logisim,P0 </tag>
+            <tag> logisim </tag>
+            
+            <tag> P0 </tag>
             
         </tags>
       
@@ -358,7 +432,7 @@
       
         <tags>
             
-            <tag> spider/crawler </tag>
+            <tag> spider </tag>
             
         </tags>
       
@@ -383,7 +457,9 @@
       
         <tags>
             
-            <tag> spider/crawler </tag>
+            <tag> python </tag>
+            
+            <tag> spider </tag>
             
         </tags>
       
@@ -408,7 +484,7 @@
       
         <tags>
             
-            <tag> spider/crawler </tag>
+            <tag> spider </tag>
             
         </tags>
       
@@ -433,7 +509,9 @@
       
         <tags>
             
-            <tag> spider/crawler </tag>
+            <tag> python </tag>
+            
+            <tag> spider </tag>
             
         </tags>
       

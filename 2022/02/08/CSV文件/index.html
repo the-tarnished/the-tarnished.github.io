@@ -4,10 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="pyquery的使用, 零落闲拾">
-    <meta name="description" content="PyqueryPyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.
-初始化字符串初始化直接将HTML的内容当作初始化参数.
-from pyquery import PyQuery as ">
+    <meta name="keywords" content="CSV文件, 零落闲拾">
+    <meta name="description" content="写入csv文件的写入需要通过writer类构造一个对象进行写入,该类构造方法需要一个file对象,另外可以通过delimiter参数自定义分隔符
+import csv
+
+with open(&#39;data.csv&#39;,&#39;w&#39;) as csvfil">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +20,7 @@ from pyquery import PyQuery as ">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>pyquery的使用 | 零落闲拾</title>
+    <title>CSV文件 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -204,12 +205,12 @@ from pyquery import PyQuery as ">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">pyquery的使用</h1>
+                    <h1 class="description center-align post-title">CSV文件</h1>
                 </div>
             </div>
         </div>
@@ -325,12 +326,8 @@ from pyquery import PyQuery as ">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/pyquery/">
-                                <span class="chip bg-color">pyquery</span>
-                            </a>
-                        
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
+                            <a href="/tags/CSV/">
+                                <span class="chip bg-color">CSV</span>
                             </a>
                         
                     </div>
@@ -354,7 +351,7 @@ from pyquery import PyQuery as ">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-02-03
+                    2022-02-08
                 </div>
                 
 
@@ -378,124 +375,45 @@ from pyquery import PyQuery as ">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Pyquery"><a href="#Pyquery" class="headerlink" title="Pyquery"></a>Pyquery</h1><p>Pyquery是一个类似css选择器的东西,在解析HTML文本的时候需要先将其初始化为PyQuery对象.</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><h3 id="字符串初始化"><a href="#字符串初始化" class="headerlink" title="字符串初始化"></a>字符串初始化</h3><p>直接将HTML的内容当作初始化参数.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div>
-    &lt;li>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
+                <h2 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h2><p>csv文件的写入需要通过writer类构造一个对象进行写入,该类构造方法需要一个file对象,另外可以通过delimiter参数自定义分隔符</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="URL初始化"><a href="#URL初始化" class="headerlink" title="URL初始化"></a>URL初始化</h3><p>还可以把一个网址的URL直接给PyQuery实例化,PyQuery对象就会请求这个URL,得到HTML内容进行初始化,效果与字符串初始化类似.</p>
-<h3 id="文件初始化"><a href="#文件初始化" class="headerlink" title="文件初始化"></a>文件初始化</h3><p>还可以选择本地的文件进行初始化,参数指定为filename即可</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> csvfile<span class="token punctuation">:</span>
+    writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>writer<span class="token punctuation">(</span>csvfile<span class="token punctuation">,</span>delimiter<span class="token operator">=</span>`<span class="token operator">|</span>`<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">## 写入列表的头</span>
+    writer<span class="token punctuation">.</span>writerow<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">## 写入列表数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另外也可以通过writerows方法一次写入多条数据.</p>
+<p>如果要写入中文数据,记得修改open的<code>encoding</code>参数</p>
+<p>如果要写入字典的话,需要通过DicWriter类构造一个对象进行写入,该类构造方法需要一个file对象,还需要一个fieldnames参数,这个参数是字典的key值.<br>实例代码:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv
+fieldnames <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">]</span>
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'w'</span><span class="token punctuation">,</span>encodeing<span class="token operator">=</span><span class="token string">'utf8'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> csvfile<span class="token punctuation">:</span>
+    writer <span class="token operator">=</span> csv<span class="token punctuation">.</span>DicWriter<span class="token punctuation">(</span>csvfile<span class="token punctuation">,</span>fieldnames <span class="token operator">=</span> fieldnames<span class="token punctuation">)</span>
+    writer<span class="token punctuation">.</span>writecow<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'韩梅梅'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'114514'</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>另外,也可以使用pandas库的DataFrame对象的to_csv方法将数据写入CSV文件中.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>filename<span class="token operator">=</span>path<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##输出所有li节点</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+data <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'韩梅梅'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'114'</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token punctuation">&#123;</span><span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'李雷'</span><span class="token punctuation">,</span><span class="token string">'grade'</span><span class="token punctuation">:</span><span class="token string">'514'</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>DataFrame<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+df<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span>index <span class="token operator">=</span> <span class="token boolean">False</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="基本CSS选择器"><a href="#基本CSS选择器" class="headerlink" title="基本CSS选择器"></a>基本CSS选择器</h2><p>首先,在CSS选择器中,<code>.</code>表示class属性,<code>#</code>表示id属性.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
+<h2 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h2><p>读取文件需要通过reader构造一个reader对象.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> csv
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>doc<span class="token punctuation">(</span><span class="token string">'#container .item3 span'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">##先选取id为container的节点,再选取内部节点里面class为item1的节点内部为span的节点 既 &lt;span>third&lt;/span>,其类型也是PyQuery类</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="查找节点"><a href="#查找节点" class="headerlink" title="查找节点"></a>查找节点</h2><h3 id="子节点"><a href="#子节点" class="headerlink" title="子节点"></a>子节点</h3><p>find方法返回所有符合要求的子孙节点(子和孙),children方法返回所有满足要求的子节点.</p>
-<h3 id="父节点"><a href="#父节点" class="headerlink" title="父节点"></a>父节点</h3><p>使用parent方法获取某个节点的父节点</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
+<span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">'data.csv'</span><span class="token punctuation">,</span><span class="token string">'r'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token builtin">file</span><span class="token punctuation">:</span>
+    reader <span class="token operator">=</span> csv<span class="token punctuation">.</span>reader<span class="token punctuation">(</span><span class="token builtin">file</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> row <span class="token keyword">in</span> reader<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>row<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'.list'</span><span class="token punctuation">)</span>
-pa <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>parent<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>pa<span class="token punctuation">)</span>
-<span class="token triple-quoted-string string">"""
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-&lt;/div>
-"""</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用parents方法获取某个节点的所有祖先节点,可以传CSS选择器来筛选祖先节点.</p>
-<h3 id="兄弟节点"><a href="#兄弟节点" class="headerlink" title="兄弟节点"></a>兄弟节点</h3><p>使用siblings方法获取某个节点的兄弟节点,可以传CSS选择器来筛选兄弟节点.</p>
-<h2 id="节点遍历"><a href="#节点遍历" class="headerlink" title="节点遍历"></a>节点遍历</h2><h3 id="内容获取"><a href="#内容获取" class="headerlink" title="内容获取"></a>内容获取</h3><p>对于单个节点的PyQuery对象,可以直接输出,如果是多个节点的PyQuery对象,则需要使用items方法将其转换成生成器,再使用for来输出.</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> pyquery <span class="token keyword">import</span> PyQuery <span class="token keyword">as</span> pq
-html <span class="token operator">=</span> <span class="token triple-quoted-string string">'''
-&lt;div id='container'>
-    &lt;li class='list'>first&lt;/li>
-    &lt;li>&lt;a href = 'item2'>second&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item3'>&lt;span>third&lt;/span>&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item4'>fourth&lt;/a>&lt;/li>
-    &lt;li>&lt;a href = 'item5'>fifth&lt;/a>&lt;/li>
-&lt;/div>
-'''</span>
-
-doc <span class="token operator">=</span> pq<span class="token punctuation">(</span>html<span class="token punctuation">)</span>
-<span class="token builtin">list</span> <span class="token operator">=</span> doc<span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span>
-lis <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> each <span class="token keyword">in</span> lis<span class="token punctuation">:</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span>lis<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="属性获取"><a href="#属性获取" class="headerlink" title="属性获取"></a>属性获取</h3><p>使用attr方法获取属性,如果是多个节点的话默认返回第一个节点的属性,所以需要前面的items方法.</p>
-<h3 id="获取文本"><a href="#获取文本" class="headerlink" title="获取文本"></a>获取文本</h3><p>使用text方法获取节点内部的文本(相当于拆掉了外面的标签)</p>
-<h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><table>
-<thead>
-<tr>
-<th align="left">方法</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">removeClass/addClass</td>
-<td align="left">修改class属性</td>
-</tr>
-<tr>
-<td align="left">attr</td>
-<td align="left">增添属性种类及其内容(需要两个参数,一个是属性名,一个是属性值)</td>
-</tr>
-<tr>
-<td align="left">text</td>
-<td align="left">修改文本(同attr)</td>
-</tr>
-<tr>
-<td align="left">html</td>
-<td align="left">直接修改html文件(同attr)</td>
-</tr>
-<tr>
-<td align="left">remove</td>
-<td align="left">移除节点</td>
-</tr>
-</tbody></table>
-<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h2><p>伪类选择器的语法格式:</p>
-<pre class="line-numbers language-none"><code class="language-none">css选择器:选择性质<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>例如</p>
-<pre class="line-numbers language-none"><code class="language-none">li:first-child   第一个li子节点
-li:last-child    最后一个li子节点
-li:nth-child(2)  第二个li子节点
-li:nth-child(2n) 偶数个子节点
-li:contains(second) 包含second文本的子节点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+<p>另外也可以通过pandas库的read_csv方法读取</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pandas
+df <span class="token operator">=</span> pandas<span class="token punctuation">.</span>read_csv<span class="token punctuation">(</span>filename<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token comment">##本质是一个DataFrame对象,类似矩阵</span>
+<span class="token builtin">list</span> <span class="token operator">=</span> df<span class="token punctuation">.</span>values<span class="token punctuation">.</span>to_list<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token comment">##输出的是一个列表</span>
+<span class="token keyword">for</span> index<span class="token punctuation">,</span>row <span class="token keyword">in</span> df<span class="token punctuation">.</span>iterrows<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token comment">##进行遍历</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>row<span class="token punctuation">.</span>tolist<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -521,7 +439,7 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/02/03/pyquery%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/02/08/CSV%E6%96%87%E4%BB%B6/">https://the-tarnished.github.io/2022/02/08/CSV%E6%96%87%E4%BB%B6/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -559,12 +477,8 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/pyquery/">
-                                    <span class="chip bg-color">pyquery</span>
-                                </a>
-                            
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
+                                <a href="/tags/CSV/">
+                                    <span class="chip bg-color">CSV</span>
                                 </a>
                             
                         </div>
@@ -612,70 +526,18 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/02/03/parsel%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <a href="/2022/02/08/CSV%E6%96%87%E4%BB%B6/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.gif" class="responsive-img" alt="parsel的使用">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="CSV文件">
                         
-                        <span class="card-title">parsel的使用</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-03
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/parsel/">
-                        <span class="chip bg-color">parsel</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/02/02/Xpath%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Xpath的使用">
-                        
-                        <span class="card-title">Xpath的使用</span>
+                        <span class="card-title">CSV文件</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -686,7 +548,7 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-08
                             </span>
                         <span class="publish-author">
                             
@@ -700,11 +562,61 @@ li:contains(second) 包含second文本的子节点<span aria-hidden="true" class
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Xpath/">
-                        <span class="chip bg-color">Xpath</span>
+                    <a href="/tags/CSV/">
+                        <span class="chip bg-color">CSV</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/02/04/sklearn%E5%AD%A6%E4%B9%A0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="sklearn学习笔记">
+                        
+                        <span class="card-title">sklearn学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-04
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
+                                    数学建模
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">机器学习</span>
                     </a>
                     
                 </div>

@@ -456,10 +456,70 @@ result <span class="token operator">=</span> html<span class="token punctuation"
 <p>可以使用<code>contains</code>方法,改成<code>//a[contains(class,&#39;item1&#39;)]</code>,那么就能匹配到该文本.</p>
 <h3 id="多属性匹配"><a href="#多属性匹配" class="headerlink" title="多属性匹配"></a>多属性匹配</h3><p>如果我们想要获取的结点要满足多个属性,如既要<code>class=&#39;item1&#39;</code>,而且<code>href=&#39;item2.html&#39;</code>,那么就要使用多属性匹配,示例如下:</p>
 <pre class="line-numbers language-none"><code class="language-none">&#96;&#x2F;&#x2F;a[@class&#x3D;&#39;item1&#39; and @href&#x3D;&#39;item2.htm&#39;]&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>下面是XPath运算符及其解释<br>| 运算符   |   描述          |  示例            |                返回值                                              |<br>| :———-|:————-|:————————-|:——–|<br>| or      |    或        |     class=’item1’ or class=’item2’ | 至少满足一个的结点                                   |<br>| and      |   且       |      class=’item1’ and class=’item2’ | 都满足的结点                                        |<br>| |       |    计算两个节点集  | class=’item1’ | class=’item2’ |   返回所有拥有class=’item1’ 和 class=’item2’的节点集 |</p>
+<p>下面是XPath运算符及其解释</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+<th align="left">返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">or</td>
+<td align="left">或</td>
+<td align="left">class=’item1’ or class=’item2’</td>
+<td align="left">至少满足一个的结点</td>
+</tr>
+<tr>
+<td align="left">and</td>
+<td align="left">且</td>
+<td align="left">class=’item1’ and class=’item2’</td>
+<td align="left">都满足的结点</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">计算两个节点集</td>
+<td align="left">class=’item1’ | class=’item2’</td>
+<td align="left">返回所有拥有class=’item1’ 和 class=’item2’的节点集</td>
+</tr>
+</tbody></table>
 <h2 id="按序选择"><a href="#按序选择" class="headerlink" title="按序选择"></a>按序选择</h2><p>当同时匹配多个节点的时候,如果想要第某一个节点,使用中括号里面加入索引方法(数字代表第几个,last表示最后一个,可以加入布尔表达式,比如position()&lt;4,就是返回第一个,第二个,第三个节点&gt;)就能做到按序选择</p>
 <h2 id="节点轴选择"><a href="#节点轴选择" class="headerlink" title="节点轴选择"></a>节点轴选择</h2><p>节点轴关键字::修饰关键字</p>
-<p>这就是一个节点轴选择的格式<br>| 关键字           |       解释                           |<br>| :—————–|:———————————— |<br>| ancestor          |      获取所有祖先节点               |<br>| attribute        |       获取节点所有属性值             |<br>| child           |        获取所有直接子节点             |<br>| descendant      |        获取所有子孙节点               |<br>| following        |       获取当且节点之后的所有节点     |<br>| following-sibling  |     获取当前节点的所有同级节点 |</p>
+<p>这就是一个节点轴选择的格式</p>
+<table>
+<thead>
+<tr>
+<th align="left">关键字</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ancestor</td>
+<td align="left">获取所有祖先节点</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">获取节点所有属性值</td>
+</tr>
+<tr>
+<td align="left">child</td>
+<td align="left">获取所有直接子节点</td>
+</tr>
+<tr>
+<td align="left">descendant</td>
+<td align="left">获取所有子孙节点</td>
+</tr>
+<tr>
+<td align="left">following</td>
+<td align="left">获取当且节点之后的所有节点</td>
+</tr>
+<tr>
+<td align="left">following-sibling</td>
+<td align="left">获取当前节点的所有同级节点</td>
+</tr>
+</tbody></table>
 
                 
             </div>
@@ -613,6 +673,10 @@ result <span class="token operator">=</span> html<span class="token punctuation"
                     
                     <a href="/tags/pyquery/">
                         <span class="chip bg-color">pyquery</span>
+                    </a>
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
                 </div>
