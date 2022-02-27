@@ -244,7 +244,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + (new Date().getDay() + Math.round(Math.random()*114514))%7 + '.jpg';
+    var bannerUrl = "/medias/banner/" + (new Date().getDay() + Math.round(Math.random()*114514))%8 + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
 </script>
 
@@ -310,20 +310,20 @@
                 </a>
                 
                 
-                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习: 4">
+                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习: 6">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="机器学习" style="background-color: #F8F9F9;">机器学习
-                        <span class="tag-length">4</span>
+                        <span class="tag-length">6</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/" title="数理知识: 5">
+                <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/" title="数理知识: 7">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="数理知识" style="background-color: #82E0AA;">数理知识
-                        <span class="tag-length">5</span>
+                        <span class="tag-length">7</span>
                     </span>
                 </a>
                 
@@ -346,19 +346,19 @@
                 </a>
                 
                 
-                <a href="/tags/Scipy/" title="Scipy: 1">
+                <a href="/tags/Numpy/" title="Numpy: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="Scipy" style="background-color: #85C1E9;">Scipy
+                            data-tagname="Numpy" style="background-color: #85C1E9;">Numpy
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/tags/Numpy/" title="Numpy: 1">
+                <a href="/tags/Scipy/" title="Scipy: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            data-tagname="Numpy" style="background-color: #F8C471;">Numpy
+                            data-tagname="Scipy" style="background-color: #F8C471;">Scipy
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -382,15 +382,6 @@
                 </a>
                 
                 
-                <a href="/tags/parsel/" title="parsel: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            data-tagname="parsel" style="background-color: #85C1E9;">parsel
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/tags/logisim/" title="logisim: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-active "
@@ -404,6 +395,15 @@
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
                             data-tagname="P0" style="background-color: #82E0AA;">P0
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/parsel/" title="parsel: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="parsel" style="background-color: #85C1E9;">parsel
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -731,16 +731,17 @@ $(function () {
     
 
     
-
-    <!-- 雪花特效 -->
-     
+        
         <script type="text/javascript">
             // 只在桌面版网页启用特效
             var windowWidth = $(window).width();
             if (windowWidth > 768) {
-                document.write('<script type="text/javascript" src="/libs/others/snow.js"><\/script>');
+                document.write('<script type="text/javascript" src="/libs/others/sakura-small.js"><\/script>');
             }
         </script>
+    
+
+    <!-- 雪花特效 -->
     
 
     <!-- 鼠标星星特效 -->

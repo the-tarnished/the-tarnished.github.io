@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>马尔科夫链蒙特卡洛法学习笔记</title>
+      <link href="/2022/02/17/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2022/02/17/%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="马尔科夫链蒙特卡洛法"><a href="#马尔科夫链蒙特卡洛法" class="headerlink" title="马尔科夫链蒙特卡洛法"></a>马尔科夫链蒙特卡洛法</h1><h2 id="蒙特卡洛法"><a href="#蒙特卡洛法" class="headerlink" title="蒙特卡洛法"></a>蒙特卡洛法</h2><h3 id="抽样方法"><a href="#抽样方法" class="headerlink" title="抽样方法"></a>抽样方法</h3><p>蒙特卡洛法的抽样方法本质就是一个间接抽样方法,比如目标分布<code>p(x)</code>不可以直接抽样,但是<code>q(x)</code>容易抽样,那么可以设定$a(x) = \frac{p(x)}{q(x)}$为拒绝分布,堆<code>q(x)</code>的分布进行抽样,然后再以<code>a(x)</code>的概率接受这次抽样,<code>1-a(x)</code>的概率拒绝抽样,这么最后的结果就是分布<code>p(x)</code>.</p><p>也叫<strong>接受-拒绝抽样法</strong></p><h3 id="数学期望估计"><a href="#数学期望估计" class="headerlink" title="数学期望估计"></a>数学期望估计</h3><p>$$E_{p(x)}[f(x)] =\underset{n \rightarrow \infty }{\lim}  \frac{1}{n}\displaystyle \sum_{i=1}^n f(x_i)$$</p><p><code>p(x)</code>是概率密度函数,<code>f(x)</code>是定义在<em>X</em>上的函数,抽取n个样本$x_1,…,x_n$,计算出样本均值$\bar f_n =\frac{1}{n}\displaystyle \sum_{i=1}^n f(x_i)$</p><h3 id="积分计算"><a href="#积分计算" class="headerlink" title="积分计算"></a>积分计算</h3><p>用样本均值的计算代替积分运算.如果$h(x) = f(x)p(x)$,那么$\int_xh(x) d(x) = \int_xf(x)p(x) d(x) = E_{p(x)}[f(x)]$</p><h2 id="马尔科夫链"><a href="#马尔科夫链" class="headerlink" title="马尔科夫链"></a>马尔科夫链</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>满足下列性质的随机序列称为n阶马尔科夫链.<br>$$P(X_t|X_0,…,X_{t-1}) = P(X_t|X_{t-1}…X_{t-n})$$<br>其中n=1称为一阶马尔可夫</p><h3 id="离散状态马尔科夫链"><a href="#离散状态马尔科夫链" class="headerlink" title="离散状态马尔科夫链"></a>离散状态马尔科夫链</h3><p>离散状态马尔科夫链$X={X_0,…X_n}$,随机变量$X_t$定义在离散空间S中,转移概率分布可以由矩阵表示.<br>$$P = (p_{ij}) = P(X_t=i|X_{t-1} = j)$$<br>且$\displaystyle \sum p_{ij} = 1$<br>考虑马尔科夫链在时刻t的概率分布称为<strong>时刻t的状态分布</strong>,记作<br>$$\pi(t) = \begin{bmatrix}<br>    \pi_1(t)\<br>    \vdots\<br>    \pi_n(t)<br>\end{bmatrix}$$<br>其中$\pi_i(t) = P(X_t = i)$<br>如果在状态空间S上存在这样一个分布:<br>$$\pi = P\pi$$<br>则称$\pi$为马尔科夫链X的平稳分布,其意义是以平稳分布作为起始分布,那么之后任何一个时刻都是该平稳分布.</p><h3 id="连续状态的马尔科夫链"><a href="#连续状态的马尔科夫链" class="headerlink" title="连续状态的马尔科夫链"></a>连续状态的马尔科夫链</h3><p>连续状态马尔科夫链$X = {X_0,…,X_n}$随机变量$X_t$定义在连续空间S,转移概率分布由概率转移或转移核表示.<br>设S是连续空间,对任意$x \in S, A \subset S$,转移核P(x,A)表示$P(X_t \subset A | X_{t-1} = x )$定义为<br>$$P(x,A) = \int_A p(x,y)dy$$<br>同理,其也有平稳分布.<br>$$\pi(y) = \int p(x,y)\pi(x)dx$$</p><h3 id="马尔可夫链的性质"><a href="#马尔可夫链的性质" class="headerlink" title="马尔可夫链的性质"></a>马尔可夫链的性质</h3><h4 id="不可约"><a href="#不可约" class="headerlink" title="不可约"></a>不可约</h4><p>对于任意$i,j \in S$,存在t, $s.tP(X_t = i | X_{t-1} = j) \gt 0$</p><h4 id="非周期"><a href="#非周期" class="headerlink" title="非周期"></a>非周期</h4><p>对任意$i \in S$,如果时刻0从i出发,t时刻返回i状态的所有市场的最大公约数为1,则称其为<strong>非周期</strong>的,否则称其为<strong>周期</strong>的.</p><h4 id="正常返"><a href="#正常返" class="headerlink" title="正常返"></a>正常返</h4><p>对于任意$i,j \in S$,,定义概率$p_{ij}^t = P(X_t = i,X_s \ne i,s = 1,…,t-1|X_0 = j)$,若对所有状态i,j满足$\underset{t \rightarrow \infty}{lim}p_{ij}^t \gt 0$,则称马尔科夫链X是正常返的</p><h4 id="遍历性质"><a href="#遍历性质" class="headerlink" title="遍历性质"></a>遍历性质</h4><p>如果马尔可夫链X是不可约的,非周期的,正常返的,则该马尔科夫链由唯一平稳分布$\pi$,并且转移概率的极限分布是马尔科夫链的平稳分布.<br>$$\underset{t \rightarrow \infty }{lim}P(X_t = i |X_0 =j) = \pi_i$$<br>####　可逆马尔可夫链<br>如果对于马尔科夫链X的任意一个时刻皆有<br>$$P(X_t |X_{t-1} =j)\pi_j = P(X_{t-1} = j|X_t = i)\pi_i(细致平衡方程)$$<br>则称起为可逆的.</p><h2 id="马尔科夫链蒙特卡洛法-1"><a href="#马尔科夫链蒙特卡洛法-1" class="headerlink" title="马尔科夫链蒙特卡洛法"></a>马尔科夫链蒙特卡洛法</h2><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>假设多元随机变量x,满足$x \in X$,其概率分布为p(x),f(x)是定义在$x \in X$上的函数,求概率分布p(x)的样本集合,以及函数f(x)的数学期望.<br>马尔科夫链蒙特卡洛法的基本思路是:</p><ul><li>定义一个满足遍历定理的马尔科夫链,使其平稳分布为抽样的目标分布</li><li>在该马尔科夫链上随机游走,由遍历性质可得在足够长时间之后,样本的分布趋近平稳分布,样本的函数均值接近函数的数学期望.</li></ul><p>算法的难点是找到这个马尔科夫链.</p><p>这个算法满足遍历定理,所以起始位置对结果没有影响.<br>对于最后的收敛,可以多次游走之后判断收敛值是否相同,或者多个点同时多次游走,判断是否相同.</p><h2 id="Metropois-Hastings算法"><a href="#Metropois-Hastings算法" class="headerlink" title="Metropois-Hastings算法"></a>Metropois-Hastings算法</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>该原理类似接受拒绝抽样法.<br>假设要抽样的概率分布为p(x),该算法采用转移核为$p(x,x^\prime)$的马尔科夫链:<br>$$p(x,x^\prime) = q(x,x^\prime)\alpha(x,x^\prime)$$<br>其中$q(x,x^\prime)$和$\alpha(x,x^\prime)$分别称为建议分布和接受分布.</p><p>建议分布$q(x,x^\prime)$是另一个马尔科夫链的转移核,并且其是不可约的,即其概率值恒不为0,同时,这个分布是一个容易抽样的分布.接受分布则是<br>$$\alpha(x,x^\prime) = \text min(1,\frac{p(x^\prime)q(x^\prime,x)}{p(x)q(x,x^\prime)})$$<br>若$p(x^\prime)q(x^\prime,x) \gt p(x)q(x,x^\prime)$,则<br>$$ \begin{aligned} p(x)p(x,x^\prime) &amp;= p(x)q(x,x^\prime)= q(x,x^\prime)p(x^\prime)\frac{p(x)q(x^\prime,x)}{p(x^\prime)q(x^\prime,x)}  \<br>    &amp;= p(x^\prime)q(x^\prime,x)\alpha(x^\prime,x)\<br>    &amp;= p(x^\prime)p(x^\prime,x)<br>\end{aligned}$$</p><p>若$p(x^\prime)q(x^\prime,x) \lt p(x)q(x,x^\prime)$,则<br>$$<br>\begin{aligned}<br>    p(x)p(x,x^\prime) &amp;= p(x)q(x,x^\prime)\frac{p(x^\prime)q(x^\prime,x)}{p(x)q(x,x^\prime)}\<br>    &amp;=p(x^\prime)q(x^\prime,x)\<br>    &amp;=p(x^\prime)q(x^\prime,x)\alpha((x^\prime,x)\<br>    &amp;=p(x^\prime)p(x^\prime,x)<br>\end{aligned}<br>$$<br>综上,$p(x,x^\prime)$是可逆的.</p><h3 id="建议分布"><a href="#建议分布" class="headerlink" title="建议分布"></a>建议分布</h3><p>建议分布的常用形式:</p><ul><li>第一种形式:建议分布是对称的,有$q(x,x^\prime) = q(x^\prime,x)$.</li><li><ul><li>特例之一是取条件概率分布$q(x,x^\prime) = p(x^\prime|x)$</li></ul></li><li><ul><li>特例之二是令$q(x,x^\prime) = q(|x-x^\prime|)$,称为随机游走的<code>Metropolis</code>算法</li></ul></li><li>第二种形式:独立抽样,假设$q(x,x^\prime)$与当前状态无关,建议分布按照$q(x^\prime)$独立抽样进行.</li></ul><h3 id="满条件分布"><a href="#满条件分布" class="headerlink" title="满条件分布"></a>满条件分布</h3><p>对于多元联合概率分布$p(x) = p(x_1,…,x_k)$,其中x为k维随机变量.如果条件概率分布$p(x_I|x_{-I})$中所有k个变量全部出现,其中$x_I = {x_i,i\in I},x_{-I} = {x_i,i\not\in I},I \subset K = {1,…,k}$,那么称这总条件概率分布维满条件分布.</p><p>它有一下性质:<br>$$p(x_I|x_{-I}) = \frac{p(x)}{\int p(x)dx_i} \propto p(x)$$<br>另有<br>$$\frac{p(x_I^\prime|x_{-I}^\prime)}{p(x_I|x_{-I})} = \frac{p(x^\prime)}{p(x)}$$<br>其意义是通过计算满条件概率的bi来计算联合概率的比,而前者更容易计算.</p><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>输入:抽样的目标分布的密度函数p(x),函数f(x)<br>输出:p(x)的随机抽样样本$x_{m+1},…,x_ {n}$,函数样本均值$f_{mn}$<br>参数:收敛步数m,迭代步数n.</p><ol><li>任意选择一个$x_0$作为起始状态.</li><li>对i=1,…,n进行循环执行</li></ol><ul><li>设状态$x_{i-1} = x$,按照建议分布$q(x,x^\prime)$随机抽样一个候选状态$x^\prime$</li><li>计算接受概率$\alpha(x,x^\prime)$</li><li>从区间[0,1]中按照均匀分布随机抽取一个数,若$u \leq \alpha(x,x^\prime)$则接受,反之则拒绝</li></ul><ol start="3"><li>得到样本集合$x_{m+1},…,x_{n}$</li></ol><h3 id="单分量的M-H算法"><a href="#单分量的M-H算法" class="headerlink" title="单分量的M-H算法"></a>单分量的M-H算法</h3><p>对于多元变量分布的抽样是困难的,所以对多元变量的每一变量的条件分布一次分别进行抽样,从而实现对整个多元变量的一次抽样,这就是但分量<code>M-H</code>算法.</p><p>假设马尔科夫链的状态有k维随机变量表示<br>$$x = (x_1,…,x_k)^T$$<br>其中$x_j$表示变量x的第j个分量,$x^i$表示在时刻i的状态.</p><p>为了生成容量为n的样本集合${x^1,…,x^n}$,单分量<code>M-H</code>算法由下面的k步迭代实现一次迭代.</p><p>设在第(i-1)次迭代结束时分量$x_j$的取值时$x_j^{i-1}$,在第i次迭代的第j步,对分量$x_j$更加<code>M-H</code>算法更新,得到其新的取值$x_j^i$.</p><ul><li>由建议分布$q(x_j^{i-1},x_j^i|x_{-j}^i)$抽样产生分量的候选值$x_j^i$,这里的$x_{-j}^i$表示第i次迭代的第(j-1)步后的$x_i$出去$x_j^{i-1}$的所有值,即<br>$$x_{-j}^i = (x_1^i,…,x_{j-1}^i,x_{j+1}^{i-1},…,x_k^{i-1})$$</li><li>根据接受概率$\alpha(x_j^{i-1},x_j^{i}|x_{-j}^i) = \text min(1,\frac{p(x_j^i|x_{-j}^i)q(x_j^i,x_j^{i-1}|x_{-j}^i)}{p(x_j^{i-1}|x_{-j}^i)q(x_j^{i-1},x_j^{i}|x_{-j}^i)})$ 抽样决定是否接受</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 数理知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>聚类方法学习</title>
+      <link href="/2022/02/13/%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2022/02/13/%E8%81%9A%E7%B1%BB%E6%96%B9%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="聚类方法"><a href="#聚类方法" class="headerlink" title="聚类方法"></a>聚类方法</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>聚类和分类的区别就是分类是提供了分类结果的,我们的目标是根据结果推原因,也就是执果索因,聚类我们是没有分类结果的,模型需要通过评价方法来判断那些是一类,那些不是一类,也就是执因索果</p><h3 id="相似度或距离"><a href="#相似度或距离" class="headerlink" title="相似度或距离"></a>相似度或距离</h3><p>距离是判断样本间相似度的重要依据,以下是主要几种相似度的判断方式.</p><h4 id="闵氏距离"><a href="#闵氏距离" class="headerlink" title="闵氏距离"></a>闵氏距离</h4><p>具体见<a href="https://the-tarnished.github.io/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">多元分析</a></p><h4 id="马氏距离"><a href="#马氏距离" class="headerlink" title="马氏距离"></a>马氏距离</h4><p>$$d_{ij} = [(x_i-x_j)^TS^{-1}(x_i-x_j)]^{\frac{1}{2}}$$<br>当<code>S</code>是单位矩阵的时候,马氏距离就是欧氏距离,可见马氏距离是欧氏距离的推广.</p><h4 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h4><p>$$r_{ij} = \frac{\displaystyle \sum_{k=1}^m(x_{ki}-\bar x_i)(x_{kj}-\bar x_j)}{[\displaystyle \sum_{k=1}^m(x_{ki}-\bar x_i)^2\displaystyle \sum_{k=1}^m(x_{kj}-\bar x_j)^2]^{\frac{1}{2}}}$$<br>其中<br>$$\bar x_i = \frac{1}{m}\displaystyle \sum_{k=1}^mx_{ki},\qquad\bar x_j = \frac{1}{m}\displaystyle \sum_{k=1}^mx_{kj}$$</p><h4 id="夹角余弦"><a href="#夹角余弦" class="headerlink" title="夹角余弦"></a>夹角余弦</h4><p>夹角余弦越接近1,表示相似度越高,反之,相似度越低.<br>$$s_{ij} = \frac{\displaystyle \sum_{k=1}^m x_{ki}x_{kj}}{\displaystyle \sum_{k=1}^m x_{ki}^2\displaystyle \sum_{k=1}^m x_{kj}^2}$$</p><h3 id="类或簇"><a href="#类或簇" class="headerlink" title="类或簇"></a>类或簇</h3><p>可以理解为样本的子集,子集内部的元素之间的距离小于外部元素和内部元素之间的距离.</p><h2 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h2><p>层次聚类需要三个因素:</p><ul><li>距离或者相似度度量选择</li><li>合并的规则(类和类之间的合并度量)</li><li>停止条件(合并的停止条件,一般都是类的总数达到了目标要求)</li></ul><h2 id="k均值聚类-k-means算法"><a href="#k均值聚类-k-means算法" class="headerlink" title="k均值聚类(k-means算法)"></a>k均值聚类(k-means算法)</h2><p>定义样本预期所属类的中心之间的距离总和为损失函数,即<br>$$W(C) = \displaystyle \sum_{l = 1}^k \displaystyle \sum_{C(i)=l} ||x_i - \bar x_l||^2$$</p><h3 id="具体算法"><a href="#具体算法" class="headerlink" title="具体算法"></a>具体算法</h3><p>可见scipy学习笔记中cluster类内的解释.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 数理知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Logistic回归和最大熵模型</title>
       <link href="/2022/02/12/Logistic%E5%9B%9E%E5%BD%92%E5%92%8C%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/"/>
       <url>/2022/02/12/Logistic%E5%9B%9E%E5%BD%92%E5%92%8C%E6%9C%80%E5%A4%A7%E7%86%B5%E6%A8%A1%E5%9E%8B/</url>
@@ -35,7 +89,7 @@
       <link href="/2022/02/11/k%E8%BF%91%E9%82%BB%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2022/02/11/k%E8%BF%91%E9%82%BB%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       
-        <content type="html"><![CDATA[<h1 id="k近邻法"><a href="#k近邻法" class="headerlink" title="k近邻法"></a>k近邻法</h1><h2 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h2><p>K近邻算法<code>(KNN,k-nearest,neighbor)</code>给定训练集,对于新输入的实例找到离它最近的<code>k</code>个点,然后根据多数表决原则判断新的实例的类别.</p><p>距离的度量有不同的方法,总结起来就是闵氏距离(可见多元分析中的介绍).</p><p>为了精确分类,k的取值有讲究,太小会导致整体模型复杂,容易发生过拟合(噪声的影响会突出),如果太多,则会导致误差变大,一般通过交叉验证来取最优的k值.</p><h2 id="kd树"><a href="#kd树" class="headerlink" title="kd树"></a>kd树</h2><p>对于多个点,如果暴力枚举会导致复杂度太高,kd树能有效降低算法复杂度(特别是点的个数远大于维数的时候).</p><h3 id="kd树的构造"><a href="#kd树的构造" class="headerlink" title="kd树的构造"></a>kd树的构造</h3><ul><li>选择某一个维度$x^{(1)}$为起点构造根节点,以T中所有实例在$x^{(1)}$维度的中位数为切分点,将其分成两个子区域.</li><li>对于每一个子区域,对于深度为j的节点,取维度$x^{(l)}(l = j(mod)k+1,k是维度)$为根节点,该区域中所有实例中中位数为切分点,分成两个区域.</li><li>如果子区域为空则停止切分.</li></ul><h3 id="kd树的查找"><a href="#kd树的查找" class="headerlink" title="kd树的查找"></a>kd树的查找</h3><p>类似平衡二叉树,左子树是小于切分点的点,右子树是大于切分点的点.</p><h3 id="kd树的搜索"><a href="#kd树的搜索" class="headerlink" title="kd树的搜索"></a>kd树的搜索</h3><p>对于新输入点寻找最近邻</p><ul><li>按照查找的逻辑向下递归到叶节点,令<code>当前最近点</code>为该节点</li><li>递归向上回退,对于每一个结点做下列判断</li><li><ul><li>如果该结点比<code>当前最近点</code>离新输入点更近,则该点为<code>当前最近点</code></li></ul></li><li><ul><li>若该结点的子节点为<code>当前最近点</code>,检查该结点的另一个子区域是否与<code>以目标点为半径,当前最近点与目标点长度为半径的超球体相交</code>,如果相交则检查另一个子区域是否有更近的点.</li></ul></li><li>退回到根节点,算法结束.</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="k近邻法"><a href="#k近邻法" class="headerlink" title="k近邻法"></a>k近邻法</h1><h2 id="算法介绍"><a href="#算法介绍" class="headerlink" title="算法介绍"></a>算法介绍</h2><p>K近邻算法<code>(KNN,k-nearest,neighbor)</code>给定训练集,对于新输入的实例找到离它最近的<code>k</code>个点,然后根据多数表决原则判断新的实例的类别.</p><p>距离的度量有不同的方法,总结起来就是闵氏距离<a href="https://the-tarnished.github.io/2022/01/29/%E5%A4%9A%E5%85%83%E5%88%86%E6%9E%90/">(可见多元分析中的介绍)</a>.</p><p>为了精确分类,k的取值有讲究,太小会导致整体模型复杂,容易发生过拟合(噪声的影响会突出),如果太多,则会导致误差变大,一般通过交叉验证来取最优的k值.</p><h2 id="kd树"><a href="#kd树" class="headerlink" title="kd树"></a>kd树</h2><p>对于多个点,如果暴力枚举会导致复杂度太高,kd树能有效降低算法复杂度(特别是点的个数远大于维数的时候).</p><h3 id="kd树的构造"><a href="#kd树的构造" class="headerlink" title="kd树的构造"></a>kd树的构造</h3><ul><li>选择某一个维度$x^{(1)}$为起点构造根节点,以T中所有实例在$x^{(1)}$维度的中位数为切分点,将其分成两个子区域.</li><li>对于每一个子区域,对于深度为j的节点,取维度$x^{(l)}(l = j(mod)k+1,k是维度)$为根节点,该区域中所有实例中中位数为切分点,分成两个区域.</li><li>如果子区域为空则停止切分.</li></ul><h3 id="kd树的查找"><a href="#kd树的查找" class="headerlink" title="kd树的查找"></a>kd树的查找</h3><p>类似平衡二叉树,左子树是小于切分点的点,右子树是大于切分点的点.</p><h3 id="kd树的搜索"><a href="#kd树的搜索" class="headerlink" title="kd树的搜索"></a>kd树的搜索</h3><p>对于新输入点寻找最近邻</p><ul><li>按照查找的逻辑向下递归到叶节点,令<code>当前最近点</code>为该节点</li><li>递归向上回退,对于每一个结点做下列判断</li><li><ul><li>如果该结点比<code>当前最近点</code>离新输入点更近,则该点为<code>当前最近点</code></li></ul></li><li><ul><li>若该结点的子节点为<code>当前最近点</code>,检查该结点的另一个子区域是否与<code>以目标点为半径,当前最近点与目标点长度为半径的超球体相交</code>,如果相交则检查另一个子区域是否有更近的点.</li></ul></li><li>退回到根节点,算法结束.</li></ul>]]></content>
       
       
       <categories>
@@ -553,31 +607,6 @@
     
     
     <entry>
-      <title>爬虫基础</title>
-      <link href="/2022/01/16/the_principle_of_crawler/"/>
-      <url>/2022/01/16/the_principle_of_crawler/</url>
-      
-        <content type="html"><![CDATA[<h1 id="一、爬虫的基本原理"><a href="#一、爬虫的基本原理" class="headerlink" title="一、爬虫的基本原理"></a>一、爬虫的基本原理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>爬虫就是假装浏览器爬取网页并获取信息.</p><h2 id="爬取数据类型"><a href="#爬取数据类型" class="headerlink" title="爬取数据类型"></a>爬取数据类型</h2><ul><li>最常见的就是爬虫能爬取JSON形式的HTML代码.</li><li>对于js,css等文件,需分析源代码后台Ajax接口,或者使用<code>Selenium</code>,<code>Splash</code>,<code>Pyppeteer</code>,<code>Playwright</code>等库来模拟js渲染.<h1 id="二、Session-和-Cookie"><a href="#二、Session-和-Cookie" class="headerlink" title="二、Session 和 Cookie"></a>二、Session 和 Cookie</h1><h2 id="无状态HTTP-查询wink状态"><a href="#无状态HTTP-查询wink状态" class="headerlink" title="无状态HTTP (#查询wink状态)"></a>无状态HTTP <del>(#查询wink状态)</del></h2>HTTP对无状态表示HTTP协议对于事务处理没有记忆能力,也就是说服务器并不知道客户端处于什么状态.这意味着如果需要处理前面的信息,客户端必须重传,造成资源浪费.所以,服务器端会保存一个<code>Session</code>,客户端保存一个<code>Cookie</code>,通过这两个凭证,服务器才能做出相应响应.<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2>Web中,Session对象用来存储特定用户是所需的属性和配置信息.这样用户再响应的网页跳转时,存储在Session中的信息不丢失.如果Session过期或者没有Session,服务器会创建一个Session.<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2>见<a href="the_principle_of_HTTP.md">HTTP原理</a><h2 id="Session维持"><a href="#Session维持" class="headerlink" title="Session维持"></a>Session维持</h2>客户端第一次请求服务器的时候,服务器会返回一个<code>Set_Cookie</code>.客户端保存响应字符串,并在之后的请求中带上<code>Cookie</code>.<code>Cookie</code>中保存着响应的<code>SessionID</code>,服务器通过查询<code>SessionID</code>来找到对应<code>Session</code>,进而判断用户状态.<h2 id="Cookie的属性结构"><a href="#Cookie的属性结构" class="headerlink" title="Cookie的属性结构"></a>Cookie的属性结构</h2>在浏览器中打开<code>Application</code>选项卡,<code>Storage</code>最后一项就是<code>Cookie</code>.</li><li><strong>Name</strong>: <code>Cookie</code>名称</li><li><strong>Value</strong>:<code>Cookie</code>的值,如果是<code>Unicode</code>字符则需要字符编码,如果是二进制数据,则是<code>BASE64</code>编码.</li><li><strong>Domain</strong>:指定可以访问该<code>Cookie</code>的域名.表示该<code>Cookie</code>的可用范围.</li><li><strong>Path</strong>:<code>Cookie</code>的使用路径.如果是/path/,则表示只在该路径可用,如果是/则表示在该<code>Domain</code>下都可用.</li><li><strong>Size</strong>:表示<code>Cookie</code>的大小.</li><li><strong>HTTP</strong>:<code>Cookie</code>的<code>httponly</code>属性,如果是<code>True</code>,则表示只有在<code>HTTP Headers</code>中才含有此<code>Cookie</code>,而不能使用<code>document.cookie</code>来访问此<code>Cookie</code>.</li><li><strong>Secure</strong>:是否允许使用安全协议传输<code>Cookie</code>.<h2 id="会话Cookie和持久Cookie"><a href="#会话Cookie和持久Cookie" class="headerlink" title="会话Cookie和持久Cookie"></a>会话Cookie和持久Cookie</h2>会话<code>Cookie</code>和持久<code>Cookie</code>本质只是Cookie存储的位置不同,一个是存在缓存,一个是存在硬盘.持久<code>Cookie</code>的有效期很久,所以可以在下次登录的时候直接使用硬盘中的<code>Cookie</code>.<h1 id="三、代理的基本原理"><a href="#三、代理的基本原理" class="headerlink" title="三、代理的基本原理"></a>三、代理的基本原理</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2>代理本名代理服务器(<code>Proxy Server</code>),功能是代网络用户获得信息.客户端把请求发给代理服务器,代理服务器再把请求发给服务器.响应在经过代理服务器返回给客户端.在这个过程中服务器接受到的是代理服务器的<code>IP</code>.<h2 id="代理的作用"><a href="#代理的作用" class="headerlink" title="代理的作用"></a>代理的作用</h2></li><li>突破IP访问限制,访问一些访问不到的站点 <del>(科学上网)</del></li><li>访问一些单位或者团队的内部资源 (校园VPN)</li><li>提高访问速度.代理服务器一般都有一个较大的硬盘缓冲区,可以保存数据.如果其他用户访问,可以直接把这些数据给用户(类似<code>cache</code>)</li><li>隐藏真实的IP,保护个人信息.<h2 id="爬虫代理"><a href="#爬虫代理" class="headerlink" title="爬虫代理"></a>爬虫代理</h2>爬虫爬取速度过快,服务器检测到一个IP地址行为异常会直接封锁IP.使用代理,爬虫就会认为是代理服务器在访问自己,通过切换代理就能防止被发现.<h2 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h2><h3 id="根据协议区分"><a href="#根据协议区分" class="headerlink" title="根据协议区分"></a>根据协议区分</h3></li><li>FTP代理,访问FTP服务器,主要端口是21和2121</li><li>HTTP代理 访问HTTP服务器,主流的代理,端口是80和8080</li><li>SSL/TLS代理 主要访问加密网站,一般有SSL和TLS加密功能,端口一般是443</li><li>RTSP代理 主要用于Realplayer访问Real流服务器,端口一般是554</li><li>Telnet代理 主要用于Telnet远程控制(黑客Ddos攻击时隐藏身份),一般端口时23</li><li>POP3/SMTP代理 主要用于以POP3/SMTP发送邮件,具有缓存功能,端口一般是110/25</li><li>SOCKS代理 单纯传递数据包,不关心协议和用法,一般有缓存功能,端口一般是1080.SOCK代理分为SOCKS4和SOCKS5.SOCKS4只支持TCP,SOCKS支持TCP和UDP,还支持身份验证机制,服务器端域名解析等.<h3 id="根据匿名程度区分"><a href="#根据匿名程度区分" class="headerlink" title="根据匿名程度区分"></a>根据匿名程度区分</h3></li><li>高度匿名代理 将数据包原封不动转发,在服务端看来就是一个普通客户端,记录的是代理的IP</li><li>普通匿名代理 会对数据包做一些处理,服务端可能发现这是一个代理,然后追查客户端的真实IP.这种代理通常会加入的HTTP头有HTTP_VIA,HTTP_X_FORWARDED_FOR</li><li>透明代理 该种代理不仅会更改数据包,还会告诉服务器真实IP,主要用于过滤数据包,常用于内网防火墙.</li><li>间谍代理 常见于组织或者个人创建的代理服务器,用于记录用户传输的数据,然后对传输数据进行研究和监控.<h3 id="常见代理设置"><a href="#常见代理设置" class="headerlink" title="常见代理设置"></a>常见代理设置</h3></li><li>网上的免费代理,建议全部抓取下来一个个筛选,然后维护代理池.</li><li>付费代理</li><li>ADSL拨号,昂贵但是稳定性高</li><li>蜂窝代理 即使用4G/5G网卡等制作的代理.该代理情形较小,封锁概念低,但是成本高.<h1 id="四、多线程和多进程的基本原理"><a href="#四、多线程和多进程的基本原理" class="headerlink" title="四、多线程和多进程的基本原理"></a>四、多线程和多进程的基本原理</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2>进程可以理解为独立运行的程序单位.比如打开浏览器.<br>线程是进程中的多个任务,比如浏览器打开之后访问网址,加载网页,看视频能同时进行.这就是多线程<h2 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h2></li><li>并发:指多个线程对应的多条指令被快速轮换地执行.人宏观上感受不到进程切换,感觉是一起执行</li><li>并行:指同一时刻有多条指令在多个处理器上同时执行.宏观和微观上都是并行.<h2 id="多线程的爬虫应用场景"><a href="#多线程的爬虫应用场景" class="headerlink" title="多线程的爬虫应用场景"></a>多线程的爬虫应用场景</h2>爬虫在向服务器发送请求等待响应的时间内可以处理其他线程.<h2 id="Python中的多线程"><a href="#Python中的多线程" class="headerlink" title="Python中的多线程"></a>Python中的多线程</h2>Python中GIL(Global Interpreter Lock)的限制导致同一时刻下只可能进行一个线程,无法发挥多核并行的优势.所以不可能并行,只能并发.<h3 id="Python多线程下每个线程的执行方式"><a href="#Python多线程下每个线程的执行方式" class="headerlink" title="Python多线程下每个线程的执行方式:"></a>Python多线程下每个线程的执行方式:</h3></li><li>获取GIL</li><li>执行代码</li><li>释放GIL<br>Python多进程效果强于多线程.因为每一个进程都有自己的GIL,互不干扰.而多线程需要频繁切换GIL,反而减慢速度.</br><br>可见大佬博客学习</br><blockquote><p>python多线程:<a href="https://cuiqingcai.com/3325.html">https://cuiqingcai.com/3325.html</a></br><br>python多进程:<a href="https://cuiqingcai.com/3335.html">https://cuiqingcai.com/3335.html</a></br></p></blockquote></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 爬虫学习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> spider </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Requests的使用</title>
       <link href="/2022/01/16/the_use_of_requests/"/>
       <url>/2022/01/16/the_use_of_requests/</url>
@@ -595,6 +624,31 @@
         <tags>
             
             <tag> python </tag>
+            
+            <tag> spider </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>爬虫基础</title>
+      <link href="/2022/01/16/the_principle_of_crawler/"/>
+      <url>/2022/01/16/the_principle_of_crawler/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一、爬虫的基本原理"><a href="#一、爬虫的基本原理" class="headerlink" title="一、爬虫的基本原理"></a>一、爬虫的基本原理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>爬虫就是假装浏览器爬取网页并获取信息.</p><h2 id="爬取数据类型"><a href="#爬取数据类型" class="headerlink" title="爬取数据类型"></a>爬取数据类型</h2><ul><li>最常见的就是爬虫能爬取JSON形式的HTML代码.</li><li>对于js,css等文件,需分析源代码后台Ajax接口,或者使用<code>Selenium</code>,<code>Splash</code>,<code>Pyppeteer</code>,<code>Playwright</code>等库来模拟js渲染.<h1 id="二、Session-和-Cookie"><a href="#二、Session-和-Cookie" class="headerlink" title="二、Session 和 Cookie"></a>二、Session 和 Cookie</h1><h2 id="无状态HTTP-查询wink状态"><a href="#无状态HTTP-查询wink状态" class="headerlink" title="无状态HTTP (#查询wink状态)"></a>无状态HTTP <del>(#查询wink状态)</del></h2>HTTP对无状态表示HTTP协议对于事务处理没有记忆能力,也就是说服务器并不知道客户端处于什么状态.这意味着如果需要处理前面的信息,客户端必须重传,造成资源浪费.所以,服务器端会保存一个<code>Session</code>,客户端保存一个<code>Cookie</code>,通过这两个凭证,服务器才能做出相应响应.<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2>Web中,Session对象用来存储特定用户是所需的属性和配置信息.这样用户再响应的网页跳转时,存储在Session中的信息不丢失.如果Session过期或者没有Session,服务器会创建一个Session.<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2>见<a href="the_principle_of_HTTP.md">HTTP原理</a><h2 id="Session维持"><a href="#Session维持" class="headerlink" title="Session维持"></a>Session维持</h2>客户端第一次请求服务器的时候,服务器会返回一个<code>Set_Cookie</code>.客户端保存响应字符串,并在之后的请求中带上<code>Cookie</code>.<code>Cookie</code>中保存着响应的<code>SessionID</code>,服务器通过查询<code>SessionID</code>来找到对应<code>Session</code>,进而判断用户状态.<h2 id="Cookie的属性结构"><a href="#Cookie的属性结构" class="headerlink" title="Cookie的属性结构"></a>Cookie的属性结构</h2>在浏览器中打开<code>Application</code>选项卡,<code>Storage</code>最后一项就是<code>Cookie</code>.</li><li><strong>Name</strong>: <code>Cookie</code>名称</li><li><strong>Value</strong>:<code>Cookie</code>的值,如果是<code>Unicode</code>字符则需要字符编码,如果是二进制数据,则是<code>BASE64</code>编码.</li><li><strong>Domain</strong>:指定可以访问该<code>Cookie</code>的域名.表示该<code>Cookie</code>的可用范围.</li><li><strong>Path</strong>:<code>Cookie</code>的使用路径.如果是/path/,则表示只在该路径可用,如果是/则表示在该<code>Domain</code>下都可用.</li><li><strong>Size</strong>:表示<code>Cookie</code>的大小.</li><li><strong>HTTP</strong>:<code>Cookie</code>的<code>httponly</code>属性,如果是<code>True</code>,则表示只有在<code>HTTP Headers</code>中才含有此<code>Cookie</code>,而不能使用<code>document.cookie</code>来访问此<code>Cookie</code>.</li><li><strong>Secure</strong>:是否允许使用安全协议传输<code>Cookie</code>.<h2 id="会话Cookie和持久Cookie"><a href="#会话Cookie和持久Cookie" class="headerlink" title="会话Cookie和持久Cookie"></a>会话Cookie和持久Cookie</h2>会话<code>Cookie</code>和持久<code>Cookie</code>本质只是Cookie存储的位置不同,一个是存在缓存,一个是存在硬盘.持久<code>Cookie</code>的有效期很久,所以可以在下次登录的时候直接使用硬盘中的<code>Cookie</code>.<h1 id="三、代理的基本原理"><a href="#三、代理的基本原理" class="headerlink" title="三、代理的基本原理"></a>三、代理的基本原理</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2>代理本名代理服务器(<code>Proxy Server</code>),功能是代网络用户获得信息.客户端把请求发给代理服务器,代理服务器再把请求发给服务器.响应在经过代理服务器返回给客户端.在这个过程中服务器接受到的是代理服务器的<code>IP</code>.<h2 id="代理的作用"><a href="#代理的作用" class="headerlink" title="代理的作用"></a>代理的作用</h2></li><li>突破IP访问限制,访问一些访问不到的站点 <del>(科学上网)</del></li><li>访问一些单位或者团队的内部资源 (校园VPN)</li><li>提高访问速度.代理服务器一般都有一个较大的硬盘缓冲区,可以保存数据.如果其他用户访问,可以直接把这些数据给用户(类似<code>cache</code>)</li><li>隐藏真实的IP,保护个人信息.<h2 id="爬虫代理"><a href="#爬虫代理" class="headerlink" title="爬虫代理"></a>爬虫代理</h2>爬虫爬取速度过快,服务器检测到一个IP地址行为异常会直接封锁IP.使用代理,爬虫就会认为是代理服务器在访问自己,通过切换代理就能防止被发现.<h2 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h2><h3 id="根据协议区分"><a href="#根据协议区分" class="headerlink" title="根据协议区分"></a>根据协议区分</h3></li><li>FTP代理,访问FTP服务器,主要端口是21和2121</li><li>HTTP代理 访问HTTP服务器,主流的代理,端口是80和8080</li><li>SSL/TLS代理 主要访问加密网站,一般有SSL和TLS加密功能,端口一般是443</li><li>RTSP代理 主要用于Realplayer访问Real流服务器,端口一般是554</li><li>Telnet代理 主要用于Telnet远程控制(黑客Ddos攻击时隐藏身份),一般端口时23</li><li>POP3/SMTP代理 主要用于以POP3/SMTP发送邮件,具有缓存功能,端口一般是110/25</li><li>SOCKS代理 单纯传递数据包,不关心协议和用法,一般有缓存功能,端口一般是1080.SOCK代理分为SOCKS4和SOCKS5.SOCKS4只支持TCP,SOCKS支持TCP和UDP,还支持身份验证机制,服务器端域名解析等.<h3 id="根据匿名程度区分"><a href="#根据匿名程度区分" class="headerlink" title="根据匿名程度区分"></a>根据匿名程度区分</h3></li><li>高度匿名代理 将数据包原封不动转发,在服务端看来就是一个普通客户端,记录的是代理的IP</li><li>普通匿名代理 会对数据包做一些处理,服务端可能发现这是一个代理,然后追查客户端的真实IP.这种代理通常会加入的HTTP头有HTTP_VIA,HTTP_X_FORWARDED_FOR</li><li>透明代理 该种代理不仅会更改数据包,还会告诉服务器真实IP,主要用于过滤数据包,常用于内网防火墙.</li><li>间谍代理 常见于组织或者个人创建的代理服务器,用于记录用户传输的数据,然后对传输数据进行研究和监控.<h3 id="常见代理设置"><a href="#常见代理设置" class="headerlink" title="常见代理设置"></a>常见代理设置</h3></li><li>网上的免费代理,建议全部抓取下来一个个筛选,然后维护代理池.</li><li>付费代理</li><li>ADSL拨号,昂贵但是稳定性高</li><li>蜂窝代理 即使用4G/5G网卡等制作的代理.该代理情形较小,封锁概念低,但是成本高.<h1 id="四、多线程和多进程的基本原理"><a href="#四、多线程和多进程的基本原理" class="headerlink" title="四、多线程和多进程的基本原理"></a>四、多线程和多进程的基本原理</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2>进程可以理解为独立运行的程序单位.比如打开浏览器.<br>线程是进程中的多个任务,比如浏览器打开之后访问网址,加载网页,看视频能同时进行.这就是多线程<h2 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h2></li><li>并发:指多个线程对应的多条指令被快速轮换地执行.人宏观上感受不到进程切换,感觉是一起执行</li><li>并行:指同一时刻有多条指令在多个处理器上同时执行.宏观和微观上都是并行.<h2 id="多线程的爬虫应用场景"><a href="#多线程的爬虫应用场景" class="headerlink" title="多线程的爬虫应用场景"></a>多线程的爬虫应用场景</h2>爬虫在向服务器发送请求等待响应的时间内可以处理其他线程.<h2 id="Python中的多线程"><a href="#Python中的多线程" class="headerlink" title="Python中的多线程"></a>Python中的多线程</h2>Python中GIL(Global Interpreter Lock)的限制导致同一时刻下只可能进行一个线程,无法发挥多核并行的优势.所以不可能并行,只能并发.<h3 id="Python多线程下每个线程的执行方式"><a href="#Python多线程下每个线程的执行方式" class="headerlink" title="Python多线程下每个线程的执行方式:"></a>Python多线程下每个线程的执行方式:</h3></li><li>获取GIL</li><li>执行代码</li><li>释放GIL<br>Python多进程效果强于多线程.因为每一个进程都有自己的GIL,互不干扰.而多线程需要频繁切换GIL,反而减慢速度.</br><br>可见大佬博客学习</br><blockquote><p>python多线程:<a href="https://cuiqingcai.com/3325.html">https://cuiqingcai.com/3325.html</a></br><br>python多进程:<a href="https://cuiqingcai.com/3335.html">https://cuiqingcai.com/3335.html</a></br></p></blockquote></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 爬虫学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
             
             <tag> spider </tag>
             
