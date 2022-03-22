@@ -402,8 +402,12 @@
 <p>自下而上的递归实现就是<br>在获得实参的时候,调用parseTerm函数去解析,最后将Term的String输出当作实参,这样不论是参数里面的嵌套调用还是求和函数求和因子里面的嵌套调用都能解决.</p>
 <h3 id="细节实现"><a href="#细节实现" class="headerlink" title="细节实现"></a>细节实现</h3><h4 id="连续正负号"><a href="#连续正负号" class="headerlink" title="连续正负号"></a>连续正负号</h4><p>在本题中连续正负号是一个很大的问题,因此我虽然抽象Expr类为加法函数,但我parseExpr并不处理正负号,我把连续正负号当作连续正负1相乘,这样就是带符号整数,变成因子了,交给parseTerm来统一处理</p>
 <h4 id="化简"><a href="#化简" class="headerlink" title="化简"></a>化简</h4><p>对于简单因子的简化没什么好说的,提一下Term类的合并同类项.</p>
-<p>我使用的是Arraylist,没有使用<code>hashmap</code>,所以我合并因子的方法是先将每一个因子化简,其中常量特别提出来,放到第0个位置,这样除此化简之后,我的项结构如下:<br>$$C<em>f_1</em>f_2 \cdots *f_n$$<br>其中$C$是常量,如果化简后因子中有表达式因子,那么就需要开括号,不然直接就去把同类项相乘.</p>
-<p>开括号创建函数<code>unfold</code>.该函数的实现是基于乘法分配律,既<br>$$(A+B)<em>(C+D) = A</em>C+A<em>D+B</em>C+B*D$$<br>我们可以看到实际就是表达式将自己的项依次拿出来,两个因子合并成为新的因子.<br>因此整个Term的化简流程如下:</p>
+<p>我使用的是Arraylist,没有使用<code>hashmap</code>,所以我合并因子的方法是先将每一个因子化简,其中常量特别提出来,放到第0个位置,这样除此化简之后,我的项结构如下:</p>
+<p>$$C<em>f_1</em>f_2 \cdots *f_n$$</p>
+<p>其中$C$是常量,如果化简后因子中有表达式因子,那么就需要开括号,不然直接就去把同类项相乘.</p>
+<p>开括号创建函数<code>unfold</code>.该函数的实现是基于乘法分配律,既</p>
+<p>$$(A+B)<em>(C+D) = A</em>C+A<em>D+B</em>C+B*D$$</p>
+<p>我们可以看到实际就是表达式将自己的项依次拿出来,两个因子合并成为新的因子.<br>因此整个Term的化简流程如下:</p>
 <h2 id="随机数据生成器"><a href="#随机数据生成器" class="headerlink" title="随机数据生成器"></a>随机数据生成器</h2><p>前两次作业我写了随机数据生成器和基于python和sympy的对拍工具,第三次作业因为嵌套的引入,使得数据生成时候解析成sympy能使用的格式时工作加大,于是放弃,只将自己的parse结果和最后的输出进行对拍,对化简进行单元测试.三次作业随机数据生成器都是基于递归下降,现在简单总结一下:</p>
 <ul>
 <li>第一次作业,也是最简单的作业,基于给的BNF还是很好写的,就不赘述了.</li>
@@ -456,7 +460,7 @@ sb<span class="token punctuation">.</span>stdout<span class="token punctuation">
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Wrong Answer"</span><span class="token punctuation">)</span>
     <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Answer"</span> <span class="token operator">+</span> simplify<span class="token punctuation">(</span>expr1<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="debug总结"><a href="#debug总结" class="headerlink" title="debug总结"></a>debug总结</h2><h3 id="个人bug发现"><a href="#个人bug发现" class="headerlink" title="个人bug发现"></a>个人bug发现</h3>个人整个作业完成下来,最严重的两个bug分别是对象引用的问题和-1这个因子解析的问题,下面做分析</li>
-<li><strong>类引用的问题</strong>:<code>java</code>对于对象是引用,所以如果两个变量实际是指向同一个对象,那么就会出现神奇的bug.比如(sin(x)**2+cos(x)*sin(x))**2,本来按照乘法分配律展开是                                                                                                $$sin(x)*<em>2</em>sin(x)**2 + 2 * sin(x)*<em>2</em>cos(x)*sin(x)+cos(x)*sin(x)*cos(x)*sin(x)$$                                          式中$sin(x)**2$都指向的是同一个对象,所以第一个$sin(x)*<em>2</em>sin(x)**2$化简的时候,后面所有的$sin(x)**2$全部变成了$sin(x)**4$,对此我的方法是把所有因子变成不可变对象,<code>merge</code>方法得返回值不是原本得对象,而是重新<code>new</code>了一个,每一个因子都没有<code>set</code>方法,这样因子的状态就不会改变了.</li>
+<li><strong>类引用的问题</strong>:<code>java</code>对于对象是引用,所以如果两个变量实际是指向同一个对象,那么就会出现神奇的bug.比如(sin(x)**2+cos(x)*sin(x))**2,本来按照乘法分配律展开是<br>$$sin(x)*<em>2</em>sin(x)**2 + 2 * sin(x)*<em>2</em>cos(x)*sin(x)+cos(x)*sin(x)*cos(x)*sin(x)$$<br>式中$sin(x)**2$都指向的是同一个对象,所以第一个$sin(x)*<em>2</em>sin(x)**2$化简的时候,后面所有的$sin(x)**2$全部变成了$sin(x)**4$,对此我的方法是把所有因子变成不可变对象,<code>merge</code>方法得返回值不是原本得对象,而是重新<code>new</code>了一个,每一个因子都没有<code>set</code>方法,这样因子的状态就不会改变了.</li>
 <li><strong>-1的解析</strong>:在我的架构中<code>-1</code>解析成了<code>-1*1</code>,也就是说输入的每一个带符号整数,在定义中是属于因子,到我的架构里面其实是一个项,但是在后续作业中我忘记了这一个区别,导致抛出了异常.<h3 id="互测bug发现"><a href="#互测bug发现" class="headerlink" title="互测bug发现"></a>互测bug发现</h3>在互测中发现了一些很有意思的bug,先列举几个很有意思的.</li>
 <li><strong>过度优化导致牺牲正确性</strong>:后面作业互测中发现了有同学优化了<code>cos(x)**2+sin(x)**2 = 1</code>,这本来是一个很厉害的优化,但是在实际互测中发现有同学的优化是基于原有架构上的拆东墙补西墙,把原本架构的一些细节改变,但没有填补.比如第三次作业,三角函数中可以放表达式因子,那么在判断是否能优化的时候就要判断三角函数里面的因子是否相等,因此有人又修改了表达式因子的equals方法,但这又导致了在项合并同类项中表达式因子合并出现了bug.因此,我认为优化应该是基于能完成需求的基础上,不能为了优化而去优化.</li>
 <li><strong>放弃优化导致牺牲时间复杂度</strong>:我也碰见了有的同学放弃了合并同类项,导致输出巨长,放一个比较复杂的数据,因为没有合并同类项,导致在开括号的时候项一级的因子越来越多,如果指数大一点就直接跑不出结果了.<h2 id="总体总结"><a href="#总体总结" class="headerlink" title="总体总结"></a>总体总结</h2><del>总结之前先来一张全家福</del><br><img src="%E7%B1%BB%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.png" alt="类的复杂度分析"><br>可见我的复杂度还行(),项和表达式因为组成复杂,优化有一点难度,至于parse,因为因子太多不得不塞很多函数进去,能做成这样还是比较满意的.<br>整个作业自我感觉除了第一次比较艰难,后面都挺轻松.可能是我第一次在架构上拓展性比较强,没有仅为了实现第一次的需求而去建立架构,而是留了很多可拓展的地方,<br>比如:</li>
