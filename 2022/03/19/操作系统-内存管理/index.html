@@ -398,7 +398,7 @@
 <p>简言之,地址空间就是<strong>进程认为</strong>自己使用的空间,是一个抽象空降,存储空间就是<strong>实际操作</strong>访问的物理空间,这二者就是CO中提到的<strong>虚拟内存技术</strong>.</p>
 <ul>
 <li><strong>内碎片</strong>:如果一个分区没有被完全占用,则剩下的空间被称为内碎片.该碎片在操作系统眼里已经被占用,无法整理.</li>
-<li><strong>外碎片</strong>: 占用分区之间的空闲分区,这片分区如果小于载入程序则无法利用,被浪费.该碎片可以整理后清楚,是内存系统性能下降的主要原因.<br><img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/0fda91b75a316cdfe34c438c68d48ed801fbe5213116ab4952773d457428f0a8.png" alt="刚好利用">  <img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/cbb0be867faf712ee27ac855d97a8639a5a95de68ea220dce9f5b6d8dcae508c.png" alt="外碎片">  <img src="%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/784c1a1cf624cf4e4b995bc6b3c5d5ddce23b82f4017912b8c6da6c9d3c7ff60.png" alt="内碎片">  </li>
+<li><strong>外碎片</strong>: 占用分区之间的空闲分区,这片分区如果小于载入程序则无法利用,被浪费.该碎片可以整理后清楚,是内存系统性能下降的主要原因.<br><img src="0fda91b75a316cdfe34c438c68d48ed801fbe5213116ab4952773d457428f0a8.png" alt="刚好利用">  <img src="cbb0be867faf712ee27ac855d97a8639a5a95de68ea220dce9f5b6d8dcae508c.png" alt="外碎片">  <img src="784c1a1cf624cf4e4b995bc6b3c5d5ddce23b82f4017912b8c6da6c9d3c7ff60.png" alt="内碎片">  </li>
 </ul>
 <h2 id="单道程序的内存管理"><a href="#单道程序的内存管理" class="headerlink" title="单道程序的内存管理"></a>单道程序的内存管理</h2><p>整个系统中出了操作系统之外只剩这一个程序,所以整个内存可以供他使用,其地址也可以固定.就像整个地区如果只有一个部落,那部落肯定找一个最好的地方发展下去.如果有多个部落互相抢占资源,那肯定存在部落被顶替掉的情况.</p>
 <h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><ul>
@@ -815,6 +815,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 

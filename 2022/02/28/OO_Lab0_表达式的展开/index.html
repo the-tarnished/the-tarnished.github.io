@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="OO_Lab0_表达式的展开, 零落闲拾">
-    <meta name="description" content="BNF描述BNF描述中去除了所有的空白项便于解析如下是三次作业总共的BNF图:$$\begin{aligned}表达式 &amp;amp;\rightarrow[加减] 项| 表达式 加减项\项 &amp;amp;\rightarrow [加减] 因子 |">
+    <meta name="description" content="BNF描述BNF描述中去除了所有的空白项便于解析如下是三次作业总共的BNF图:$$\begin{aligned}表达式 &amp;amp;\rightarrow[加减] 项| 表达式 加减项\\项 &amp;amp;\rightarrow [加减] 因子 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -372,7 +372,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="BNF描述"><a href="#BNF描述" class="headerlink" title="BNF描述"></a>BNF描述</h2><p>BNF描述中去除了所有的空白项便于解析<br>如下是三次作业总共的BNF图:<br>$$\begin{aligned}<br>表达式 &amp;\rightarrow[加减] 项| 表达式 加减项\<br>项 &amp;\rightarrow [加减] 因子 | 项’*’因子\<br>因子 &amp;\rightarrow​ 变量因子 | 常数因子 | 表达式因子\<br>变量因子 &amp;\rightarrow 幂函数 | 三角函数 | 自定义函数调用 | 求和函数\<br>常数因子 &amp;\rightarrow​ 带符号的整数\<br>表达式因子 &amp;\rightarrow​ ‘(‘ 表达式 ‘)’ [指数]\<br>幂函数 &amp;\rightarrow (函数自变量|’i’) [指数]\<br>三角函数 &amp;\rightarrow ‘sin’’(‘因子’)’ [指数] | ‘cos’’(‘因子’)’ [指数]\<br>指数 &amp;\rightarrow ‘**’[‘+’] 允许前导零的整数\<br>带符号的整数 &amp;\rightarrow [加减] 允许前导零的整数\<br>允许前导零的整数 &amp;\rightarrow (0|1|2|…|9){0|1|2|…|9}\<br>加减 &amp;\rightarrow ‘+’ | ‘-‘<br>\end{aligned}$$</p>
+                <h2 id="BNF描述"><a href="#BNF描述" class="headerlink" title="BNF描述"></a>BNF描述</h2><p>BNF描述中去除了所有的空白项便于解析<br>如下是三次作业总共的BNF图:<br>$$\begin{aligned}<br>表达式 &amp;\rightarrow[加减] 项| 表达式 加减项\\<br>项 &amp;\rightarrow [加减] 因子 | 项’*’因子\\<br>因子 &amp;\rightarrow​ 变量因子 | 常数因子 | 表达式因子\\<br>变量因子 &amp;\rightarrow 幂函数 | 三角函数 | 自定义函数调用 | 求和函数\\<br>常数因子 &amp;\rightarrow​ 带符号的整数\\<br>表达式因子 &amp;\rightarrow​ ‘(‘ 表达式 ‘)’ [指数]\\<br>幂函数 &amp;\rightarrow (函数自变量|’i’) [指数]\\<br>三角函数 &amp;\rightarrow ‘sin’’(‘因子’)’ [指数] | ‘cos’’(‘因子’)’ [指数]\\<br>指数 &amp;\rightarrow ‘**’[‘+’] 允许前导零的整数\\<br>带符号的整数 &amp;\rightarrow [加减] 允许前导零的整数\\<br>允许前导零的整数 &amp;\rightarrow (0|1|2|…|9){0|1|2|…|9}\\<br>加减 &amp;\rightarrow ‘+’ | ‘-‘<br>\end{aligned}$$</p>
 <h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><p>$$读入输入 \rightarrow 解析输入 \rightarrow 简化表达式 \rightarrow 输出表达式$$</p>
 <h2 id="抽象结构"><a href="#抽象结构" class="headerlink" title="抽象结构"></a>抽象结构</h2><h3 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h3><p>从上面的<code>BNF</code>中,我们可以初步提取出下面的类:</p>
 <ul>
@@ -387,9 +387,9 @@
 <li>常数因子</li>
 </ul>
 <p>我们发现因子又包含了表达式,表达式又由项组成,因此,我们可以将因子认为是所有类的最顶层模块,可能是接口,可能是父类.<br>再细看要求,题目要求<code>simpilify</code>这一个动作,<code>simplify</code>可以将其拆分为各个类将自己的组成成分化简,和类之间的合并.因此,对这一个行为进行抽象,<strong>因子就是所有类的接口</strong>.<br>另外,对表达式类和项类这两个特殊类进行观察,能发现这两者不仅要合并其他类,还要将自己类包含的项或者因子进行合并.因此我们将这两者抽象出来一个新的<strong>父类</strong>,该父类有一个<strong>属性用来保存该类的组成部分</strong>,还要有一个<strong>合并因子的函数用于合并因子</strong>,另外还要有一个判断是否符合合并要求的方法<strong>留给子类自己重写</strong>,让子类控制合并行为.</p>
-<p>因此我们的基本的<code>UML</code>图如下(Factors指代除了表达式因子的因子们):<br><img src="OO_Lab0_%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%B1%95%E5%BC%80/%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84.png" alt="基础架构">  </p>
+<p>因此我们的基本的<code>UML</code>图如下(Factors指代除了表达式因子的因子们):<br><img src="%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84.png" alt="基础架构">  </p>
 <p>但是,其中自定义函数和求和函数是第二次作业提出,这两个函数涉及到形参换成实参,并且函数之间相等的判断也特别复杂,因此我的思路是在<strong>解析阶段就完成形参实参替换</strong>,并把字符串替换结果交给第一次作业就已经实现的解析函数,将解析函数的返回值返回给上层函数,完成对函数的解析,因此这两个类不放入表达式化简过程,而是将其<strong>在解析阶段完成解析</strong>.</p>
-<p>最终我们的<code>UML</code>图如下(只列出重要的函数):<br><img src="OO_Lab0_%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%B1%95%E5%BC%80/%E6%9C%80%E7%BB%88%E6%9E%B6%E6%9E%84.png" alt="最终架构">  </p>
+<p>最终我们的<code>UML</code>图如下(只列出重要的函数):<br><img src="%E6%9C%80%E7%BB%88%E6%9E%B6%E6%9E%84.png" alt="最终架构">  </p>
 <p>其中FuncParse是解析输入的自定义函数定义,返回一个自定义函数对象.</p>
 <p>对于第三次作业提出的嵌套函数,我也在保留原有架构的基础上,使用的是自下而上的递归实现字符串替换.</p>
 <p>原有函数解析架构:</p>
@@ -459,7 +459,7 @@ sb<span class="token punctuation">.</span>stdout<span class="token punctuation">
 <li><strong>类引用的问题</strong>:<code>java</code>对于对象是引用,所以如果两个变量实际是指向同一个对象,那么就会出现神奇的bug.比如(sin(x)**2+cos(x)*sin(x))**2,本来按照乘法分配律展开是                                                                                                $$sin(x)*<em>2</em>sin(x)**2 + 2 * sin(x)*<em>2</em>cos(x)*sin(x)+cos(x)*sin(x)*cos(x)*sin(x)$$                                          式中$sin(x)**2$都指向的是同一个对象,所以第一个$sin(x)*<em>2</em>sin(x)**2$化简的时候,后面所有的$sin(x)**2$全部变成了$sin(x)**4$,对此我的方法是把所有因子变成不可变对象,<code>merge</code>方法得返回值不是原本得对象,而是重新<code>new</code>了一个,每一个因子都没有<code>set</code>方法,这样因子的状态就不会改变了.</li>
 <li><strong>-1的解析</strong>:在我的架构中<code>-1</code>解析成了<code>-1*1</code>,也就是说输入的每一个带符号整数,在定义中是属于因子,到我的架构里面其实是一个项,但是在后续作业中我忘记了这一个区别,导致抛出了异常.<h3 id="互测bug发现"><a href="#互测bug发现" class="headerlink" title="互测bug发现"></a>互测bug发现</h3>在互测中发现了一些很有意思的bug,先列举几个很有意思的.</li>
 <li><strong>过度优化导致牺牲正确性</strong>:后面作业互测中发现了有同学优化了<code>cos(x)**2+sin(x)**2 = 1</code>,这本来是一个很厉害的优化,但是在实际互测中发现有同学的优化是基于原有架构上的拆东墙补西墙,把原本架构的一些细节改变,但没有填补.比如第三次作业,三角函数中可以放表达式因子,那么在判断是否能优化的时候就要判断三角函数里面的因子是否相等,因此有人又修改了表达式因子的equals方法,但这又导致了在项合并同类项中表达式因子合并出现了bug.因此,我认为优化应该是基于能完成需求的基础上,不能为了优化而去优化.</li>
-<li><strong>放弃优化导致牺牲时间复杂度</strong>:我也碰见了有的同学放弃了合并同类项,导致输出巨长,放一个比较复杂的数据,因为没有合并同类项,导致在开括号的时候项一级的因子越来越多,如果指数大一点就直接跑不出结果了.<h2 id="总体总结"><a href="#总体总结" class="headerlink" title="总体总结"></a>总体总结</h2><del>总结之前先来一张全家福</del><br><img src="OO_Lab0_%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%B1%95%E5%BC%80/%E7%B1%BB%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.png" alt="类的复杂度分析"><br>可见我的复杂度还行(),项和表达式因为组成复杂,优化有一点难度,至于parse,因为因子太多不得不塞很多函数进去,能做成这样还是比较满意的.<br>整个作业自我感觉除了第一次比较艰难,后面都挺轻松.可能是我第一次在架构上拓展性比较强,没有仅为了实现第一次的需求而去建立架构,而是留了很多可拓展的地方,<br>比如:</li>
+<li><strong>放弃优化导致牺牲时间复杂度</strong>:我也碰见了有的同学放弃了合并同类项,导致输出巨长,放一个比较复杂的数据,因为没有合并同类项,导致在开括号的时候项一级的因子越来越多,如果指数大一点就直接跑不出结果了.<h2 id="总体总结"><a href="#总体总结" class="headerlink" title="总体总结"></a>总体总结</h2><del>总结之前先来一张全家福</del><br><img src="%E7%B1%BB%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90.png" alt="类的复杂度分析"><br>可见我的复杂度还行(),项和表达式因为组成复杂,优化有一点难度,至于parse,因为因子太多不得不塞很多函数进去,能做成这样还是比较满意的.<br>整个作业自我感觉除了第一次比较艰难,后面都挺轻松.可能是我第一次在架构上拓展性比较强,没有仅为了实现第一次的需求而去建立架构,而是留了很多可拓展的地方,<br>比如:</li>
 <li>第一次作业我就已经能解决嵌套括号的问题</li>
 <li>对于新增加的因子我也有了一套比较完整的实现模型</li>
 <li>对于新增因子的合并我在项和表达式一级也解开了耦合,让这两个类能更好的自己控制合并同类项这一个行为.</li>
