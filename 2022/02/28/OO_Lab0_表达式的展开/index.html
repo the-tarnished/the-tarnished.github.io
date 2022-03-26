@@ -390,7 +390,13 @@
 <p>因此我们的基本的<code>UML</code>图如下(Factors指代除了表达式因子的因子们):<br><img src="%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84.png" alt="基础架构">  </p>
 <p>但是,其中自定义函数和求和函数是第二次作业提出,这两个函数涉及到形参换成实参,并且函数之间相等的判断也特别复杂,因此我的思路是在<strong>解析阶段就完成形参实参替换</strong>,并把字符串替换结果交给第一次作业就已经实现的解析函数,将解析函数的返回值返回给上层函数,完成对函数的解析,因此这两个类不放入表达式化简过程,而是将其<strong>在解析阶段完成解析</strong>.</p>
 <p>最终我们的<code>UML</code>图如下(只列出重要的函数):<br><img src="%E6%9C%80%E7%BB%88%E6%9E%B6%E6%9E%84.png" alt="最终架构">  </p>
-<p>其中FuncParse是解析输入的自定义函数定义,返回一个自定义函数对象.</p>
+<p><strong>函数解释</strong></p>
+<ul>
+<li><code>FuncParse</code>是解析输入的自定义函数定义的类,<code>parseDiyFunc</code>方法返回一个<code>DiyFunc</code>对象.</li>
+<li><code>DiyFunc</code>和<code>SumFunction</code>的<code>transmission</code>方法是处理输入的自定义函数调用或者求和函数,返回替换之后的字符串.</li>
+<li><code>Poly</code>的<code>margeAble</code>方法是一个抽象方法,留给<code>Expr</code>和<code>Term</code>类自己重写,自定义什么情况两者算同类相,需要合并.</li>
+<li><code>Factor</code>的<code>merge</code>方法是实现接口的类和自己同类型相互合并的方法,该方法不修改对象本身,而是返回一个新的对象.</li>
+</ul>
 <p>对于第三次作业提出的嵌套函数,我也在保留原有架构的基础上,使用的是自下而上的递归实现字符串替换.</p>
 <p>原有函数解析架构:</p>
 <ul>
