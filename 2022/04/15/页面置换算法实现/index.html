@@ -466,9 +466,9 @@ request<span class="token punctuation">:</span><span class="token builtin">list<
                 UsedTimes<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>UsedTimes<span class="token punctuation">[</span>tag<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 对应记录使用次数的元素删掉</span>
                 ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
             PTable<span class="token punctuation">.</span>append<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-            UsedTimes<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            UsedTimes<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
-            UsedTimes<span class="token punctuation">[</span>PTable<span class="token punctuation">.</span>index<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+            UsedTimes<span class="token punctuation">[</span>PTable<span class="token punctuation">.</span>index<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
     <span class="token keyword">return</span> ret
 
 DefaultInOPT <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
