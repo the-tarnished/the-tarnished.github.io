@@ -428,8 +428,8 @@ request<span class="token punctuation">:</span><span class="token builtin">list<
                 usedTime<span class="token punctuation">:</span><span class="token builtin">list</span> <span class="token operator">=</span> FindUsedless<span class="token punctuation">(</span>Schedule<span class="token punctuation">,</span>PTable<span class="token punctuation">,</span>i<span class="token punctuation">)</span> <span class="token comment">## 寻找下一次的使用时间</span>
                 tag <span class="token operator">=</span> MarkTheUnused<span class="token punctuation">(</span>usedTime<span class="token punctuation">)</span> <span class="token comment">## 找到使用间隔最长的页表</span>
                 PTable<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>PTable<span class="token punctuation">[</span>tag<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 删除对应页表</span>
-                ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
             PTable<span class="token punctuation">.</span>append<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
     <span class="token keyword">return</span> ret
 
 <span class="token keyword">def</span> <span class="token function">FIFO</span><span class="token punctuation">(</span>n<span class="token punctuation">:</span><span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -440,8 +440,8 @@ request<span class="token punctuation">:</span><span class="token builtin">list<
         <span class="token keyword">if</span> request<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token keyword">not</span> <span class="token keyword">in</span> PTable<span class="token punctuation">:</span>
             <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>PTable<span class="token punctuation">)</span> <span class="token operator">>=</span> n<span class="token punctuation">:</span>
                 PTable<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>PTable<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 把第一个进来的删掉</span>
-                ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
             PTable<span class="token punctuation">.</span>append<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
     <span class="token keyword">return</span> ret
 
 <span class="token keyword">def</span> <span class="token function">MarkTheLessUsed</span><span class="token punctuation">(</span>usedTime<span class="token punctuation">:</span><span class="token builtin">list</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
@@ -464,9 +464,9 @@ request<span class="token punctuation">:</span><span class="token builtin">list<
                 tag <span class="token operator">=</span> MarkTheLessUsed<span class="token punctuation">(</span>UsedTimes<span class="token punctuation">)</span>
                 PTable<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>PTable<span class="token punctuation">[</span>tag<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 把使用最少的哪一个删掉</span>
                 UsedTimes<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>UsedTimes<span class="token punctuation">[</span>tag<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">## 对应记录使用次数的元素删掉</span>
-                ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
             PTable<span class="token punctuation">.</span>append<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
             UsedTimes<span class="token punctuation">.</span>append<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+            ret<span class="token operator">+=</span><span class="token number">1</span> <span class="token comment">## 缺页异常</span>
         <span class="token keyword">else</span><span class="token punctuation">:</span>
             UsedTimes<span class="token punctuation">[</span>PTable<span class="token punctuation">.</span>index<span class="token punctuation">(</span>request<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
     <span class="token keyword">return</span> ret
