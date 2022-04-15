@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="操作系统_链接与重定位, 零落闲拾">
-    <meta name="description" content="链接与重定位逻辑地址空间引入如果没有引入抽象的逻辑地址空间,直接使用物理地址,那么,没有重定位操作势必破坏系统和其他应用的内存,如果实现重定位,其实现复杂(每次运行都需要重新编译进行重定位),浪费时间,所以需要新增一层在程序和实际物理地址之">
+    <meta name="keywords" content="操作系统-进程管理, 零落闲拾">
+    <meta name="description" content="进程管理并发和并行并发(Concurrent)设两个活动a和b,在某一个指定时间t后,只要a和b都处在起点和终点之间的某一处,那就称之为并发.
+并行(Parallel)设两个程序,如果在同一个时间度量下同时运行在不同的处理机上,则陈这两个程">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>操作系统_链接与重定位 | 零落闲拾</title>
+    <title>操作系统-进程管理 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -202,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">操作系统_链接与重定位</h1>
+                    <h1 class="description center-align post-title">操作系统-进程管理</h1>
                 </div>
             </div>
         </div>
@@ -348,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-03-24
+                    2022-04-07
                 </div>
                 
 
@@ -372,29 +373,142 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="链接与重定位"><a href="#链接与重定位" class="headerlink" title="链接与重定位"></a>链接与重定位</h1><h2 id="逻辑地址空间"><a href="#逻辑地址空间" class="headerlink" title="逻辑地址空间"></a>逻辑地址空间</h2><h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>如果没有引入抽象的逻辑地址空间,直接使用物理地址,那么,没有重定位操作势必破坏系统和其他应用的内存,如果实现重定位,其实现复杂(每次运行都需要重新编译进行重定位),浪费时间,所以需要<strong>新增一层在程序</strong>和实际物理地址之间,这一层就是<strong>逻辑地址空间</strong>,这样只需要建立逻辑地址到物理地址的映射即可,不需要每次都修改文件.</p>
-<h3 id="辨别"><a href="#辨别" class="headerlink" title="辨别"></a>辨别</h3><ul>
-<li>物理地址:</li>
-<li><ul>
-<li>内存中一系列存储信息的物理地址的集合</li>
+                <h1 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h1><h2 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h2><h3 id="并发-Concurrent"><a href="#并发-Concurrent" class="headerlink" title="并发(Concurrent)"></a>并发(Concurrent)</h3><p>设两个活动<code>a</code>和<code>b</code>,在某一个指定时间t后,只要<code>a</code>和<code>b</code>都处在起点和终点之间的某一处,那就称之为<strong>并发</strong>.</p>
+<h3 id="并行-Parallel"><a href="#并行-Parallel" class="headerlink" title="并行(Parallel)"></a>并行(Parallel)</h3><p>设两个程序,如果在同一个时间度量下同时运行在不同的处理机上,则陈这两个程序是<strong>并行</strong>的.</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>并行一定并发,并发不一定并行.</p>
+<h3 id="并发执行的特征"><a href="#并发执行的特征" class="headerlink" title="并发执行的特征"></a>并发执行的特征</h3><ul>
+<li>间断性: 并发程序具有”执行—暂停—执行”间断性的活动规律.</li>
+<li>非封闭性: 多个程序会共享系统中的资源,该资源状态会被多个程序改变,程序之间会互相影响.</li>
+<li>不可再现性: 在输入相同的情况下,输出还和执行次序有关.<h2 id="Bernstein条件"><a href="#Bernstein条件" class="headerlink" title="Bernstein条件"></a>Bernstein条件</h2>该条件是判断程序并发执⾏行结果是否可再现的充分条件。<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3></li>
+<li>$R(S_i)$: $S_i$的读子集,表示在$S_i$中被引用的变量的集合.</li>
+<li>$W(S_i)$: $S_i$的写子集,表示在$S_i$中被修改的变量的集合.</li>
 </ul>
-</li>
-<li>逻辑地址</li>
-<li><ul>
-<li>对内存空间的抽象</li>
+<p>两个进程可并发,当且仅当下列条件同时成立的时候:<br>$$\begin{aligned}<br>    R(S_1) \cap W(S_1) = \emptyset \\<br>    W(S_1) \cap R(S_1) = \emptyset<br>\end{aligned}$$<br>也可以理解为两个进程对于同一个共享变量的权力对等的时候才是可并发的,既二者都是读或者二者都是写.</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>进程是程序在一个数据集合上运行的<strong>过程</strong>，它是系统进行资源分配和调度的一个<strong>独立单位</strong>。</p>
+<h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><ul>
+<li><strong>动态性</strong>：进程是程序的一次执行过程。因创建而诞生，因调度而执行，因无资源而暂停，因撤销而消亡。</li>
+<li><strong>并发性</strong>：多个进程实体同时存在于内存中，能在一段时间内同时运行。</li>
+<li><strong>独立性</strong>：在传统<code>os</code>中，进程是独立运行的基本单位。</li>
+<li><strong>异步性</strong>：进程之间相互制约，进程自己以各自独立的不可预知的速度向前推进。</li>
+<li><strong>结构特征</strong>：程序段，数据段，进程控制块<code>PCB</code>。</li>
 </ul>
-</li>
-<li><ul>
-<li>是一个进程用来范文内存的一组地址</li>
+<p>进程应该包括：</p>
+<ul>
+<li>程序代码</li>
+<li>程序数据</li>
+<li>PC值</li>
+<li>一组通用寄存器的<strong>值</strong>（不是寄存器本身），堆，栈</li>
+<li>一组系统资源（比如打开的文件）</li>
 </ul>
-</li>
-<li><ul>
-<li>不同进程之间的地址空间相对独立,每个进程访问的地址是自己的逻辑地址,不会访问到其他进程的空间.<h3 id="地址映射"><a href="#地址映射" class="headerlink" title="地址映射"></a>地址映射</h3>程序的逻辑地址空间只是针对进程而言,实际操作系统需要访问物理地址,逻辑地址到实际物理地址的转化就是地址映射,由存储管理单元(MMU)完成.<h3 id="动态重定位"><a href="#动态重定位" class="headerlink" title="动态重定位"></a>动态重定位</h3>在装载程序时,直接将程序装入到分配的内存中,执行的时候,基址寄存器存放程序的首地址,界限寄存器存放程序的长度,这样每一次地址访问都经过基址寄存器的转换,访问到真正的内存.<h2 id="装入和链接"><a href="#装入和链接" class="headerlink" title="装入和链接"></a>装入和链接</h2>代码源文件先经过<strong>编译</strong>,变成机器码文件,再把几个程序之间<strong>链接</strong>,以使用依赖的库,然后再一起<strong>装入</strong>内存.<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3>链接分为静态链接和动态链接,分别如下</li>
+<h2 id="进程的状态与控制"><a href="#进程的状态与控制" class="headerlink" title="进程的状态与控制"></a>进程的状态与控制</h2><h3 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h3><p>进程有三种基本状态：就绪状态，执行状态，阻塞状态。</p>
+<ul>
+<li>就绪状态：进程已经获得了除处理器资源外的所有资源，等待调度。</li>
+<li>执行状态：占用处理器资源，处于此状态的进程数目小于等于处理器数量. 在没有其他进程可以执行时, 通常会自动执行系统的idle进程(相当于空操作)。</li>
+<li>阻塞状态：正在执行的进程，因为某种原因无法继续执行，放弃处理器资源。<h3 id="进程控制块"><a href="#进程控制块" class="headerlink" title="进程控制块"></a>进程控制块</h3>进程控制块在进程控制中的作用：</li>
+<li>随着进程创建而创建，随着进程撤销而撤销</li>
+<li>是进程的唯一标志</li>
+<li>限制系统进程数目（有些操作系统PCID只有6bit，最多容纳64个进程）</li>
 </ul>
-</li>
-<li>静态链接:在编译阶段把静态库复制加入到可执行文件中,导致可执行文件较大.</li>
-<li>动态链接:假装链接完毕,其实只是加入了描述信息,等到执行到这里的时候去访问相应动态库载入内存执行.</li>
+<p>进程控制块是进程管理与控制中最重要的数据结构，每一个进程均有一个PCB。其包含以下内容：</p>
+<ul>
+<li><strong>进程标识符</strong>：每一个进程都必须有一个唯一的标识符, 可以是字符串, 也可以是数字. 在进程创建时被系统赋予。</li>
+<li><strong>程序与数据地址</strong>：把PCB与其对应的程序与数据联系起来。</li>
+<li><strong>进程状态</strong>：表示进程状态，为了方便管理，<code>os</code>将相同状态的进程统一管理。</li>
+<li><strong>现场保留区</strong>：当进程放弃处理器的时候，应把处理器中的各种状态信息保存起来，待重新获得处理器之后恢复现场。</li>
+<li><strong>同步互斥机制相关的域</strong>：用于实现进程间互斥，同步所需的信号量。</li>
+<li><strong>进程通信机制相关的域</strong>：用于实现进程间通信所需的字段</li>
+<li><strong>资源清单</strong>：列出所拥有的除处理器外的资源记录，如拥有的I/O设备，打开的文件列表。</li>
+<li><strong>家族关系</strong>：关于父进程，子进程的信息。</li>
+<li><strong>链接字</strong>：根据进程所处的现行状态，进程相应的PCB加入到不同的队列中，PCB链接字指出该进程所在队列中下一个PCB的首地址。（链表指向下一个结点的指针。）</li>
 </ul>
+<h3 id="PCB的组织方式"><a href="#PCB的组织方式" class="headerlink" title="PCB的组织方式"></a>PCB的组织方式</h3><p><strong>线性表</strong><br>不论进程的状态如何，将所有的PCB连续地存放在内存的系统区。这种方式适用于系统中进程数目不多的情况。</p>
+<p><strong>链接方式</strong><br>系统按照进程的状态将进程的PCB组成队列，从而形成就绪队列、阻塞队列、运行队列等。</p>
+<p><strong>索引方式</strong><br>该方式是线性表方式的改进，系统按照进程的状态分别建立就绪索引表、阻塞索引表等。</p>
+<h3 id="中断处理触发的进程切换流程"><a href="#中断处理触发的进程切换流程" class="headerlink" title="中断处理触发的进程切换流程"></a>中断处理触发的进程切换流程</h3><ul>
+<li>栈储存进程的PC</li>
+<li>硬件从中断向量中载入新进程的PC</li>
+<li>汇编程序保存寄存器的值</li>
+<li>汇编程序建立新的栈</li>
+<li>C语言中断服务运行</li>
+<li>调度器决定下一个进程</li>
+<li>C语言程序返回到汇编代码</li>
+<li>汇编程序开启下一个新进程</li>
+</ul>
+<h3 id="进程上下⽂文切换-vs-陷⼊入内核"><a href="#进程上下⽂文切换-vs-陷⼊入内核" class="headerlink" title="进程上下⽂文切换 vs 陷⼊入内核"></a>进程上下⽂文切换 vs 陷⼊入内核</h3><p>进程从用户态到内核态的切换和进程之间的切换不同，mode switch还是在本进程之内，所以上下文切换的时候主要是寄存器上下文切换，栈的切换（防止恶意程序读共享栈中的内核数据导致信息泄露）。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h3 id="线程的引入"><a href="#线程的引入" class="headerlink" title="线程的引入"></a>线程的引入</h3><p>进程的不足：</p>
+<ul>
+<li>一个进程只能在一个时间干一件事</li>
+<li>多个进程直接切换开销很大</li>
+<li>多个进程共享数据和通讯开销很大</li>
+</ul>
+<p>因此引入了线程，线程可以看成轻量级的进程（但是线程和进程是两码事），线程之间的共享数据，并发执行，上下文切换更轻松。</p>
+<h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><p>进程是系统进行资源分配和调度的一个<strong>独立单位</strong>，它同时包含两个概念：资源拥有者和可执行单元。<br>操作系统将资源拥有者称为<strong>进程</strong>（<code>process</code>，<code>task</code>），可执行单元称为<strong>线程</strong>（<code>Thread</code>）。</p>
+<ul>
+<li>一个进程可以有多个线程，但是一个线程只能同时被一个进程拥有。</li>
+<li>进程是资源分配的基本单位，线程是处理机调度的基本单位，所有线程共享其所属进程的所有资源和代码。</li>
+<li>线程执行过程中很容易协作同步，而进程需要通过消息通信进行同步。</li>
+<li>线程的划分制度更小，并发性更高。</li>
+<li>线程既共享进程的数据，也有自己的堆栈。</li>
+<li>线程不能单独执行，但是每一个线程都有程序的入口、执行序列以及程序出口。它必须组成进程才能被执行。</li>
+</ul>
+<h3 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h3><h4 id="用户级线程"><a href="#用户级线程" class="headerlink" title="用户级线程"></a>用户级线程</h4><p>线程在用户空间, 通过<code>library</code>模拟的<code>thread</code>,不需要或仅需要极少的<code>kernel</code>支持。<br>其上下文切换比较快，不需要更改页表。</p>
+<p><strong>主要功能</strong></p>
+<ul>
+<li>创建和销毁线程</li>
+<li>线程之间传递信息和数据</li>
+<li>调度线程执行</li>
+<li>保存和恢复线程上下文</li>
+</ul>
+<blockquote>
+<p>用户级线程库: POSIX Pthreads, Mach C-threads, Java Threads.<br>POSIX Pthreads:</p>
+<ul>
+<li>用于线程创建和同步的 POSIX 标准 API(IEEE 1003.1c).</li>
+<li>可在用户级或内核级实现.</li>
+<li>API 规定了线程库的行文, 但不限定实现方法.</li>
+<li>类 Unix 操作系统中很常见: Solaris, Linux, MacOS X.</li>
+</ul>
+</blockquote>
+<p><strong>优缺点</strong><br>优点:</p>
+<ul>
+<li>线程切换与内核无关</li>
+<li>线程的调度由应用决定,容易进行优化</li>
+<li>可移植性强,只要线程库支持即可</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>很多系统调用会引起阻塞,内核因此会阻塞所有相关线程</li>
+<li>内核<strong>只能将处理器分配给进程</strong>(进程是资源分配的基本单位)，即使有多个处理器，也无法实现一个进程中的多个线程的并行执行。</li>
+</ul>
+<h4 id="内核级线程"><a href="#内核级线程" class="headerlink" title="内核级线程"></a>内核级线程</h4><p>线程在内核空间. 内核有多个分身, 每一个分身都可以用来处理一个任务. 这用来处理非同步事件很有效, 内核可以对每一个非同步事件产生一个分身来进行处理.</p>
+<blockquote>
+<p>支持内核线程的操作系统内核称作<strong>多线程内核</strong></p>
+</blockquote>
+<p><strong>优缺点</strong><br>优点:</p>
+<ul>
+<li>内核可以在多个处理器上调度一个进程的多个线程实现同步并行执行</li>
+<li>组色色发生在线程级别</li>
+<li>内核中的一些处理可以通过多线程实现</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>一个进程中的线程切换需要内核参与,线程的切换设计到两个模式的切换(进程-进程、线程-线程)</li>
+<li>效率低下</li>
+</ul>
+<h4 id="线程比较"><a href="#线程比较" class="headerlink" title="线程比较"></a>线程比较</h4><ul>
+<li>内核支持线程是OS内核可感知的，而用户级线程是OS内核不可感知的</li>
+<li>用户级线程的创建，撤销和调度不需要OS内核的支持；内核支持线程的创建，撤销和调度则需要OS内核支持</li>
+<li>用户级线程执行系统调用的时候将中断当前进程，而内核支持线程系统调用的时候只中断线程。</li>
+<li>在只有用户级线程的系统内，CPU调度还是以进程为单位，处于运行状态的进程中的多个线程，由用户程序控制线程的轮换运行</li>
+<li>在有内核支持线程的系统内，CPU调度则以线程为单位，由OS的线程调度程序负责线程的调度。</li>
+</ul>
+<h4 id="混合实现"><a href="#混合实现" class="headerlink" title="混合实现"></a>混合实现</h4><p>系统实现内核级线程<br>用户实现用户级线程<br>可以认为用户的进程是建立在内核线程上的</p>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>有些系统同时支持用户线程和内核线程由此产生了不同的多线程模型，即实现用户级线程和内核级线程的连接方式。</p>
+<h4 id="Many-to-One-模型"><a href="#Many-to-One-模型" class="headerlink" title="Many-to-One 模型"></a>Many-to-One 模型</h4><p>将多个用户级线程映射到一个内核级线程，线程管理在用户空间完成</p>
+<p>该模型和纯的用户线程类似，线程的操作不需要经过内核，效率高，但是系统调用将中断整个进程</p>
+<h4 id="One-to-One-模型"><a href="#One-to-One-模型" class="headerlink" title="One-to-One 模型"></a>One-to-One 模型</h4><p>每个用户级线程映射到一个内核级线程</p>
+<p>该模型和纯的内核线程类似，系统调用效率高，线程之间可并发，但是线程的创建开销很大</p>
+<h4 id="Many-to-Many-模型"><a href="#Many-to-Many-模型" class="headerlink" title="Many-to-Many 模型"></a>Many-to-Many 模型</h4><p>将<code>n</code>个用户级线程映射到<code>m</code>个内核级线程上，要求<code>m &lt;= n</code>。</p>
+<p>在多对一模型和一对一模型中取了个折中，克服了多对一模型的并发度不高的缺点，又克服了一对一模型的一个用户进程占用太多内核级线程，开销太大的缺点。又拥有多对一模型和一对一模型各自的优点，可谓集两者之所长。</p>
 
                 
             </div>
@@ -421,7 +535,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/03/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E9%93%BE%E6%8E%A5%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%BD%8D/">https://the-tarnished.github.io/2022/03/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E9%93%BE%E6%8E%A5%E4%B8%8E%E9%87%8D%E5%AE%9A%E4%BD%8D/</a>
+                    <a href="https://the-tarnished.github.io/2022/04/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/">https://the-tarnished.github.io/2022/04/07/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -512,6 +626,59 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
+                <a href="/2022/04/15/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="页面置换算法实现">
+                        
+                        <span class="card-title">页面置换算法实现</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
                 <a href="/2022/04/05/%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
                         
@@ -528,9 +695,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -548,55 +715,6 @@
                     
                     <a href="/tags/python/">
                         <span class="chip bg-color">python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/03/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="操作系统_内存管理">
-                        
-                        <span class="card-title">操作系统_内存管理</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-19
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    操作系统
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
                 </div>
@@ -727,6 +845,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
