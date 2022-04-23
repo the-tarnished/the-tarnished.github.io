@@ -411,6 +411,27 @@ tasks <span class="token operator">=</span> <span class="token punctuation">[</s
 loop <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>get_envent_loop<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">## 创建事件循环</span>
 loop<span class="token punctuation">.</span>run_until_complete<span class="token punctuation">(</span>asyncio<span class="token punctuation">.</span>wait<span class="token punctuation">(</span>tasks<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">## 调用tasks</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+<h2 id="aiohttp的使用"><a href="#aiohttp的使用" class="headerlink" title="aiohttp的使用"></a>aiohttp的使用</h2><p><code>aiohttp</code>是实现异步<code>http</code>协议操作的模块.该模块基于<code>asyncio</code>的异步<code>http</code>网络模块,既提供了服务端,也提供了客户端.服务端主要是用于处理请求与返回请求.客户端主要用于发起异步请求.爬虫只需要客户端就行.</p>
+<p>样例代码</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> aiohttp
+<span class="token keyword">import</span> asyncio
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">fetch</span><span class="token punctuation">(</span>session<span class="token punctuation">,</span>url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">async</span> <span class="token keyword">with</span> session<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">,</span>params <span class="token operator">=</span> params<span class="token punctuation">)</span> <span class="token keyword">as</span> response<span class="token punctuation">:</span> <span class="token comment">## with as用于python增加一个上下文管理器,自动分配和管理资源</span>
+        <span class="token keyword">return</span> <span class="token keyword">await</span> response<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>response<span class="token punctuation">.</span>status          <span class="token comment">## params 用于设置URL参数,和requests类似</span>
+
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">main</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span><span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">async</span> <span class="token keyword">with</span> aiohttp<span class="token punctuation">.</span>ClientSession<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> session<span class="token punctuation">:</span>
+        html<span class="token punctuation">,</span>status <span class="token operator">=</span> <span class="token keyword">await</span> fetch<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>html<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    url <span class="token operator">=</span> <span class="token string">''</span>
+    loop <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>get_event_loop<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    loop<span class="token punctuation">.</span>run_until_complete<span class="token punctuation">(</span>main<span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>aiohttp同样支持post请求等,和requests请求类似,就不赘述了</p>
 
                 
             </div>
