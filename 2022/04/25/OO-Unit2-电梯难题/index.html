@@ -4,11 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="爬虫基础">
-    <meta name="description" content="一、爬虫的基本原理概述爬虫就是假装浏览器爬取网页并获取信息.
-爬取数据类型
-最常见的就是爬虫能爬取JSON形式的HTML代码.
-对于js,css等文件,需分析源代码后台Ajax接口,或者使用Selenium,Splash,Pyppeteer">
+    <meta name="keywords" content="OO_Unit2_电梯难题, 零落闲拾">
+    <meta name="description" content="电梯难题这单元作业的主题是电车电梯难题,整体感觉还行,如果不去纠结最优,明白锁这个概念的话,实现难度还是挺低的。（感觉不如第一单元。。。。难度）
+同步和锁本次作业我没有使用lock(因为第一次作业用的synchronized,懒得改了).对">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>爬虫基础 | 零落闲拾</title>
+    <title>OO_Unit2_电梯难题 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -205,12 +203,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=486011445,3434971599&fm=253&fmt=auto&app=138&f=JPEG?w=922&h=500')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">爬虫基础</h1>
+                    <h1 class="description center-align post-title">OO_Unit2_电梯难题</h1>
                 </div>
             </div>
         </div>
@@ -326,8 +324,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/spider/">
-                                <span class="chip bg-color">spider</span>
+                            <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                                <span class="chip bg-color">面向对象</span>
                             </a>
                         
                     </div>
@@ -338,8 +336,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                爬虫学习
+                            <a href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-category">
+                                面向对象
                             </a>
                         
                     </div>
@@ -351,7 +349,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-01-16
+                    2022-04-25
                 </div>
                 
 
@@ -375,45 +373,85 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、爬虫的基本原理"><a href="#一、爬虫的基本原理" class="headerlink" title="一、爬虫的基本原理"></a>一、爬虫的基本原理</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>爬虫就是假装浏览器爬取网页并获取信息.</p>
-<h2 id="爬取数据类型"><a href="#爬取数据类型" class="headerlink" title="爬取数据类型"></a>爬取数据类型</h2><ul>
-<li>最常见的就是爬虫能爬取JSON形式的HTML代码.</li>
-<li>对于js,css等文件,需分析源代码后台Ajax接口,或者使用<code>Selenium</code>,<code>Splash</code>,<code>Pyppeteer</code>,<code>Playwright</code>等库来模拟js渲染.<h1 id="二、Session-和-Cookie"><a href="#二、Session-和-Cookie" class="headerlink" title="二、Session 和 Cookie"></a>二、Session 和 Cookie</h1><h2 id="无状态HTTP-查询wink状态"><a href="#无状态HTTP-查询wink状态" class="headerlink" title="无状态HTTP (#查询wink状态)"></a>无状态HTTP <del>(#查询wink状态)</del></h2>HTTP对无状态表示HTTP协议对于事务处理没有记忆能力,也就是说服务器并不知道客户端处于什么状态.这意味着如果需要处理前面的信息,客户端必须重传,造成资源浪费.所以,服务器端会保存一个<code>Session</code>,客户端保存一个<code>Cookie</code>,通过这两个凭证,服务器才能做出相应响应.<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2>Web中,Session对象用来存储特定用户是所需的属性和配置信息.这样用户再响应的网页跳转时,存储在Session中的信息不丢失.如果Session过期或者没有Session,服务器会创建一个Session.<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2>见<a href="the_principle_of_HTTP.md">HTTP原理</a><h2 id="Session维持"><a href="#Session维持" class="headerlink" title="Session维持"></a>Session维持</h2>客户端第一次请求服务器的时候,服务器会返回一个<code>Set_Cookie</code>.客户端保存响应字符串,并在之后的请求中带上<code>Cookie</code>.<code>Cookie</code>中保存着响应的<code>SessionID</code>,服务器通过查询<code>SessionID</code>来找到对应<code>Session</code>,进而判断用户状态.<h2 id="Cookie的属性结构"><a href="#Cookie的属性结构" class="headerlink" title="Cookie的属性结构"></a>Cookie的属性结构</h2>在浏览器中打开<code>Application</code>选项卡,<code>Storage</code>最后一项就是<code>Cookie</code>.</li>
-<li><strong>Name</strong>: <code>Cookie</code>名称</li>
-<li><strong>Value</strong>:<code>Cookie</code>的值,如果是<code>Unicode</code>字符则需要字符编码,如果是二进制数据,则是<code>BASE64</code>编码.</li>
-<li><strong>Domain</strong>:指定可以访问该<code>Cookie</code>的域名.表示该<code>Cookie</code>的可用范围.</li>
-<li><strong>Path</strong>:<code>Cookie</code>的使用路径.如果是/path/,则表示只在该路径可用,如果是/则表示在该<code>Domain</code>下都可用.</li>
-<li><strong>Size</strong>:表示<code>Cookie</code>的大小.</li>
-<li><strong>HTTP</strong>:<code>Cookie</code>的<code>httponly</code>属性,如果是<code>True</code>,则表示只有在<code>HTTP Headers</code>中才含有此<code>Cookie</code>,而不能使用<code>document.cookie</code>来访问此<code>Cookie</code>.</li>
-<li><strong>Secure</strong>:是否允许使用安全协议传输<code>Cookie</code>.<h2 id="会话Cookie和持久Cookie"><a href="#会话Cookie和持久Cookie" class="headerlink" title="会话Cookie和持久Cookie"></a>会话Cookie和持久Cookie</h2>会话<code>Cookie</code>和持久<code>Cookie</code>本质只是Cookie存储的位置不同,一个是存在缓存,一个是存在硬盘.持久<code>Cookie</code>的有效期很久,所以可以在下次登录的时候直接使用硬盘中的<code>Cookie</code>.<h1 id="三、代理的基本原理"><a href="#三、代理的基本原理" class="headerlink" title="三、代理的基本原理"></a>三、代理的基本原理</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2>代理本名代理服务器(<code>Proxy Server</code>),功能是代网络用户获得信息.客户端把请求发给代理服务器,代理服务器再把请求发给服务器.响应在经过代理服务器返回给客户端.在这个过程中服务器接受到的是代理服务器的<code>IP</code>.<h2 id="代理的作用"><a href="#代理的作用" class="headerlink" title="代理的作用"></a>代理的作用</h2></li>
-<li>突破IP访问限制,访问一些访问不到的站点 <del>(科学上网)</del></li>
-<li>访问一些单位或者团队的内部资源 (校园VPN)</li>
-<li>提高访问速度.代理服务器一般都有一个较大的硬盘缓冲区,可以保存数据.如果其他用户访问,可以直接把这些数据给用户(类似<code>cache</code>)</li>
-<li>隐藏真实的IP,保护个人信息.<h2 id="爬虫代理"><a href="#爬虫代理" class="headerlink" title="爬虫代理"></a>爬虫代理</h2>爬虫爬取速度过快,服务器检测到一个IP地址行为异常会直接封锁IP.使用代理,爬虫就会认为是代理服务器在访问自己,通过切换代理就能防止被发现.<h2 id="代理分类"><a href="#代理分类" class="headerlink" title="代理分类"></a>代理分类</h2><h3 id="根据协议区分"><a href="#根据协议区分" class="headerlink" title="根据协议区分"></a>根据协议区分</h3></li>
-<li>FTP代理,访问FTP服务器,主要端口是21和2121</li>
-<li>HTTP代理 访问HTTP服务器,主流的代理,端口是80和8080</li>
-<li>SSL/TLS代理 主要访问加密网站,一般有SSL和TLS加密功能,端口一般是443</li>
-<li>RTSP代理 主要用于Realplayer访问Real流服务器,端口一般是554</li>
-<li>Telnet代理 主要用于Telnet远程控制(黑客Ddos攻击时隐藏身份),一般端口时23</li>
-<li>POP3/SMTP代理 主要用于以POP3/SMTP发送邮件,具有缓存功能,端口一般是110/25</li>
-<li>SOCKS代理 单纯传递数据包,不关心协议和用法,一般有缓存功能,端口一般是1080.SOCK代理分为SOCKS4和SOCKS5.SOCKS4只支持TCP,SOCKS支持TCP和UDP,还支持身份验证机制,服务器端域名解析等.<h3 id="根据匿名程度区分"><a href="#根据匿名程度区分" class="headerlink" title="根据匿名程度区分"></a>根据匿名程度区分</h3></li>
-<li>高度匿名代理 将数据包原封不动转发,在服务端看来就是一个普通客户端,记录的是代理的IP</li>
-<li>普通匿名代理 会对数据包做一些处理,服务端可能发现这是一个代理,然后追查客户端的真实IP.这种代理通常会加入的HTTP头有HTTP_VIA,HTTP_X_FORWARDED_FOR</li>
-<li>透明代理 该种代理不仅会更改数据包,还会告诉服务器真实IP,主要用于过滤数据包,常用于内网防火墙.</li>
-<li>间谍代理 常见于组织或者个人创建的代理服务器,用于记录用户传输的数据,然后对传输数据进行研究和监控.<h3 id="常见代理设置"><a href="#常见代理设置" class="headerlink" title="常见代理设置"></a>常见代理设置</h3></li>
-<li>网上的免费代理,建议全部抓取下来一个个筛选,然后维护代理池.</li>
-<li>付费代理</li>
-<li>ADSL拨号,昂贵但是稳定性高</li>
-<li>蜂窝代理 即使用4G/5G网卡等制作的代理.该代理情形较小,封锁概念低,但是成本高.<h1 id="四、多线程和多进程的基本原理"><a href="#四、多线程和多进程的基本原理" class="headerlink" title="四、多线程和多进程的基本原理"></a>四、多线程和多进程的基本原理</h1><h2 id="线程和进程"><a href="#线程和进程" class="headerlink" title="线程和进程"></a>线程和进程</h2>进程可以理解为独立运行的程序单位.比如打开浏览器.<br>线程是进程中的多个任务,比如浏览器打开之后访问网址,加载网页,看视频能同时进行.这就是多线程<h2 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h2></li>
-<li>并发:指多个线程对应的多条指令被快速轮换地执行.人宏观上感受不到进程切换,感觉是一起执行</li>
-<li>并行:指同一时刻有多条指令在多个处理器上同时执行.宏观和微观上都是并行.<h2 id="多线程的爬虫应用场景"><a href="#多线程的爬虫应用场景" class="headerlink" title="多线程的爬虫应用场景"></a>多线程的爬虫应用场景</h2>爬虫在向服务器发送请求等待响应的时间内可以处理其他线程.<h2 id="Python中的多线程"><a href="#Python中的多线程" class="headerlink" title="Python中的多线程"></a>Python中的多线程</h2>Python中GIL(Global Interpreter Lock)的限制导致同一时刻下只可能进行一个线程,无法发挥多核并行的优势.所以不可能并行,只能并发.<h3 id="Python多线程下每个线程的执行方式"><a href="#Python多线程下每个线程的执行方式" class="headerlink" title="Python多线程下每个线程的执行方式:"></a>Python多线程下每个线程的执行方式:</h3></li>
-<li>获取GIL</li>
-<li>执行代码</li>
-<li>释放GIL<br>Python多进程效果强于多线程.因为每一个进程都有自己的GIL,互不干扰.而多线程需要频繁切换GIL,反而减慢速度.</br><br>可见大佬博客学习</br><blockquote>
-<p>python多线程:<a target="_blank" rel="noopener" href="https://cuiqingcai.com/3325.html">https://cuiqingcai.com/3325.html</a></br><br>python多进程:<a target="_blank" rel="noopener" href="https://cuiqingcai.com/3335.html">https://cuiqingcai.com/3335.html</a></br></p>
-</blockquote>
-</li>
+                <h1 id="电梯难题"><a href="#电梯难题" class="headerlink" title="电梯难题"></a>电梯难题</h1><p>这单元作业的主题是<del>电车</del>电梯难题,整体感觉还行,如果不去纠结最优,明白锁这个概念的话,实现难度还是挺低的。<del>（感觉不如第一单元。。。。难度）</del></p>
+<h2 id="同步和锁"><a href="#同步和锁" class="headerlink" title="同步和锁"></a>同步和锁</h2><p>本次作业我没有使用<code>lock</code><del>(因为第一次作业用的<code>synchronized</code>,懒得改了)</del>.对于同步块的选择,我的想法如下</p>
+<h3 id="为何需要同步代码块"><a href="#为何需要同步代码块" class="headerlink" title="为何需要同步代码块"></a>为何需要同步代码块</h3><p>同步块主要用于解决线程冲突问题.怎么判断线程冲突?我的判断方法是判断线程之间<strong>权力是否对等</strong>.</p>
+<p>权力是否对等指的是读写权力是否相等.如果线程之间不是全读,或者全写的话,那么对这个临界数据的操作就<strong>必须是原子性</strong>的,既,其必须处于同步代码块.</p>
+<h3 id="怎么放置同步代码块"><a href="#怎么放置同步代码块" class="headerlink" title="怎么放置同步代码块"></a>怎么放置同步代码块</h3><p>语法层面这个很简单,不赘诉了.<del>(有手就行)</del>重点是如何将其最小化,提高线程的效率.</p>
+<p>我的原则如下:</p>
+<ul>
+<li><strong><code>run</code>方法里面没有锁</strong>:run方法不放置同步代码块,只调用类方法,锁由对应类方法实现,.这样使得run方法简单,也不会出现疏忽导致一个锁锁了不应该的方法.</li>
+<li><strong>锁指出具体的对象,而不是锁方法</strong>:锁方法锁的是<code>this</code>指针,这代表着<code>this</code>被共享出去,但是实际情况下并不是这样,比如<strong>调度器既是生产者也是消费者</strong>,如果锁了<code>this</code>,那么电梯读数据的时候,调度器也不能从输入线程获得数据,这样<strong>输入线程和电梯线程同时被阻塞</strong>.</li>
+<li><strong>变量的声明放出锁外,锁内只有对共享资源的读/写等操作</strong>:这个容易理解,让锁最小.</li>
 </ul>
+<h2 id="架构分享"><a href="#架构分享" class="headerlink" title="架构分享"></a>架构分享</h2><h3 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h3><p>下面是我最后一次迭代出来的架构:<br>这是我的处理请求的模型:<br><img src="images/%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86.png" alt="请求处理">  </p>
+<p>这是我的UML图:<br><strong>调度器</strong>:<br><img src="images/%E8%B0%83%E5%BA%A6%E5%99%A8.png" alt="调度器"><br>主调度器使用了单例模式<br>TransferTable保存了整个大楼的联通情况,通过Dijstra算法获得最优路径.<br><strong>电梯</strong>:<br><img src="images/%E7%94%B5%E6%A2%AF.png" alt="电梯"><br>ElevatorFloorA和ElevatorBuildingA本是为了防止特种电梯,比如停奇数楼层等,但是没有这种电梯,但是架构就没有改变,留下了拓展的余地.<br>OutputThread是用于输出信息的,加了一层封装保证线程安全<br>这是我的协作图:<br>主函数/Input Thread:<br><img src="images/Input_Thread.png" alt="Input_Thread"><br>主调度器的协作图:<br><img src="images/Main_Dispatch.png" alt="Main_Dispatch"><br>副调度器:<br><img src="images/SubDispatch.png" alt="SubDispatch"><br>电梯:<br><img src="images/Elevetor.png" alt="Elevetor">  </p>
+<h3 id="细节分析"><a href="#细节分析" class="headerlink" title="细节分析"></a>细节分析</h3><h4 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h4><p>我的调度器分为主调度器<code>(Main Dispatch)</code>和副调度器<code>(SubDispatch)</code>.</p>
+<p><strong>主调度器</strong>负责获得输入线程的请求,规划请求的路线,并把请求分配给对应的副调度器</p>
+<p><strong>副调度器</strong>负责获得主调度器分配的请求,并根据请求的<code>from</code>安置在容器的不同位置,方便电梯根据自己的位置寻找请求.</p>
+<p>因此调度器既是生产者也是消费者.</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Dispatch</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">//...</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token class-name">MyPersonRequest</span> get <span class="token operator">=</span> <span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//消费者获得数据</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>isInterrupted<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//用于终止子线程</span>
+          <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">distributeRequest</span><span class="token punctuation">(</span>get<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 分发数据</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="电梯"><a href="#电梯" class="headerlink" title="电梯"></a>电梯</h4><p>电梯我的策略是类似<code>als</code>的策略,使用的自由竞争的策略.<br><strong>电梯的启动</strong><br>电梯静置状态搜索队列,寻找离自己最远的哪一个请求,然后行驶到对应的位置接受请求.<br><strong>电梯的捎带</strong><br>电梯在行驶到目的地之前会捎带沿途中同方向的请求.捎带请求之后,更新自己的目的地.</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Elevator</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">&#123;</span>
+  <span class="token comment">//...</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token class-name">MyPersonRequest</span> get <span class="token operator">=</span> <span class="token function">getFreeRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>isInterrupted<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token function">running</span><span class="token punctuation">(</span>get<span class="token punctuation">.</span><span class="token function">getTo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">running</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isArrival</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">needOpen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">getIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">getOff</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去往下一层</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="请求的规划和换乘"><a href="#请求的规划和换乘" class="headerlink" title="请求的规划和换乘"></a>请求的规划和换乘</h3><h4 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h4><p>本次作业,对于请求的规划我使用的是<code>Dijstra</code>算法求得路径最短和换乘最少的一个最优结果.</p>
+<p><strong>图的初始化</strong>:<br>对于请求换乘只存在环状电梯,所以换乘最少也是只针对环状电梯,因此,对于图我的初始化方法是:</p>
+<ul>
+<li>对于<strong>竖形电梯</strong>,两个结点的距离如下:<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> dist <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>floor1<span class="token operator">-</span>floor2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>对于<strong>环形电梯</strong>,两个结点的距离如下:<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> dist <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">nonStop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token operator">:</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">114514</span><span class="token punctuation">;</span> 
+<span class="token comment">//如果这两个结点能直达则为1,不能直达则为一个极大值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+</ul>
+<p>这样如果两个环状电梯结点不能直达,则其路径长度大于等于2,如果能直达则为1,相当于加入了<strong>换乘惩罚</strong>.</p>
+<p>至于Dijstra算法则不再赘述,求得最短路径,获得前导结点,修改请求即可.</p>
+<h4 id="换乘"><a href="#换乘" class="headerlink" title="换乘"></a>换乘</h4><p>在第一次作业中,为了防止电梯没有完成任务就结束,我建立了电梯和主调度器的反馈管道.当任务完成,则主调度器记录完成的任务增加,这样在结束的时候,只需要判断完成的任务是否等于输入的任务.这一个反馈管道在第三次作业中也承担了换乘请求的处理,电梯完成第一阶段任务之后,将请求返回主调度器,主调度器就能继续对其进行分发.</p>
+<h4 id="请求的维护"><a href="#请求的维护" class="headerlink" title="请求的维护"></a>请求的维护</h4><p>如果一个请求为<code>1-FROM-A-5-TO-D-8</code>,经过Dijstra算法之后,其路径为:<br><img src="images/%E8%AF%B7%E6%B1%82%E9%93%BE%E8%A1%A8.png" alt="请求链表">  </p>
+<p>为了防止电梯获得不应该获得的数据,对于请求的读取由两个指针控制,分别为<code>from</code>,<code>to</code>,这样,完成一个任务之后,把<code>from</code>指针对应的结点删除,两个结点移动一个结点,这就变成了一个新的请求.其流程图如下:</p>
+<p><img src="images/%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="请求处理流程图">  </p>
+<h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><p>本单元的自动化测试特别感想<code>@wzm</code>大佬,和我一起<del>结对编程</del>,我负责数据生成部分,他负责正确性判断.</p>
+<p>数据生成思路:<br>主要数据分类为<strong>增加电梯指令</strong>,<strong>高并发数据</strong>,<strong>捎带数据</strong>,<strong>弱数据</strong>.</p>
+<h3 id="竖形电梯数据"><a href="#竖形电梯数据" class="headerlink" title="竖形电梯数据:"></a>竖形电梯数据:</h3><p>  该类数据生成较为简单,只需要选定起始楼层和终止楼层即可.为了数据强度,在决定起始楼层之后,在确定一个gap大小,则<br>  $$[baseFloor-gap,baseFloor) \bigcup (baseFloor,baseFloor+gap]$$则为目的楼层的范围,在这个范围内的值多次取值则为目的楼层.只要取值次数够多,则并发数据强度就够高.同时,对于捎带类数据,选择该范围内的数据为起始楼层,就能建立数据之间的捎带关系.</p>
+<h3 id="环状电梯数据"><a href="#环状电梯数据" class="headerlink" title="环状电梯数据:"></a>环状电梯数据:</h3><p>  数据生成方法和上面类似,只是,环状电梯需要维护一个<code>transferTable</code>表,该表记录了<code>building</code>之间的联通关系,在生成新的电梯之后更新它,之后在生成并发数据和捎带数据,则要在表中记录的楼层周围生成,以测试环状电梯的功能.</p>
+<h2 id="bug分析"><a href="#bug分析" class="headerlink" title="bug分析"></a>bug分析</h2><h3 id="自我bug分析"><a href="#自我bug分析" class="headerlink" title="自我bug分析"></a>自我bug分析</h3><p>我对自己代码的检查方法主要是<strong>单元测试</strong>,在实现一个功能之后,先测试功能的正确性,再继续编写其他部分.比如路径规划部分,在编写完之后,输入请求测试其功能.在整体编写完毕之后,则是使用评测机进行随机测试.</p>
+<p>分享一个很有意思的bug:</p>
+<p>我调度器的<code>run</code>方法会在开始的时候将该调度器管理的电梯全部<code>start</code>.同时,输入线程如果输入增加电梯的请求,那么副调度其会在容器里面增加对应的电梯,并<code>start</code>该电梯.这个时候问题就出现了,如果一个新增的电梯的请求在调度器<code>start</code>电梯之前出现,那么这个电梯就会被<code>start</code>两次.其原因就是增加电梯这件事情不是由副调度器完成,而是主调度器直接访问对应副调度器的容器然后增加,并且<code>start</code>,也就是说<strong>一个线程是两个线程的子线程</strong>,这是不安全的.</p>
+<p>最后的解决方法则是将容器分裂为两个,一个面向副调度器,一个面向主调度器.这样一个解决方法并不优雅,<del>但能用就行</del>.</p>
+<h3 id="他人bug分析"><a href="#他人bug分析" class="headerlink" title="他人bug分析"></a>他人bug分析</h3><p>对于他人的bug的发现方法主要是评测机跑数据.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次作业感觉在处理上面没有第一单元困难,只需要写好每一个电梯的功能即可,因此只要明白锁和一些设计模式(流水线模式等),即可完成本单元作业,哪怕使用自由竞争也依然有很高的性能分.<br>线程安全上,只要按照前面的原则判断是否需要同步代码块,怎样安排同步代码块,至少先线程通信的时候,临界区的线程安全是没有问题的.<br>架构设计上,主要就是生产者消费者模型和流水线模型,分清楚每一个类在和不同线程之间中承担什么工作,做好抽象,难度尚可.<br>至于细节上面,使用Dijstra这些成熟的算法,而不是自己造轮子.<br>希望下一单元越来越好.</p>
 
                 
             </div>
@@ -440,7 +478,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/01/16/the_principle_of_crawler/">https://the-tarnished.github.io/2022/01/16/the_principle_of_crawler/</a>
+                    <a href="https://the-tarnished.github.io/2022/04/25/OO-Unit2-%E7%94%B5%E6%A2%AF%E9%9A%BE%E9%A2%98/">https://the-tarnished.github.io/2022/04/25/OO-Unit2-%E7%94%B5%E6%A2%AF%E9%9A%BE%E9%A2%98/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -478,8 +516,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/spider/">
-                                    <span class="chip bg-color">spider</span>
+                                <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                                    <span class="chip bg-color">面向对象</span>
                                 </a>
                             
                         </div>
@@ -527,16 +565,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/01/16/the_use_of_requests/">
+                <a href="/2022/04/25/OO-Unit2-%E7%94%B5%E6%A2%AF%E9%9A%BE%E9%A2%98/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-3.yxdown.com%2F2016%2F5%2F23%2FKDYwMHgp%2Fff9199a4-4ab5-409d-864b-b161fe980bed.jpg&refer=http%3A%2F%2Fi-3.yxdown.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002512&t=bc9bdf244c5dfd3f2e1bc1de1d9b522e" class="responsive-img" alt="Requests的使用">
                         
-                        <span class="card-title">Requests的使用</span>
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="OO_Unit2_电梯难题">
+                        
+                        <span class="card-title">OO_Unit2_电梯难题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -546,30 +586,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
+                            <a href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-category">
+                                    面向对象
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/spider/">
-                        <span class="chip bg-color">spider</span>
+                    <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                        <span class="chip bg-color">面向对象</span>
                     </a>
                     
                 </div>
@@ -583,12 +620,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/16/the_use_of_urllib/">
+                <a href="/2022/04/15/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">
                     <div class="card-image">
                         
-                        <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpsv.tgbus.com%2FUploadFiles_5352%2F201306%2F20130614104148898.jpg&refer=http%3A%2F%2Fpsv.tgbus.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645002876&t=88f32ad5e48f5a275529653df17d2dbc" class="responsive-img" alt="urllib的使用">
                         
-                        <span class="card-title">urllib的使用</span>
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="页面置换算法实现">
+                        
+                        <span class="card-title">页面置换算法实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -599,14 +637,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-16
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
                                 </a>
                             
                             
@@ -620,8 +658,8 @@
                         <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/spider/">
-                        <span class="chip bg-color">spider</span>
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
                     </a>
                     
                 </div>
@@ -752,6 +790,13 @@
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
