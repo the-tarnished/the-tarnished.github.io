@@ -825,15 +825,184 @@ SV (S1, d1, S2, d2, ..., Sn, dn) :
 <li><code>send(destination,&amp;message)</code></li>
 <li><code>receive(source,&amp;message)</code></li>
 </ul>
-<p>调用方式:</p>
+<p><strong>调用方式</strong>:</p>
 <ul>
 <li>阻塞调用</li>
 <li>非阻塞调用(maybe内核线程)</li>
 </ul>
-<p>主要问题:</p>
+<p><strong>主要问题</strong>:</p>
 <ul>
 <li>解决信息丢失,延迟问题</li>
 <li>编址问题</li>
+</ul>
+<p><strong>传递过程</strong>:<br>调用send()之后,首先<strong>陷入内核态</strong>,然后<strong>复制message于消息缓冲区</strong>.之后将消息缓冲区<strong>挂载到接受进程的消息队列</strong>.之后调用receive()函数则将消息队列的消息<strong>复制</strong>过来.</p>
+<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><p>该方式是最有用的进程通信方式,因为省去了开销很大的缓冲复制过程.</p>
+<p>共享内存意味着同一块物理内存被映射到了两个不同进程的进程地址空间.通过信号量等方法实现共享内存的互斥和同步.</p>
+<h3 id="经典进程同步问题"><a href="#经典进程同步问题" class="headerlink" title="经典进程同步问题"></a>经典进程同步问题</h3><h4 id="生产者消费者模型"><a href="#生产者消费者模型" class="headerlink" title="生产者消费者模型"></a>生产者消费者模型</h4><p>基础生产者消费者问题:</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token constant">SEMAPHORE</span> full <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token constant">SEMAPHORE</span> empty <span class="token operator">=</span> <span class="token constant">N</span>
+<span class="token constant">SEMAPHORE</span> mutex <span class="token operator">=</span> <span class="token number">1</span>         <span class="token comment">// protect buffer</span>
+
+<span class="token constant">VAR</span> buffer<span class="token punctuation">[</span><span class="token constant">N</span><span class="token punctuation">]</span>
+<span class="token constant">VAR</span> buf_in <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token constant">VAR</span> buf_out <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token constant">PRODUCER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token constant">WHILE</span> <span class="token constant">TRUE</span> <span class="token operator">:</span>
+        next <span class="token operator">=</span> <span class="token comment">// produce `next` //</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        buffer<span class="token punctuation">[</span>buf_in<span class="token punctuation">]</span> <span class="token operator">=</span> next
+        buf_in <span class="token operator">=</span> <span class="token punctuation">(</span>buf_in <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token constant">N</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>full<span class="token punctuation">)</span>
+<span class="token constant">CONSUMER</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token constant">WHILE</span> <span class="token constant">TRUE</span> <span class="token operator">:</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>full<span class="token punctuation">)</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        next <span class="token operator">=</span> buffer<span class="token punctuation">[</span>buf_out<span class="token punctuation">]</span>
+        buf_out <span class="token operator">=</span> <span class="token punctuation">(</span>buf_out <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> <span class="token constant">N</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>empty<span class="token punctuation">)</span>
+        <span class="token comment">// consume `next` //</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>扩展问题:设有一个可以装A, B两种物品的仓库, 其容量无限大, 但要求仓库中A, B两种物品的数量 $C_A$ 和 $C_B$​ 满足下述不等式:<br>$$−M \le C_A​−C_B ​\le N \quad (M,N \in Z+)$$</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token constant">SEMAPHORE</span> mutex <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token constant">SEMAPHORE</span> sem_a <span class="token operator">=</span> <span class="token constant">N</span>
+<span class="token constant">SEMAPHORE</span> sem_b <span class="token operator">=</span> <span class="token constant">M</span>
+
+<span class="token constant">A</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token constant">WHILE</span> <span class="token constant">TRUE</span> <span class="token operator">:</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>sem_a<span class="token punctuation">)</span>   
+        <span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token comment">// A --> warehouse //</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>sem_b<span class="token punctuation">)</span> <span class="token comment">//增加B的上限</span>
+<span class="token constant">B</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span>
+    <span class="token constant">WHILE</span> <span class="token constant">TRUE</span> <span class="token operator">:</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>sem_b<span class="token punctuation">)</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token comment">// B --> warehouse //</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>sem_a<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="读者写者问题"><a href="#读者写者问题" class="headerlink" title="读者写者问题"></a>读者写者问题</h4><p>读者优先:</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">int readers <span class="token operator">=</span> <span class="token number">0</span>
+Semaphore mutex <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//互斥</span>
+Semaphore roomEmpty <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//是否能容下其他人</span>
+Semaphore turnstile <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//闸机控制</span>
+
+<span class="token literal-property property">Reader</span><span class="token operator">:</span>
+<span class="token comment">//进入</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+    readers <span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> readers <span class="token operator">==</span> <span class="token number">1</span><span class="token operator">:</span>
+        <span class="token constant">P</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span> <span class="token comment">//不允许写者进入</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+<span class="token comment">//read critical region</span>
+
+<span class="token comment">//离开</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+    readers<span class="token operator">--</span>
+    <span class="token keyword">if</span> readers <span class="token operator">==</span> <span class="token number">0</span><span class="token operator">:</span>
+        <span class="token constant">V</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span>
+
+<span class="token literal-property property">Writer</span><span class="token operator">:</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span> <span class="token comment">//禁止其他读者进入</span>
+    <span class="token constant">P</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span> <span class="token comment">//等待里面的读者出来</span>
+    <span class="token comment">//write critical region</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>公平</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">int readers <span class="token operator">=</span> <span class="token number">0</span>
+Semaphore roomEmpty <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//是否能容下其他人</span>
+Semaphore turnstile <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//闸机控制</span>
+
+<span class="token literal-property property">Reader</span><span class="token operator">:</span>
+<span class="token comment">//进入</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
+<span class="token comment">//read critical region</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
+
+
+<span class="token literal-property property">Writer</span><span class="token operator">:</span>
+<span class="token constant">P</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span> <span class="token comment">//禁止其他读者进入</span>
+    <span class="token constant">P</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span> <span class="token comment">//等待里面的读者出来</span>
+    <span class="token comment">//write critical region</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
+<span class="token constant">V</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p><strong>死锁</strong>:如果一个进程集合中的<strong>每个进程</strong>都在等待只能由该进程集合中其他进程才能<strong>引发的事件</strong>，那么该进程集合就是死锁的。</p>
+<p><strong>资源死锁</strong>:如果<strong>每个进程</strong>等待的事件是释放该进程集合中其他进程所占有的<strong>资源</strong>。</p>
+<h3 id="必要条件"><a href="#必要条件" class="headerlink" title="必要条件"></a>必要条件</h3><ul>
+<li><strong>互斥条件</strong>:指进程对所分配到的资源进行排他性使用,即在一段时间内资源只能有一个进程占用</li>
+<li><strong>保持和请求条件</strong>:已经获得资源的线程可以请求新的资源</li>
+<li><strong>不剥夺条件</strong>:指进程已获得的资源,再未使用完之前不能被强制剥夺,只能在使用完时由自己释放</li>
+<li><strong>环路等待条件</strong>:指在发生死锁时,必然存在两个或多个进程组成的环形链,每个进程都在等待环形链中下一个节点占用的资源.</li>
+</ul>
+<h3 id="死锁处理方法"><a href="#死锁处理方法" class="headerlink" title="死锁处理方法"></a>死锁处理方法</h3><h4 id="鸵鸟算法"><a href="#鸵鸟算法" class="headerlink" title="鸵鸟算法"></a>鸵鸟算法</h4><p><del><strong>神中神</strong></del>.<br>OS无所作为,全部交给程序员来负责</p>
+<h4 id="死锁检测与死锁恢复"><a href="#死锁检测与死锁恢复" class="headerlink" title="死锁检测与死锁恢复"></a>死锁检测与死锁恢复</h4><p>允许死锁发生,当检测死锁放生之后,采取措施恢复<br>死锁检测算法:</p>
+<ul>
+<li>基于资源分配图,每类一个资源</li>
+<li>基于资源向量计算,每类多个资源</li>
+</ul>
+<h4 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h4><p>破坏死锁的四个必要条件.</p>
+<h4 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h4><p>在资源分配之前判断是否安全,仅当安全才进行分配.需要依赖执行前获取额外信息.</p>
+<h3 id="资源分配图"><a href="#资源分配图" class="headerlink" title="资源分配图"></a>资源分配图</h3><p>每类资源一个的死锁检测<br>按照资源请求和释放的序列对图进行操作，并在每步操作后检查是否存在环。<br>可用作分析是否存在死锁的工具</p>
+<h3 id="资源向量计算"><a href="#资源向量计算" class="headerlink" title="资源向量计算"></a>资源向量计算</h3><p>矩阵介绍:</p>
+<ul>
+<li>E:存在资源向量:表示每类资源的总量</li>
+<li>A:可用资源向量:表示当前未分配可使用的资源数</li>
+<li>C:当前分配矩阵:表示第i个行向量对应第i个进程已经分配到的各类资源数量</li>
+<li>R:请求矩阵:第i个行向量表示进程i所需要的资源数量<br>$\displaystyle \sum C_{ij} + A_j = E_j$</li>
+</ul>
+<p>算法步骤:</p>
+<ul>
+<li>寻找进程$P_i$,其在R矩阵中对应的第i行小于等于A</li>
+<li>如果找到,将C矩阵的第i行加入A,标记该进程执行完毕,转到第一步</li>
+<li>如果找不到,结束</li>
+</ul>
+<h3 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h3><ul>
+<li>资源抢占法:<br>挂起一些占有资源的进程，剥夺它们的资源以解除死锁，将资源分配给另一个死锁进程使其能够执行完毕，然后再激活被挂起的进程</li>
+<li>杀死进程法:<ul>
+<li>杀死一个或者若干个进程,杀死的线程应该是重新执行无副作用的进程,根据资源情况,杀死环内或者环外的进程</li>
+</ul>
+</li>
+<li>回滚法:<ul>
+<li>设置检查点,根据死锁时所需要的资源,将一个拥有资源的进程滚回一个未占用资源的检查点状态,从而使得其他死锁进程能够获得响应的资源</li>
+</ul>
+</li>
+</ul>
+<h3 id="死锁预防-1"><a href="#死锁预防-1" class="headerlink" title="死锁预防"></a>死锁预防</h3><ul>
+<li><strong>打破互斥</strong>:<br>允许进程同时访问某些资源</li>
+<li><strong>打破保持和请求条件</strong>:<br>在进程开始执行前请求所需的全部资源。只有当系统能够满足当前进程的全部资源需求时，才一次性地将所申请的资源全部分配给该进程，否则不分配任何资源。或者请求之前先释放资源,再尝试获得所有资源<ul>
+<li>缺点:<ul>
+<li>资源不可预测</li>
+<li>资源利用率低</li>
+<li>降低进程并发</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>打破不可抢占条件</strong>:<br>允许进程强行从占有者哪里夺取那些资源.</li>
+<li><strong>打破循环等待条件</strong>:<br>实行资源有序分配策略。即把资源事先分类编号，所有进程对资源的请求必须严格按资源序号递增的顺序提出，使进程在申请，占用资源时不会形成环路，从而预防了死锁。<ul>
+<li>缺点:增加开销,增加了进程对资源的占用时间</li>
+</ul>
+</li>
+</ul>
+<h3 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h3><p>5个哲学家围绕一张圆桌而坐，桌子上放着5支筷子(叉子)，每两个哲学家之间放一支；哲学家必须拿到左右两只筷子才能吃饭。<br><strong>方法</strong>:</p>
+<ul>
+<li><strong>破除循环等待</strong>:<ul>
+<li>至多允许四个哲学家同时拿起筷子,保证至少一个哲学家就餐.</li>
+<li>奇数号哲学家先拿左再拿右,偶数人反之</li>
+<li>同时拿起两根筷子,或者不拿起</li>
+</ul>
+</li>
 </ul>
 
                 
