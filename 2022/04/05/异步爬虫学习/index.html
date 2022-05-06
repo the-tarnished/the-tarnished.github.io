@@ -432,7 +432,14 @@ loop<span class="token punctuation">.</span>run_until_complete<span class="token
     loop<span class="token punctuation">.</span>run_until_complete<span class="token punctuation">(</span>main<span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token keyword">for</span> _ <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>aiohttp同样支持post请求等,和requests请求类似,就不赘述了</p>
+<h3 id="并发限制"><a href="#并发限制" class="headerlink" title="并发限制"></a>并发限制</h3><p>使用<code>asyncio</code>的<code>Semaphore</code>控制并发量,防止网站崩掉<br>类似于<code>P/V</code>原语,<code>Semaphore</code>定义的信号量需要自己手动管理,这个时候就展示出<code>with</code>的妙用了</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> asyncio
+CONCURRENCE <span class="token operator">=</span> <span class="token number">10</span>
+semaphore <span class="token operator">=</span> asyncio<span class="token punctuation">.</span>Semaphore<span class="token punctuation">(</span>CONCURRENCE<span class="token punctuation">)</span>
 
+<span class="token keyword">async</span> <span class="token keyword">def</span> <span class="token function">getURL</span><span class="token punctuation">(</span>URL<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">async</span> <span class="token keyword">with</span> semaphore<span class="token punctuation">:</span> <span class="token comment">##相当于在开头结尾增加 P(semaphore)  V(semaphore)</span>
+        <span class="token keyword">pass</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
