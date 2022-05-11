@@ -383,15 +383,15 @@
 <h2 id="编程方式"><a href="#编程方式" class="headerlink" title="编程方式"></a>编程方式</h2><p><code>Lua</code>语言支持脚本式编程.<br>一般情况下,直接写代码,然后<code>lua xxx.lua</code>运行.<br>但是,可以通过开头添加<code>#!/usr/local/bin/lua</code>的方式,指定解释器位置,使用类似<code>.bat</code>文件的方式运行.</p>
 <p><code>Lua</code>同时也支持交互式编程,具体可见python.</p>
 <h2 id="注释方式"><a href="#注释方式" class="headerlink" title="注释方式"></a>注释方式</h2><p><code>Lua</code>的注释方式很奇特.<br>单行注释:</p>
-<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">--hello World
- print(&quot;Hello World&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">--hello World</span>
+ <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>多行注释:</p>
-<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">--[[
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">--[[
  如果爱
  请干净的爱
  把爱情献给爱情
- --]]
- print(&quot;Hello World&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ --]]</span>
+ <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>因为注释是<code>--</code>,因此<code>Lua</code>不支持自增自减运算</p>
 <h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
 <thead>
@@ -447,9 +447,9 @@ t<span class="token punctuation">.</span>i
 <span class="token function">gettable_event</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span>i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>方法和用途:<br>|方法|用途|<br>|:–:|:–:|<br>|<code>table.concat (table [, sep [, start [, end]]])</code>|列出从<code>start</code>到<code>end</code>的所有元素,元素之间以<code>sep</code>分割|<br>|<code>table.insert (table, [pos,] value)</code>|插入元素,默认为尾部|<br>|table.remove (table [, pos])|删除指定位置的元素,默认为最后一个|<br>|table.sort()|排序|</p>
 <h3 id="function"><a href="#function" class="headerlink" title="function"></a>function</h3><p>因为<code>function</code>变成了数据类型,因此,可以通过变量存储函数,类似函数指针.<br>同时,因为变成了变量,因此可以直接声明一个函数当成参数传给另一个函数.<br>函数的声明:</p>
-<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">function fun()
---pass
-end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">--pass</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>函数支持多返回值</p>
 <h3 id="userdata"><a href="#userdata" class="headerlink" title="userdata"></a>userdata</h3><p>自定义数据,用于表示一种由应用程序或 C/C++ 语言库所创建的类型，可以将任意 C/C++ 的任意数据类型的数据（通常是 struct 和 指针）存储到 Lua 变量中调用。</p>
 <h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>对于变量声明,<code>local</code>表示局部变量,不加修饰就是全局变量,因此可以在函数里面声明一个全局变量.<code>Lua</code>很神奇吧</p>
