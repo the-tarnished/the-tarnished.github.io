@@ -4,9 +4,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="OO_Unit2_电梯难题, 零落闲拾">
-    <meta name="description" content="电梯难题这单元作业的主题是电车电梯难题,整体感觉还行,如果不去纠结最优,明白锁这个概念的话,实现难度还是挺低的。（感觉不如第一单元。。。。难度）
-同步和锁本次作业我没有使用lock(因为第一次作业用的synchronized,懒得改了).对">
+    <meta name="keywords" content="Lua语言总结, 零落闲拾">
+    <meta name="description" content="Lua
+这个名字总让我想起月亮.
+
+基本介绍Lua是一种轻量小巧的脚本语言,使用标准C语言编写,支持面向过程和函数式编程,其和C不同,不需要程序员考虑内存的问题,语言自动管理内存.其主要目的是嵌入程序中,为程序提供灵活扩展
+编程方式Lua语">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>OO_Unit2_电梯难题 | 零落闲拾</title>
+    <title>Lua语言总结 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -203,12 +206,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">OO_Unit2_电梯难题</h1>
+                    <h1 class="description center-align post-title">Lua语言总结</h1>
                 </div>
             </div>
         </div>
@@ -324,8 +327,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-                                <span class="chip bg-color">面向对象</span>
+                            <a href="/tags/Lua/">
+                                <span class="chip bg-color">Lua</span>
                             </a>
                         
                     </div>
@@ -336,8 +339,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-category">
-                                面向对象
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                编程语言学习
                             </a>
                         
                     </div>
@@ -349,7 +352,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-04-25
+                    2022-05-11
                 </div>
                 
 
@@ -373,85 +376,143 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="电梯难题"><a href="#电梯难题" class="headerlink" title="电梯难题"></a>电梯难题</h1><p>这单元作业的主题是<del>电车</del>电梯难题,整体感觉还行,如果不去纠结最优,明白锁这个概念的话,实现难度还是挺低的。<del>（感觉不如第一单元。。。。难度）</del></p>
-<h2 id="同步和锁"><a href="#同步和锁" class="headerlink" title="同步和锁"></a>同步和锁</h2><p>本次作业我没有使用<code>lock</code><del>(因为第一次作业用的<code>synchronized</code>,懒得改了)</del>.对于同步块的选择,我的想法如下</p>
-<h3 id="为何需要同步代码块"><a href="#为何需要同步代码块" class="headerlink" title="为何需要同步代码块"></a>为何需要同步代码块</h3><p>同步块主要用于解决线程冲突问题.怎么判断线程冲突?我的判断方法是判断线程之间<strong>权力是否对等</strong>.</p>
-<p>权力是否对等指的是读写权力是否相等.如果线程之间不是全读,或者全写的话,那么对这个临界数据的操作就<strong>必须是原子性</strong>的,既,其必须处于同步代码块.</p>
-<h3 id="怎么放置同步代码块"><a href="#怎么放置同步代码块" class="headerlink" title="怎么放置同步代码块"></a>怎么放置同步代码块</h3><p>语法层面这个很简单,不赘诉了.<del>(有手就行)</del>重点是如何将其最小化,提高线程的效率.</p>
-<p>我的原则如下:</p>
-<ul>
-<li><strong><code>run</code>方法里面没有锁</strong>:run方法不放置同步代码块,只调用类方法,锁由对应类方法实现,.这样使得run方法简单,也不会出现疏忽导致一个锁锁了不应该的方法.</li>
-<li><strong>锁指出具体的对象,而不是锁方法</strong>:锁方法锁的是<code>this</code>指针,这代表着<code>this</code>被共享出去,但是实际情况下并不是这样,比如<strong>调度器既是生产者也是消费者</strong>,如果锁了<code>this</code>,那么电梯读数据的时候,调度器也不能从输入线程获得数据,这样<strong>输入线程和电梯线程同时被阻塞</strong>.</li>
-<li><strong>变量的声明放出锁外,锁内只有对共享资源的读/写等操作</strong>:这个容易理解,让锁最小.</li>
+                <h1 id="Lua"><a href="#Lua" class="headerlink" title="Lua"></a>Lua</h1><blockquote>
+<p>这个名字总让我想起月亮.</p>
+</blockquote>
+<h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p><code>Lua</code>是一种轻量小巧的<strong>脚本语言</strong>,使用标准C语言编写,支持面向过程和函数式编程,其和C不同,不需要程序员考虑内存的问题,语言自动管理内存.<br>其主要目的是嵌入程序中,为程序提供灵活扩展</p>
+<h2 id="编程方式"><a href="#编程方式" class="headerlink" title="编程方式"></a>编程方式</h2><p><code>Lua</code>语言支持脚本式编程.<br>一般情况下,直接写代码,然后<code>lua xxx.lua</code>运行.<br>但是,可以通过开头添加<code>#!/usr/local/bin/lua</code>的方式,指定解释器位置,使用类似<code>.bat</code>文件的方式运行.</p>
+<p><code>Lua</code>同时也支持交互式编程,具体可见python.</p>
+<h2 id="注释方式"><a href="#注释方式" class="headerlink" title="注释方式"></a>注释方式</h2><p><code>Lua</code>的注释方式很奇特.<br>单行注释:</p>
+<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">--hello World
+ print(&quot;Hello World&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>多行注释:</p>
+<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">--[[
+ 如果爱
+ 请干净的爱
+ 把爱情献给爱情
+ --]]
+ print(&quot;Hello World&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为注释是<code>--</code>,因此<code>Lua</code>不支持自增自减运算</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>nil</code></td>
+<td align="center">等同于<code>NULL</code>,但是在<code>Lua</code>中,这是一个数据类型,</td>
+</tr>
+<tr>
+<td align="center"><code>boolean</code></td>
+<td align="center">布尔值,<code>nil</code>和<code>false</code>为假,<code>true</code>和非<code>nil</code>为真,因此,0为<code>true</code></td>
+</tr>
+<tr>
+<td align="center"><code>number</code></td>
+<td align="center">双精度浮点数,和<code>double</code>一样</td>
+</tr>
+<tr>
+<td align="center"><code>string</code></td>
+<td align="center">字符串</td>
+</tr>
+<tr>
+<td align="center"><code>function</code></td>
+<td align="center">由<code>C</code>或<code>Lua</code>编写的函数</td>
+</tr>
+<tr>
+<td align="center"><code>userdata</code></td>
+<td align="center">任意存储在变量中的<code>C</code>数据结构</td>
+</tr>
+<tr>
+<td align="center"><code>thread</code></td>
+<td align="center">线程</td>
+</tr>
+<tr>
+<td align="center"><code>table</code></td>
+<td align="center">是一个”关联数组”</td>
+</tr>
+</tbody></table>
+<p><code>type</code>函数用于返回变量的数据类型,返回值是一个 <strong><code>string</code></strong></p>
+<h3 id="number"><a href="#number" class="headerlink" title="number"></a>number</h3><p>默认是<code>double</code>,但是可以通过修改源码里面<code>luaconf.h</code>的定义</p>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><ul>
+<li>对于一块字符串可用<code>[[]]</code>表示,类似python中<code>&quot;&quot;&quot;&quot;&quot;&quot;</code></li>
+<li>不支持<code>+</code>,使用<code>+</code>会尝试转换成<code>number</code>,而不是字符串拼接.</li>
+<li><code>#</code>返回字符串长度</li>
 </ul>
-<h2 id="架构分享"><a href="#架构分享" class="headerlink" title="架构分享"></a>架构分享</h2><h3 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h3><p>下面是我最后一次迭代出来的架构:<br>这是我的处理请求的模型:<br><img src="images/%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86.png" alt="请求处理">  </p>
-<p>这是我的UML图(红色部分为第二次作业加入内容,蓝色部分为第三次作业加入内容):<br><strong>调度器</strong>:<br><img src="images/%E8%B0%83%E5%BA%A6%E5%99%A8.jpg" alt="调度器"><br>主调度器使用了单例模式<br>第二次作业中因为floor电梯的加入,我重构了整个subDispatch分支,抽象了部分subDispatchBuilding的行为出来.<br>第三次作业加入了TransferTable.<br>TransferTable保存了整个大楼的联通情况,通过Dijstra算法获得最优路径.<br><strong>电梯</strong>:<br><img src="images/%E7%94%B5%E6%A2%AF.jpg" alt="电梯"><br>第二次作业我重构了整个Elevetor的子类,增加了ElevatorBuilding和ElevatorFloor,将部分Elevetor的属性下放.<br>ElevatorFloorA和ElevatorBuildingA本是为了防止特种电梯,比如停奇数楼层等,但是没有这种电梯,但是架构就没有改变,留下了拓展的余地.<br>OutputThread是用于输出信息的,加了一层封装保证线程安全<br>这是我的协作图:<br>主函数/Input Thread:<br><img src="images/Input_Thread.png" alt="Input_Thread"><br>主调度器的协作图:<br><img src="images/Main_Dispatch.png" alt="Main_Dispatch"><br>副调度器:<br><img src="images/SubDispatch.png" alt="SubDispatch"><br>电梯:<br><img src="images/Elevetor.png" alt="Elevetor"><br>Strategy本是为了应付早高峰等特殊场景二出现的,但是因为没有这些要求,所以Strategy整个就是一个空类.</p>
-<h3 id="细节分析"><a href="#细节分析" class="headerlink" title="细节分析"></a>细节分析</h3><h4 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h4><p>我的调度器分为主调度器<code>(Main Dispatch)</code>和副调度器<code>(SubDispatch)</code>.</p>
-<p><strong>主调度器</strong>负责获得输入线程的请求,规划请求的路线,并把请求分配给对应的副调度器</p>
-<p><strong>副调度器</strong>负责获得主调度器分配的请求,并根据请求的<code>from</code>安置在容器的不同位置,方便电梯根据自己的位置寻找请求.</p>
-<p>因此调度器既是生产者也是消费者.</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Dispatch</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">&#123;</span>
-  <span class="token comment">//...</span>
-  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token class-name">MyPersonRequest</span> get <span class="token operator">=</span> <span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//消费者获得数据</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>isInterrupted<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-          <span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//用于终止子线程</span>
-          <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token function">distributeRequest</span><span class="token punctuation">(</span>get<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 分发数据</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><p><code>table</code>本质是一个字典(或者关联数组),在不给键值对的时候,默认<code>value</code>是数字索引,特别注意,数字索引从<code>1</code>开始,而不是从<code>0</code>.<br>索引方式多样,比如:</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">t <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+t<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+t<span class="token punctuation">.</span>i
+<span class="token function">gettable_event</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span>i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>方法和用途:<br>|方法|用途|<br>|:–:|:–:|<br>|<code>table.concat (table [, sep [, start [, end]]])</code>|列出从<code>start</code>到<code>end</code>的所有元素,元素之间以<code>sep</code>分割|<br>|<code>table.insert (table, [pos,] value)</code>|插入元素,默认为尾部|<br>|table.remove (table [, pos])|删除指定位置的元素,默认为最后一个|<br>|table.sort()|排序|</p>
+<h3 id="function"><a href="#function" class="headerlink" title="function"></a>function</h3><p>因为<code>function</code>变成了数据类型,因此,可以通过变量存储函数,类似函数指针.<br>同时,因为变成了变量,因此可以直接声明一个函数当成参数传给另一个函数.<br>函数的声明:</p>
+<pre class="line-numbers language-Lua" data-language="Lua"><code class="language-Lua">function fun()
+--pass
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>函数支持多返回值</p>
+<h3 id="userdata"><a href="#userdata" class="headerlink" title="userdata"></a>userdata</h3><p>自定义数据,用于表示一种由应用程序或 C/C++ 语言库所创建的类型，可以将任意 C/C++ 的任意数据类型的数据（通常是 struct 和 指针）存储到 Lua 变量中调用。</p>
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2><p>对于变量声明,<code>local</code>表示局部变量,不加修饰就是全局变量,因此可以在函数里面声明一个全局变量.<code>Lua</code>很神奇吧</p>
+<h2 id="循环和条件"><a href="#循环和条件" class="headerlink" title="循环和条件"></a>循环和条件</h2><h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">while</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span>
+<span class="token keyword">do</span>
+<span class="token comment">--statements</span>
+<span class="token keyword">end</span>
 
-<h4 id="电梯"><a href="#电梯" class="headerlink" title="电梯"></a>电梯</h4><p>电梯我的策略是类似<code>als</code>的策略,使用的自由竞争的策略.<br><strong>电梯的启动</strong><br>电梯静置状态搜索队列,寻找离自己最远的哪一个请求,然后行驶到对应的位置接受请求.<br><strong>电梯的捎带</strong><br>电梯在行驶到目的地之前会捎带沿途中同方向的请求.捎带请求之后,更新自己的目的地.</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Elevator</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">&#123;</span>
-  <span class="token comment">//...</span>
-  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token class-name">MyPersonRequest</span> get <span class="token operator">=</span> <span class="token function">getFreeRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span>isInterrupted<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">break</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-      <span class="token function">running</span><span class="token punctuation">(</span>get<span class="token punctuation">.</span><span class="token function">getTo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> var<span class="token operator">=</span>exp1<span class="token punctuation">,</span>exp2<span class="token punctuation">,</span>exp3 <span class="token keyword">do</span> <span class="token comment">--var 从 exp1 变化到 exp2，每次变化以 exp3 为步长递增 var,exp3默认为1,可以不写</span>
+<span class="token comment">--statements  </span>
+<span class="token keyword">end</span>  
 
-  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">running</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">isArrival</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">needOpen</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token function">getIn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">getOff</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-      <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//去往下一层</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span>v <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token keyword">do</span> <span class="token comment">--类似python for i in iterator</span>
+<span class="token comment">--statements</span>
+<span class="token keyword">end</span>
 
+<span class="token keyword">repeat</span> <span class="token comment">--类似do while</span>
+<span class="token comment">--statements</span>
+<span class="token keyword">until</span><span class="token punctuation">(</span> condition <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="请求的规划和换乘"><a href="#请求的规划和换乘" class="headerlink" title="请求的规划和换乘"></a>请求的规划和换乘</h3><h4 id="规划"><a href="#规划" class="headerlink" title="规划"></a>规划</h4><p>本次作业,对于请求的规划我使用的是<code>Dijstra</code>算法求得路径最短和换乘最少的一个最优结果.</p>
-<p><strong>图的初始化</strong>:<br>对于请求换乘只存在环状电梯,所以换乘最少也是只针对环状电梯,因此,对于图我的初始化方法是:</p>
-<ul>
-<li>对于<strong>竖形电梯</strong>,两个结点的距离如下:<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> dist <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>floor1<span class="token operator">-</span>floor2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>对于<strong>环形电梯</strong>,两个结点的距离如下:<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> dist <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">nonStop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">?</span><span class="token operator">:</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">114514</span><span class="token punctuation">;</span> 
-<span class="token comment">//如果这两个结点能直达则为1,不能直达则为一个极大值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-</ul>
-<p>这样如果两个环状电梯结点不能直达,则其路径长度大于等于2,如果能直达则为1,相当于加入了<strong>换乘惩罚</strong>.</p>
-<p>至于Dijstra算法则不再赘述,求得最短路径,获得前导结点,修改请求即可.</p>
-<h4 id="换乘"><a href="#换乘" class="headerlink" title="换乘"></a>换乘</h4><p>在第一次作业中,为了防止电梯没有完成任务就结束,我建立了电梯和主调度器的反馈管道.当任务完成,则主调度器记录完成的任务增加,这样在结束的时候,只需要判断完成的任务是否等于输入的任务.这一个反馈管道在第三次作业中也承担了换乘请求的处理,电梯完成第一阶段任务之后,将请求返回主调度器,主调度器就能继续对其进行分发.</p>
-<h4 id="请求的维护"><a href="#请求的维护" class="headerlink" title="请求的维护"></a>请求的维护</h4><p>如果一个请求为<code>1-FROM-A-5-TO-D-8</code>,经过Dijstra算法之后,其路径为:<br><img src="images/%E8%AF%B7%E6%B1%82%E9%93%BE%E8%A1%A8.png" alt="请求链表">  </p>
-<p>为了防止电梯获得不应该获得的数据,对于请求的读取由两个指针控制,分别为<code>from</code>,<code>to</code>,这样,完成一个任务之后,把<code>from</code>指针对应的结点删除,两个结点移动一个结点,这就变成了一个新的请求.其流程图如下:</p>
-<p><img src="images/%E8%AF%B7%E6%B1%82%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="请求处理流程图">  </p>
-<h2 id="自动化测试"><a href="#自动化测试" class="headerlink" title="自动化测试"></a>自动化测试</h2><p>本单元的自动化测试特别感想<code>@wzm</code>大佬,和我一起<del>结对编程</del>,我负责数据生成部分,他负责正确性判断.</p>
-<p>数据生成思路:<br>主要数据分类为<strong>增加电梯指令</strong>,<strong>高并发数据</strong>,<strong>捎带数据</strong>,<strong>弱数据</strong>.</p>
-<h3 id="竖形电梯数据"><a href="#竖形电梯数据" class="headerlink" title="竖形电梯数据:"></a>竖形电梯数据:</h3><p>  该类数据生成较为简单,只需要选定起始楼层和终止楼层即可.为了数据强度,在决定起始楼层之后,在确定一个gap大小,则<br>  $$[baseFloor-gap,baseFloor) \bigcup (baseFloor,baseFloor+gap]$$则为目的楼层的范围,在这个范围内的值多次取值则为目的楼层.只要取值次数够多,则并发数据强度就够高.同时,对于捎带类数据,选择该范围内的数据为起始楼层,就能建立数据之间的捎带关系.</p>
-<h3 id="环状电梯数据"><a href="#环状电梯数据" class="headerlink" title="环状电梯数据:"></a>环状电梯数据:</h3><p>  数据生成方法和上面类似,只是,环状电梯需要维护一个<code>transferTable</code>表,该表记录了<code>building</code>之间的联通关系,在生成新的电梯之后更新它,之后在生成并发数据和捎带数据,则要在表中记录的楼层周围生成,以测试环状电梯的功能.</p>
-<h2 id="bug分析"><a href="#bug分析" class="headerlink" title="bug分析"></a>bug分析</h2><h3 id="自我bug分析"><a href="#自我bug分析" class="headerlink" title="自我bug分析"></a>自我bug分析</h3><p>我对自己代码的检查方法主要是<strong>单元测试</strong>,在实现一个功能之后,先测试功能的正确性,再继续编写其他部分.比如路径规划部分,在编写完之后,输入请求测试其功能.在整体编写完毕之后,则是使用评测机进行随机测试.</p>
-<p>分享一个很有意思的bug:</p>
-<p>我调度器的<code>run</code>方法会在开始的时候将该调度器管理的电梯全部<code>start</code>.同时,输入线程如果输入增加电梯的请求,那么副调度其会在容器里面增加对应的电梯,并<code>start</code>该电梯.这个时候问题就出现了,如果一个新增的电梯的请求在调度器<code>start</code>电梯之前出现,那么这个电梯就会被<code>start</code>两次.其原因就是增加电梯这件事情不是由副调度器完成,而是主调度器直接访问对应副调度器的容器然后增加,并且<code>start</code>,也就是说<strong>一个线程是两个线程的子线程</strong>,这是不安全的.</p>
-<p>最后的解决方法则是将容器分裂为两个,一个面向副调度器,一个面向主调度器.这样一个解决方法并不优雅,<del>但能用就行</del>.</p>
-<h3 id="他人bug分析"><a href="#他人bug分析" class="headerlink" title="他人bug分析"></a>他人bug分析</h3><p>对于他人的bug的发现方法主要是评测机跑数据.</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本次作业感觉在处理上面没有第一单元困难,只需要写好每一个电梯的功能即可,因此只要明白锁和一些设计模式(流水线模式等),即可完成本单元作业,哪怕使用自由竞争也依然有很高的性能分.<br>线程安全上,只要按照前面的原则判断是否需要同步代码块,怎样安排同步代码块,至少先线程通信的时候,临界区的线程安全是没有问题的.<br>架构设计上,主要就是生产者消费者模型和流水线模型,分清楚每一个类在和不同线程之间中承担什么工作,做好抽象,难度尚可.<br>至于细节上面,使用Dijstra这些成熟的算法,而不是自己造轮子.<br>希望下一单元越来越好.</p>
+<p><code>Lua</code>的循环支持<code>goto</code>语句,语法为<code>goto lable</code>,<code>lable</code>的定义为<code>::lable::</code></p>
+<h3 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h3><pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">if</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span>
+<span class="token keyword">then</span>
+<span class="token comment">--statement</span>
+<span class="token keyword">elseif</span> <span class="token punctuation">(</span>condition<span class="token punctuation">)</span>
+<span class="token keyword">then</span>
+<span class="token comment">--statement</span>
+<span class="token keyword">else</span>
+<span class="token comment">--statement</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p><code>Lua</code>支持自定义迭代函数,但是,笔者学习<code>Lua</code>只是为了使用这个工具,不打算细究这个语言,因此,在这个模块,我只讨论<code>ipairs()</code>和<code>pairs()</code>的区别</p>
+<h3 id="ipairs"><a href="#ipairs" class="headerlink" title="ipairs()"></a>ipairs()</h3><p><code>ipairs</code>只支持数字索引,而且从1开始,相当于返回<code>t[1],t[2],...,t[n]</code>,所以如果不是数字索引,或者不连续,那么得不到期望的结果.具体原因和其迭代器的实现有关,这里就不深究了.</p>
+<h3 id="pairs"><a href="#pairs" class="headerlink" title="pairs()"></a>pairs()</h3><p><code>pairs</code>遍历所有的<code>key</code>.</p>
+<h2 id="文件I-O"><a href="#文件I-O" class="headerlink" title="文件I/O"></a>文件I/O</h2><p><code>lua</code>的文件<code>I/O</code>有些许复杂,分为简单模式和复杂模式,简单模式之下是通过改变程序标准输入输出来实现的,复杂模式则是通过句柄实现.<br>简单模式虽然是简单模式,但是实际应用还是由诸多不变,在此做简单介绍.</p>
+<h3 id="简单模式"><a href="#简单模式" class="headerlink" title="简单模式"></a>简单模式</h3><pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">-- 以只读方式打开文件</span>
+file <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"in.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 设置默认输入文件为in.txt</span>
+io<span class="token punctuation">.</span><span class="token function">input</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
+<span class="token comment">-- 输出文件第一行</span>
+<span class="token function">print</span><span class="token punctuation">(</span>io<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 关闭打开的文件</span>
+io<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
+<span class="token comment">-- 以附加的方式打开只写文件</span>
+file <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"in.txt"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 设置默认输出文件为in.txt</span>
+io<span class="token punctuation">.</span><span class="token function">output</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span>
+<span class="token comment">-- 在文件最后一行添加</span>
+io<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 关闭打开的文件</span>
+io<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对于io.read()方法,可以通过提供参数,获得不同的效果<br>|参数|效果|<br>|:-:|:-:|<br>|”*n”|读取一个数字|<br>|”*a”|从当前文字读取整个文件|<br>|”*l”|默认参数,读取下一行|<br>|number|返回一个指定字符的字符串,<code>io.read(114514)</code>,返回114514个字符|</p>
+<h2 id="完全模式"><a href="#完全模式" class="headerlink" title="完全模式"></a>完全模式</h2><pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">-- 以只读方式打开文件</span>
+file <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"in.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 输出文件第一行</span>
+<span class="token function">print</span><span class="token punctuation">(</span>file<span class="token punctuation">:</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">-- 关闭打开的文件</span>
+file<span class="token punctuation">:</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">-- 再次打开只写文件</span>
+file <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"in.txt"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 在文件最后一行添加文字</span>
+file<span class="token punctuation">:</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span>
+<span class="token comment">-- 关闭打开的文件</span>
+file<span class="token punctuation">:</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -478,7 +539,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/04/25/OO-Unit2-%E7%94%B5%E6%A2%AF%E9%9A%BE%E9%A2%98/">https://the-tarnished.github.io/2022/04/25/OO-Unit2-%E7%94%B5%E6%A2%AF%E9%9A%BE%E9%A2%98/</a>
+                    <a href="https://the-tarnished.github.io/2022/05/11/Lua%E8%AF%AD%E8%A8%80%E6%80%BB%E7%BB%93/">https://the-tarnished.github.io/2022/05/11/Lua%E8%AF%AD%E8%A8%80%E6%80%BB%E7%BB%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -516,8 +577,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-                                    <span class="chip bg-color">面向对象</span>
+                                <a href="/tags/Lua/">
+                                    <span class="chip bg-color">Lua</span>
                                 </a>
                             
                         </div>
@@ -565,17 +626,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2022/05/07/Selenium%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <a href="/2022/05/11/Lua%E8%AF%AD%E8%A8%80%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Selenium的使用">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Lua语言总结">
                         
-                        <span class="card-title">Selenium的使用</span>
+                        <span class="card-title">Lua语言总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -585,9 +647,59 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-07
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    编程语言学习
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Lua/">
+                        <span class="chip bg-color">Lua</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/08/Splash%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Splash的使用">
+                        
+                        <span class="card-title">Splash的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -607,61 +719,12 @@
                         <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/selenium/">
-                        <span class="chip bg-color">selenium</span>
+                    <a href="/tags/Lua/">
+                        <span class="chip bg-color">Lua</span>
                     </a>
                     
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/04/15/%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="页面置换算法实现">
-                        
-                        <span class="card-title">页面置换算法实现</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    操作系统
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
+                    <a href="/tags/splash/">
+                        <span class="chip bg-color">splash</span>
                     </a>
                     
                 </div>
@@ -792,13 +855,6 @@
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
-    });
-</script>
 
 
 
