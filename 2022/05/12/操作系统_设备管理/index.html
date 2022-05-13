@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Splash的使用, 零落闲拾">
-    <meta name="description" content="Splash的使用Splash是一个JS渲染服务,本质是一个轻量级浏览器.建议Splash通过Docker安装.
-Lua脚本进入Splash,能看见这样一段代码:
-function main(splash, args)
-  assert(s">
+    <meta name="keywords" content="操作系统_设备管理, 零落闲拾">
+    <meta name="description" content="设备管理I/O硬件总线这是在对总线的抽象,CPU,Memory,I/O部件挂载在总线上,通过总线交流地址总线传递地址，数据总线传递数据，控制总线传递控制信号。以CPU读入数据为例,CPU发出请求,address bus传递地址,读到的数据通">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@ function main(splash, args)
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Splash的使用 | 零落闲拾</title>
+    <title>操作系统_设备管理 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -205,12 +202,12 @@ function main(splash, args)
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Splash的使用</h1>
+                    <h1 class="description center-align post-title">操作系统_设备管理</h1>
                 </div>
             </div>
         </div>
@@ -326,16 +323,8 @@ function main(splash, args)
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/python/">
-                                <span class="chip bg-color">python</span>
-                            </a>
-                        
-                            <a href="/tags/Lua/">
-                                <span class="chip bg-color">Lua</span>
-                            </a>
-                        
-                            <a href="/tags/splash/">
-                                <span class="chip bg-color">splash</span>
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
                             </a>
                         
                     </div>
@@ -346,8 +335,8 @@ function main(splash, args)
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                爬虫学习
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
                             </a>
                         
                     </div>
@@ -359,7 +348,7 @@ function main(splash, args)
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-05-08
+                    2022-05-12
                 </div>
                 
 
@@ -383,46 +372,144 @@ function main(splash, args)
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Splash的使用"><a href="#Splash的使用" class="headerlink" title="Splash的使用"></a>Splash的使用</h1><p><code>Splash</code>是一个<code>JS</code>渲染服务,本质是一个轻量级浏览器.建议<code>Splash</code>通过<code>Docker</code>安装.</p>
-<h2 id="Lua脚本"><a href="#Lua脚本" class="headerlink" title="Lua脚本"></a>Lua脚本</h2><p>进入Splash,能看见这样一段代码:</p>
-<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-  <span class="token function">assert</span><span class="token punctuation">(</span>splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span>args<span class="token punctuation">.</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token function">assert</span><span class="token punctuation">(</span>splash<span class="token punctuation">:</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">0.5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
-    html <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">html</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    png <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">png</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    har <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">har</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>大致能看明白这段代码先执行了<code>go</code>方法,然后<code>wait</code>,返回值是<code>html</code>,<code>png</code>,<code>har</code>.<br>因此,通过修改这段代码,能实现更多的功能,具体细节请看笔者的<strong>Lua语言总结</strong></p>
-<h3 id="入口和返回值"><a href="#入口和返回值" class="headerlink" title="入口和返回值"></a>入口和返回值</h3><ul>
-<li><p><strong>入口</strong>:<br>函数的入口固定为<code>main</code>,和<code>c</code>差不多</p>
+                <h1 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h1><h2 id="I-O硬件"><a href="#I-O硬件" class="headerlink" title="I/O硬件"></a>I/O硬件</h2><h3 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h3><p>这是在对总线的抽象,<code>CPU</code>,<code>Memory</code>,<code>I/O</code>部件挂载在总线上,通过总线交流<br><img src="images/Bus.drawio.svg" alt="Bus"><br>地址总线传递地址，数据总线传递数据，控制总线传递控制信号。<br>以<code>CPU</code>读入数据为例,<code>CPU</code>发出请求,<code>address bus</code>传递地址,读到的数据通过<code>data bus</code>传递给<code>CPU</code>。</p>
+<h3 id="I-O系统"><a href="#I-O系统" class="headerlink" title="I/O系统"></a>I/O系统</h3><p>这是对<code>I/O</code>的抽象,可见<code>I/O</code>被拆分开,<code>channel processor</code>可以看成分发器,<code>System Bus</code>传来的请求在这里处理,然后发送信号到<code>I/O bus</code>,控制不同的<code>I/O</code>设备.<br><img src="images/IO_bus.svg" alt="IO"><br><code>I/O Bus</code>连接了不同的<code>I/O</code>设备,不同<code>I/O</code>设备的传输数量差了很多倍数量级,键盘打字的速度再快也比不上硬盘的读入,因此,需要对不同设备分别管理.</p>
+<h3 id="I-O设备与管理"><a href="#I-O设备与管理" class="headerlink" title="I/O设备与管理"></a>I/O设备与管理</h3><h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p><strong>按照类型分类</strong>:</p>
+<ul>
+<li>传输速度不同:低俗设备,中速设备,高速设备</li>
+<li>数据组织不同:<ul>
+<li>块设备:以数据块为单位存储、传输信息。传输速率较高、可寻址(随机读写)</li>
+<li>字符设备:以字符为单位存储、传输信息。传输速率低、不可寻址。</li>
+</ul>
 </li>
-<li><p><strong>返回值</strong>:<br>返回值可以是字符串,也可以是字典,其形式分别如下:</p>
-<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> `Hello World!` <span class="token operator">//</span>字符串
-<span class="token keyword">end</span>
-
-<span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>hello<span class="token operator">=</span>`Hello World!`<span class="token punctuation">&#125;</span> <span class="token operator">//</span>字典
-<span class="token keyword">end</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="异步处理"><a href="#异步处理" class="headerlink" title="异步处理"></a>异步处理</h3><p><code>splash</code>支持异步处理,在<code>wait</code>的时候会进行其他任务</p>
-<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">,</span> args<span class="token punctuation">)</span>
-    <span class="token keyword">local</span> urls <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"www.baidu.com"</span><span class="token punctuation">,</span><span class="token string">"www.google.com"</span><span class="token punctuation">,</span><span class="token string">"www.chrome.com"</span><span class="token punctuation">&#125;</span>
-    <span class="token keyword">local</span> results <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-    <span class="token keyword">for</span> index<span class="token punctuation">,</span>url <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>urls<span class="token punctuation">)</span> 
-    <span class="token keyword">do</span>
-      <span class="token keyword">local</span> ok<span class="token punctuation">,</span>reason <span class="token operator">=</span> splash<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-      <span class="token keyword">if</span> ok 
-      <span class="token keyword">then</span>
-        splash<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
-        results<span class="token punctuation">[</span>url<span class="token punctuation">]</span> <span class="token operator">=</span> splash<span class="token punctuation">.</span><span class="token function">png</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-      <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-    <span class="token keyword">return</span> results
-<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="splash对象的属性"><a href="#splash对象的属性" class="headerlink" title="splash对象的属性"></a>splash对象的属性</h2></li>
+<li>共享属性不同:<ul>
+<li>独占设备:一次只能由一个进程访问,比如打印机</li>
+<li>共享设备:可以多个进程访问的设备</li>
+<li>虚拟设备:在一类设备上模拟另一类设备，常用的方法是，用共享设备模拟独占设备，用高速设备模拟低速设备。</li>
+</ul>
+</li>
+</ul>
+<h4 id="设备管理-1"><a href="#设备管理-1" class="headerlink" title="设备管理"></a>设备管理</h4><p><strong>目标</strong>:</p>
+<ul>
+<li>按照请求,操作设备,完成数据交换,最终完成用户请求</li>
+<li>建立方便,统一的独立于设备的接口(抽象)</li>
+<li>充分利用技术,提高CPU与设备,设备与设备之间的并行工作能力,提高利用率</li>
+<li>保护信息</li>
+</ul>
+<h3 id="设备控制器"><a href="#设备控制器" class="headerlink" title="设备控制器"></a>设备控制器</h3><p><img src="images/IO_Controller.svg" alt="设备控制器"></p>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ul>
+<li>接收和识别CPU给来的命令</li>
+<li>数据交换：CPU与控制器、控制器与设备</li>
+<li>设备状态的了解和报告</li>
+<li>设备地址识别</li>
+<li>缓冲区</li>
+<li>对设备传来的数据进行差错检测</li>
+</ul>
+<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>控制器与<code>CPU</code>的接口: 数据寄存器,控制寄存器,状态寄存器,采用内存映射或专门的<code>I/O</code>指令</li>
+<li>控制器与设备的接口: 数据信号,控制信号,状态信号</li>
+<li><code>I/O</code>逻辑: 用于实现<code>CPU</code>对<code>I/O</code>设备控制</li>
+</ul>
+<h3 id="I-O端口地址"><a href="#I-O端口地址" class="headerlink" title="I/O端口地址"></a>I/O端口地址</h3><p><code>I/O</code>端口地址指的是接口电路中每个寄存器具有唯一的地址</p>
+<p>每个设备的<code>I/O</code>端口地址形成<code>I/O</code>地址空间,由OS保护</p>
+<p><code>I/O</code>指令形式和<code>I/O</code>地址相关联,分类如下:</p>
+<ul>
+<li>内存映像编址(内存映像<code>I/O</code>模式):<ul>
+<li>控制器的寄存器作为物理空间的一部分,可以直接通过地址访问</li>
+</ul>
+</li>
+<li><code>I/O</code>独立编址(<code>I/O</code>专用指令):<ul>
+<li>由专门的指令访问<code>I/O</code>端口,就像<code>CP0</code>中的寄存器通过<code>mfc0,mtc0</code>访问类似,<code>add</code>等指令无法访问<code>CP0</code>寄存器,<code>intel</code>架构中有<code>in/out</code>指令</li>
+</ul>
+</li>
+</ul>
+<h4 id="内存映像I-O模式特点"><a href="#内存映像I-O模式特点" class="headerlink" title="内存映像I/O模式特点:"></a>内存映像<code>I/O</code>模式特点:</h4><p><strong>优点</strong>:</p>
+<ul>
+<li>不需要特殊的保护机制来组织用于进程访问,只需要当成内核地址一样即可.</li>
+<li>不需要额外指令集,减轻编程负担</li>
+</ul>
+<p><strong>缺点</strong>:</p>
+<ul>
+<li>不允许把控制寄存器放入高速缓存,因为该寄存器的值会改变<h4 id="I-O独立编址特点"><a href="#I-O独立编址特点" class="headerlink" title="I/O独立编址特点:"></a><code>I/O</code>独立编址特点:</h4></li>
+</ul>
+<p><strong>优点</strong>:</p>
+<ul>
+<li>外设不占用地址空间</li>
+<li>编程时易区分是对内存操作还是<code>I/O</code>操作</li>
+</ul>
+<p><strong>缺点</strong>:</p>
+<ul>
+<li><code>I/O</code>指令少,操作不灵活</li>
+</ul>
+<h3 id="I-O控制方式"><a href="#I-O控制方式" class="headerlink" title="I/O控制方式"></a>I/O控制方式</h3><ul>
+<li>程序控制<code>I/O</code>:也称轮询或者查询方式<code>I/O</code>.</li>
+<li>中断驱动:当<code>I/O</code>操作结束后由设备控制器主动来通知驱动程序说这次结束.</li>
+<li><code>DMA(Direct Memory Access)</code>:直接存储器访问方式,由一个专门的控制器完成数据到内存和设备或者是从设备到内存的传输工作</li>
+<li>通道:与<code>DMA</code>很类似,但是<code>DMA</code>依然离不开<code>CPU</code>,需要<code>CPU</code>的控制信号,通道则更加<strong>独立</strong>.<strong>它有自己的指令和程序</strong>专门负责数据输入输出的传输控制.CPU将“传输控制”的功能下放给通道后只负责“数据处理”功能.这样,通道与CPU<strong>分时使用内存</strong>，实现了CPU内部运算与I/O设备的<strong>并行</strong>工作.<h4 id="程序控制I-O"><a href="#程序控制I-O" class="headerlink" title="程序控制I/O"></a>程序控制<code>I/O</code></h4><img src="images/%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6IO.svg" alt="程序控制I/O"><h4 id="中断驱动"><a href="#中断驱动" class="headerlink" title="中断驱动"></a>中断驱动</h4><img src="images/%E4%B8%AD%E6%96%AD%E9%A9%B1%E5%8A%A8.svg" alt="中断驱动"><h4 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h4></li>
+<li>命令/状态寄存器(<code>CR</code>):用于接受从CPU发送来的I/O命令,或有关控制信息,或设备状态.</li>
+<li>内存地址寄存器(<code>MAR</code>):在输入时,它存放把数据从设备传送到内存的起始目标地址,在输出的时候,它存方由内存到设备的内存源地址.</li>
+<li>数据寄存器(<code>DR</code>):用于暂存从设备到内存,或从内存到设备的数据.</li>
+<li>数据计数器(<code>DC</code>):存放本次<code>CPU</code>要读或写的字节数.<br><img src="images/DMA.svg" alt="DMA"></li>
+<li>优点:<ul>
+<li><code>CPU</code>只需要干预<code>I/O</code>操作的开始和结束,后续数据读写无需CPU控制</li>
+</ul>
+</li>
+<li>缺点:<ul>
+<li>数据传输方向,地址,数据大小都由CPU控制,占用<code>CPU</code>时间</li>
+<li>每个设备占用一个<code>DMA</code>控制器,当设备增加的时候,需要增加新的<code>DMA</code>控制器<h4 id="I-O通道"><a href="#I-O通道" class="headerlink" title="I/O通道"></a>I/O通道</h4></li>
+</ul>
+</li>
+</ul>
+<p><strong>基本思想</strong>:<br>进一步减少<code>CPU</code>的干预.</p>
+<p><code>I/O</code>通道有自己的处理器和指令体系,独立于<code>CPU</code>,可进行更复杂的<code>I/O</code>控制.通道程序通常由操作系统构造,放在内存.</p>
+<ul>
+<li><strong>优点</strong>:<ul>
+<li>执行一个通道程序可以完成机组I/O操作,减少<code>CPU</code>干预.</li>
+</ul>
+</li>
+<li><strong>缺点</strong>:<ul>
+<li>费用高</li>
+</ul>
+</li>
+</ul>
+<p><strong>I/O通道分类</strong></p>
+<ul>
+<li><strong>字节多路通道</strong><ul>
+<li>以字节为单位交叉工作:当为一台设备传送一个字节后,立即转去为另一台设备传送一个字节,是用于低速或中速<code>I/O</code>设备.</li>
+</ul>
+</li>
+<li><strong>选择通道</strong><ul>
+<li>以组方式工作:每次传送一批数据,传送速率很高,但一段时间只能为一个设备服务.当当前<code>I/O</code>请求处理完之后,就选择另一台设备服务,适用于高速设备.</li>
+</ul>
+</li>
+<li><strong>数组多路通道</strong><ul>
+<li>综合字节多路通道<strong>分时工作</strong>和<strong>选择通道</strong>传输速率高的特点,实质是:对通道程序采用多道程序设计技术,使得与通道连接而设备可以并行工作.</li>
+</ul>
+</li>
+</ul>
+<h4 id="DMA与通道区别"><a href="#DMA与通道区别" class="headerlink" title="DMA与通道区别"></a>DMA与通道区别</h4><ul>
+<li>通道更加独立,<code>DMA</code>数据传输方向,地址,大小还脱离不了<code>CPU</code>,通道则有自己的指令体系,执行通道程序就能实现对数据传输控制.</li>
+<li>DMA通常只能控制一台或者少数几台同类设备,而一个通道可以同时控制多种设备</li>
+</ul>
+<h2 id="I-O软件"><a href="#I-O软件" class="headerlink" title="I/O软件"></a>I/O软件</h2><p><img src="images/%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.svg" alt="层次关系"></p>
+<h3 id="设备独立性"><a href="#设备独立性" class="headerlink" title="设备独立性"></a>设备独立性</h3><p>类似于逻辑地址和物理地址的结构,对于设备而言也有逻辑设备和物理设备.应用程序访问的是逻辑设备,经过逻辑设备表转换为物理设备.这样的好处是:</p>
+<ul>
+<li>设备分配的灵活性:当计算机连接多台相同设备的时候,如果进程直接访问物理设备,而该物理设备繁忙,那么就会阻塞.如果访问逻辑设备,则是请求的一类设备,由<code>OS</code>完成分配.</li>
+<li>易于<code>I/O</code>重定向,用于<code>I/O</code>操作的设备通过修改逻辑设备表即可实现更换,而不需要更换应用程序,同时也提升了程序的可移植性</li>
+</ul>
+<h3 id="逻辑设备表-LUT"><a href="#逻辑设备表-LUT" class="headerlink" title="逻辑设备表(LUT)"></a>逻辑设备表(LUT)</h3><p>为了实现设备独立性,系统设置的一张由逻辑设备映射到物理设备的表,该表表项包含三项:<strong>逻辑设备名</strong>,<strong>物理设备名</strong>,<strong>驱动程序入口地址</strong>.</p>
+<p><code>LUT</code>的设置课采用两种方式:</p>
+<ul>
+<li>整个系统设置一张<code>LUT</code>:该表中不能出现重复的逻辑设备名,因此用户不能使用相同的逻辑设备名(保证用户的独立性)</li>
+<li>每个用户一张<code>LUT</code>:每个用户登录时,便为该用户建立一个进程,同时设置一张<code>LUT</code>放入进程的<code>PCB</code>中.</li>
+</ul>
+<h3 id="设备驱动程序"><a href="#设备驱动程序" class="headerlink" title="设备驱动程序"></a>设备驱动程序</h3><p>与设备密切相关的代码放在设备驱动程序中,<strong>每个设备驱动程序处理一种设备类型</strong>.</p>
+<p>设备驱动程序的任务时<strong>接受来自于设备无关的上层软件的抽象请求</strong>,并执行请求.</p>
+<p>每一个控制器都设有一个或多个设备寄存器,用于存放向设备发送的命令和参数,<strong>设备驱动程序负责释放这些命令,监督正确执行</strong>.</p>
+<p>它是I/O设备和设备控制器之间的通信程序</p>
+<p>驱动程序与I/O设备的<strong>特性</strong>,<strong>控制方式</strong>,<strong>硬件</strong>密切相关,特殊优化.</p>
+<h4 id="设备驱动程序的组成"><a href="#设备驱动程序的组成" class="headerlink" title="设备驱动程序的组成"></a>设备驱动程序的组成</h4><ul>
+<li>$\color</li>
 </ul>
 
                 
@@ -450,7 +537,7 @@ function main(splash, args)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/05/08/Splash%E7%9A%84%E4%BD%BF%E7%94%A8/">https://the-tarnished.github.io/2022/05/08/Splash%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="https://the-tarnished.github.io/2022/05/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">https://the-tarnished.github.io/2022/05/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -488,16 +575,8 @@ function main(splash, args)
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/python/">
-                                    <span class="chip bg-color">python</span>
-                                </a>
-                            
-                                <a href="/tags/Lua/">
-                                    <span class="chip bg-color">Lua</span>
-                                </a>
-                            
-                                <a href="/tags/splash/">
-                                    <span class="chip bg-color">splash</span>
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
                                 </a>
                             
                         </div>
@@ -545,9 +624,60 @@ function main(splash, args)
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2022/05/12/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F_%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="操作系统_设备管理">
+                        
+                        <span class="card-title">操作系统_设备管理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/05/11/Lua%E8%AF%AD%E8%A8%80%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
@@ -564,9 +694,9 @@ function main(splash, args)
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -584,59 +714,6 @@ function main(splash, args)
                     
                     <a href="/tags/Lua/">
                         <span class="chip bg-color">Lua</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/05/07/Selenium%E7%9A%84%E4%BD%BF%E7%94%A8/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Selenium的使用">
-                        
-                        <span class="card-title">Selenium的使用</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-07
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    爬虫学习
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
-                    </a>
-                    
-                    <a href="/tags/selenium/">
-                        <span class="chip bg-color">selenium</span>
                     </a>
                     
                 </div>
@@ -767,6 +844,13 @@ function main(splash, args)
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
