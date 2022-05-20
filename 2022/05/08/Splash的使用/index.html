@@ -413,7 +413,7 @@ function main(splash, args)
     <span class="token keyword">local</span> results <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
     <span class="token keyword">for</span> index<span class="token punctuation">,</span>url <span class="token keyword">in</span> <span class="token function">pairs</span><span class="token punctuation">(</span>urls<span class="token punctuation">)</span> 
     <span class="token keyword">do</span>
-      <span class="token keyword">local</span> ok<span class="token punctuation">,</span>reason <span class="token operator">=</span> splash<span class="token punctuation">.</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+      <span class="token keyword">local</span> ok<span class="token punctuation">,</span>reason <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
       <span class="token keyword">if</span> ok 
       <span class="token keyword">then</span>
         splash<span class="token punctuation">.</span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
@@ -421,10 +421,113 @@ function main(splash, args)
       <span class="token keyword">end</span>
     <span class="token keyword">end</span>
     <span class="token keyword">return</span> results
-<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="splash对象的属性"><a href="#splash对象的属性" class="headerlink" title="splash对象的属性"></a>splash对象的属性</h2></li>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+<h2 id="splash对象的属性"><a href="#splash对象的属性" class="headerlink" title="splash对象的属性"></a>splash对象的属性</h2><p><code>main</code>方法中的第一个参数<code>splash</code>及其重要,类似<code>selenium</code>中的<code>webdriver</code>对象.</p>
+<h3 id="args属性"><a href="#args属性" class="headerlink" title="args属性"></a>args属性</h3><p><code>main</code>方法中的第二个参数<code>args</code>也是<code>splash</code>的<code>args</code>属性,所以:</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">)</span>
+  <span class="token keyword">local</span> args <span class="token operator">=</span> splash<span class="token punctuation">.</span>args
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>也是正确的.<br>该属性可用于获取加载时的配置参数,例如<code>url</code>,对于<code>POST</code>请求可获取提交的表单,<code>GET</code>请求能获取请求参数.</p>
+<h3 id="js-enable属性"><a href="#js-enable属性" class="headerlink" title="js_enable属性"></a>js_enable属性</h3><p>是否执行<code>js</code>的开关</p>
+<h3 id="recource-timeout属性"><a href="#recource-timeout属性" class="headerlink" title="recource_timeout属性"></a>recource_timeout属性</h3><p>设置页面加载的超时时间,单位为<code>秒</code>,设置为<code>0</code>和<code>nil</code>表示不检测超时</p>
+<h3 id="images-enable属性"><a href="#images-enable属性" class="headerlink" title="images_enable属性"></a>images_enable属性</h3><p>用于设置是否加载图片,默认为<code>true</code>,如果不加载,可提高页面加载速度,但也可能影响<code>js</code>渲染.</p>
+<h3 id="plugins-enable属性"><a href="#plugins-enable属性" class="headerlink" title="plugins_enable属性"></a>plugins_enable属性</h3><p>用于控制是否开启浏览器插件(比如时代眼泪Flash),默认不开启.</p>
+<h3 id="scroll-position属性"><a href="#scroll-position属性" class="headerlink" title="scroll_position属性"></a>scroll_position属性</h3><p>控制页面上下滚动或左右滚动</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">)</span>
+  <span class="token function">assert</span><span class="token punctuation">(</span>splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  splash<span class="token punctuation">.</span>scroll_position <span class="token operator">=</span> <span class="token punctuation">&#123;</span>y<span class="token operator">=</span><span class="token number">400</span><span class="token punctuation">&#125;</span> <span class="token comment">--控制上下滚动的像素为400</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>png <span class="token operator">=</span> splash<span class="token punctuation">.</span><span class="token function">png</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="splash对象的方法"><a href="#splash对象的方法" class="headerlink" title="splash对象的方法"></a>splash对象的方法</h2><h3 id="go方法"><a href="#go方法" class="headerlink" title="go方法"></a>go方法</h3><p>该方法用于请求某个链接,用于模拟GET请求和POST请求,同时支持传入请求头,表单等数据</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">ok<span class="token punctuation">,</span>reason <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span>baseurl <span class="token operator">=</span> <span class="token keyword">nil</span><span class="token punctuation">,</span> headers <span class="token operator">=</span> <span class="token keyword">nil</span><span class="token punctuation">,</span> http_method <span class="token operator">=</span> <span class="token string">"GET"</span><span class="token punctuation">,</span> body <span class="token operator">=</span> <span class="token keyword">nil</span><span class="token punctuation">,</span> formdata <span class="token operator">=</span> <span class="token keyword">nil</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>url:请求的URL</li>
+<li>baseurl: 资源加载的相对路径,可选参数</li>
+<li>headers: 请求头</li>
+<li>http_methos:请求方法,默认是<code>GET</code>,支持<code>POST</code></li>
+<li>body:<code>POST</code>方法时的表单数据,<code>Content-type</code>为<code>application/json</code></li>
+<li>formdata:<code>POST</code>方法时的表单数据,使用的<code>Content-type</code>为<code>application/x-www-form-urlencoded</code></li>
+</ul>
+<p><code>ok</code>表示是否请求成功,如果失败,则<code>ok</code>为空,<code>reason</code>存储失败的原因</p>
+<h3 id="wait方法"><a href="#wait方法" class="headerlink" title="wait方法"></a>wait方法</h3><p>该方法用于控制页面等待时间,用法如下:</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua">ok<span class="token punctuation">,</span>reason <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">wait</span><span class="token punctuation">(</span>time<span class="token punctuation">,</span> cancel_on_redirect<span class="token operator">=</span><span class="token keyword">false</span><span class="token punctuation">,</span>concel_on_error<span class="token operator">=</span><span class="token keyword">true</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>time:等待时间,单位秒</li>
+<li>cancel_on_redirect: 如果发生重定向则停止等待,并返回重定向结果,可选参数,默认为false</li>
+<li>cancel_on_error:如果页面加载错误就停止等待,可选参数,默认为false</li>
+</ul>
+<p>返回值和<code>go</code>方法类似,不再赘述</p>
+<h3 id="jsfunc方法"><a href="#jsfunc方法" class="headerlink" title="jsfunc方法"></a>jsfunc方法</h3><p>该方法直接调用<code>JavaScript</code>定义的方法,但是需要用双中括号把调用的方法扩起来.实现<code>js</code>方法和<code>lua</code>方法的转换,示例如下</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">)</span>
+  <span class="token keyword">local</span> get_div_num <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">jsfunc</span><span class="token punctuation">(</span><span class="token string">[[
+    function () &#123;
+      var body = document.body;
+      var divs = body.getElementByTagName("div");
+      return divs.length;
+    &#125;
+  ]]</span><span class="token punctuation">)</span>
+  splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token function">get_div_num</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="evaljs方法"><a href="#evaljs方法" class="headerlink" title="evaljs方法"></a>evaljs方法</h3><p>此方法用于执行<code>js</code>代码并返回最后一条<code>js</code>代码的返回结果,示例如下:</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">local</span> title <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">evaljs</span><span class="token punctuation">(</span><span class="token string">"document.title"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="runjs方法"><a href="#runjs方法" class="headerlink" title="runjs方法"></a>runjs方法</h3><p>此方法也是用于执行<code>js</code>代码,和<code>evaljs</code>类似,但是其更偏向于执行某些动作或声明某些方法,示例如下:</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">local</span> title <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">runjs</span><span class="token punctuation">(</span><span class="token string">"foo = function()&#123;return 'bar'&#125;"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="html方法"><a href="#html方法" class="headerlink" title="html方法"></a>html方法</h3><p>获取爬取页面的<code>html</code>源代码</p>
+<h3 id="png方法"><a href="#png方法" class="headerlink" title="png方法"></a>png方法</h3><p>获取爬取页面的<code>png</code>格式截屏</p>
+<h3 id="jpeg方法"><a href="#jpeg方法" class="headerlink" title="jpeg方法"></a>jpeg方法</h3><p>获取<code>JPEG</code>格式的页面截屏</p>
+<h3 id="har方法"><a href="#har方法" class="headerlink" title="har方法"></a>har方法</h3><p>此方法用于获取页面加载过程中的描述信息.</p>
+<h3 id="url方法"><a href="#url方法" class="headerlink" title="url方法"></a>url方法</h3><p>用于获取当前正在访问网页的<code>url</code>.</p>
+<h3 id="set-user-agent方法"><a href="#set-user-agent方法" class="headerlink" title="set_user_agent方法"></a>set_user_agent方法</h3><p>此方法用于设置浏览器的<code>User-Agent</code></p>
+<h3 id="select方法"><a href="#select方法" class="headerlink" title="select方法"></a>select方法</h3><p>此方法用于选中符合条件的<code>第一个节点</code>,语法和<code>css</code>选择器类似</p>
+<pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">main</span><span class="token punctuation">(</span>splash<span class="token punctuation">)</span>
+  splash<span class="token punctuation">:</span><span class="token function">go</span><span class="token punctuation">(</span><span class="token string">"www.baidu.com"</span><span class="token punctuation">)</span>
+  input <span class="token operator">=</span> splash<span class="token punctuation">:</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">"#kw"</span><span class="token punctuation">)</span> <span class="token comment">--id 为 kw 的节点</span>
+  <span class="token keyword">return</span> splash<span class="token punctuation">:</span><span class="token function">text</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="select-all方法"><a href="#select-all方法" class="headerlink" title="select_all方法"></a>select_all方法</h3><p>此方法返回所有符合条件的节点</p>
+<h3 id="mouse-click方法"><a href="#mouse-click方法" class="headerlink" title="mouse_click方法"></a>mouse_click方法</h3><p>相当于<code>selenium</code>的<code>click</code>方法</p>
+<h3 id="send-text方法"><a href="#send-text方法" class="headerlink" title="send_text方法"></a>send_text方法</h3><p>相当于<code>selenium</code>的<code>send_keys</code>方法</p>
+<h2 id="调用Splash提供的Api"><a href="#调用Splash提供的Api" class="headerlink" title="调用Splash提供的Api"></a>调用Splash提供的Api</h2><p>前面是<code>lua</code>脚本得用法,但是要实现<code>Splash</code>渲染页面,和<code>python</code>交互获得我们想要的东西,因此,需要调用<code>splash</code>提供的<code>api</code>.<br><code>api</code>地址格式是:<br><code>http://localhost:8050/&#123;api&#125;?url=&#123;&#125;</code></p>
+<h3 id="render-html"><a href="#render-html" class="headerlink" title="render.html"></a>render.html</h3><p><code>api</code>地址是:<br><code>http://localhost:8050/render.html?url=&#123;&#125;</code><br>实例如下:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+url <span class="token operator">=</span> <span class="token string">"https://www.baidu.com"</span>
+base_url <span class="token operator">=</span> <span class="token string">"http://localhost:8050/render.html?url=&#123;&#125;"</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>base_url<span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="render-png"><a href="#render-png" class="headerlink" title="render.png"></a>render.png</h3><p><code>api</code>地址是:<br><code>http://localhost:8050/render.png?url=&#123;&#125;&amp;width=&#123;&#125;&amp;height=&#123;&#125;</code><br>其中<code>width</code>和<code>height</code>用于控制截图的长宽.</p>
+<h3 id="render-jpeg"><a href="#render-jpeg" class="headerlink" title="render.jpeg"></a>render.jpeg</h3><p>和<code>render.png</code>类似</p>
+<h3 id="render-har"><a href="#render-har" class="headerlink" title="render.har"></a>render.har</h3><p>用于获取<code>HAR</code>数据返回值是<code>json</code>数据</p>
+<h3 id="render-json"><a href="#render-json" class="headerlink" title="render.json"></a>render.json</h3><p>此<code>API</code>包含前面所有<code>API</code>的功能,基础功能为返回<code>json</code>格式的请求数据,通过增加不同的参数返回不同的结果.<br><code>http://localhost:8050/render.json?url=www.baidu.com&amp;html=1</code>,增加返回html代码的功能</p>
+<h3 id="execute"><a href="#execute" class="headerlink" title="execute"></a>execute</h3><p>该方法的<code>api</code>为:</p>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;localhost:8050&#x2F;execute?lua_source&#x3D;&#123;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>实例如下:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">from</span> urllib<span class="token punctuation">.</span>parse <span class="token keyword">import</span> quote
+
+lua <span class="token operator">=</span> <span class="token triple-quoted-string string">"""
+function main(splash)
+  local get_div_num = splash:jsfunc([[
+    function () &#123;
+      var body = document.body;
+      var divs = body.getElementByTagName("div");
+      return divs.length;
+    &#125;
+  ]])
+  splash:go(url)
+  return get_div_num();
+end
+"""</span>
+base_url <span class="token operator">=</span> <span class="token string">"http://localhost:8050/execute?lua_source="</span>
+url <span class="token operator">=</span> base_url <span class="token operator">+</span> quote<span class="token punctuation">(</span>lua<span class="token punctuation">)</span>
+response <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>

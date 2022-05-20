@@ -1,0 +1,1193 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="操作系统_磁盘管理, 零落闲拾">
+    <meta name="description" content="磁盘管理磁盘介绍基本概念
+扇区(Sector):盘片被分为若干个扇区
+磁道(Track):盘片上以盘片中心为圆心,不同半径的同心圆环
+柱面(Cylinder):磁盘中,不同盘片相同半径的磁道组成的圆柱
+磁头(Head):每个磁盘有两个面,每">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>操作系统_磁盘管理 | 零落闲拾</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">零落闲拾</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>Index</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>Tags</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>About</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>Friends</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-atom" style="zoom: 0.6;"></i>
+      
+      <span>Category</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="Search" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">零落闲拾</div>
+        <div class="logo-desc">
+            
+            零落闲拾
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			Index
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			Tags
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			About
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			Friends
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-atom"></i>
+			
+			Category
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">操作系统_磁盘管理</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
+                    2022-05-19
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h1><h2 id="磁盘介绍"><a href="#磁盘介绍" class="headerlink" title="磁盘介绍"></a>磁盘介绍</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>扇区(Sector):盘片被分为若干个扇区</li>
+<li>磁道(Track):盘片上以盘片中心为圆心,不同半径的同心圆环</li>
+<li>柱面(Cylinder):磁盘中,不同盘片相同半径的磁道组成的圆柱</li>
+<li>磁头(Head):每个磁盘有两个面,每个面一个磁头</li>
+</ul>
+<p>定位一个扇区需要三个信息:柱面号,磁头号,扇区号</p>
+<h3 id="磁盘结构"><a href="#磁盘结构" class="headerlink" title="磁盘结构"></a>磁盘结构</h3><p>磁盘实际扇区数比硬盘标签上标定的大,其中一部分用于存储硬盘的固件(硬盘控制器使用)</p>
+<p>一部分是用户存储数据的区域,即工作区,也就是硬盘标定容量的扇区.</p>
+<p>剩下的是保留区,超过在固件里定义的硬盘容量的那些扇区就称为保留扇区.</p>
+<p>对于坏扇区(不管是生产缺陷,还是使用过程中磁介质老化缺陷),都存在一张表用于映射坏扇区到空闲扇区.对于生产缺陷,这张表叫 P 表,对于老化缺陷,这张表叫 G 表.</p>
+<h3 id="磁盘参数"><a href="#磁盘参数" class="headerlink" title="磁盘参数"></a>磁盘参数</h3><ul>
+<li>寻道时间:<br>$$Ts = m * n + s (m是一个常数,可以认为是磁道的移动速度)$$<br>把磁头从当前位置移动到指定磁道上所经历的时间,该时间是启动磁盘时间 s 与磁头移动 n 条磁道所花费的时间之和</li>
+<li>旋转延迟时间<br>$$Tr = \frac{1}{2r}$$<br>r 是旋转速度</li>
+<li>传输时间<br>$$Tt = \frac{b}{rN}$$<br>b是每次读写操作的字节数,N是一个磁道上的字节数,r是旋转速度</li>
+<li>访问时间<br>$$Ta = Ts + Tr + Tt$$<h2 id="磁盘组织"><a href="#磁盘组织" class="headerlink" title="磁盘组织"></a>磁盘组织</h2><h3 id="主引导扇区-MBR"><a href="#主引导扇区-MBR" class="headerlink" title="主引导扇区(MBR)"></a>主引导扇区(MBR)</h3>硬盘的0柱面,0磁头,1扇区称为<strong>主引导扇区</strong>,该记录占用512个字节,用于在硬盘启动的时候将系统控制权转给用户控制权.<br>其结构为:</li>
+<li><strong>前446byte</strong>:包含启动代码和数据</li>
+<li><strong>后64byte</strong>:四个分区项组成的分区表,记录了启动时需要的分区参数</li>
+<li><strong>末2byte</strong>:魔数</li>
+</ul>
+<p>对于四个分区至少有一个主分区用于存储系统,其余盘为扩展磁盘分区用于存储数据,扩展磁盘分区可以分出多个逻辑分区.</p>
+<h2 id="磁盘调度"><a href="#磁盘调度" class="headerlink" title="磁盘调度"></a>磁盘调度</h2><h3 id="FCFS"><a href="#FCFS" class="headerlink" title="FCFS"></a>FCFS</h3><p><strong>算法思想</strong>:<br>按照请求到达的先后次序服务</p>
+<ul>
+<li>优点<ul>
+<li>简单,公平</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>效率不高<h3 id="SSTF"><a href="#SSTF" class="headerlink" title="SSTF"></a>SSTF</h3></li>
+</ul>
+</li>
+</ul>
+<p><strong>算法思想</strong>:<br>优先选择距当前磁头最近的访问请求进行服务</p>
+<ul>
+<li>优点<ul>
+<li>改善了磁盘的平均服务时间</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能产生饥饿现象</li>
+</ul>
+</li>
+</ul>
+<h3 id="SCAN"><a href="#SCAN" class="headerlink" title="SCAN"></a>SCAN</h3><p><strong>算法思想</strong>:<br>当有访问请求时，磁头按一个方向移动，在移动过程中对遇到的访问请求进行服务，然后判断该方向上是否还有访问请求，如果有则继续扫描；否则改变移动方向，并为经过的访问请求服务，如此反复.</p>
+<ul>
+<li>优点<ul>
+<li>克服了最短寻道优先的缺点，既考虑了距离，同时又考虑了方向</li>
+</ul>
+</li>
+<li>缺点:<ul>
+<li>但由于是摆动式的扫描方法，两侧磁道被访问的频率仍低于中间磁道。<h3 id="CSCAN"><a href="#CSCAN" class="headerlink" title="CSCAN"></a>CSCAN</h3></li>
+</ul>
+</li>
+</ul>
+<p><strong>算法思想</strong>:</p>
+<ul>
+<li>按照所要访问的柱面位置的次序去选择访问者</li>
+<li>移动臂到达最后一个柱面后,立即带动读写磁头快速返回到 0 号柱面</li>
+<li>返回时不为任何的等待访问者服务.</li>
+<li>返回后可再次进行扫描</li>
+</ul>
+<p><strong>优点</strong>:<br>改进了 SCAN 算法偏向于处理那些接近最里或最外的磁道的请求的问题.</p>
+<h3 id="LOOK和C-LOOK"><a href="#LOOK和C-LOOK" class="headerlink" title="LOOK和C-LOOK"></a>LOOK和C-LOOK</h3><p>和SCAN,CSCAN类似,但是区别<strong>是当移动方向上不再有请求时, 就调转方向</strong>.</p>
+<h2 id="空间的管理"><a href="#空间的管理" class="headerlink" title="空间的管理"></a>空间的管理</h2><h3 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h3><p>用一串二进制位反映磁盘空间中分配使用情况，每个物理块对应一位，分配的物理块为0，否则为1。</p>
+<h3 id="空闲表"><a href="#空闲表" class="headerlink" title="空闲表"></a>空闲表</h3><p>将所有空闲块记录在一个表中，即空闲表.</p>
+<p>表项记录两个内容:起始块号，块数.</p>
+<h3 id="空闲链表法"><a href="#空闲链表法" class="headerlink" title="空闲链表法"></a>空闲链表法</h3><p>把所有空闲块链成一个表.</p>
+<h3 id="成组链接法"><a href="#成组链接法" class="headerlink" title="成组链接法"></a>成组链接法</h3><p>把空白物理块分成组，在通过指针把组与组之间链接起来，这种管理空白块的方法称为<strong>成组链接法</strong>。<br><img src="images/%E6%88%90%E7%BB%84%E9%93%BE%E6%8E%A5%E6%B3%95.svg" alt="成组链接法"></p>
+<h2 id="RAID"><a href="#RAID" class="headerlink" title="RAID"></a>RAID</h2><p>RAID(Redundant Arrays of Inexpensive Disks),也叫廉价冗余磁盘阵列,用低成本增加磁盘的容错能力</p>
+<h3 id="RAID1"><a href="#RAID1" class="headerlink" title="RAID1"></a>RAID1</h3><p>镜像存储,在成对的独立磁盘上产生互为备份的数据.两个磁盘都可读取,提高了读取的性能,安全性很高,出现问题直接切换磁盘即可,但是成本也很高.</p>
+<h3 id="RAID2"><a href="#RAID2" class="headerlink" title="RAID2"></a>RAID2</h3><p>海明码(汉明码)校验条带存储.将数据条块化地分布于不同的硬盘,条块单位为位或字节,使用海明码来提供错误检查及恢复.这种编码技术需要多个磁盘存放检查及恢复信息.</p>
+<ul>
+<li>并行存取,各个驱动器同步工作</li>
+<li>使用海明编码进行错误检测和纠正,数据传输率高</li>
+<li>是一种在多磁盘易出错环境中的有效选择,并未被广泛应用,目前还没有商业化产品</li>
+</ul>
+<h4 id="海明校验"><a href="#海明校验" class="headerlink" title="海明校验"></a>海明校验</h4><p>海明校验的基本原理是异或运算.由异或运算的性质可以知道$a \oplus a = 0$,因此如果<br>$$a_0 = a_1 \oplus a_2 \oplus … \oplus a_n$$<br>则<br>$$a_i = a_{j_0} \oplus … \oplus a_{j_n}, \quad {i,j_0,…,j_n} = {0,1,…,n}$$</p>
+<p>对于海明校验的数据,令 P 为海明校验码的维数,D 为数据的维数,则<br>$$2^P = P + D + 1$$</p>
+<h3 id="RAID3"><a href="#RAID3" class="headerlink" title="RAID3"></a>RAID3</h3><p>使用奇偶校验条带存储,共享校验盘,数据条带存储单位为字节.同 RAID2 类似,但是RAID 3使用的是简单的奇偶校验,并用单块磁盘存放奇偶校验信息.<br><strong>特点</strong></p>
+<ul>
+<li>将磁盘分组，读写要访问组中所有盘，每组中有一个盘作为校验盘。</li>
+<li>校验盘一般采用奇偶校验.</li>
+<li>简单理解：先将分布在各个数据盘上的一组数据加起来，将和存放在冗余盘上。一旦某一个盘出错，只要将冗余盘上的和减去所有正确盘上的数据，得到的差就是出错的盘上的数据。</li>
+<li>缺点:恢复时间长</li>
+</ul>
+<h3 id="RAID4"><a href="#RAID4" class="headerlink" title="RAID4"></a>RAID4</h3><p>RAID4 和 RAID3 类似,只是 RAID4 以数据块为单位分布于不同磁盘,单位更大,方便了读操作.但是每次写都需要访问奇偶盘,限制了速度,因此在商业中用的也很少</p>
+<p><strong>特点</strong>:</p>
+<ul>
+<li>冗余代价与 RAID3 相同</li>
+<li>访问数据的方法与 RAID3 不同,RAID3 每次读都需要访问阵列中所有磁盘</li>
+</ul>
+<h3 id="RAID5"><a href="#RAID5" class="headerlink" title="RAID5"></a>RAID5</h3><p>和RAID4类似,奇偶校验,存储单位为块,只是不单独设计奇偶校验盘符,而是在磁盘上交叉地存取数据及奇偶校验信息.在 RAID5 上,读/写指针可同时对阵列设备进行操作,提供了更高的数据流量.</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>适合小数据块和随机读写的数据</li>
+<li>因为块更大,所以操作涉及的磁盘少,可并行</li>
+<li>写损失,每一次写产生四次读/写错做,其中两次读旧数据和奇偶信息,两次写新的数据和奇偶信息</li>
+<li>如果两块盘坏掉,RAID失效</li>
+</ul>
+<h3 id="RAID6"><a href="#RAID6" class="headerlink" title="RAID6"></a>RAID6</h3><p>和RAID5类似,只是增加了第二个奇偶校验信息块,两者使用不同的算法,数据可靠性高,即使两块磁盘失效,也不影响数据.<br><strong>特点</strong>:</p>
+<ul>
+<li>空间开销比 RAID5 大</li>
+<li>每次写非常差,要对两个校验盘操作</li>
+<li>可容忍双盘出错</li>
+<li>实际应用少:性能和成本问题</li>
+</ul>
+<h2 id="提高I-O速度"><a href="#提高I-O速度" class="headerlink" title="提高I/O速度"></a>提高I/O速度</h2><p>主要途径:</p>
+<ul>
+<li>提高磁盘性能</li>
+<li>提高并行度</li>
+<li>采用适当的调度算法</li>
+<li>设置高速缓冲</li>
+</ul>
+<h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><ul>
+<li>磁盘高速缓存形式<ul>
+<li>独立缓存(固定大小)</li>
+<li>虚拟内存(可变大小)</li>
+</ul>
+</li>
+<li>数据交付<ul>
+<li>直接交付(copy开销大)</li>
+<li>指针交付(内存管理麻烦)</li>
+</ul>
+</li>
+<li>置换算法</li>
+<li>周期性写回</li>
+</ul>
+<h3 id="优化数据布局"><a href="#优化数据布局" class="headerlink" title="优化数据布局"></a>优化数据布局</h3><ul>
+<li>优化物理块分布<ul>
+<li>连续摆放</li>
+</ul>
+</li>
+<li>优化索引节点分布<ul>
+<li>减少与数据块的距离</li>
+<li>与数据块结合</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ul>
+<li>提前读:<ul>
+<li>顺序访问的时候,把下一块提前读入缓冲区</li>
+</ul>
+</li>
+<li>延迟写<ul>
+<li>先写入缓冲区,直到缓冲区写满再写回磁盘</li>
+</ul>
+</li>
+<li>虚拟盘<ul>
+<li>利用内存空间仿真磁盘</li>
+</ul>
+</li>
+<li>Virtual disk 和 disk cache 区别:<ul>
+<li>Vitual disk的存放的内容由用户完全控制</li>
+<li>Disk cache中的内容完全是由操作系统控制</li>
+</ul>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        Author:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Dovahkiin</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        Link:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://the-tarnished.github.io/2022/05/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/">https://the-tarnished.github.io/2022/05/19/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        Reprint policy:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    All articles in this blog are used except for special statements
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    reprint policy. If reproduced, please indicate source
+                    <a href="/about" target="_blank">Dovahkiin</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>Copied successfully, please follow the reprint policy of this article</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">more</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+            <div class="card">
+                <a href="/2022/05/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="操作系统_文件系统">
+                        
+                        <span class="card-title">操作系统_文件系统</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/05/16/Pyppeteer%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Pyppeteer的使用">
+                        
+                        <span class="card-title">Pyppeteer的使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    爬虫学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
+                    </a>
+                    
+                    <a href="/tags/pyppeteer/">
+                        <span class="chip bg-color">pyppeteer</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">Dovahkiin</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;Total visits:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;Total visitors:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/the-tarnished" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1106931777@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1106931777" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1106931777" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;Search</span>
+            <input type="search" id="searchInput" name="s" placeholder="Please enter a search keyword"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura-small.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
