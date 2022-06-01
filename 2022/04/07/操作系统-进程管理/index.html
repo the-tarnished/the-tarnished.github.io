@@ -383,7 +383,9 @@
 <li>$R(S_i)$: $S_i$的读子集,表示在$S_i$中被引用的变量的集合.</li>
 <li>$W(S_i)$: $S_i$的写子集,表示在$S_i$中被修改的变量的集合.</li>
 </ul>
-<p>两个进程可并发,当且仅当下列条件同时成立的时候:<br>$$\begin{aligned}<br>    R(S_1) \cap W(S_1) = \emptyset \\<br>    W(S_1) \cap R(S_1) = \emptyset<br>\end{aligned}$$<br>也可以理解为两个进程对于同一个共享变量的权力对等的时候才是可并发的,既二者都是读或者二者都是写.</p>
+<p>两个进程可并发,当且仅当下列条件同时成立的时候:</p>
+<p>$$\begin{aligned}<br>    R(S_1) \cap W(S_1) = \emptyset \\<br>    W(S_1) \cap R(S_1) = \emptyset<br>\end{aligned}$$</p>
+<p>也可以理解为两个进程对于同一个共享变量的权力对等的时候才是可并发的,既二者都是读或者二者都是写.</p>
 <h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>进程是程序在一个数据集合上运行的<strong>过程</strong>，它是系统进行资源分配和调度的一个<strong>独立单位</strong>。</p>
 <h3 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h3><ul>
 <li><strong>动态性</strong>：进程是程序的一次执行过程。因创建而诞生，因调度而执行，因无资源而暂停，因撤销而消亡。</li>
@@ -520,8 +522,9 @@
 <h3 id="调度类型-CPU的三级调度"><a href="#调度类型-CPU的三级调度" class="headerlink" title="调度类型|CPU的三级调度"></a>调度类型|CPU的三级调度</h3><ul>
 <li><strong>高级调度</strong>：又称“宏观调度”，作业调度。从<strong>用户工作流程</strong>的角度，一次提交若干个作业，对每个作业进行调度。</li>
 <li><strong>中级调度</strong>：又称“内外存交换”，从*<em>存储器资源</em>的角度，将进程的部分或全部换出到外存上，将当前所需部分换入内存。指令和数据必须再内存里才能被CPU访问。</li>
-<li><strong>低级调度</strong>：又称“微观调度”，“进程或线程调度”，从<strong>CPU资源</strong>的角度的调度，调度频繁，要求高效率。<br><img src="%E4%B8%89%E7%BA%A7%E8%B0%83%E5%BA%A6.png" alt="三级调度"></li>
+<li><strong>低级调度</strong>：又称“微观调度”，“进程或线程调度”，从<strong>CPU资源</strong>的角度的调度，调度频繁，要求高效率。</li>
 </ul>
+<p><img src="%E4%B8%89%E7%BA%A7%E8%B0%83%E5%BA%A6.png" alt="三级调度"></p>
 <h3 id="进程的特性和分类"><a href="#进程的特性和分类" class="headerlink" title="进程的特性和分类"></a>进程的特性和分类</h3><ul>
 <li><strong><code>I/O Bound</code></strong>(I/O密集型)</li>
 </ul>
@@ -547,7 +550,7 @@
 <li>简单:易于实现</li>
 <li>轻量:执行开销小</li>
 </ul>
-<p><strong>不同系统的特异性目标</strong></p>
+<p><strong>不同系统的特异性目标</strong>:</p>
 <h4 id="批处理系统"><a href="#批处理系统" class="headerlink" title="批处理系统"></a>批处理系统</h4><ul>
 <li>提升吞吐量(每小时完成的作业数)</li>
 <li>减少周转时间(一批作业从提交到完成所经历的统计平均时间)</li>
@@ -634,25 +637,23 @@
 <p>该处理系统由主处理机管理一个公共就绪队列,并分派进程给从处理器执行.</p>
 <h4 id="SMP-Symmetric-Multi-Processor-对称式多处理系统"><a href="#SMP-Symmetric-Multi-Processor-对称式多处理系统" class="headerlink" title="SMP(Symmetric Multi-Processor)对称式多处理系统"></a>SMP(Symmetric Multi-Processor)对称式多处理系统</h4><p>和AMP相反,SMP中各个处理器的地位相同.</p>
 <ul>
-<li><strong>静态分配</strong><br>每个CPU设立一个就绪队列，进程从开始执行到完成，都在同一个CPU上。</li>
-</ul>
-<p><strong>优点</strong><br>调度算法开销小<br><strong>缺点</strong><br>难以准确预测执行时间,容易出现忙闲不均</p>
-<ul>
-<li><strong>动态分配</strong><br>各个CPU采用一个公共就绪队列，队首进程每次分派到当前空闲的CPU上执行。可防止系统中多个处理器忙闲不均。</li>
-<li><strong>自调度</strong><br>各个CPU采用一个公共就绪队列，每个处理机都可以从队列中选择适当进来执行。需要对就绪队列的数据结构进行互斥访问控制。是最常用的算法,实现时易于移植。</li>
-</ul>
-<p><strong>优点</strong><br>不需要专门的处理机从事任务分派工作<br><strong>缺点</strong><br>当处理机个数较多时,对就绪队列的访问可能成为系统的瓶颈</p>
-<ul>
-<li><strong>成组调度</strong><br>将一个进程中的一组线程,每次分配时到一组处理机上执行,在剥夺处理机时也同时对这一组线程进行.</li>
-</ul>
-<p><strong>优点</strong></p>
-<ul>
-<li><ul>
-<li>通常这样的一组线程在应用逻辑上相互何做,成组调度提高了这些线程的执行并行度,有利于减少阻塞和加快推进速度,最终提高系统吞吐量.</li>
+<li><strong>静态分配</strong><br>每个CPU设立一个就绪队列，进程从开始执行到完成，都在同一个CPU上。<ul>
+<li><strong>优点</strong><br>调度算法开销小</li>
+<li><strong>缺点</strong><br>难以准确预测执行时间,容易出现忙闲不均</li>
 </ul>
 </li>
-<li><ul>
+<li><strong>动态分配</strong><br>各个CPU采用一个公共就绪队列，队首进程每次分派到当前空闲的CPU上执行。可防止系统中多个处理器忙闲不均。</li>
+<li><strong>自调度</strong><br>各个CPU采用一个公共就绪队列，每个处理机都可以从队列中选择适当进来执行。需要对就绪队列的数据结构进行互斥访问控制。是最常用的算法,实现时易于移植。<ul>
+<li><strong>优点</strong><br>不需要专门的处理机从事任务分派工作</li>
+<li><strong>缺点</strong><br>当处理机个数较多时,对就绪队列的访问可能成为系统的瓶颈</li>
+</ul>
+</li>
+<li><strong>成组调度</strong><br>将一个进程中的一组线程,每次分配时到一组处理机上执行,在剥夺处理机时也同时对这一组线程进行.<ul>
+<li><strong>优点</strong><ul>
+<li>通常这样的一组线程在应用逻辑上相互何做,成组调度提高了这些线程的执行并行度,有利于减少阻塞和加快推进速度,最终提高系统吞吐量.</li>
 <li>每次调度可以完成多个线程的分派,在系统内线程总数相同时能够减少调度次数,从而减少调度算法的开销.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>专用处理机调度</strong><br>为进程中的每个线程都固定分配一个CPU, 直到该线程执行完成.<br>只适用于CPU数量众多的高度并行系统, 单个CPU的利用率已经不太重要.</li>
@@ -662,12 +663,18 @@
 <li>空闲让进:没人在临界区则进入</li>
 <li>忙则等待:有进程在临界区则等待</li>
 <li>有限等待:进入临界区的进程要及时离开临界区,防止死锁</li>
-<li>让权等待:进程长时间不能进入临界区则应该放出处理器,防止轮询<h3 id="基于忙等待的互斥方法"><a href="#基于忙等待的互斥方法" class="headerlink" title="基于忙等待的互斥方法"></a>基于忙等待的互斥方法</h3><h4 id="严格轮换法"><a href="#严格轮换法" class="headerlink" title="严格轮换法"></a>严格轮换法</h4>设立公用变量<code>turn</code>,描述允许进入临界区的进程标识.<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+<li>让权等待:进程长时间不能进入临界区则应该放出处理器,防止轮询</li>
+</ul>
+<h3 id="基于忙等待的互斥方法"><a href="#基于忙等待的互斥方法" class="headerlink" title="基于忙等待的互斥方法"></a>基于忙等待的互斥方法</h3><h4 id="严格轮换法"><a href="#严格轮换法" class="headerlink" title="严格轮换法"></a>严格轮换法</h4><p>设立公用变量<code>turn</code>,描述允许进入临界区的进程标识.</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token keyword">while</span><span class="token punctuation">(</span>turn <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// until the turn = 0,into  the critical region</span>
         <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         turn <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-问题:<br>一个进程可能被一个不在临界区的进程阻塞<h4 id="Peterson算法"><a href="#Peterson算法" class="headerlink" title="Peterson算法"></a>Peterson算法</h4>进入临界区判断其他进程对其有没有兴趣,如果有则等待<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">enter_region</span><span class="token punctuation">(</span><span class="token keyword">int</span> process<span class="token punctuation">)</span>
+
+<p>问题:<br>一个进程可能被一个不在临界区的进程阻塞</p>
+<h4 id="Peterson算法"><a href="#Peterson算法" class="headerlink" title="Peterson算法"></a>Peterson算法</h4><p>进入临界区判断其他进程对其有没有兴趣,如果有则等待</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">enter_region</span><span class="token punctuation">(</span><span class="token keyword">int</span> process<span class="token punctuation">)</span>
 <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> other <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> process<span class="token punctuation">;</span>
 
@@ -675,17 +682,28 @@
     turn <span class="token operator">=</span> process<span class="token punctuation">;</span>
     <span class="token keyword">while</span><span class="token punctuation">(</span>turn <span class="token operator">==</span> process <span class="token operator">&amp;&amp;</span> interested<span class="token punctuation">[</span>other<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-特点:<br>如果同一个时刻两个进程都进入临界区，interested和turn是竞争访问，后设置turn的进程会循环，先设置的进入</li>
-</ul>
+
+<p>特点:<br>如果同一个时刻两个进程都进入临界区，interested和turn是竞争访问，后设置turn的进程会循环，先设置的进入</p>
 <h4 id="硬件指令机制"><a href="#硬件指令机制" class="headerlink" title="硬件指令机制"></a>硬件指令机制</h4><p>Test and Set Lock指令简称TSL,执行该指令的CPU会通过锁住内存总线,禁止其他CPU访问内存<br>XCHG:原子性的交换两个位置的内容</p>
 <h4 id="Bakery-Algorithm"><a href="#Bakery-Algorithm" class="headerlink" title="Bakery Algorithm"></a>Bakery Algorithm</h4><p>设置静态变量,每进入一个进程分配一个序号,如果多个进程分配到同一个序号,则根据进程号再排序.最后进程根据序号和进程号排序,最小的先进.</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在没有进入临界区,进程会等待,消耗CPU资源,对于这些进程应该将其阻塞,带到空闲再进入Runnable队列.</p>
 <h3 id="信号量机制"><a href="#信号量机制" class="headerlink" title="信号量机制"></a>信号量机制</h3><p>信号量是一种新的变量类型 Semaphore , 只能通过初始化和标准原语 P/V 来访问, 作为OS核心代码执行, 不受进程调度打断.</p>
 <ul>
-<li>P(s):表示将要操作共享资源<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span>s<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//阻塞</span>
-s<span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li>V(s):表示释放操作资源<pre class="line-numbers language-c" data-language="c"><code class="language-c">s<span class="token operator">++</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-对于不同的操作系统,初值设置可以不一样.<h4 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h4>$$\begin{matrix}<br>A:P(s) \rightarrow 临界区 \rightarrow V(s)\\<br>B:P(s) \rightarrow 临界区 \rightarrow V(s)<br>\end{matrix}<br>$$<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4>$$\begin{matrix}<br>A:代码A \rightarrow P(s) \rightarrow 代码A\\<br>B:代码B \rightarrow V(s)\\<br>s初始值为0,A进程等待B完成之后才能继续进行\\<br>\end{matrix}<br>$$<h4 id="汇合"><a href="#汇合" class="headerlink" title="汇合"></a>汇合</h4>$$\begin{matrix}<br>A:a1 \rightarrow V(a) \rightarrow P(b) \rightarrow a2\\<br>B:b1 \rightarrow V(b) \rightarrow P(a) \rightarrow b2<br>\end{matrix}<br>$$<h4 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h4><pre class="line-numbers language-none"><code class="language-none">VAR n &#x2F;&#x2F;numofProcess
+<li>P(s):表示将要操作共享资源</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">while</span><span class="token punctuation">(</span>s<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//阻塞</span>
+s<span class="token operator">--</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>V(s):表示释放操作资源</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">s<span class="token operator">++</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>对于不同的操作系统,初值设置可以不一样.</p>
+<h4 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h4><p>$$\begin{matrix}<br>A:P(s) \rightarrow 临界区 \rightarrow V(s)\\<br>B:P(s) \rightarrow 临界区 \rightarrow V(s)<br>\end{matrix}<br>$$</p>
+<h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>$$\begin{matrix}<br>A:代码A \rightarrow P(s) \rightarrow 代码A\\<br>B:代码B \rightarrow V(s)\\<br>s初始值为0,A进程等待B完成之后才能继续进行\\<br>\end{matrix}<br>$$</p>
+<h4 id="汇合"><a href="#汇合" class="headerlink" title="汇合"></a>汇合</h4><p>$$\begin{matrix}<br>A:a1 \rightarrow V(a) \rightarrow P(b) \rightarrow a2\\<br>B:b1 \rightarrow V(b) \rightarrow P(a) \rightarrow b2<br>\end{matrix}<br>$$</p>
+<h4 id="屏障"><a href="#屏障" class="headerlink" title="屏障"></a>屏障</h4><pre class="line-numbers language-none"><code class="language-none">VAR n &#x2F;&#x2F;numofProcess
 VAR count &#x3D; 0
 
 P(a)
@@ -695,9 +713,9 @@ if count &#x3D;&#x3D; n: 直到所有进程都完成了,才能继续b操作
     V(b)
 P(b)
 V(b)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h4>s = n,就能保证最多n个线程同时进行<h3 id="信号量集"><a href="#信号量集" class="headerlink" title="信号量集"></a>信号量集</h3><h4 id="AND型信号量集"><a href="#AND型信号量集" class="headerlink" title="AND型信号量集"></a>AND型信号量集</h4></li>
-</ul>
-<p><strong>基本思想</strong>: 一次性分配全部所需共享资源给进程, 待进程使用完后, 再一次性释放.</p>
+
+<h4 id="多路复用"><a href="#多路复用" class="headerlink" title="多路复用"></a>多路复用</h4><p>s = n,就能保证最多n个线程同时进行</p>
+<h3 id="信号量集"><a href="#信号量集" class="headerlink" title="信号量集"></a>信号量集</h3><h4 id="AND型信号量集"><a href="#AND型信号量集" class="headerlink" title="AND型信号量集"></a>AND型信号量集</h4><p><strong>基本思想</strong>: 一次性分配全部所需共享资源给进程, 待进程使用完后, 再一次性释放.</p>
 <pre class="line-numbers language-none"><code class="language-none">SP (S1, S2, ..., Sn) :
     while(1) &#123;
         if ( S1 &gt;&#x3D; 1 &amp;&amp; S2 &gt;&#x3D; 1 &amp;&amp; ... &amp;&amp; Sn &gt;&#x3D; 1)&#123;&#125;
@@ -713,6 +731,7 @@ SV (S1, S2, ..., Sn) :
     S2 &#x3D; S2 + 1;
     ...
     Sn &#x3D; Sn + 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h4 id="一般信号量集"><a href="#一般信号量集" class="headerlink" title="一般信号量集"></a>一般信号量集</h4><p><strong>基本思想</strong>: 在AND型信号量集的基础上进行扩充. 进程对信号量 Si 的测试值为 ti, 占用值为 di.</p>
 <pre class="line-numbers language-none"><code class="language-none">SP (S1, t1, d1, S2, t2, d2, ..., Sn, tn, dn) :
     while(1) &#123;
@@ -729,6 +748,7 @@ SV (S1, d1, S2, d2, ..., Sn, dn) :
     S2 &#x3D; S2 + d2
     ...
     Sn &#x3D; Sn + dn<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h4 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h4><ul>
 <li>SP(S,d,d):表示每次申请d个资源，当资源数量少于d个时，便不<br>予分配</li>
 <li>SP(S,1,1):表示互斥信号量</li>
@@ -775,6 +795,7 @@ SV (S1, d1, S2, d2, ..., Sn, dn) :
         <span class="token keyword">return</span> ret<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>如上面代码的思路,管程就是将零碎的共享资源进行封装,提供统一的接口进行操作,在管程里面对共享资源的操作都是互斥的.<br>管程中有如下信息:</p>
 <ul>
 <li><strong>临界资源</strong>:管程管理的共享资源,每一个临界资源的创立都有一个对应的等待队列.</li>
@@ -915,6 +936,8 @@ Semaphore turnstile <span class="token operator">=</span> <span class="token num
     <span class="token comment">//write critical region</span>
 <span class="token constant">V</span><span class="token punctuation">(</span>roomEmpty<span class="token punctuation">)</span>
 <span class="token constant">V</span><span class="token punctuation">(</span>turnstile<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
 <p>公平</p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">int readers <span class="token operator">=</span> <span class="token number">0</span>
 Semaphore roomEmpty <span class="token operator">=</span> <span class="token number">1</span> <span class="token comment">//是否能容下其他人</span>
