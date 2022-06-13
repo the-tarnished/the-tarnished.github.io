@@ -445,7 +445,31 @@
 t<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
 t<span class="token punctuation">.</span>i
 <span class="token function">gettable_event</span><span class="token punctuation">(</span>t<span class="token punctuation">,</span>i<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>方法和用途:<br>|方法|用途|<br>|:–:|:–:|<br>|<code>table.concat (table [, sep [, start [, end]]])</code>|列出从<code>start</code>到<code>end</code>的所有元素,元素之间以<code>sep</code>分割|<br>|<code>table.insert (table, [pos,] value)</code>|插入元素,默认为尾部|<br>|table.remove (table [, pos])|删除指定位置的元素,默认为最后一个|<br>|table.sort()|排序|</p>
+<p>方法和用途:</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>table.concat (table [, sep [, start [, end]]])</code></td>
+<td align="center">列出从<code>start</code>到<code>end</code>的所有元素,元素之间以<code>sep</code>分割</td>
+</tr>
+<tr>
+<td align="center"><code>table.insert (table, [pos,] value)</code></td>
+<td align="center">插入元素,默认为尾部</td>
+</tr>
+<tr>
+<td align="center">table.remove (table [, pos])</td>
+<td align="center">删除指定位置的元素,默认为最后一个</td>
+</tr>
+<tr>
+<td align="center">table.sort()</td>
+<td align="center">排序</td>
+</tr>
+</tbody></table>
 <h3 id="function"><a href="#function" class="headerlink" title="function"></a>function</h3><p>因为<code>function</code>变成了数据类型,因此,可以通过变量存储函数,类似函数指针.<br>同时,因为变成了变量,因此可以直接声明一个函数当成参数传给另一个函数.<br>函数的声明:</p>
 <pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token keyword">function</span> <span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token comment">--pass</span>
@@ -500,7 +524,31 @@ io<span class="token punctuation">.</span><span class="token function">output</s
 io<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span><span class="token string">"Hello World"</span><span class="token punctuation">)</span>
 <span class="token comment">-- 关闭打开的文件</span>
 io<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>对于io.read()方法,可以通过提供参数,获得不同的效果<br>|参数|效果|<br>|:-:|:-:|<br>|”*n”|读取一个数字|<br>|”*a”|从当前文字读取整个文件|<br>|”*l”|默认参数,读取下一行|<br>|number|返回一个指定字符的字符串,<code>io.read(114514)</code>,返回114514个字符|</p>
+<p>对于io.read()方法,可以通过提供参数,获得不同的效果</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">“*n”</td>
+<td align="center">读取一个数字</td>
+</tr>
+<tr>
+<td align="center">“*a”</td>
+<td align="center">从当前文字读取整个文件</td>
+</tr>
+<tr>
+<td align="center">“*l”</td>
+<td align="center">默认参数,读取下一行</td>
+</tr>
+<tr>
+<td align="center">number</td>
+<td align="center">返回一个指定字符的字符串,<code>io.read(114514)</code>,返回114514个字符</td>
+</tr>
+</tbody></table>
 <h2 id="完全模式"><a href="#完全模式" class="headerlink" title="完全模式"></a>完全模式</h2><pre class="line-numbers language-lua" data-language="lua"><code class="language-lua"><span class="token comment">-- 以只读方式打开文件</span>
 file <span class="token operator">=</span> io<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">"in.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span>
 <span class="token comment">-- 输出文件第一行</span>

@@ -5,7 +5,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="OO_Unit1_表达式的展开, 零落闲拾">
-    <meta name="description" content="BNF描述BNF描述中去除了所有的空白项便于解析如下是三次作业总共的BNF图:$$\begin{aligned}表达式 &amp;amp;\rightarrow[加减] 项| 表达式 加减项\\项 &amp;amp;\rightarrow [加减] 因子 ">
+    <meta name="description" content="BNF描述BNF描述中去除了所有的空白项便于解析如下是三次作业总共的BNF图:
+$$\begin{aligned}表达式 &amp;amp;\rightarrow[加减] 项| 表达式 加减项\\项 &amp;amp;\rightarrow [加减] 因子">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -372,7 +373,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="BNF描述"><a href="#BNF描述" class="headerlink" title="BNF描述"></a>BNF描述</h2><p>BNF描述中去除了所有的空白项便于解析<br>如下是三次作业总共的BNF图:<br>$$\begin{aligned}<br>表达式 &amp;\rightarrow[加减] 项| 表达式 加减项\\<br>项 &amp;\rightarrow [加减] 因子 | 项’*’因子\\<br>因子 &amp;\rightarrow​ 变量因子 | 常数因子 | 表达式因子\\<br>变量因子 &amp;\rightarrow 幂函数 | 三角函数 | 自定义函数调用 | 求和函数\\<br>常数因子 &amp;\rightarrow​ 带符号的整数\\<br>表达式因子 &amp;\rightarrow​ ‘(‘ 表达式 ‘)’ [指数]\\<br>幂函数 &amp;\rightarrow (函数自变量|’i’) [指数]\\<br>三角函数 &amp;\rightarrow ‘sin’’(‘因子’)’ [指数] | ‘cos’’(‘因子’)’ [指数]\\<br>指数 &amp;\rightarrow ‘**’[‘+’] 允许前导零的整数\\<br>带符号的整数 &amp;\rightarrow [加减] 允许前导零的整数\\<br>允许前导零的整数 &amp;\rightarrow (0|1|2|…|9){0|1|2|…|9}\\<br>加减 &amp;\rightarrow ‘+’ | ‘-‘<br>\end{aligned}$$</p>
+                <h2 id="BNF描述"><a href="#BNF描述" class="headerlink" title="BNF描述"></a>BNF描述</h2><p>BNF描述中去除了所有的空白项便于解析<br>如下是三次作业总共的BNF图:</p>
+<p>$$\begin{aligned}<br>表达式 &amp;\rightarrow[加减] 项| 表达式 加减项\\<br>项 &amp;\rightarrow [加减] 因子 | 项’*’因子\\<br>因子 &amp;\rightarrow​ 变量因子 | 常数因子 | 表达式因子\\<br>变量因子 &amp;\rightarrow 幂函数 | 三角函数 | 自定义函数调用 | 求和函数\\<br>常数因子 &amp;\rightarrow​ 带符号的整数\\<br>表达式因子 &amp;\rightarrow​ ‘(‘ 表达式 ‘)’ [指数]\\<br>幂函数 &amp;\rightarrow (函数自变量|’i’) [指数]\\<br>三角函数 &amp;\rightarrow ‘sin’’(‘因子’)’ [指数] | ‘cos’’(‘因子’)’ [指数]\\<br>指数 &amp;\rightarrow ‘**’[‘+’] 允许前导零的整数\\<br>带符号的整数 &amp;\rightarrow [加减] 允许前导零的整数\\<br>允许前导零的整数 &amp;\rightarrow (0|1|2|…|9){0|1|2|…|9}\\<br>加减 &amp;\rightarrow ‘+’ | ‘-‘<br>\end{aligned}$$</p>
 <h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><p>$$读入输入 \rightarrow 解析输入 \rightarrow 简化表达式 \rightarrow 输出表达式$$</p>
 <h2 id="抽象结构"><a href="#抽象结构" class="headerlink" title="抽象结构"></a>抽象结构</h2><h3 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h3><p>从上面的<code>BNF</code>中,我们可以初步提取出下面的类:</p>
 <ul>
