@@ -434,7 +434,9 @@ struct Tcb &amp;#123;
 <h4 id="pthread-join"><a href="#pthread-join" class="headerlink" title="pthread_join"></a>pthread_join</h4><p>函数原型:</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">pthread_join</span><span class="token punctuation">(</span><span class="token class-name">pthread_t</span> thread<span class="token punctuation">,</span> <span class="token keyword">void</span> <span class="token operator">*</span><span class="token operator">*</span>value_ptr<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>该函数将当前线程挂载到指定线程,待目标线程结束后,才被唤醒,用于线程同步。</p>
+<p>该函数将当前线程挂载到指定线程,待目标线程结束后,才被唤醒,用于线程回收资源。</p>
+<p>可以认为,线程的创建是为了实现一个要求,线程做完工作之后需要告知其他线程运行结果,所以需要 join 来回收资源,该资源通过指定的 <code>value_ptr</code> 进行回收,进入函数之后,线程的 tcb 维护该指针,待到目标线程结束,将资源放入其中.</p>
+<p>但是,也可以让线程自己释放资源,通过设置 detach 能让线程无法被其他线程 join.</p>
 <p>根据手册，应该只能被一个线程挂载，并且目标线程的 detach 不能为1。</p>
 <h4 id="pthread-setcancelstate"><a href="#pthread-setcancelstate" class="headerlink" title="pthread_setcancelstate"></a>pthread_setcancelstate</h4><p>函数原型:</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">pthread_setcancelstate</span><span class="token punctuation">(</span><span class="token keyword">int</span> state<span class="token punctuation">,</span> <span class="token keyword">int</span> <span class="token operator">*</span>oldvalue<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -481,6 +483,7 @@ son exit ret is -2<span aria-hidden="true" class="line-numbers-rows"><span></spa
     <span class="token function">writef</span><span class="token punctuation">(</span><span class="token string">"next loop\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  上诉循环能 testcancel 结束</p>
+<p>5.</p>
 <h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>本次任务只需要实现无名信号量,也就是说,这个信号量只能在当前进程使用.所以,可以偷懒把信号量存储在用户空间,内核并不对信号量进行管理.但是为了保证操作的原子性,所以,还是需要系统调用实现.</p>
 <h3 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> sem <span class="token class-name">sem_t</span><span class="token punctuation">;</span> 
 <span class="token function">LIST_HEAD</span><span class="token punctuation">(</span>Sem_wait_list<span class="token punctuation">,</span>Tcb<span class="token punctuation">)</span><span class="token punctuation">;</span>
