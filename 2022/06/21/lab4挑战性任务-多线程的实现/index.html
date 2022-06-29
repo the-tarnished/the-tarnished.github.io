@@ -483,8 +483,12 @@ son exit ret is -2<span aria-hidden="true" class="line-numbers-rows"><span></spa
     <span class="token function">writef</span><span class="token punctuation">(</span><span class="token string">"next loop\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  上诉循环能 testcancel 结束</p>
-<p>5.</p>
-<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><p>本次任务只需要实现无名信号量,也就是说,这个信号量只能在当前进程使用.所以,可以偷懒把信号量存储在用户空间,内核并不对信号量进行管理.但是为了保证操作的原子性,所以,还是需要系统调用实现.</p>
+<ol start="5">
+<li><p>stacktest 测试栈是否共享<br>测试思路:将主线程局部变量的地址通过 pthread_create 传个新线程,新线程访问该地址,看是否查询到该变量</p>
+<p>正确判断:<br>是否输出正确的值</p>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2></li>
+</ol>
+<p>本次任务只需要实现无名信号量,也就是说,这个信号量只能在当前进程使用.所以,可以偷懒把信号量存储在用户空间,内核并不对信号量进行管理.但是为了保证操作的原子性,所以,还是需要系统调用实现.</p>
 <h3 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h3><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">typedef</span> sem <span class="token class-name">sem_t</span><span class="token punctuation">;</span> 
 <span class="token function">LIST_HEAD</span><span class="token punctuation">(</span>Sem_wait_list<span class="token punctuation">,</span>Tcb<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">struct</span> <span class="token class-name">sem</span> <span class="token punctuation">&#123;</span>
