@@ -413,13 +413,13 @@
 <p><strong>求 $\underset{\omega,b}{min} L(\omega,b,\alpha)$</strong></p>
 <p>原函数对 $\omega,b$求导,可求得<br>$$\begin{aligned}<br>    &amp; \omega  = \sum \alpha_i y_i x_i \\<br>    &amp; \sum \alpha_i y_i  = 0<br>\end{aligned}$$</p>
 <p>带入原式子,得</p>
-<p>$$\underset{\omega,b}{min} L(\omega,b,\alpha) = -\frac{1}{2}*(\Alpha Y X)^2 + \sum \alpha_i$$</p>
-<p>式子中$\Alpha$ 为 $(\alpha_1,…,\alpha_n)$,$YX$ 为 $(x_1y_1,…,x_ny_n)^T$,$(\Alpha Y X)^2$为矩阵相乘的模</p>
+<p>$$\underset{\omega,b}{min} L(\omega,b,\alpha) = -\frac{1}{2}*(A Y X)^2 + \sum \alpha_i$$</p>
+<p>式子中$A$ 为 $(\alpha_1,…,\alpha_n)$,$YX$ 为 $(x_1y_1,…,x_ny_n)^T$,$(A Y X)^2$为矩阵相乘的模</p>
 <p><strong>求 $\underset{\alpha}{max} L(\omega,b,\alpha)$</strong></p>
-<p>问题转化为:<br>$$\begin{aligned}<br>    \underset{\alpha}{min} \quad &amp; -\frac{1}{2}*(\Alpha Y X)^2 + \sum \alpha_i \\<br>    s.t. \quad &amp; \sum \alpha_iy_i = 0 \\<br>    &amp; \alpha_i \ge 0,\quad i = 1,..,N<br>\end{aligned}$$</p>
+<p>问题转化为:<br>$$\begin{aligned}<br>    \underset{\alpha}{min} \quad &amp; -\frac{1}{2}*(A Y X)^2 + \sum \alpha_i \\<br>    s.t. \quad &amp; \sum \alpha_iy_i = 0 \\<br>    &amp; \alpha_i \ge 0,\quad i = 1,..,N<br>\end{aligned}$$</p>
 <p>由此,整个算法为:</p>
 <ul>
-<li><p>构造并求解约束最优化问题:<br>$$\begin{aligned}<br>  \underset{\alpha}{min} \quad &amp; -\frac{1}{2}*(\Alpha Y X)^2 + \sum \alpha_i \\<br>  s.t. \quad &amp; \sum \alpha_iy_i = 0 \\<br>  &amp; \alpha_i \ge 0,\quad i = 1,..,N<br>\end{aligned}$$<br>求得最优解$(\alpha_1,…,\alpha_n)$</p>
+<li><p>构造并求解约束最优化问题:<br>$$\begin{aligned}<br>  \underset{\alpha}{min} \quad &amp; -\frac{1}{2}*(A Y X)^2 + \sum \alpha_i \\<br>  s.t. \quad &amp; \sum \alpha_iy_i = 0 \\<br>  &amp; \alpha_i \ge 0,\quad i = 1,..,N<br>\end{aligned}$$<br>求得最优解$(\alpha_1,…,\alpha_n)$</p>
 </li>
 <li><p>计算<br>$$\omega = \sum \alpha_i y_i x_i$$<br>选择一个正分量$\alpha_j \gt 0$,计算<br>$$b = y_j - \sum \alpha_i y _i x_i x_j$$</p>
 </li>
@@ -441,9 +441,9 @@
 <p>$$L(\omega,b,\zeta,\alpha,\mu) = \frac{1}{2}||\omega||^2 + C \sum \zeta - \sum \alpha_i(y_i(\omega_x + b)-1+\zeta_i) - \sum \mu_i \zeta_i$$</p>
 <p>求导可得<br>$$\begin{aligned}<br>    \omega = \sum \alpha_i y_i x_i \\<br>    \sum \alpha_i y_i = 0 \\<br>    C - \alpha_i - \mu_i = 0<br>\end{aligned}$$</p>
 <p>带入原始可得对偶问题为:</p>
-<p>$$\begin{aligned}<br>    \underset{\alpha}{max} &amp; -\frac{1}{2} \Alpha Y X + \sum \alpha_i \\<br>    s.t. &amp; \sum \alpha_i y_i = 0 \\<br>    &amp; C - \alpha_i - \mu_i = 0 \\<br>    &amp; \alpha_i \ge 0 \\<br>    &amp; \mu_i \ge 0<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br>    \underset{\alpha}{max} &amp; -\frac{1}{2} A Y X + \sum \alpha_i \\<br>    s.t. &amp; \sum \alpha_i y_i = 0 \\<br>    &amp; C - \alpha_i - \mu_i = 0 \\<br>    &amp; \alpha_i \ge 0 \\<br>    &amp; \mu_i \ge 0<br>\end{aligned}$$</p>
 <p>消去 $\mu$ 也可写成:</p>
-<p>$$\begin{aligned}<br>    \underset{\alpha}{max} &amp; -\frac{1}{2} \Alpha Y X + \sum \alpha_i \\<br>    s.t. &amp; \sum \alpha_i y_i = 0 \\<br>    &amp; C \ge \alpha_i \ge 0<br>\end{aligned}$$</p>
+<p>$$\begin{aligned}<br>    \underset{\alpha}{max} &amp; -\frac{1}{2} A Y X + \sum \alpha_i \\<br>    s.t. &amp; \sum \alpha_i y_i = 0 \\<br>    &amp; C \ge \alpha_i \ge 0<br>\end{aligned}$$</p>
 <p>因此<br>$$\omega = \sum \alpha_i y_i x_i$$<br>选择一个符合 $C \ge \alpha_j \ge 0$ 的 $\alpha_j$,计算<br>$$b = y_j - \sum y_i \alpha_i(x_i*x_j)$$</p>
 <h3 id="支持向量"><a href="#支持向量" class="headerlink" title="支持向量"></a>支持向量</h3><p>这个模型中,支持向量要么落在间隔边界上,要么落在间隔边界和分离超平面之间,要么处于误分类的一侧.对于 $\zeta_i = 0$ 的点,其刚好落在边界上,如果$0 \lt \zeta_i \lt 1$,则落在间隔边界和超平面之间,如果$\zeta_i == 1$,则落在误分类的一侧.</p>
 <h3 id="合页损失函数"><a href="#合页损失函数" class="headerlink" title="合页损失函数"></a>合页损失函数</h3><p>对于线性支持向量机学习还有另外一种解释,为:</p>
@@ -483,7 +483,7 @@
 <p>其中<br>$$\eta = K_{11} + K_{22} - 2K_{12}$$</p>
 <p>剪辑后 $\alpha_2^{new}$ 的解为:<br>$$\alpha_2^{new} = \begin{cases}<br>    H, \quad \alpha_2^{new,unc} \gt H\\<br>    \alpha_2^{new,unc}, \quad else\\<br>    L, \quad \alpha_2^{new,unc} &lt; L<br>\end{cases}$$</p>
 <p>根据之前的二次规划的约束条件可以求得 $\alpha_1^{new}$</p>
-<h3 id="变量的选择"><a href="#变量的选择" class="headerlink" title="变量的选择"></a>变量的选择</h3><h4 id="第-1-个变量选择"><a href="#第-1-个变量选择" class="headerlink" title="第 1 个变量选择"></a>第 1 个变量选择</h4><p>KKT 条件:<br>$$\begin{aligned}<br>    \alpha_i = 0 \Harr y_i g(x_i) \ge 1 \\<br>    C \gt \alpha_i \gt 0 \Harr y_i g(x_i) = 1 \\<br>    \alpha_i = C \Harr y_i g(x_i) \le 1 \\<br>\end{aligned}$$</p>
+<h3 id="变量的选择"><a href="#变量的选择" class="headerlink" title="变量的选择"></a>变量的选择</h3><h4 id="第-1-个变量选择"><a href="#第-1-个变量选择" class="headerlink" title="第 1 个变量选择"></a>第 1 个变量选择</h4><p>KKT 条件:<br>$$\begin{aligned}<br>    \alpha_i = 0 \Leftrightarrow y_i g(x_i) \ge 1 \\<br>    C \gt \alpha_i \gt 0 \Leftrightarrow y_i g(x_i) = 1 \\<br>    \alpha_i = C \Leftrightarrow y_i g(x_i) \le 1 \\<br>\end{aligned}$$</p>
 <p>因此,外层循环首先遍历所有满足在间隔边界上的支持向量点,检验是否满足 KKT 条件,如果都满足则遍历整个训练集.</p>
 <h4 id="第-2-个变量选择"><a href="#第-2-个变量选择" class="headerlink" title="第 2 个变量选择"></a>第 2 个变量选择</h4><p>第二个变量选择的希望时使 $\alpha_2$ 有足够大的变化,所以选择一个最大的 $|E_1 - E_2|$</p>
 <p>如果选不到一个满足要求的 $\alpha_2$,那么则遍历整个训练集,如果还是找不到,则更换 $\alpha_1$</p>
