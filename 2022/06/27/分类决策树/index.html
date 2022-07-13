@@ -416,7 +416,7 @@
 <li>若D中所有实例属于同一类 $C_k$,则 T 为单节点树,并将类 $C_k$ 作为该节点的类标记,返回 T</li>
 <li>若 $A = \empty $,则 T 为单节点树,将 D 中实例数最大的类 $C_k$ 作为该结点的类标记,返回 T.</li>
 <li>否则,按照算法求得信息增益最大的特征值 $A_g$</li>
-<li>如果 $A_g$ 的信息增益小于阈值 $\epsilon$,则T为单节点树,并将 D 中实例数最大的类 $C_k$ 作为该结点的类标记</li>
+<li>如果 $A_g$ 的信息增益小于阈值 $\epsilon $,则T为单节点树,并将 D 中实例数最大的类 $C_k$ 作为该结点的类标记</li>
 <li>否则,对 $A_g$ 的每一可能值 $a_i$,依照 A_g = a_i 将 D 分割为若干非空子集 $D_i$,将 $D_i$ 中实例数最大的类作为标记,构建子节点,由结点及其子节点构成数T,返回T</li>
 <li>对第 i 各子节点,以 $D_i$ 为训练集,以 $A-{A_g}$ 为特征值,递归调用步骤 1-5,得到子树 $T_i$,返回 $T_i$</li>
 </ul>
@@ -604,18 +604,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;Current
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2022/06/27/%E5%88%86%E7%B1%BB%E5%86%B3%E7%AD%96%E6%A0%91/">
+                <a href="/2022/07/01/%E5%90%91%E9%87%8F%E6%9C%BA%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="分类决策树">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="向量机学习">
                         
-                        <span class="card-title">分类决策树</span>
+                        <span class="card-title">向量机学习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -625,9 +624,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-27
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-01
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -640,7 +639,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
