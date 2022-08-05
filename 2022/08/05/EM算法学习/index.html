@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="vscode配置verilog运行环境, 零落闲拾">
-    <meta name="description" content="vscode要想运行Verilog需要编译文件以及识别产生的.vcd文件生成波形图.在经过一中午的摸索之后,这是我的成功方案(本人是windows系统).
-安装iverilog地址:http://bleyer.org/icarus/进入网站">
+    <meta name="keywords" content="EM算法学习, 零落闲拾">
+    <meta name="description" content="EM 算法E 代表 expectation,求期望,M 代表 maximization 求极大.所以这一算法称为期望极大算法.
+该算法用于含有隐变量的概率模型参数的极大似然估计.
+算法EM 算法
+输入:观测变量数据 Y,隐变量数据 Z,联合">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>vscode配置verilog运行环境 | 零落闲拾</title>
+    <title>EM算法学习 | 零落闲拾</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -203,12 +205,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">vscode配置verilog运行环境</h1>
+                    <h1 class="description center-align post-title">EM算法学习</h1>
                 </div>
             </div>
         </div>
@@ -322,12 +324,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">机器学习</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                <span class="chip bg-color">数理知识</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -336,7 +355,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2022-08-04
+                    2022-08-05
                 </div>
                 
 
@@ -360,41 +379,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>vscode要想运行Verilog需要编译文件以及识别产生的.vcd文件生成波形图.在经过一中午的摸索之后,这是我的成功方案(本人是windows系统).</p>
-<h2 id="安装iverilog"><a href="#安装iverilog" class="headerlink" title="安装iverilog"></a>安装iverilog</br></h2><h5 id="地址-http-bleyer-org-icarus"><a href="#地址-http-bleyer-org-icarus" class="headerlink" title="地址:http://bleyer.org/icarus/"></a>地址:<a target="_blank" rel="noopener" href="http://bleyer.org/icarus/">http://bleyer.org/icarus/</a></h5><p>进入网站后直接选择第一个就行</br><br>安装完成后在环境变量PATH中添加iverilog.exe和gtkwave.exe的路径.</p>
-<h5 id="iverilog路径-iverilog-bin"><a href="#iverilog路径-iverilog-bin" class="headerlink" title="iverilog路径:\iverilog\bin"></a>iverilog路径:\iverilog\bin</h5><h5 id="gtkwave路径-F-iverilog-gtkwave-bin"><a href="#gtkwave路径-F-iverilog-gtkwave-bin" class="headerlink" title="gtkwave路径:F:\iverilog\gtkwave\bin"></a>gtkwave路径:F:\iverilog\gtkwave\bin</h5><p>最后可以在cmd中输入: </p>
-<pre class="line-numbers language-none"><code class="language-none">where verilog
-where vvp 
-where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>或者 <code>iverilog -h</code> 和 <code>gtkwave --version</code> 来检测是否成功<br>结果如图</p>
-<p><img src="images/9164060e8036a1e55c0969956234f6fdaafc50a1dd8c88d30375a43ec3c531dc.png" alt="图 1">  </p>
-<h2 id="下载并配置vscode拓展"><a href="#下载并配置vscode拓展" class="headerlink" title="下载并配置vscode拓展"></a>下载并配置vscode拓展</h2><h5 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h5><p><img src="images/5db6c542ac6718454e8adc9b8ce54f60348e32bf571d40bed1ab1fd56a6409f8.png" alt="图 2">  </p>
-<p>如图,下载下面两个个拓展加上code runner.即可</p>
-<h5 id="配置code-runner"><a href="#配置code-runner" class="headerlink" title="配置code runner"></a>配置code runner</h5><p>在code runner的setting.json中输入以下代码</p>
-<pre class="line-numbers language-language" data-language="language"><code class="language-language">&quot;code-runner.executorMapByGlob&quot;: &#123;
-
-    &quot;pom.xml&quot;: &quot;cd $dir &amp;&amp; mvn clean package&quot;,
-    &quot;*.test.js&quot;: &quot;tap&quot;,
-    &quot;*.js&quot;: &quot;node&quot;,
-    &quot;*.v&quot;: &quot;cd $dir &amp;&amp; iverilog -o run.vvp \&quot;$fileName\&quot; &amp;&amp; vvp run.vvp&quot;,
-    &quot;*.vcd&quot;: &quot;cd $dir &amp;&amp; gtkwave \&quot;$fileName\&quot;&quot;,
-&#125;,
-&quot;code-runner.saveFileBeforeRun&quot;: true,
-&quot;code-runner.runInTerminal&quot;: true,
-&quot;code-runner.saveAllFilesBeforeRun&quot;: true,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h6 id="coderunner的setting-json的位置"><a href="#coderunner的setting-json的位置" class="headerlink" title="coderunner的setting.json的位置"></a>coderunner的setting.json的位置</h6><p><img src="images/7fb069ef74065008e65c8e73ffd4e09688f4e1fc934c85f3384692d575fd028c.png" alt="图 3">  </p>
-<h5 id="配置verilog"><a href="#配置verilog" class="headerlink" title="配置verilog"></a>配置verilog</h5><p>在设置中搜索verilog,在linter中选择iverilog,如图</p>
-<p><img src="images/c4e72a990881f26ea5ba793e3bf7c4d9c92ca626f4bfb6870d6b3e1bedfdcb56.png" alt="图 4">  </p>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在vscode中新建.v文件,在完成代码编辑之后一定要记得添加如下代码:</p>
-<pre class="line-numbers language-language" data-language="language"><code class="language-language">initial
-    begin            
-        $dumpfile(&quot;wave.vcd&quot;);        &#x2F;&#x2F;生成的vcd文件名称
-        $dumpvars(0, modulename);    &#x2F;&#x2F;模块名称
-    end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>之后右键文件run code或者右上角三角符号run code.编译成功之后会出现vvp和vcd文件,对vcd文件右键run code,就会出现波形图的窗口<br>波形图窗口如图</p>
-<p><img src="images/04b2c901858ae15294083783b49d4c9682eafba60b6b93cf098d7b0df08e4517.png" alt="图 5">  </p>
-<p>##参考网页</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/marvellousbinary/article/details/79842347">https://blog.csdn.net/marvellousbinary/article/details/79842347</a></br><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/367612172">https://zhuanlan.zhihu.com/p/367612172</a></br></p>
+                <h1 id="EM-算法"><a href="#EM-算法" class="headerlink" title="EM 算法"></a>EM 算法</h1><p>E 代表 expectation,求期望,M 代表 maximization 求极大.所以这一算法称为期望极大算法.</p>
+<p>该算法用于含有隐变量的概率模型参数的极大似然估计.</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p><strong>EM 算法</strong></p>
+<p>输入:观测变量数据 Y,隐变量数据 Z,联合分布 $P(Y,Z|\theta)$,条件分布 $P(Z|Y,\theta)$</p>
+<p>输出:模型参数</p>
 
                 
             </div>
@@ -421,7 +410,7 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://the-tarnished.github.io/2022/08/04/vscode%E9%85%8D%E7%BD%AEverilog%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/">https://the-tarnished.github.io/2022/08/04/vscode%E9%85%8D%E7%BD%AEverilog%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/</a>
+                    <a href="https://the-tarnished.github.io/2022/08/05/EM%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">https://the-tarnished.github.io/2022/08/05/EM%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -458,7 +447,15 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">No tag</span>
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">机器学习</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
+                                    <span class="chip bg-color">数理知识</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -504,9 +501,10 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2022/08/05/EM%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">
                     <div class="card-image">
@@ -524,9 +522,9 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-08-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -539,6 +537,7 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -561,13 +560,13 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/08/04/%E6%8F%90%E5%8D%87%E6%96%B9%E6%B3%95/">
+                <a href="/2022/08/04/vscode%E9%85%8D%E7%BD%AEverilog%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="提升方法">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="vscode配置verilog运行环境">
                         
-                        <span class="card-title">提升方法</span>
+                        <span class="card-title">vscode配置verilog运行环境</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -582,27 +581,11 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    机器学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Dovahkiin
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">机器学习</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%95%B0%E7%90%86%E7%9F%A5%E8%AF%86/">
-                        <span class="chip bg-color">数理知识</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -731,6 +714,13 @@ where gtkwave<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    });
+</script>
 
 
 
