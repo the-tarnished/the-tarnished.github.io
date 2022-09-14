@@ -384,7 +384,19 @@
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p><strong>EM 算法</strong></p>
 <p>输入:观测变量数据 Y,隐变量数据 Z,联合分布 $P(Y,Z|\theta)$,条件分布 $P(Z|Y,\theta)$</p>
 <p>输出:模型参数</p>
-
+<ul>
+<li>初始化:选择参数的初值,开始迭代</li>
+<li>E 步:记 $\theta^i$ 为第 $i$ 次迭代参数 $\theta$ 的估计值,在第 $i + 1$ 次迭代的 E步,计算:<br>$$\begin{aligned}<br>  Q(\theta,\theta^i) &amp;= E_Z[log P(Y,Z|\theta) | Y,\theta^i] \\<br>  &amp;= \displaystyle \sum_Z log P(Y,Z|\theta)P (Z|Y,\theta^i)<br>\end{aligned}$$</li>
+<li>M 步:求使 $Q(\theta,\theta^i)$ 极大化的 $\theta$,确定第 $i+1$ 次迭代的参数的估计值 $\theta^{i+1}$</li>
+<li>重复 M 和 E 步,直到收敛</li>
+</ul>
+<p><strong>Q函数定义</strong></p>
+<p>完全数据的对数似然函数 $log P(Y,Z|\theta)$ 关于在给定观测数据 $Y$ 和当前参数 $\theta^i$ 下对未观测数据 $Z$ 的条件概率分布 $P(Z|Y,\theta^i)$ 的期望称为 $Q$ 函数,即:<br>$$Q(\theta,\theta^i) = E_Z[log P(Y,Z|\theta) | Y,\theta^i]$$</p>
+<h2 id="EM-算法在高斯混合模型中的应用"><a href="#EM-算法在高斯混合模型中的应用" class="headerlink" title="EM 算法在高斯混合模型中的应用"></a>EM 算法在高斯混合模型中的应用</h2><h3 id="高斯混合模型"><a href="#高斯混合模型" class="headerlink" title="高斯混合模型"></a>高斯混合模型</h3><p>高斯混合模型是指具有如下形式的概率分布模型:</p>
+<p>$$P(y|\theta) = \displaystyle \sum_{k=1}^K \alpha_k \phi(y|\theta_k)$$</p>
+<p>其中,$\alpha_k$ 是系数,$\alpha_k \ge 0$,$\sum \alpha_k = 1$;$\phi(y|\theta_k)$是高斯分布密度,也就是正态分布密度</p>
+<p>$\theta_k = (\mu_k,\sigma_k^2)$,称为第 $k$ 个分模型</p>
+<h3 id="高斯混合模型参数估计的EM算法"><a href="#高斯混合模型参数估计的EM算法" class="headerlink" title="高斯混合模型参数估计的EM算法"></a>高斯混合模型参数估计的EM算法</h3>
                 
             </div>
             <hr/>
